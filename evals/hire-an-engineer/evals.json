@@ -1,0 +1,23 @@
+{
+  "skill_name": "hire-an-engineer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "mujhe apni bakery ke liye ek app banana hai jis mein orders aayein aur mujhe pata chale kis din kitna bechna hai. main programmer nahi hoon, kahan se shuru karun?",
+      "expected_output": "Starts with discovery questions (users, current process, core action), avoids jumping to a full-stack app, suggests the simplest approach, plain language in Roman Urdu/English mix.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I want a tool where I upload my monthly bank statement CSV and it shows me how much I spent per category with a chart. I have zero coding experience. Plan it, design it, give me the structure and test cases.",
+      "expected_output": "Product brief, approach choice (likely single HTML file or Python script) with an alternative, simple diagram, file structure, milestones, acceptance tests with normal/edge/failure cases, privacy note about bank data.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Our team of 8 needs an internal tool to track which video ad creatives are in production, who owns each, and their status. Right now it's a messy WhatsApp group. Help me architect this.",
+      "expected_output": "Discovers needs, considers no-code/spreadsheet options before custom build, shared-data and access considerations, data model (creative, owner, status), key flows, decision log.",
+      "files": []
+    }
+  ]
+}

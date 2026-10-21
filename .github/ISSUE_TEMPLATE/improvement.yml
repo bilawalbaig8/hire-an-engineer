@@ -1,0 +1,25 @@
+name: Improvement idea
+description: Make an existing skill better.
+title: "[improve] "
+labels: ["type: improvement", "needs-triage"]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options:
+        - hire-an-engineer
+        - other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What should the skill do differently, and in which situation?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters

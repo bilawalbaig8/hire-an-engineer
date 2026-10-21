@@ -1,0 +1,43 @@
+name: Issue triage
+on:
+  issues:
+    types: [opened]
+permissions:
+  issues: write
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label by skill and area, thank reporter
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+            const pick = (heading) => {
+              const m = body.match(new RegExp(`### ${heading}\\s*\\n+([^\\n]+)`));
+              return m ? m[1].trim() : null;
+            };
+            const labels = [];
+            const skill = pick("Skill");
+            if (skill && skill !== "_No response_") labels.push(`skill: ${skill}`);
+            const area = pick("Area");
+            if (area && area !== "_No response_") labels.push(`area: ${area.split(" / ")[0]}`);
+            const tool = pick("Tool");
+            if (tool && tool !== "_No response_") labels.push(`tool: ${tool}`);
+            // Flag possible secrets so the owner can remove them quickly
+            const secretPattern = /(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----)/;
+            if (secretPattern.test(body)) labels.push("possible-secret");
+            for (const name of labels) {
+              try { await github.rest.issues.getLabel({ ...context.repo, name }); }
+              catch { await github.rest.issues.createLabel({ ...context.repo, name, color: "c5def5" }); }
+            }
+            if (labels.length) {
+              await github.rest.issues.addLabels({ ...context.repo, issue_number: context.issue.number, labels });
+            }
+            const note = labels.includes("possible-secret")
+              ? "\n\n⚠️ This issue may contain a secret or key. Please revoke it in the provider's dashboard right away; the maintainer will remove it here."
+              : "";
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: context.issue.number,
+              body: "Thanks for the report! It's been labelled and will be reviewed." + note
+            });
