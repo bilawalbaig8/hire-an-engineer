@@ -1,0 +1,75 @@
+name: Skill gap or wrong behaviour
+description: The agent missed something, did the wrong thing, or the skill didn't cover a situation.
+title: "[gap] "
+labels: ["type: gap", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Please **don't include private code, keys, customer data or personal information**.
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options:
+        - hire-an-engineer
+        - other / not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - discovery / planning
+        - memory / PROJECT_STATE / docs
+        - getting unstuck
+        - UI/UX
+        - database
+        - integrations / APIs
+        - process automation
+        - build / testing
+        - GitHub / releases
+        - cost tracking
+        - triggering (skill used when it shouldn't, or not used)
+        - pacing / too many questions / too slow
+        - other
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Tool
+      options:
+        - claude.ai
+        - Claude Code
+        - Cursor
+        - Codex
+        - Antigravity
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you asked, and what the agent did.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix (optional)
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This issue contains no private code, keys, customer data or personal information.
+          required: true

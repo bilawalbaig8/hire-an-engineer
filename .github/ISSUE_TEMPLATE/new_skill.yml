@@ -1,0 +1,21 @@
+name: New skill request
+description: Suggest a new skill for this repository.
+title: "[new skill] "
+labels: ["type: new-skill", "needs-triage"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Working name
+  - type: textarea
+    id: job
+    attributes:
+      label: What should it help people do?
+      description: Who is it for, and what situation triggers it?
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Example requests
+      description: 2–3 things a person might type when they need it.
