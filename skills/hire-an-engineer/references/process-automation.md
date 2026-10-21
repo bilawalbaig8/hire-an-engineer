@@ -29,6 +29,9 @@ Capture, in their words:
 - **Volume and time:** how often, how long each run takes, how many people do it
 - **Pain:** where mistakes and delays happen
 - **Access:** which accounts/apps are involved, and whether those apps can be connected (APIs, exports, connectors)
+- **Privacy:** who else sees the data; personal vs work account; whether content (e.g. PDF text) may be sent to an AI service
+
+Single-step process (one trigger → one action, e.g. email → sheet row): a real sample plus ≤5 questions replaces the step-by-step walkthrough and the flowchart.
 
 ## 2. Map it
 
@@ -58,6 +61,7 @@ Draw the to-be flowchart showing: trigger → steps → decisions → outputs, p
 - **Notifications:** who is told what, when (success summaries optional; failures always).
 - **Data flow** between apps, with what data each step reads and writes.
 - **Rollback/undo** for steps that change data.
+- **First visible result:** a mockup of the output (e.g. sheet layout with one normal and one exception row) or a dry run on one sample. Never connect real accounts before approval.
 
 ## 5. Choose the platform
 

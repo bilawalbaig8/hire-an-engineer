@@ -18,7 +18,7 @@ Identify the case and the size early (end of discovery). They decide which roles
 | **Medium** | Team tool, shared data, login, a few integrations | + UX, Project Manager, Tools lead, Database, GitHub, Security, Reviewer, DevOps | Full pack; live board with priorities; PR workflow + CI; test & live environments; migrations; backups |
 | **Large** | Public users, payments, personal data at scale, many integrations, mobile app | All roles incl. Production Support | Full pack, separate documents, roadmap of versions, branch protection, staging, release + monitoring plans |
 
-When unsure, pick the smaller size and grow — never the reverse. The size also selects the process, principles and test types in `engineering-principles.md`.
+Guess the size from the first message to pick a lane; confirm or change it at the end of discovery. When unsure, pick the smaller size and grow — never the reverse. The size also selects the process, principles and test types in `engineering-principles.md`.
 
 ## 2. Project types
 

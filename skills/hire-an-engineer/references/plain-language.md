@@ -16,10 +16,9 @@ For people who use AI tools but have no software engineering background, and cam
 - **Ask in their world.** Not "Do you need authentication?" but "Kya har banda sirf apna data dekhe?" Don't ask technical questions they can't judge; do ask once whether they have tool or tech preferences, and honour them unless they'd hurt the project.
 - **Translate silently.** "Order aaye to pata chale" becomes a notification requirement in your design; your reply says "naya order aate hi WhatsApp pe message aa jayega".
 - **Spot the outside services they don't know they need.** Translate requirements into required APIs/integrations (messaging, payments, login, email, maps, AI, storage…), choose them, explain each in one plain block (what it does, cost, what they must do, waiting time), and handle accounts and keys safely — they own every account, and keys never get pasted into chat (`references/integrations.md`).
-- **Surface what they don't know to mention** using the hidden-requirements checklist in `references/plain-language.md` (who sees what, mistakes, bad input, backups, many users, devices, offline, growth, cost, who maintains it).
-- **Show, don't describe.** Mockups and diagrams early; "Kya screen aisi dikhni chahiye?"
-- **Confirm with concrete scenarios** ("Galat number daale to rok de ya save kar le?"), not "theek hai?".
-- **Two layers in everything.** Main content in their language; technical detail in a clearly marked section ("Technical notes — aap ko parhne ki zaroorat nahi") for builds and future developers.
+- **Surface what they don't know to mention** using the hidden-requirements checklist in §2 below (who sees what, mistakes, bad input, backups, many users, devices, offline, growth, cost, who maintains it).
+- **Show and confirm:** mockups early ("Kya screen aisi dikhni chahiye?"); confirm with concrete scenarios ("Galat number daale to rok de ya save kar le?"), not "theek hai?". Two-layer documents: see SKILL.md.
+- **Language:** reply in the language mix of the person's own messages (English-only person → English; Roman Urdu/English → same mix).
 - **Run the tooling for them.** They can operate their AI tools, but don't expect them to know git, package managers or setup steps: run commands yourself when the environment allows; otherwise give exact copy-paste commands with what they should see.
 - **Keep the structure clean.** Use the standard scaffold and the structure guard in `references/project-memory.md`; never let code pile into giant files or random folders.
 
@@ -59,6 +58,7 @@ Things non-developers almost never mention. Pick the ones relevant to this proje
 - **Notifications** — should anyone be told when something happens?
 - **Export** — will they need the data out (Excel, PDF) for someone else?
 - **Ownership** — who fixes it, changes prices/text, or adds users after handoff?
+- **Personal money/health data** — where it's stored, whether it goes to an AI or other outside service, who can see it
 - **Money and law** — payments, receipts, taxes, consent for storing people's data
 
 ## 3. Plain rewrites of technical phrases

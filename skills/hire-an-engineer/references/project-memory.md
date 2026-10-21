@@ -12,15 +12,23 @@ The person builds with AI tools — and switches between them (chat, Claude Code
 5. Session end protocol
 6. Docs-as-code
 7. Structure guard
-8. Working across different AI tools
-9. Chat → coding agent handoff
-10. Templates
+8. Working across different AI tools (only when switching tools)
+9. Chat → coding agent handoff (only in chat-only environments)
+10. Templates (in `templates.md`)
 
 ---
 
 ## 1. Standard project scaffold
 
-Create on day one (adapt folder names to the stack; keep it flat for small projects):
+Minimum by size:
+
+| Size | Create |
+|---|---|
+| Tiny | git, AGENTS.md, CLAUDE.md (one line), PROJECT_STATE.md, README.md, .gitignore |
+| Small | Tiny + CHANGELOG.md + docs/project.md (brief, design, plan, tests in one file) + docs/decisions/ once the first decision exists |
+| Medium / Large | The full tree below; grow into it, don't create empty folders |
+
+Full tree for Medium/Large (adapt folder names to the stack):
 
 ```
 project/
@@ -126,14 +134,14 @@ AI-built projects decay into one giant file, duplicate helpers and random folder
 
 For an existing messy project: don't rewrite. Map what exists, write the target structure into `AGENTS.md`, and move toward it incrementally with tests protecting behaviour.
 
-## 8. Working across different AI tools
+## 8. Working across different AI tools (only when switching tools)
 
 - The scaffold and memory files are plain Markdown + git, so every tool can read them.
 - Don't rely on any tool's private memory, chat history or proprietary features for project knowledge; if a tool stores something useful, copy it into the project files.
 - Capabilities differ by tool (terminal, git, browser, sub-agents, connectors). At session start, check what's available and plan accordingly; if a step needs a capability this tool lacks, say which tool or step the person should use and prepare everything for it.
 - When the person switches tools mid-project, the session end protocol in the old tool + start protocol in the new one makes the switch safe.
 
-## 9. Chat → coding agent handoff
+## 9. Chat → coding agent handoff (only in chat-only environments)
 
 Chat environments are good for discovery, planning, design, documents and prototypes, but usually can't keep a persistent project folder, run git, or deploy. When the build stage arrives in a chat-only environment:
 
@@ -156,70 +164,4 @@ The same works in reverse: if they come back to chat to plan v2 or write documen
 
 ## 10. Templates
 
-**AGENTS.md**
-```markdown
-# [Project] — Agent Instructions
-
-## What this is
-[2 lines]. Owner: [person]. Current version: see PROJECT_STATE.md.
-
-## Always
-- Start: read this file and PROJECT_STATE.md; check git status and tests.
-- Checkpoint at least every ~20 minutes of work (see project-memory.md §4): commit + update PROJECT_STATE.md (Last updated, next step, session log).
-- End: update PROJECT_STATE.md, decisions, docs, changelog; commit.
-- Plan before code; tests first for core logic; no "done" without running tests.
-- Never commit secrets; keys live in [where].
-- Talk to the owner in plain language ([language preference]); they are not an engineer.
-
-## Stack
-[languages, frameworks, database, hosting]
-
-## Run & test
-[exact commands]
-
-## Folder map
-[tree with one line per folder]
-
-## Conventions
-[naming, file size, branching, commit style, formatting/linting]
-
-## Docs
-See docs/README.md. Docs are updated in the same change as the code.
-```
-
-**PROJECT_STATE.md**
-```markdown
-# Project State
-
-Last updated: [YYYY-MM-DD HH:MM] by [tool/session]
-
-**Version:** v0.3.0 · **Milestone:** M3 — editor MVP (60%)
-**Status:** 🟢 / 🟡 / 🔴 — [one line]
-
-## Done recently
-- …
-## In progress
-- [task] — next exact step: …  (branch: feat/…)
-## Next up (priority order)
-1. …
-## Blocked / waiting on owner
-- …
-## Open questions for owner
-- …
-## Known issues
-- …
-## Last session summary
-[3–5 lines]
-
-## Session log (today)
-- HH:MM — [what changed]
-```
-
-**Decision record (docs/decisions/0007-title.md)**
-```markdown
-# 0007 — [Decision]   ([date], status: accepted)
-Context: …
-Decision: …
-Alternatives considered: …
-Consequences: …
-```
+See `templates.md`.

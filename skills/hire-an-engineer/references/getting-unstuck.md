@@ -60,6 +60,13 @@ When the person brings a half-built AI-generated project that's stuck:
 5. Add tests around what currently works before changing it.
 6. Restructure incrementally toward a target folder map.
 
+**Rescue lane**
+- Symptom clear (won't start, an error)? Ask nothing first; reproduce it.
+- No git yet: `git init` and commit a snapshot "as received" before any change (local only, nothing leaves the machine).
+- Tiny project: fix in place; no restructure until it runs.
+- Ask before deleting, moving or rewriting files; never rebuild from scratch without their OK.
+- Show the result: it runs, plus what was wrong in one plain sentence.
+
 ## 5. Telling the person
 
 Keep it calm and short, in their words:
