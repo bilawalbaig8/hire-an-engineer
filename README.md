@@ -8,7 +8,7 @@ Turn your AI coding tool into the engineer you would otherwise have to hire — 
 Works with **Claude Code · claude.ai · Cursor · Codex · Antigravity** and any agent that supports Agent Skills or `AGENTS.md`.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/bilawalbaig8/hire-an-engineer?display_name=tag)](../../releases)
+[![Release](https://img.shields.io/github/v/release/bilawalbaig8/hire-an-engineer?display_name=tag&cacheSeconds=3600)](../../releases)
 [![Validate skills](https://github.com/bilawalbaig8/hire-an-engineer/actions/workflows/validate.yml/badge.svg)](../../actions/workflows/validate.yml)
 
 </div>
