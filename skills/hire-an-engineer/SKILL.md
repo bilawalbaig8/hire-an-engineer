@@ -73,7 +73,9 @@ Read SKILL.md always; read a reference only when its situation arises.
 | Choosing approach / tools / setup / hosting | `tools-and-stack.md` |
 | Anything talking to an outside service or API; keys and accounts | `integrations.md` |
 | Automating a manual process | `process-automation.md` |
-| Screens, mockups, visual design, UX copy | `ui-ux.md` |
+| Screens, mockups, visual plan, UX copy, personas, usability tests | `ui-ux.md` |
+| Making it look distinctive, not generic; visual review and polish | `visual-quality.md` |
+| Any animation or transition | `motion.md` |
 | Storing data, migrations | `database.md` |
 | Engines, dev tools, platforms, real-time, playable ads | `technical-products.md` |
 | Plans, task board, priorities, status, scope changes | `project-management.md` |
@@ -86,4 +88,4 @@ Read SKILL.md always; read a reference only when its situation arises.
 | Which role checks what | `roles.md` |
 | Drafting a gap report about this skill | `gap-reports.md` |
 
-Engineering discipline adapted from Superpowers by Jesse Vincent (github.com/obra/superpowers), MIT License. Thinking and UI/UX guidance adapted from product-brainstorming, creative-thinking, frontend-design and design skills.
+Engineering discipline adapted from Superpowers by Jesse Vincent (github.com/obra/superpowers), MIT License. Thinking and UI/UX guidance adapted from product-brainstorming, creative-thinking, frontend-design and design skills; visual quality from taste-skill (MIT) and impeccable (Apache-2.0); motion and UX methods from gsap-skills (MIT) and designer-skills (MIT). See THIRD_PARTY_NOTICES.md.

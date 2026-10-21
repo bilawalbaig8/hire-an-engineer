@@ -2,7 +2,7 @@
 
 Contents: The UX process · Users and journeys · Screens and wireframes · Visual design · Every state of every screen · Words on the screen (UX copy) · Accessibility and devices · Design review (self-critique) · Quick usability test with real users · Design tokens and handoff spec · Tools for design work
 
-The UX Designer role, end to end. Drawn and simplified from the frontend-design, ux-copy, accessibility-review, design-critique, user-research, design-system and design-handoff skills for this use case.
+The UX Designer role, end to end. Drawn and simplified from the frontend-design, ux-copy, accessibility-review, design-critique, user-research, design-system and design-handoff skills, with research and critique methods adapted from designer-skills (MIT). Deeper visual craft: `visual-quality.md`; animation: `motion.md`.
 
 The person can't judge design from words or specs. They judge by **seeing** and **trying**. So: show early, show options, let them click, then refine.
 
@@ -26,6 +26,8 @@ Skip or shrink steps for tiny tools — a single calculator still deserves good 
 - **Who:** each type of user (owner, staff, customer), their device, their comfort with tech, language, where they'll be (shop counter, on the move, at a desk).
 - **Journeys:** for each user type, the 1–3 most important tasks, step by step, from their trigger to done. Draw the main one as a flowchart.
 - **Count the steps.** Every extra tap or field loses people. Remove anything not needed for the task.
+- **Quick persona (Small+):** one primary user, plus one or two only if truly different — role, device and tech comfort, goal, top frustration, current workaround, one "day in the life" line, and what it means for the design. Built from what the person told you; mark guesses as assumptions.
+- **Journey map (Medium+ or when the experience is the product):** 3–7 stages, each with goal, action, thought, feeling (+/−) and pain. Mark the 1–2 moments that make or break it; list the top 3 fixes. A simple table is enough.
 
 ## 3. Screens and wireframes
 
@@ -33,6 +35,7 @@ Skip or shrink steps for tiny tools — a single calculator still deserves good 
 2. **Wireframes first:** quick ASCII or simple boxes showing layout and content order — no colours yet. Get the structure right before the looks.
 3. **Then a clickable mockup:** an HTML preview (or design tool) the person can open and tap through. This catches more misunderstandings than any document.
 4. Ask with concrete choices: "Order list upar ho ya calendar view?" — and show both when it matters.
+5. **Real options, not variations:** when the structure is uncertain, sketch 2–3 directions at the same level of detail that differ in what the user does (order of steps, who decides, where they start), not just colours. Say which question they answer; no deliberately weak option.
 
 Layout principles:
 - The most important action on each screen is the most visible thing.
@@ -44,14 +47,14 @@ Layout principles:
 
 Ground the look in the subject — a kids' learning app, a bakery, and a finance dashboard should look nothing alike. Before building UI, write a compact visual plan:
 
-- **Colour:** 4–6 named colours (background, text, primary action, accent, success/error). Use brand colours if the person has them (ask for a logo).
+- **Colour:** named role tokens — background, surface, text, muted text, primary action (+ text on it), success, error. Use brand colours if the person has them (ask for a logo).
 - **Type:** one or two typefaces with clear roles; readable sizes (body ≥ 16px on mobile); line length under ~80 characters.
 - **Layout concept:** a sentence plus an ASCII sketch; alignment rules.
 - **One memorable thing:** spend boldness in one place, keep the rest calm. Remove one unnecessary decoration before shipping.
 
-Avoid generic AI-template looks that ignore the subject (identical rounded cards everywhere with soft grey shadows, decorative gradients, all-caps labels above every heading, arrow "→" on every button, a single accent word in the headline). Use them only if the brief calls for it.
+Avoid generic AI-template looks that ignore the subject; use them only if the brief calls for it. Full list of tells, concrete type/colour/space values, the design record and the screenshot critique: `visual-quality.md`.
 
-Motion only when it shows what changed (item added, panel opened). No decorative animations on every section.
+Motion only when it shows what changed (item added, panel opened); timing, easing and performance rules: `motion.md`.
 
 For anything branded or public (website, customer-facing app), offer the person 2 visual directions to choose from. For internal tools, one clean, consistent direction is enough.
 
@@ -77,6 +80,8 @@ Design and build all of these — missing states are where non-technical owners 
 - Errors: what happened + how to fix, specific, no blame, no vague "Something went wrong".
 - Confirmations for destructive actions: "3 orders delete karein? Yeh wapas nahi ho sakta." Buttons: "Delete orders" / "Rehne dein".
 - Sentence case, short, one job per piece of text.
+- Tone by state: loading calm ("Getting your orders"), empty inviting, user error blame-free with one next step, system error owns the problem, success warm and brief.
+- Say each idea once; placeholders are examples, not labels; where undo is cheap to build, prefer it to a confirm dialog.
 - Write in the users' language. If Urdu script is used, check right-to-left layout and fonts; for Roman Urdu/English mixes, be consistent per screen.
 
 ## 7. Accessibility and devices
@@ -100,7 +105,9 @@ Before showing any screen, review it as a fresh critic (screenshot it if the env
 4. **Consistency:** same colours, spacing, button styles, words throughout.
 5. **States & copy:** all states present (§5); copy follows §6.
 6. **Accessibility:** §7 checklist.
-Fix critical and moderate issues before the person sees it. Record notable findings in the test report.
+Rate issues on one scale — 4 blocks the task · 3 major · 2 minor · 1 polish · 0 not an issue — and fix every 4 and 3 before the person sees it. Record notable findings in the test report. For customer-facing screens add the screenshot passes, severity tags and polish order in `visual-quality.md` §6–7.
+
+**Heuristic walkthrough (Small+, before a release):** walk each main journey twice — as a first-time user and as a regular one — against the 10 usability heuristics (status visible, plain words, easy undo/exit, consistency, error prevention, recognise rather than recall, shortcuts for regulars, no clutter, clear error recovery, help where needed). Log each issue: heuristic, where, severity (same 0–4 scale), fix. Fix every 3 and 4 before release.
 
 ## 9. Quick usability test with real users
 
@@ -109,7 +116,7 @@ For anything other people will use, run a light test before launch (no research 
 - Give each a task, not instructions: "Ek chocolate cake kal ke liye order karein."
 - Watch where they hesitate or ask questions; don't help.
 - Ask afterwards: "Kya mushkil laga? Kya expect kiya tha jo nahi hua?"
-Write the person a short script for this. Group what you learn into themes, fix the top issues, note results in the Test Report.
+Write the person a short script: one opening line ("we're testing the app, not you"), a warm-up task, then 4–6 tasks from easy to hard — each a reason plus one goal in the users' own words, never button names or steps. Try the script once yourself first. Note for each task: done or not, time, wrong turns, help asked, difficulty 1–5. Group what you learn into themes, fix the top 3, note results in the Test Report.
 
 ## 10. Design tokens and handoff spec
 
