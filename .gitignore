@@ -5,13 +5,13 @@ __pycache__/
 .env
 
 # Owner-only / internal (kept locally, not published)
-HANDOFF.md
-PROJECT_STATE.md
-AGENTS.md
-CLAUDE.md
-docs/OWNER_SETUP.md
-docs/GITHUB_ABOUT.md
-scripts/set_owner.sh
-scripts/setup_labels.sh
-evals/
-templates/
+/HANDOFF.md
+/PROJECT_STATE.md
+/AGENTS.md
+/CLAUDE.md
+/docs/OWNER_SETUP.md
+/docs/GITHUB_ABOUT.md
+/scripts/set_owner.sh
+/scripts/setup_labels.sh
+/evals/
+/templates/

@@ -4,15 +4,6 @@ Thinking tools a sharp product lead and architect use *in their head* before dec
 
 The person never sees framework names. They see the result: a clearer problem, two or three real options, and your recommendation with a reason. Use a tool when it moves the project forward; never run every tool on every project.
 
-## Contents
-1. When to reach for which tool
-2. Understanding the problem
-3. Generating options
-4. Stress-testing an idea
-5. Deciding
-6. When stuck
-7. How to show the result to the person
-
 ---
 
 ## 1. When to reach for which tool
@@ -83,7 +74,7 @@ Always include one option that **removes** something instead of adding, and one 
 
 ## 6. When stuck
 
-- Three failed fixes, or a design that keeps getting more complicated → step back one level: is the problem framed right? Reframe (§3) before continuing.
+- Stuck or three failed fixes → `getting-unstuck.md`; then reframe (§3) before continuing.
 - Two good options and no clear winner → pick the one easier to undo, and log it as a ruling.
 - Person keeps changing their mind → go back to the job to be done and success criteria; decide against those.
 

@@ -1,18 +1,8 @@
 # Complex Technical Products — game engines, developer tools, platforms
 
-Read when the idea is a **game engine or game framework**, an **editor/creation tool**, a **developer tool** (SDK, library, API, CLI, plugin), or a **platform** (multi-tenant SaaS, real-time collaboration, marketplace). These are always Large-tier projects. Everything else in the skill still applies; this file adds what these products specifically need.
+Contents: Scoping these products · Game engine runtime architecture · Editor architecture · Performance budgets · Testing engines and technical products · Developer-facing products (APIs, SDKs, engines) · Platforms (multi-tenant, real-time) · Export targets (web, playable ads, mobile) · Roadmap pattern · Roles that carry extra weight
 
-## Contents
-1. Scoping these products
-2. Game engine runtime architecture
-3. Editor architecture
-4. Performance budgets
-5. Testing engines and technical products
-6. Developer-facing products (APIs, SDKs, engines)
-7. Platforms (multi-tenant, real-time)
-8. Export targets (web, playable ads, mobile)
-9. Roadmap pattern
-10. Roles that carry extra weight
+Read when the idea is a **game engine or game framework**, an **editor/creation tool**, a **developer tool** (SDK, library, API, CLI, plugin), or a **platform** (multi-tenant SaaS, real-time collaboration, marketplace). These are always Large-tier projects. Everything else in the skill still applies; this file adds what these products specifically need.
 
 ---
 

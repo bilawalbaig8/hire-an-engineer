@@ -2,16 +2,6 @@
 
 The person won't know that their idea needs outside services, what an API or API key is, or how to get one. You discover the need, choose the service, get it set up safely, integrate it robustly, and keep it working. They only hear it in their terms: "WhatsApp pe message bhejne ke liye ek service ka account chahiye hoga."
 
-## Contents
-1. Discover which APIs are needed
-2. Research and choose
-3. Explain it to the person
-4. Accounts and keys — the safe way
-5. Integration design
-6. Testing integrations
-7. Integrations register
-8. Keeping integrations healthy
-
 ---
 
 ## 1. Discover which APIs are needed
@@ -70,7 +60,7 @@ Flag early anything with waiting time (business verification, app review, paymen
 
 ## 4. Accounts and keys — the safe way
 
-- **The person owns every account**, in their/their business name. Never create accounts for them or enter their passwords, ID documents or payment details; guide them click by click (screenshots of what they'll see).
+- **The person owns every account**, in their/their business name. They create accounts themselves; you ask before suggesting any new account. Never enter their passwords, ID documents or payment details; guide them click by click (screenshots of what they'll see).
 - **API keys are secrets.** Tell the person plainly: "Yeh key password jaisi hai — chat mein paste na karein."
   Instead, guide them to put it directly where the software reads it: hosting environment variables, GitHub Actions secrets, the database's secrets/vault, or a local `.env` file that is git-ignored. Give exact click paths.
 - If a key does get pasted into chat, a doc or code: treat it as exposed — have them revoke/rotate it in the provider dashboard and create a new one.
@@ -97,7 +87,7 @@ Build every integration so an outside failure never breaks the person's core wor
 - **Integration tests against the sandbox** for the main flows.
 - **Contract tests:** check real responses still match what the code expects; run in CI on a schedule to catch provider changes.
 - **Webhook tests:** replay sample events, duplicates, bad signatures.
-- **End-to-end on test environment** before release; one controlled live check after release (e.g. a small real payment refunded, a test message to the owner).
+- **End-to-end on test environment** before release; one controlled live check after release, with approval, using owner-controlled test accounts/recipients only (e.g. a test message to the owner).
 
 ## 7. Integrations register
 

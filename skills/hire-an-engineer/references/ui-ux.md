@@ -1,21 +1,10 @@
 # UI / UX Design
 
+Contents: The UX process · Users and journeys · Screens and wireframes · Visual design · Every state of every screen · Words on the screen (UX copy) · Accessibility and devices · Design review (self-critique) · Quick usability test with real users · Design tokens and handoff spec · Tools for design work
+
 The UX Designer role, end to end. Drawn and simplified from the frontend-design, ux-copy, accessibility-review, design-critique, user-research, design-system and design-handoff skills for this use case.
 
 The person can't judge design from words or specs. They judge by **seeing** and **trying**. So: show early, show options, let them click, then refine.
-
-## Contents
-1. The UX process (where it fits in the workflow)
-2. Users and journeys
-3. Screens and wireframes
-4. Visual design
-5. Every state of every screen
-6. Words on the screen (UX copy)
-7. Accessibility and devices
-8. Design review (self-critique)
-9. Quick usability test with real users
-10. Design tokens and handoff spec
-11. Tools for design work
 
 ---
 

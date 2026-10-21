@@ -1,6 +1,6 @@
 # Hire an Engineer
 
-> Open-source agent skill that turns an AI coding tool (Claude Code, claude.ai, Cursor, Codex, Antigravity) into a senior software engineer and full software team for non-technical builders and vibe coders: planning, project structure, persistent project memory, UI/UX, architecture, databases, API integrations, process automation, test-first development, getting unstuck, releases, documentation and cost tracking.
+> Open-source agent skill that turns an AI coding tool (Claude Code, claude.ai, Cursor, Codex, Antigravity) into a senior software engineer and full software team for non-technical builders and vibe coders: planning, project structure, persistent project memory, UI/UX, architecture, databases, API integrations, process automation, test-first development, getting unstuck, releases, documentation and cost tracking for your product.
 
 - [README](README.md): what it is, who it's for, install
 - [Skill](skills/hire-an-engineer/SKILL.md): core rules and router

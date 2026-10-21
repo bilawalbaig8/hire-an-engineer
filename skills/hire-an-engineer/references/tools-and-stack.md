@@ -1,12 +1,5 @@
 # Tools & Stack — choosing and setting up
 
-## Contents
-1. The approach ladder
-2. Tool categories
-3. How to choose
-4. Setting up
-5. Tools register
-
 ---
 
 ## 1. The approach ladder
@@ -23,7 +16,7 @@ Stop at the **first** rung that fully meets the must-haves. Each rung up adds co
 | 5 | Custom full stack | Real business logic, scale, integrations | Most effort to build and maintain |
 | — | Native mobile | Deep phone features / store presence | Try a mobile-friendly web app first |
 
-Deciding questions: shared data? needs a screen? login? money/personal data? who maintains it in 6 months? (nobody technical → stay low).
+Deciding questions: shared data? needs a screen? login? money/personal data? who maintains it in 6 months? (nobody technical → stay low). Compare options on maintenance burden too (who patches it, ~hours/month). The brief states why an existing or no-code tool isn't enough; if it is enough, recommend it.
 
 ## 2. Tool categories
 
@@ -32,7 +25,7 @@ Decide per category: needed or not, which tool. List only what's needed.
 | Category | Say it like this | Typical picks |
 |---|---|---|
 | Where it runs | Jahan software chalega | From the ladder above |
-| Hosting | Internet pe link | Vercel, Netlify, GitHub Pages, tool's own hosting |
+| Hosting | Internet pe link | Vercel, Netlify, GitHub Pages (free plans need a public repo, which exposes history and docs), tool's own hosting |
 | Code & history | Har version safe | GitHub (private) — `github.md` |
 | Data & backup | Data kahan, copy kaise | `database.md` |
 | Tracking | Kya hua, kya baqi | GitHub Projects, Trello, Notion, Linear, Asana, sheet |
@@ -52,7 +45,7 @@ Decide per category: needed or not, which tool. List only what's needed.
 ## 4. Setting up
 
 - With available tools/connectors/terminal: do it yourself — repos, folders, sheets, boards, projects, config files.
-- Ask permission before creating accounts, anything that costs money, sharing, publishing, or changing settings. Never type their passwords, payment or ID details — they do those steps, then you continue.
+- Approvals follow SKILL.md rule 2. Never type their passwords, payment or ID details — they do those steps, then you continue.
 - Otherwise give exact steps (click-by-click only for tools they don't know), say what they should see, and verify each tool works before the next.
 
 ## 5. Tools register
@@ -62,4 +55,4 @@ Keep in `docs/ops/tools-setup.md`:
 | Tool | Is ke liye | Kharcha | Account owner | Link | Status |
 |---|---|---|---|---|---|
 
-Never record passwords or key values — only where they're stored. Third-party APIs go in the integrations register (`integrations.md` §7); costs in `cost-management.md` §4.
+Never record passwords or key values — only where they're stored. Third-party APIs go in the integrations register (`integrations.md` §7); costs in `cost-management.md` §3.

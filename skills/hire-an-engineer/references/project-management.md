@@ -2,18 +2,6 @@
 
 You are the project manager. Every project, however small, gets a real plan, a live task list, clear priorities and visible tracking. Scale the ceremony to the size tier (`project-cases.md`): a tiny tool gets a short checklist; a medium/large project gets everything below.
 
-## Contents
-1. Planning hierarchy
-2. The task board (artifact)
-3. Task anatomy
-4. Setting priorities
-5. Estimating and scheduling
-6. Tracking and status updates
-7. Risks, issues and change requests
-8. Where the board lives
-
----
-
 ## 1. Planning hierarchy
 
 ```
@@ -31,11 +19,9 @@ Vision (one line: what this is for)
 
 ## 2. The task board (artifact)
 
-Every project beyond tiny gets a **live task board** the person can open any time. Build it in this order of preference:
-1. In the project tool they already use, via connector (GitHub Projects, Trello, Asana, Linear, Notion, monday, Jira).
-2. An interactive task-board artifact (an HTML page with saved state, if the environment can publish artifacts) — columns, filters by priority/milestone, progress bar, and burndown/progress chart.
-3. A Google Sheet / Excel tracker with status dropdowns, priority colours and a progress chart.
-4. A Markdown checklist inside the Project Plan document (fallback, and for tiny projects).
+Every project beyond tiny gets a **live task board** the person can open any time. One preference order (stated here only): the tool they already use (GitHub Projects, Trello, Asana, Linear, Notion, monday, Jira, via connector) → GitHub Issues for code projects → a simple Markdown board (checklist in the plan; also for tiny).
+
+Medium+ only: interactive HTML board with filters and progress chart, burndown/Gantt charts, retrospectives.
 
 Board columns: **Backlog → To do (this milestone) → In progress → In review/testing → Done**, plus a **Blocked** flag.
 
@@ -45,20 +31,17 @@ Update the board as you work — every task you start or finish moves. A board t
 
 ## 3. Task anatomy
 
+Essential fields:
+
 | Field | Example |
 |---|---|
-| ID | T-014 |
 | Title (verb first) | Add "phone number" validation to order form |
 | Why / user value | So wrong numbers don't break WhatsApp alerts |
-| Milestone / release | M1 / v1.0 |
 | Priority | P1 |
-| Type | Feature / Bug / Design / Setup / Docs / Test / Chore |
-| Estimate | S / M / L |
-| Depends on | T-010 |
 | Done when (acceptance) | Wrong number shows message; valid number saves; test passes |
 | Owner | Agent / Person (e.g. "send product photos") |
-| Status | To do / In progress / Review / Done / Blocked |
-| Links | GitHub issue/PR, test report |
+
+Optional (Medium+): ID, milestone/release, type, estimate (S/M/L), depends on, status, links.
 
 Tasks owned by the person (provide content, approve design, test on their phone, make payments) are real tasks with dates — they're often the biggest blocker.
 
@@ -88,7 +71,7 @@ Show the person priorities in their terms: "Pehle yeh 4 cheezein (inke baghair a
 - Size tasks S / M / L; give the person ranges in days/weeks, never false precision.
 - Add buffer (~30%) for unknowns and for waiting on the person.
 - Put person-owned tasks and approval points on the timeline explicitly.
-- Show the schedule as a Gantt chart in the Project Plan; update when it moves and say why.
+- Medium+: show the schedule as a Gantt chart in the Project Plan; update when it moves and say why. Small: a milestone list with dates.
 
 ## 6. Tracking and status updates
 
@@ -103,7 +86,7 @@ Risks: …
 Progress: [chart] 9/14 tasks · v1.0 target [date]
 ```
 
-Charts to keep current: progress (tasks done over time / burndown), release progress per milestone, test pass rate, open bugs by priority.
+Medium+: keep charts current (progress/burndown, release progress, test pass rate, open bugs by priority).
 
 ## 7. Risks, issues and change requests
 
@@ -113,4 +96,4 @@ Charts to keep current: progress (tasks done over time / burndown), release prog
 
 ## 8. Where the board lives
 
-Record the board's link in the Tools & Setup Guide and at the top of the Project Plan. If tasks also live in GitHub Issues, keep one source of truth — the GitHub Project board — and link to it rather than duplicating.
+Record the board's link in the Tools & Setup Guide and at the top of the Project Plan. If tasks also live in GitHub Issues, keep one source of truth — the board chosen in §2 — and link to it rather than duplicating.

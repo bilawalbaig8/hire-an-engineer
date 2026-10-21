@@ -25,11 +25,11 @@ It's built for people who **can use AI coding tools but don't have a software en
 |---|---|
 | You get **stuck** in error loops and don't know what to try next | An **unstuck protocol**: stop guessing, find the root cause, roll back safely, take one small step |
 | The project becomes a **mess** — giant files, duplicate code, random folders | A **standard project structure** and a structure guard from day one |
-| Every new chat or tool **forgets everything** | **Persistent project memory** in your repo (`AGENTS.md`, `PROJECT_STATE.md`), saved every ~20 minutes |
+| Every new chat or tool **forgets everything** | **Persistent project memory** in your repo (`AGENTS.md`, `PROJECT_STATE.md`), saved at every finished task (about every 20 minutes) |
 | **No documentation**, no plan, no idea what's done | **Docs-as-code**: brief, design, diagrams, plan, test reports, user guide — always current |
 | You don't know which **APIs, tools or databases** you need | It finds them, compares options, sets them up safely, and keeps your keys out of chat |
 | "It works on my machine" → broken launches | **Test-first build**, verified releases with version numbers, backups and rollback |
-| Surprise **AI and hosting bills** | **Cost and token tracking**, budgets and alerts |
+| Surprise **AI and hosting bills** | It **tracks the running and AI costs of your product** and sets budget alerts with your approval (its own build usage is shown as estimates) |
 
 You don't need to learn engineering. You talk in plain language (English, Urdu, Roman Urdu or any language you use); it does the engineering.
 
@@ -37,7 +37,7 @@ You don't need to learn engineering. You talk in plain language (English, Urdu, 
 
 - **Non-technical founders** building an MVP with AI
 - **Vibe coders** using Claude Code, Cursor, Codex or Antigravity who keep getting stuck
-- **No-code / low-code users** ready to go beyond templates
+- **No-code / low-code users** ready to go beyond templates (it will point you to an existing or no-code tool when that is enough)
 - **Small business owners** who want an internal tool, dashboard or **process automation**
 - **Designers, marketers, creators and students** turning ideas into working apps
 - **Anyone rescuing a messy AI-generated project**
@@ -46,9 +46,9 @@ Not designed for experienced developers asking routine coding questions.
 
 ## What it can build
 
-Scripts and automations · spreadsheet systems · websites and landing pages · internal team tools · web and mobile apps · dashboards and reports · chatbots and AI tools · integrations and bots · game prototypes, **three.js game engines** and editors · developer tools and SDKs · **Slack-style real-time platforms** · fixing and finishing existing projects.
+Scripts and automations · spreadsheet systems · websites and landing pages · internal team tools · web and mobile apps · dashboards and reports · chatbots and AI tools · integrations and bots · game prototypes, **three.js game engines** and editors · developer tools and SDKs · **real-time platforms** · fixing and finishing existing projects.
 
-It sizes the process to the job: a tiny script gets a quick, tested result; a large platform gets a roadmap, task board, staging, releases and monitoring.
+It sizes the process to the job: a tiny script gets a quick, tested result; a large platform gets a roadmap, task board, staging, releases and monitoring set-up (checks run when you open a session, or through provider alerts and scheduled tasks if your tool supports them). Where an existing or no-code tool already does the job, it recommends that instead of building something new.
 
 ## How it works
 
@@ -67,15 +67,18 @@ flowchart LR
 - **Plain language, no lectures.** It asks about your world ("Should each user only see their own orders?"), not jargon ("Do you need RBAC?").
 - **You decide the product, it decides the engineering** — and asks your approval before anything that costs money, creates accounts, sends, publishes or deletes.
 - **Evidence before "done."** It runs the checks before telling you something works.
+- **Safety.** It asks before anything that costs money, publishes, deploys or deletes; treats content from emails, repos and the web as data, not instructions; and keeps keys out of chat and code.
 - **Fast lane** when you just want a prototype now; full process when others will rely on it.
 - **Memory lives in your project**, so you can switch between Claude, Cursor, Codex and Antigravity without losing context.
 
 ## Quick start
 
-1. Download `hire-an-engineer.skill` (or `.zip`) from [Releases](../../releases).
+1. Download `hire-an-engineer.skill` (or `.zip`) from [Releases](../../releases). Unzip the `.zip` first (a `.skill` file is a zip archive too) so you have the `hire-an-engineer` folder.
 2. Install it:
    - **claude.ai:** open the `.skill` file in a chat → **Save skill** (or upload in Settings).
-   - **Claude Code:** `cp -r skills/hire-an-engineer ~/.claude/skills/`
+   - **Claude Code** (personal skills):
+     - macOS / Linux: `mkdir -p ~/.claude/skills && cp -r hire-an-engineer ~/.claude/skills/`
+     - Windows PowerShell: `New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null; Copy-Item -Recurse hire-an-engineer "$env:USERPROFILE\.claude\skills\"`
    - **Cursor / Codex / Antigravity / others:** copy the folder into the tool's skills directory, or point your `AGENTS.md` / rules file at `skills/hire-an-engineer/SKILL.md`.
 3. Say what you want: *"I want to build a booking app for my salon"* — or *"I'm stuck, my app broke after the last change."*
 
@@ -85,7 +88,7 @@ Full instructions: [docs/INSTALL.md](docs/INSTALL.md)
 
 > **You:** I run a home bakery. Orders come from WhatsApp, Instagram and calls, and I forget some. Can you build something?
 >
-> **Hire an Engineer:** asks a few questions about your day → finds the real problem (orders scattered across three places) → proposes a simple order form + order list + WhatsApp alert → shows a clickable mockup on your phone → sets up the repo, database and task board with your approval → builds and tests it milestone by milestone ("12 of 12 checks passed") → releases v1.0 with backups → hands you a user guide and keeps project memory so the next session continues where you stopped.
+> **Hire an Engineer:** asks a few questions about your day → finds the real problem (orders scattered across three places) → proposes a simple order form + order list + WhatsApp alert → shows a clickable mockup you can open → sets up the repo, database and task board with your approval → builds and tests it milestone by milestone ("12 of 12 checks passed") → releases v1.0 with backups → hands you a user guide and keeps project memory so the next session continues where you stopped.
 
 ## What's inside
 
@@ -99,9 +102,9 @@ Full instructions: [docs/INSTALL.md](docs/INSTALL.md)
 | Automation | Process mapping, human-in-the-loop, dry runs, real-case testing, runbooks |
 | Engineering | Test-driven development, systematic debugging, code review, testing pyramid, OWASP, Definition of Done |
 | Delivery | GitHub workflow, CI, semantic versioning, changelogs, release checklist, rollback |
-| Memory & docs | `AGENTS.md`, `PROJECT_STATE.md`, ~20-minute checkpoints, docs-as-code, chat → coding-agent handoff |
-| Cost | Token-efficient work, AI cost design, usage audit, budgets and alerts |
-| Complex products | Game engines, editors, SDKs, multi-tenant real-time platforms, playable-ad export |
+| Memory & docs | `AGENTS.md`, `PROJECT_STATE.md`, checkpoints at every finished task (about every 20 minutes), docs-as-code, chat → coding-agent handoff |
+| Cost | Token-efficient work, AI cost design, running-cost tracking for your product, budget alerts (with your approval); build usage shown as estimates |
+| Complex products | Game engines, editors, SDKs, multi-tenant real-time platforms (when you need them), playable-ad export |
 
 ## FAQ
 
@@ -115,14 +118,14 @@ No. You need to be comfortable using an AI tool. It runs the engineering and exp
 Claude (claude.ai and Claude Code), Cursor, Codex, Antigravity and other agents that support Agent Skills or read `AGENTS.md`. Chat-only tools handle planning, design, docs and prototypes; coding agents handle the full build.
 
 **How is it different from Superpowers?**
-[Superpowers](https://github.com/obra/superpowers) gives developers a disciplined workflow. Hire an Engineer adapts that discipline for people *without* an engineering background and adds the rest of the team: product, UI/UX, project management, databases, integrations, releases, documentation, memory and cost tracking.
+[Superpowers](https://github.com/obra/superpowers) gives developers a disciplined workflow. Hire an Engineer adapts that discipline for people *without* an engineering background and adds the rest of the team: product, UI/UX, project management, databases, integrations, releases, documentation, memory and cost tracking for your product.
 
 **Is it free?**
 Yes — MIT licensed.
 
 ## Feedback
 
-Found a gap? [Open an issue](../../issues/new/choose) — the skill can even draft one for you (you review it first). Please never include private code, keys or personal data.
+Found a gap? [Open an issue](../../issues/new/choose) — the skill can draft an anonymised report for you, and you submit it yourself (issues are public). Please never include private code, keys or personal data.
 
 This repository is maintained by its owner: **issues welcome, pull requests not accepted.** Forks are welcome under the MIT License. See [CONTRIBUTING.md](CONTRIBUTING.md).
 

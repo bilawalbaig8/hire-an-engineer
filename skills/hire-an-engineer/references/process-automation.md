@@ -2,18 +2,6 @@
 
 The most common request from non-technical people: "Yeh kaam roz haath se karta hoon, khud ho jaye." They know the process deeply but can't describe it as steps, triggers and rules. You map it, decide what to automate, build it on the simplest reliable platform, keep a human in control where it matters, and make sure it never fails silently.
 
-## Contents
-1. Discover the process (as-is)
-2. Map it
-3. Decide what to automate
-4. Design the automated process (to-be)
-5. Choose the platform
-6. Build safely
-7. Test with real cases
-8. Roll out
-9. Run, monitor and measure
-10. Documents for automation projects
-
 ---
 
 ## 1. Discover the process (as-is)
@@ -93,14 +81,14 @@ Prefer official APIs and connectors (`integrations.md`). Prefer tools the person
 
 ## 7. Test with real cases
 
-- Collect 10–20 **real past examples**, including the awkward ones (missing attachment, duplicate, wrong format, very large).
+- Collect 10–20 **real past examples**, including the awkward ones (missing attachment, duplicate, wrong format, very large). Real samples stay outside the repo, are anonymised before becoming test fixtures, go to an AI service only with the person's consent, and are deleted after testing.
 - Run them through in dry-run; compare outputs to what the person actually did. Track accuracy, especially for AI steps.
 - Test every exception path and the failure alert.
 - Acceptance checks in their words: "Agar invoice email aaye to 5 minute mein sheet mein row aa jaye; agar PDF na ho to aap ko message aaye."
 
 ## 8. Roll out
 
-- **Parallel run:** for a week (or N runs), automation runs alongside the manual process; compare results daily.
+- **Parallel run:** for a week (or N runs), automation runs alongside the manual process; compare results daily. It stays in dry-run (no sends or writes to live) until approved.
 - Switch to automation for the easy cases first; humans keep handling exceptions.
 - Turn on full automation only with the person's approval and acceptable accuracy.
 - If others are affected (staff, customers), give them a short note on what changes for them.

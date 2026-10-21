@@ -2,17 +2,6 @@
 
 GitHub is where the project's code, history, tasks and releases live. You run it; the person never needs to touch git. To them it's "aap ke software ki safe jagah, har version ke saath".
 
-## Contents
-1. When to use GitHub
-2. Setting up the repository
-3. Day-to-day workflow
-4. Issues, labels, milestones and Projects board
-5. Pull requests and reviews
-6. Automation (GitHub Actions)
-7. Releases and tags
-8. Security and access
-9. How you operate it
-
 ---
 
 ## 1. When to use GitHub
@@ -29,14 +18,7 @@ The person owns the account and the repo (create it under their account or organ
 
 - **Private** unless the person wants it public.
 - Name: short, lowercase, hyphens (`bakery-orders`).
-- Files from day one:
-  - `README.md` — what it is, how to run, links to docs, current version
-  - `.gitignore` — for the stack; always excludes secrets (`.env`), build output, OS junk
-  - `.env.example` — names of required secrets, no values
-  - `CHANGELOG.md`
-  - `docs/` — technical docs, design spec, data dictionary (person-facing docs can live in their doc tool, linked from README)
-  - `tests/`
-  - License only if public (ask)
+- Files from day one: minimum files per project size are in `project-memory.md` §1. `.gitignore` always excludes secrets (`.env`), build output, OS junk.
 - Default branch `main`; enable branch protection on `main` for medium/large projects (no direct pushes, checks must pass).
 
 Folder structure follows the file map from the implementation plan; keep it flat and obvious.
@@ -54,7 +36,7 @@ Simple, not enterprise:
 
 ## 4. Issues, labels, milestones and Projects board
 
-Use GitHub as the task system when the project is code-based (`project-management.md`):
+`project-management.md` decides where the board lives. When it's GitHub:
 - **Issues** = tasks and bugs, using the task anatomy (title, why, done-when, priority).
 - **Labels:** `P0`–`P3`, `feature`, `bug`, `design`, `docs`, `test`, `chore`, `needs-owner` (waiting on the person), `blocked`.
 - **Milestones** = releases/milestones with due dates (`v1.0 — Launch`).
@@ -72,9 +54,9 @@ Use GitHub as the task system when the project is code-based (`project-managemen
 Add as the project warrants:
 - **CI on every push/PR:** install, lint, run all tests. Red = no merge.
 - **Preview deploys:** hosting integration (Vercel/Netlify) gives every PR a test link — share with the person for UI approval.
-- **Deploy on release:** tag `v*` → build → deploy to live (or hosting auto-deploys `main`).
+- **Deploy on release:** tag `v*` → build → deploy to live. If hosting auto-deploys a branch, merging to it is a live release: release approval (SKILL.md rule 2).
 - **Scheduled jobs:** nightly database backup, data exports, dependency checks.
-- **Dependabot:** security updates for dependencies; review and merge like any PR.
+- **Dependabot:** the person can't review these. You review and merge only after CI is green and a changelog check; major-version bumps need their OK.
 
 Keep workflows short and commented; record them in the Handoff Guide.
 
@@ -94,7 +76,7 @@ Keep workflows short and commented; record them in the Handoff Guide.
 ## 9. How you operate it
 
 In order of preference:
-1. Use available tools directly (git in a coding agent or terminal, a GitHub connector or CLI) — create repo, branches, commits, issues, board, PRs, releases. Ask permission before creating the repo, making anything public, adding collaborators, or pushing releases live.
+1. Use available tools directly (git in a coding agent or terminal, a GitHub connector or CLI) — create repo, branches, commits, issues, board, PRs, releases. Approvals follow SKILL.md rule 2; also ask before making the repo public (it exposes all history and docs) or adding collaborators.
 2. If you can't access GitHub, prepare everything (files, issue list as CSV/markdown, workflow files) and guide the person click by click through repo creation and upload — or recommend continuing the build in a coding agent (CLI or IDE) for full automation.
 
 Always report in plain terms: "Version 1.1 GitHub pe save ho gaya, yeh raha link."

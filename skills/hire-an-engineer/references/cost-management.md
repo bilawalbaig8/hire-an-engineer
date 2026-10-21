@@ -2,7 +2,7 @@
 
 You are the cost controller. Three kinds of cost, all tracked and kept low.
 
-**Track always, show only if the person manages it.** Tracking, logging, the cost register and audits always happen — but quietly, in the records. Whether the person sees cost reports is their choice (see §6). Default is record-only.
+**Track always, show only if the person manages it.** Tracking, logging, the cost register and audits always happen — but quietly, in the records. Whether the person sees cost reports is their choice (see §5). Default is record-only.
 
 The three kinds:
 1. **Build cost** — your own tokens/usage while doing the project.
@@ -11,28 +11,13 @@ The three kinds:
 
 Be honest about what you can measure. In a chat interface you usually cannot see exact token counts or billing; in coding agents (CLI or IDE), the API or other agent environments, usage data is often available (e.g. a cost command, usage fields in API responses, provider dashboards). Report real numbers where you have them and clearly labelled estimates where you don't. Never invent figures. Look up current model and service pricing when it matters rather than relying on memory.
 
-## Contents
-1. Build efficiency — don't waste tokens
-2. Product AI cost — design for low cost
-3. AI usage logging and audit
-4. Running cost register
-5. Budgets and alerts
-6. Visibility — record-only vs managed
+## Build efficiency
 
----
+- Use cheaper/smaller models or sub-agents for simple helper tasks where the tool allows.
+- Resume from `PROJECT_STATE.md` instead of replaying the chat.
+- Batch related changes.
 
-## 1. Build efficiency — don't waste tokens
-
-- Read only the files the router points to; never re-read what's already in context.
-- Size output to the project; edit documents and code with targeted changes, never regenerate whole files to change a few lines.
-- Keep chat short; details live in documents.
-- No speculative features, variants or documents before approval.
-- Batch related edits and tool calls; test early so you don't build on broken work; root-cause debugging instead of repeated guesses.
-- Where you can choose models (e.g. helper agents): cheaper models for simple, well-specified tasks; the strongest for architecture, hard debugging and reviews.
-- Resume long projects from `PROJECT_STATE.md`, not by replaying long conversations.
-- Note build usage per milestone in the cost register where it's measurable.
-
-## 2. Product AI cost — design for low cost
+## 1. Product AI cost — design for low cost
 
 When the software itself calls an AI model (chat, summaries, classification, generation):
 - **Estimate before building:** cost per action = (input tokens × input price + output tokens × output price), × actions per user per day × users × 30. Show the person a monthly range in their currency for low / expected / high usage.
@@ -44,7 +29,7 @@ When the software itself calls an AI model (chat, summaries, classification, gen
 - **Keys safe:** AI API keys only on the server side, never in the browser.
 - **Quality vs cost tests:** include tests checking both answer quality and token usage per call, so cost regressions get caught like bugs.
 
-## 3. AI usage logging and audit
+## 2. AI usage logging and audit
 
 Every AI call the product makes is logged (add this table to the database design):
 
@@ -62,10 +47,10 @@ Never log sensitive message content unless the person explicitly needs it; log s
 
 From this log, provide:
 - **Dashboard / monthly report:** total cost, cost by feature, by user/workspace, by model, trend chart, cost per active user.
-- **Audit checks (monthly, or on alert):** top 10 most expensive users/features, calls that failed but still cost, unusually long prompts, repeated identical calls (cache candidates), any model used outside its intended feature. Each finding becomes a task on the board with a priority.
+- **Audit checks (at the first session of each month, or via provider alerts / a scheduled task if the tool supports one):** top 10 most expensive users/features, calls that failed but still cost, unusually long prompts, repeated identical calls (cache candidates), any model used outside its intended feature. Each finding becomes a task on the board with a priority.
 - **Reconciliation:** compare the log's total to the provider's billing dashboard; investigate gaps over ~5%.
 
-## 4. Running cost register
+## 3. Running cost register
 
 A table in the Tools & Setup Guide (or its own sheet), kept current:
 
@@ -79,14 +64,14 @@ A table in the Tools & Setup Guide (or its own sheet), kept current:
 
 Check and update at every release. Before any change that adds cost (new service, paid tier, bigger model), get the person's approval with the monthly impact.
 
-## 5. Budgets and alerts
+## 4. Budgets and alerts
 
-- Agree a monthly budget with the person for running and AI costs.
+- Agree a monthly budget with the person for running and AI costs, including your own build usage. Before each milestone give a one-line estimate of build usage where measurable (labelled estimate); give an actual only if the user shares it (some tools show usage to the user, e.g. a cost command; you usually can't read it: ask them to share it, otherwise estimate).
 - Set spending limits/alerts in every provider that supports them (AI API, hosting, database), at e.g. 50%, 80% and 100% of budget. Ask permission before changing billing settings; the person sets payment details themselves.
 - In the product: hard caps on AI usage per user/day; alert the person if daily AI cost exceeds a threshold.
 - Watch free-tier limits and warn before they're crossed.
 
-## 6. Visibility — record-only vs managed
+## 5. Visibility — record-only vs managed
 
 **Ask once** (Phase 3, when estimating costs), in one line: "Kharche ka hisaab aap khud dekhna chahenge, ya main record mein rakhun aur sirf zaroori baat pe bataun?"
 
@@ -99,7 +84,7 @@ They can switch any time ("kharcha dikhao" / "bas record mein rakho"). Remember 
 
 **Always shown, in both modes** (these involve their money or approval, so never silent):
 - Before anything that adds cost: a new paid service, a paid tier, a bigger AI model — one line with the monthly impact, and wait for approval.
-- Budget crossed or about to be crossed (≥ 80%), or a free-tier limit about to end and start charging.
+- Budget (including build usage) crossed or about to be crossed (≥ 80%), or a free-tier limit about to end and start charging.
 - A sudden spike (e.g. AI cost for a day far above normal) — possible bug or abuse.
 - Whenever they ask about cost — answer from the records immediately.
 
@@ -107,7 +92,7 @@ Keep these alerts to one or two lines; full detail stays in the records.
 
 **Record-keeping in record-only mode** (silent, but done every time):
 - Update the cost register at every release.
-- Run the monthly AI usage audit; fix findings as normal board tasks (labelled `cost`) without announcing them unless they change something the person sees or pays.
+- Run the monthly AI usage audit (first session of the month); fix findings as normal board tasks (labelled `cost`) without announcing them unless they change something the person sees or pays.
 - Note build usage per milestone where measurable.
 
 **Report format (managed mode, or on request):**

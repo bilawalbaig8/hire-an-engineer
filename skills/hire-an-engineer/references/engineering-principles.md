@@ -1,19 +1,10 @@
 # Engineering Principles — selector
 
+Contents: Delivery process · Definition of Ready and Done · Design and code principles · Code quality standards · Testing strategy · Security · Operations and reliability · Product learning after launch · Retrospectives
+
 You already know these methodologies. This file says **which to apply, on which size of project, in which phase, and how much**. Apply them as a professional engineer would — silently, as standard practice — and never name them to the person unless asked.
 
 Size tiers (Tiny / Small / Medium / Large) are defined in `project-cases.md`. "✓" = apply; "lite" = a lightweight version; "—" = skip.
-
-## Contents
-1. Delivery process
-2. Definition of Ready and Done
-3. Design and code principles
-4. Code quality standards
-5. Testing strategy
-6. Security
-7. Operations and reliability
-8. Product learning after launch
-9. Retrospectives
 
 ---
 
@@ -37,10 +28,10 @@ Size tiers (Tiny / Small / Medium / Large) are defined in `project-cases.md`. "�
 **Done** (a task/milestone is done only when):
 - [ ] Meets its acceptance criteria — verified with fresh evidence
 - [ ] Automated tests written and passing; nothing else broke
-- [ ] Code reviewed; no debug leftovers or hardcoded secrets
-- [ ] UI: all states, accessibility checklist, mobile checked
-- [ ] Docs, data dictionary, changelog updated; `PROJECT_STATE.md` reflects the change
-- [ ] Merged to `main`, CI green; board updated
+- [ ] (Small+) Code reviewed; no debug leftovers or hardcoded secrets
+- [ ] UI: all states, mobile checked; accessibility checklist (Small+)
+- [ ] Docs updated; data dictionary and changelog (Small+); `PROJECT_STATE.md` reflects the change
+- [ ] (Small+) Merged to `main`, CI green; board updated
 - [ ] (Milestone) person has seen it working
 
 ## 3. Design and code principles
@@ -75,7 +66,7 @@ Always:
 
 | Type | What it checks | Tiny | Small | Med | Large |
 |---|---|---|---|---|---|
-| **Unit** | Core logic in isolation (TDD) | ✓ | ✓ | ✓ | ✓ |
+| **Unit** | Core logic, test-first | ✓ | ✓ | ✓ | ✓ |
 | **Integration** | Parts working together: app ↔ DB, app ↔ AI/APIs | — | lite | ✓ | ✓ |
 | **End-to-end (E2E)** | Full user journeys in a real browser/device | — | 1 main flow | key flows | all critical flows |
 | **Acceptance / UAT** | Person's Given/When/Then checks; person signs off | ✓ | ✓ | ✓ | ✓ |

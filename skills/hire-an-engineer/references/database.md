@@ -2,19 +2,6 @@
 
 You are the database engineer and administrator. The person only knows "mera data". Your job: choose where it lives, design it properly, set it up, keep it correct, safe and backed up, and give them an easy way to see it.
 
-## Contents
-1. Choosing where data lives
-2. Designing the schema
-3. Data dictionary
-4. Setting it up
-5. Changing the schema (migrations)
-6. Data quality and validation
-7. Access and security
-8. Backups and restore
-9. Performance and growth
-10. Giving the person access to their data
-11. Ongoing management
-
 ---
 
 ## 1. Choosing where data lives
@@ -50,7 +37,7 @@ Show the person the data model in plain words with the ERD ("Har order mein cust
 
 ## 3. Data dictionary
 
-A document (in the System Design Doc or `docs/data-dictionary.md`) listing every table and field:
+A document (in the System Design Doc or `docs/design/data-dictionary.md`) listing every table and field:
 
 | Table | Field | Type | Required | Meaning (plain) | Example | Rules |
 |---|---|---|---|---|---|---|
@@ -69,7 +56,7 @@ Keep it updated with every schema change.
 
 - Every change is a numbered migration file in the repo (`migrations/003_add_delivery_date.sql`) — up and, where possible, down.
 - Test on a copy/test database with realistic data first.
-- Backup live before applying. Apply during a quiet time. Verify after (row counts, app still works).
+- Backup live before applying; no live migration without a tested restore or down migration (`versioning-release.md` §6). Apply during a quiet time. Verify after (row counts, app still works).
 - Prefer additive, backward-compatible changes (add column → backfill → switch code → remove old later).
 - Update the data dictionary, ERD and changelog.
 
