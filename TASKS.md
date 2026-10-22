@@ -73,12 +73,14 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 7 Visual office
 
-- [ ] 7.1 Design spec: office floor, one desk per role, who is working / waiting / idle, handoffs as moving files, approvals inbox
-- [ ] 7.2 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
-- [ ] 7.3 Web UI: office view, timeline, files panel, approvals inbox
-- [ ] 7.4 Boss opens the office automatically when a team run starts; owner answers approvals inside it
-- [ ] 7.5 Test with a replay of a recorded team run
-- [ ] 7.6 Package, install script, docs
+- [ ] 7.1 Starts only after the boss and two specialists work (Phase 4). Mock designs: 2-3 clickable office layouts, owner picks one
+- [ ] 7.2 Owner approves the final design; written spec (desks, states, handoff animation, files panel, approvals inbox)
+- [ ] 7.3 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
+- [ ] 7.4 Working UI built from the approved design (office view, timeline, files panel, approvals inbox)
+- [ ] 7.5 Boss opens the office automatically when a team run starts; owner answers approvals inside it
+- [ ] 7.6 Test with a real problem: give the boss a task, specialists work, check the result is correct
+- [ ] 7.7 Check the office tells the truth: replay the events and compare with what really happened; fix mismatches
+- [ ] 7.8 Package, install script, docs
 
 ## Roles (66)
 

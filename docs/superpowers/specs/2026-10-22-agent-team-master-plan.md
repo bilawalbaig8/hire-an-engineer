@@ -87,7 +87,7 @@ The owner asked for roles beyond software engineering. A research pass (2026-10-
 - **Phase 3 — Second specialist (Reviewer or QA):** proves the contract on two agents.
 - **Phase 4 — Orchestrator:** own design doc, built and tested against the first two specialists.
 - **Phase 5 — Remaining roles** in six groups (product, design, engineering, quality+security, release+ops, docs+growth), each group: research → spec → build → evals → release.
-- **Phase 7 — Visual office (owner idea, 2026-10-22):** when a team run starts, the boss opens a local web dashboard that shows the team as a visual office: one desk per role, who is working, waiting or idle, files and messages moving between agents, and an inbox for the owner's approvals. Built from an event log the contract requires (task 1.6), so it needs no change to the specialists.
+- **Phase 7 — Visual office (owner idea, 2026-10-22):** starts only after the boss and two specialists work. Order: (1) mock designs, owner picks one, (2) approved written design, (3) event pipeline, (4) working UI, (5) boss opens it automatically, (6) test with a real problem given to the boss and specialists, checking the result, (7) check the office shows what really happened (replay of events against reality), (8) package. The office is a local web dashboard: one desk per role, who is working, waiting or idle, files and messages moving between agents, and an inbox for the owner's approvals. It only reads the event log the contract requires (task 1.6).
 - **Phase 6 — Integration:** router line in `hire-an-engineer`, optional plugin bundle, end-to-end test (build a small real app with the whole team), docs, release.
 
 ## 6. Definition of done for one agent
