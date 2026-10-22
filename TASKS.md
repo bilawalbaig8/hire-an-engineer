@@ -26,13 +26,13 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 2 Architect
 
-- [~] 2.1 Write sources.md from the four verified research passes (written: 123 sources, 86 verified / 37 unverified; fact-check review pending)
-- [ ] 2.2 core-principles, method-design, method-recover
-- [ ] 2.3 Field references: web/backend/cloud, distributed/data, mobile, desktop/plugins, game/engine, real-time/netcode, AI systems, security, data pipelines
-- [ ] 2.4 diagrams.md (C4, Mermaid default, render + check) and review-checklists.md
-- [ ] 2.5 SKILL.md router and agents/architect.md
-- [~] 2.6 Evals written first: 5 design cases, 2 recover cases, refusal cases
-- [ ] 2.7 Run evals, fix, rerun
+- [x] 2.1 Write sources.md from the four verified research passes (written: 123 sources, 86 verified / 37 unverified; fact-check review parked for the final review)
+- [x] 2.2 core-principles, method-design, method-recover, review-checklists (done; commands verified on a throwaway repo)
+- [x] 2.3 Field references: web/backend/cloud, distributed/data, mobile, desktop/plugins, game/engine, real-time/netcode, AI systems, security, data pipelines (done, 9 files)
+- [x] 2.4 diagrams.md (C4, Mermaid default; 6 templates rendered and checked in a browser) (done)
+- [x] 2.5 SKILL.md router and agents/architect.md (done)
+- [x] 2.6 Evals written first: 12 cases + test project (done; re-review parked for the final review)
+- [~] 2.7 Run evals, fix, rerun
 - [ ] 2.8 THIRD_PARTY_NOTICES, CHANGELOG, validate, repo + installed copies identical
 - [ ] 2.9 Commit; release software-architect 0.1.0 (only when owner says)
 
