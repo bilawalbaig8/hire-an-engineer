@@ -22,6 +22,8 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## Agent team
 
+This is repository tooling, versioned together with the first agent skill (software-architect 0.1.0); it is not tagged on its own.
+
 ### [0.1.0] - Unreleased
 - Handoff contract between the boss and specialist agents (`docs/agents/agent-template/handoff-contract.md`) with a validator, `scripts/agent_contract.py`: request, response (status, summary, files, questions, approvals, assumptions, evidence), event line, and the event log `.agents/events.jsonl`.
 - `scripts/validate_agents.py` checks `agents/*.md` (name, description, model, tools, skill folder, `## Handoff` section); runs in CI with the new tests.

@@ -55,3 +55,58 @@ def test_readme_is_a_ten_step_checklist():
     text = (TEMPLATE / "README.md").read_text(encoding="utf-8")
     steps = re.findall(r"^(\d+)\. ", text, re.M)
     assert steps == [str(i) for i in range(1, 11)]
+
+
+def _read(name):
+    return (TEMPLATE / name).read_text(encoding="utf-8")
+
+
+def test_contract_says_who_writes_the_event_log():
+    text = _read("handoff-contract.md")
+    assert "The hook" in text and "writes `agent_start`, `agent_stop`" in text
+    assert "The boss writes `handoff`, `approval_requested` and `approval_given`" in text
+    assert "A specialist writes nothing" in text
+    assert "must be present" in text and "should be present" not in text
+
+
+def test_readme_follows_definition_of_done():
+    text = _read("README.md")
+    steps = dict(re.findall(r"^(\d+)\. (.*)$", text, re.M))
+    assert "evals" in steps["4"].lower() and "BEFORE" in steps["4"]
+    assert "knowledge" in steps["5"].lower()
+    assert "check_evals.py" in steps["7"]
+    assert "diff -rq" in steps["9"] and "stale" in steps["9"]
+    assert "hooks-snippet.json" in text and "scripts/log_event.py" in text
+
+
+def test_agent_template_never_list_and_inline_handoff():
+    text = _read("agent.md")
+    assert "Overwrite, renumber or reformat existing project records" in text
+    handoff = text.split("## Handoff")[1].split("## Never")[0]
+    for field in ("status", "summary", "files", "questions", "approvals", "assumptions", "evidence", "one_way_door"):
+        assert f'"{field}"' in handoff, field
+    assert "handoff-contract.md" in handoff
+    assert "not evidence" in handoff
+
+
+def test_agent_template_tools_and_skills_keys():
+    text = _read("agent.md")
+    assert re.search(r"^tools: Read, Grep", text, re.M)
+    assert re.search(r"^skills:\n  - <skill-name>\nskill: <skill-name>$", text, re.M)
+
+
+def test_skill_template_has_no_issue_link_and_uses_claim_labels():
+    text = _read("skill/SKILL.md")
+    assert "issue link" not in text
+    assert "verified in code" in text
+    assert "verified in code" in _read("agent.md")
+
+
+def test_install_doc_and_workflows():
+    root = TEMPLATE.parent.parent.parent
+    install = (root / "docs" / "INSTALL.md").read_text(encoding="utf-8")
+    assert "--verbose` to list `same`" in install and "never removes stale files" in install
+    validate = (root / ".github" / "workflows" / "validate.yml").read_text(encoding="utf-8")
+    assert "skills/*/" in validate and "software-architect" not in validate
+    release = (root / ".github" / "workflows" / "release.yml").read_text(encoding="utf-8")
+    assert "validate_agents.py" in release and "pytest -q" in release

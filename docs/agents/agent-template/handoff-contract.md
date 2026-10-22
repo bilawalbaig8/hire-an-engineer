@@ -44,7 +44,7 @@ Example:
 | `assumptions` | Things the specialist assumed instead of asking. |
 | `evidence` | Proof the work is real. Required (at least one) when `status` is `done`. |
 
-All seven fields should be present; use an empty list when there is nothing to say.
+All seven fields must be present; use an empty list when there is nothing to say.
 
 ### Questions and approvals
 
@@ -108,10 +108,14 @@ Example, a response asking for approval:
 
 ## The event log
 
-Every agent appends one line per event to `.agents/events.jsonl` (one JSON object per
-line, never edited afterwards). This is the trail the owner can read to see what
-happened. Use `append_event` from `scripts/agent_contract.py`; it checks the line
-before writing.
+Events are appended to `.agents/events.jsonl` (one JSON object per line, never edited
+afterwards). This is the trail the owner can read to see what happened. Who writes what:
+
+- The hook (`scripts/log_event.py`, see "Event sources") writes `agent_start`, `agent_stop`
+  and `file_written`.
+- The boss writes `handoff`, `approval_requested` and `approval_given`, using
+  `append_event` from `scripts/agent_contract.py` (it checks the line before writing).
+- A specialist writes nothing to the log.
 
 | Field | Meaning |
 |---|---|

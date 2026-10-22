@@ -44,8 +44,9 @@ The installer copies `skills/` and `agents/*.md` from this repo into your Claude
 ```
 python scripts/install_agents.py
 ```
-- Preview first: `python scripts/install_agents.py --dry-run` lists every file as `new`, `same` or `differs` and writes nothing.
+- Preview first: `python scripts/install_agents.py --dry-run` lists new and differing files and writes nothing (add `--verbose` to list `same` files too).
 - It never overwrites a file that differs from the repo copy. If any file differs it stops, lists them and writes nothing (exit code 1).
 - To replace the differing files with the repo versions, add `--force`.
 - Use `--dest PATH` to install somewhere else, and `--verbose` to also list unchanged files.
 - Running it again when nothing changed writes zero files.
+- It never removes stale files: if you delete a skill file or agent in the repo, delete the installed copy by hand.
