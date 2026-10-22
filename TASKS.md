@@ -18,10 +18,10 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 ## Phase 1 Contract & template
 
 - [x] 1.1 Handoff contract: what boss sends, what specialist returns (done, reviewed)
-- [ ] 1.2 templates/agent-template (agent file + skill-shaped folder)
+- [x] 1.2 Agent template (agent file + skill folder + 10-step checklist) in docs/agents/agent-template (done)
 - [x] 1.3 Validator and packager support for agents/ (done, reviewed)
 - [x] 1.4 Install script + INSTALL.md section (copy to ~/.claude) (done, reviewed; real install only after owner OK)
-- [?] 1.5 Eval pattern for agents (typical, edge, refusal cases) and sources/evals checkers. Blocked: subagent launch refused by the permission checker
+- [~] 1.5 Eval pattern for agents (typical, edge, refusal cases) and sources/evals checkers (built; independent review waiting for the Part 1 final review)
 - [x] 1.6 Event log in the contract: every agent start, stop, handoff and file written is one line in .agents/events.jsonl (feeds the visual office) (done, reviewed)
 
 ## Phase 2 Architect
