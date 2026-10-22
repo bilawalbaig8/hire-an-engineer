@@ -256,3 +256,34 @@ def test_path_traversal_rejected(office, path):
     status = int(data.split(b" ", 2)[1])
     assert status in (400, 403, 404)
     assert b"secret" not in data.split(b"\r\n\r\n", 1)[1]
+
+
+def test_state_pairs_approvals_on_id_of_the_new_contract(office):
+    office.write_events(
+        '{"type": "approval_requested", "id": "a1", "title": "Pick a database"}\n',
+        '{"type": "approval_requested", "id": "a2"}\n',
+        '{"type": "question_asked", "id": "a2"}\n',
+        '{"type": "approval_given", "id": "a1", "decision": "approved"}\n',
+    )
+    _, body = office.get("/state")
+    assert [e["id"] for e in json.loads(body)["pending_approvals"]] == ["a2"]
+
+
+def test_state_old_approval_id_still_works(office):
+    office.write_events(
+        '{"type": "approval_requested", "approval_id": "x"}\n',
+        '{"type": "approval_given", "id": "x"}\n',
+    )
+    _, body = office.get("/state")
+    assert json.loads(body)["pending_approvals"] == []
+
+
+def test_answer_keeps_structured_fields_and_drops_unknown_ones(office):
+    status, _ = office.post({"id": "a1", "answer": "approved", "kind": "approval", "decision": "approved",
+                             "option": "o1", "answers": [{"id": "q1", "answer": "x"}], "text": "ok",
+                             "run_id": "r1", "evil": "dropped"})
+    assert status == 200
+    line = json.loads((office.project / ".team" / "inbox.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert line["decision"] == "approved" and line["option"] == "o1" and line["run_id"] == "r1"
+    assert line["answers"] == [{"id": "q1", "answer": "x"}] and line["text"] == "ok"
+    assert "evil" not in line

@@ -37,6 +37,7 @@ MAX_BODY = 64 * 1024
 POLL_SECONDS = 0.3
 EVENTS_PATH = Path(".agents") / "events.jsonl"
 INBOX_PATH = Path(".team") / "inbox.jsonl"
+ANSWER_EXTRA_KEYS = ("decision", "option", "answers", "text", "run_id")  # structured fields the window may add
 UI_DIR = Path("docs") / "agents" / "visual-office"
 ROSTER_PATH = Path("docs") / "agents" / "roster.md"
 
@@ -101,10 +102,12 @@ def read_events(path: Path) -> list[dict]:
 
 
 def pending_approvals(events: list[dict]) -> list[dict]:
-    """approval_requested events with no later approval_given for the same approval_id."""
+    """approval_requested events with no later approval_given for the same id (`id`, or the older `approval_id`)."""
     pending: dict[object, dict] = {}
     for ev in events:
-        aid = ev.get("approval_id")
+        if ev.get("type") not in ("approval_requested", "approval_given"):
+            continue
+        aid = ev.get("id", ev.get("approval_id"))
         if aid is None:
             continue
         if ev.get("type") == "approval_requested":
@@ -272,6 +275,9 @@ class Handler(BaseHTTPRequestHandler):
         if kind not in ("question", "approval"):
             return self._send(400, b'{"error": "kind must be question or approval"}')
         entry = {"ts": _now(), "id": ident, "answer": answer, "kind": kind, "source": "window"}
+        for key in ANSWER_EXTRA_KEYS:
+            if key in body:
+                entry[key] = body[key]
         inbox = self.server.project / INBOX_PATH
         try:
             inbox.parent.mkdir(parents=True, exist_ok=True)
