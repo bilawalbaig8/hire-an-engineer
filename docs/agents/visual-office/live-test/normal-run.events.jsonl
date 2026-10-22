@@ -1,0 +1,30 @@
+{"ts": "2026-10-23T09:00:00Z", "type": "run_started", "agent": "orchestrator", "run_id": "sess-normal-001", "goal": "A booking website with online payment", "size": "medium"}
+{"ts": "2026-10-23T09:00:02Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-normal-001", "from": "orchestrator", "to": "architect", "task": "Design the system"}
+{"ts": "2026-10-23T09:00:03Z", "type": "agent_start", "agent": "architect", "run_id": "sess-normal-001", "task": "Sketching the system"}
+{"ts": "2026-10-23T09:00:12Z", "type": "file_written", "agent": "architect", "run_id": "sess-normal-001", "path": "docs/architecture/overview.md"}
+{"ts": "2026-10-23T09:00:18Z", "type": "file_written", "agent": "architect", "run_id": "sess-normal-001", "path": "docs/architecture/risks.md"}
+{"ts": "2026-10-23T09:00:23Z", "type": "agent_stop", "agent": "architect", "run_id": "sess-normal-001"}
+{"ts": "2026-10-23T09:00:24Z", "type": "agent_result", "agent": "architect", "run_id": "sess-normal-001", "status": "needs_answers", "summary": "Has 3 questions for the owner", "response_file": ".team/runs/sess-normal-001/01-architect-response.json"}
+{"ts": "2026-10-23T09:00:25Z", "type": "file_written", "agent": "orchestrator", "run_id": "sess-normal-001", "path": ".team/runs/sess-normal-001/01-architect-response.json"}
+{"ts": "2026-10-23T09:00:26Z", "type": "question_asked", "agent": "architect", "run_id": "sess-normal-001", "id": "q-01", "questions": [{"id": "pay", "question": "Which ways to pay must work at launch?", "why": "For example: cards only, or cards and wallets"}, {"id": "volume", "question": "How many bookings a day do you expect in year one?", "why": "A rough number is fine"}, {"id": "venues", "question": "Is this for one venue or many?", "why": "Many venues means separate accounts and calendars"}]}
+#wait-answer q-01
+{"ts": "2026-10-23T09:00:28Z", "type": "approval_given", "agent": "orchestrator", "run_id": "sess-normal-001", "id": "q-01", "decision": "answered", "by": "terminal", "answers": [{"id": "pay", "answer": "Cards only"}, {"id": "volume", "answer": "About 200 a day"}, {"id": "venues", "answer": "One venue"}]}
+{"ts": "2026-10-23T09:00:30Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-normal-001", "from": "orchestrator", "to": "architect", "task": "Answers: cards only, 200 a day, one venue"}
+{"ts": "2026-10-23T09:00:31Z", "type": "agent_start", "agent": "architect", "run_id": "sess-normal-001", "task": "Writing the architecture"}
+{"ts": "2026-10-23T09:01:01Z", "type": "file_written", "agent": "architect", "run_id": "sess-normal-001", "path": "docs/adr/0001-use-postgresql.md"}
+{"ts": "2026-10-23T09:01:05Z", "type": "file_written", "agent": "architect", "run_id": "sess-normal-001", "path": "docs/architecture/overview.md"}
+{"ts": "2026-10-23T09:01:08Z", "type": "agent_stop", "agent": "architect", "run_id": "sess-normal-001"}
+{"ts": "2026-10-23T09:01:09Z", "type": "agent_result", "agent": "architect", "run_id": "sess-normal-001", "status": "needs_approval", "summary": "Database choice needs your decision"}
+{"ts": "2026-10-23T09:01:10Z", "type": "approval_requested", "agent": "orchestrator", "run_id": "sess-normal-001", "id": "a-01", "kind": "decision", "title": "Choose the main database", "why": "Booking and payment records will live here. Moving to another database later means migrating every record.", "options": [{"id": "pg", "label": "PostgreSQL", "note": "Keeps a booking and its payment consistent. Widely hosted.", "recommended": true}, {"id": "my", "label": "MySQL", "note": "Also solid. Fewer built-in data features."}, {"id": "doc", "label": "Document database", "note": "Flexible shapes. Weaker for payments and reports."}], "one_way_door": true, "asked_agent": "architect"}
+#wait-answer a-01
+{"ts": "2026-10-23T09:01:13Z", "type": "approval_given", "agent": "orchestrator", "run_id": "sess-normal-001", "id": "a-01", "decision": "approved", "option": "pg", "by": "terminal"}
+{"ts": "2026-10-23T09:01:15Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-normal-001", "from": "orchestrator", "to": "code-reviewer", "task": "Review the architecture notes"}
+{"ts": "2026-10-23T09:01:16Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-normal-001", "from": "orchestrator", "to": "general-purpose", "task": "Look up payment provider limits"}
+{"ts": "2026-10-23T09:01:18Z", "type": "agent_start", "agent": "code-reviewer", "run_id": "sess-normal-001", "task": "Reading the notes"}
+{"ts": "2026-10-23T09:01:19Z", "type": "agent_start", "agent": "general-purpose", "run_id": "sess-normal-001"}
+{"ts": "2026-10-23T09:01:26Z", "type": "file_written", "agent": "code-reviewer", "run_id": "sess-normal-001", "path": "docs/reviews/review-1.md"}
+{"ts": "2026-10-23T09:01:30Z", "type": "agent_stop", "agent": "general-purpose", "run_id": "sess-normal-001"}
+{"ts": "2026-10-23T09:01:31Z", "type": "agent_result", "agent": "general-purpose", "run_id": "sess-normal-001", "status": "done", "summary": "Provider limits noted"}
+{"ts": "2026-10-23T09:01:34Z", "type": "agent_stop", "agent": "code-reviewer", "run_id": "sess-normal-001"}
+{"ts": "2026-10-23T09:01:35Z", "type": "agent_result", "agent": "code-reviewer", "run_id": "sess-normal-001", "status": "done", "summary": "Two small notes left"}
+{"ts": "2026-10-23T09:01:55Z", "type": "run_finished", "agent": "orchestrator", "run_id": "sess-normal-001", "status": "done", "summary": "Architecture signed off. PostgreSQL chosen."}

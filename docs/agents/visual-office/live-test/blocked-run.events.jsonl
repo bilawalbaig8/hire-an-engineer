@@ -1,0 +1,24 @@
+{"ts": "2026-10-23T10:30:00Z", "type": "run_started", "agent": "orchestrator", "run_id": "sess-blocked-002", "goal": "Add card payments to the shop", "size": "small"}
+{"ts": "2026-10-23T10:30:02Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-blocked-002", "from": "orchestrator", "to": "backend", "task": "Build the payment endpoint"}
+{"ts": "2026-10-23T10:30:03Z", "type": "agent_start", "agent": "backend", "run_id": "sess-blocked-002", "task": "Building the payment endpoint"}
+{"ts": "2026-10-23T10:30:11Z", "type": "file_written", "agent": "backend", "run_id": "sess-blocked-002", "path": "src/api/payments.ts"}
+{"ts": "2026-10-23T10:30:16Z", "type": "file_written", "agent": "backend", "run_id": "sess-blocked-002", "path": "src/api/webhook.ts"}
+{"ts": "2026-10-23T10:30:19Z", "type": "agent_stop", "agent": "backend", "run_id": "sess-blocked-002"}
+{"ts": "2026-10-23T10:30:20Z", "type": "agent_result", "agent": "backend", "run_id": "sess-blocked-002", "status": "done", "summary": "Payment endpoint built"}
+{"ts": "2026-10-23T10:30:22Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-blocked-002", "from": "orchestrator", "to": "security", "task": "Check the payment webhook"}
+{"ts": "2026-10-23T10:30:23Z", "type": "agent_start", "agent": "security", "run_id": "sess-blocked-002", "task": "Checking payments"}
+{"ts": "2026-10-23T10:30:29Z", "type": "file_written", "agent": "security", "run_id": "sess-blocked-002", "path": "docs/security/threat-model.md"}
+{"ts": "2026-10-23T10:30:33Z", "type": "agent_stop", "agent": "security", "run_id": "sess-blocked-002"}
+{"ts": "2026-10-23T10:30:34Z", "type": "agent_result", "agent": "security", "run_id": "sess-blocked-002", "status": "blocked", "summary": "Webhook accepts unsigned requests"}
+{"ts": "2026-10-23T10:30:36Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-blocked-002", "from": "orchestrator", "to": "backend", "task": "Fix: verify webhook signatures"}
+{"ts": "2026-10-23T10:30:37Z", "type": "blocked", "agent": "qa", "run_id": "sess-blocked-002", "reason": "Test database is not reachable"}
+{"ts": "2026-10-23T10:30:40Z", "type": "agent_start", "agent": "backend", "run_id": "sess-blocked-002", "task": "Adding the signature check"}
+{"ts": "2026-10-23T10:31:25Z", "type": "file_written", "agent": "backend", "run_id": "sess-blocked-002", "path": "src/api/webhook.ts"}
+{"ts": "2026-10-23T10:31:28Z", "type": "agent_stop", "agent": "backend", "run_id": "sess-blocked-002"}
+{"ts": "2026-10-23T10:31:29Z", "type": "agent_result", "agent": "backend", "run_id": "sess-blocked-002", "status": "done", "summary": "Webhook now verified"}
+{"ts": "2026-10-23T10:31:31Z", "type": "handoff", "agent": "orchestrator", "run_id": "sess-blocked-002", "from": "orchestrator", "to": "security", "task": "Re-check the fix"}
+{"ts": "2026-10-23T10:31:32Z", "type": "agent_start", "agent": "security", "run_id": "sess-blocked-002", "task": "Re-checking the webhook"}
+{"ts": "2026-10-23T10:31:38Z", "type": "agent_stop", "agent": "security", "run_id": "sess-blocked-002"}
+{"ts": "2026-10-23T10:31:39Z", "type": "agent_result", "agent": "security", "run_id": "sess-blocked-002", "status": "done", "summary": "No open findings"}
+{"ts": "2026-10-23T10:31:41Z", "type": "blocker_cleared", "agent": "qa", "run_id": "sess-blocked-002"}
+{"ts": "2026-10-23T10:31:44Z", "type": "run_finished", "agent": "orchestrator", "run_id": "sess-blocked-002", "status": "done", "summary": "Card payments added. One block found and fixed."}
