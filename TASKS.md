@@ -32,7 +32,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 2.4 diagrams.md (C4, Mermaid default; 6 templates rendered and checked in a browser) (done)
 - [x] 2.5 SKILL.md router and agents/architect.md (done)
 - [x] 2.6 Evals written first: 12 cases + test project (done; re-review parked for the final review)
-- [~] 2.7 Run evals, fix, rerun
+- [~] 2.7 Run evals, fix, rerun (5 of 7 first-batch cases pass after 1 fix; the 2 recover cases are waiting: subagent launch refused)
 - [ ] 2.8 THIRD_PARTY_NOTICES, CHANGELOG, validate, repo + installed copies identical
 - [ ] 2.9 Commit; release software-architect 0.1.0 (only when owner says)
 
