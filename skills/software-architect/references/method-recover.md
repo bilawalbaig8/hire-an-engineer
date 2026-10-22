@@ -32,7 +32,7 @@ Find entry points (things that start work). Patterns by ecosystem:
 ```bash
 grep -rnE "if __name__ == .__main__.|argparse|HTTPServer\(|@(app|router)\.|app\.(route|get|post)|click\.command" --include=*.py . | grep -v "^./.git" | grep -vE "/tests?/|/test_"
 ```
-Test files are not entry points: leave `tests/` and `test_*` files out of the list. Output of step 1: a list of entry points, each marked `verified in code` with file and line, and a first guess of who and what talks to the system (`inferred` until confirmed).
+Test files are not entry points: leave `tests/` and `test_*` files out of the entry-point table (report which tests exist and whether they pass in a separate "Checks that exist" line). Output of step 1: a list of entry points, each marked `verified in code` with file and line, and a first guess of who and what talks to the system (`inferred` until confirmed).
 
 ### Step 2: data model and state
 Goal: what is stored, where, and who writes it. Data ownership usually reveals the real module boundaries.
