@@ -74,8 +74,8 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 7 Visual office
 
-- [?] 7.1 Mock v2 built (monkeys, Office / Orchestra / Pixel themes, fit-to-screen, Panels drawer) and published as an Artifact; owner liked it but Pixel theme is to be redone or dropped; waiting for the owner to pick layout A, B or C
-- [ ] 7.2 Decided (master plan): local window opened by a hook when a job starts; owner answers in terminal or window; verify the window-to-session channel with a small test first. Owner approves the final design; written spec (desks, states, handoff animation, files panel, approvals inbox)
+- [x] 7.1 Design final: mock v2 (docs/agents/visual-office/mock-v2.html) approved by the owner on 2026-10-23 (all three themes and layouts stay switchable; no more mocks). Implement and test this; new roles are added to the office as they are built
+- [~] 7.2 Written implementation spec from mock v2 (event to scene mapping, local server, hook that opens the window, answer channel from window to session, role registry fed by docs/agents/roster.md) - in progress
 - [ ] 7.3 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
 - [ ] 7.4 Working UI built from the approved design (office view, timeline, files panel, approvals inbox)
 - [ ] 7.5 Boss opens the office automatically when a team run starts; owner answers approvals inside it

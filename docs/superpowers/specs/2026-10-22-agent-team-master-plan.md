@@ -120,3 +120,4 @@ Order Architect → second specialist → boss → rest; copy-install before plu
 - **Themes:** all themes ship (Office default, Orchestra, Pixel) and the owner switches with one control. The Pixel theme in mock v2 did not please the owner and is redone or dropped before the final build.
 - **Two ways to work:** the owner may answer questions and approvals either in the terminal or in the window, whichever is faster; the first answer wins and both places show the result. Window to session needs a verified channel: first check the Claude Code docs (push external events) and run a small test; fallback is a read-only window with answers in the terminal.
 - **Not a goal:** replacing Claude with a separate app; the window is a view and an optional second input.
+- **Design final (owner, 2026-10-23):** mock v2 is the approved design. No more mocks. Build and test it as the working office; every role that is built (listed in `docs/agents/roster.md`) is added to the office.
