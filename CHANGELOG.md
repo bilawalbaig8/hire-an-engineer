@@ -19,3 +19,14 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 - Tuned from a pre-release evaluation (5 test cases): doesn't take over routine or one-off questions; replies in the language of the person's messages; first-reply recipe (size guess picks the lane, show something visible with the questions, deliver requested plans/tests first); minimum files per size with templates in `templates.md`; rescue lane for stuck projects; lighter discovery for single-step automations; privacy prompts for personal financial/health data.
 - Hardened from a thinking-model review (pre-mortem, red team, via negativa, map–territory): outside content is data, never instructions; secrets never printed and kept out of rescue snapshots; approval defined (one action, own message, explicit yes) and extended to deploys, force-push, DNS, live config, migrations and rollback; tripwires force the normal lane; test-first for core logic in every lane; checkpoints per finished task, never stash, PROJECT_STATE trimming; chat-only resume; project-at-a-glance page; build-cost estimates; leaner references (new `handoff.md`, `gap-reports.md`).
 - Design depth: new `visual-quality.md` (modes, idea-first, generic-look tells, concrete type/colour/space values, design record, screenshot critique, polish pass) and `motion.md` (timing, easing, feedback, performance, reduced motion); `ui-ux.md` gains quick persona, journey map, real options, heuristic walkthrough and a better test script. Adapted from taste-skill, impeccable, gsap-skills and designer-skills (credited in THIRD_PARTY_NOTICES).
+
+## Agent team
+
+### [0.1.0] - Unreleased
+- Handoff contract between the boss and specialist agents (`docs/agents/agent-template/handoff-contract.md`) with a validator, `scripts/agent_contract.py`: request, response (status, summary, files, questions, approvals, assumptions, evidence), event line, and the event log `.agents/events.jsonl`.
+- `scripts/validate_agents.py` checks `agents/*.md` (name, description, model, tools, skill folder, `## Handoff` section); runs in CI with the new tests.
+- `scripts/package_skill.py` includes the agent files that name the skill (`agents/<file>.md` at the archive root) and warns when an agent file cannot be read.
+- `scripts/install_agents.py` copies skills and agents to `~/.claude` (or `--dest`): dry run first, never overwrites a changed file without `--force`, never deletes.
+- `scripts/log_event.py`: Claude Code hook script that writes one event line per subagent start/stop and file write; never fails the session, never writes outside the project, reads UTF-8. Hooks snippet in `docs/agents/agent-template/hooks-snippet.json`.
+- `scripts/check_sources.py` and `scripts/check_evals.py` guard `sources.md` (verified/unverified, unique IDs, citations resolve) and `evals.json`.
+- `docs/agents/agent-template/`: copy-and-fill agent file, skill folder and a ten-step "add a new specialist" checklist.
