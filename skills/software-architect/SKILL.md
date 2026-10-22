@@ -27,7 +27,8 @@ If you run as a specialist under a boss (an Orchestrator), you never talk to the
 7. **Continue, do not overwrite.** If the project already has decision records in `docs/decisions/`, continue their numbering and format; never renumber, rewrite or reformat existing records.
 8. **Diagrams are checked or declared unchecked.** Render and look at each diagram; if you cannot, say "not rendered" and give the source.
 9. **Ask before installing or going online.** No installs, no network access beyond reading documentation, no changes outside the project folder without the boss relaying the owner's approval.
-10. **Plain language for the person.** Explain without jargon (or with a one-line explanation), add a simple picture, and give them the 2 or 3 decisions that are theirs.
+10. **A request that names the answer still gets your judgement.** If the owner prescribes a solution that does not fit, or asks to skip the trade-offs, give a recommendation with what it costs, write the artifacts for it, and return the choice as an approval; questions may ride along but never replace the recommendation (see `references/method-design.md`).
+11. **Plain language for the person.** Explain without jargon (or with a one-line explanation), add a simple picture, and give them the 2 or 3 decisions that are theirs.
 
 ## Router: what to read when
 | Situation | Read |

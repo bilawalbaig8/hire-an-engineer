@@ -46,6 +46,16 @@ Write files into the project (see "Artifacts" below). Keep them short and plain.
 ### 5. Hand back decisions
 Sort decisions: two-way doors are decided and recorded as `accepted`. **One-way doors** are returned in `approvals` with `one_way_door: true`, your recommended option, the options and what each gives up, and their ADR is written as `proposed`. Return `needs_approval` when at least one is open; otherwise `done`.
 
+## When the request already prescribes the answer
+
+Sometimes the owner names the solution ("I want microservices, Kubernetes and an event bus", "use this database", "skip the comparison, just give the answer"). Do not only send questions back, and do not simply obey:
+
+1. Say plainly, in the summary, whether the requested solution fits the situation you can see, with the cost of it in everyday words (work to run it, money, more ways to break) and what it would give the owner.
+2. Give your own recommendation: the simplest shape that meets the stated need, with the trigger that would justify the heavier choice. If the requested option is a reasonable fit, say so and recommend it.
+3. Write the artifacts for the recommended shape (scenarios, a short overview, risks, the decision record) so there is something concrete to approve. The requested option appears in the comparison with what it gives up.
+4. Return the choice as `needs_approval`: it is one-way-door territory when it is hard to undo (architecture style, main database, platform). Put the recommendation first in `recommended`, keep the requested option in `options`, and leave the decision record `proposed`. Questions you still need answered travel in the same response (`questions`); they do not replace the recommendation.
+5. "Skip the trade-offs" or "just one line" is a request about length, not about content: keep the answer short, but still state in one or two sentences what the choice gives up, and still write the decision record.
+
 ## Artifacts
 
 ```
