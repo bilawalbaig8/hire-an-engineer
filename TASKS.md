@@ -20,7 +20,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 1.1 Handoff contract: what boss sends, what specialist returns (done, reviewed)
 - [x] 1.2 Agent template (agent file + skill folder + 10-step checklist) in docs/agents/agent-template (done)
 - [x] 1.3 Validator and packager support for agents/ (done, reviewed)
-- [x] 1.4 Install script + INSTALL.md section (copy to ~/.claude) (done, reviewed; real install only after owner OK)
+- [x] 1.4 Install script + INSTALL.md section (copy to ~/.claude) (done, reviewed; now with --only; real install only after owner OK)
 - [x] 1.5 Eval pattern for agents (typical, edge, refusal cases) and sources/evals checkers (done, whole-branch review passed after one fix wave)
 - [x] 1.6 Event log in the contract: every agent start, stop, handoff and file written is one line in .agents/events.jsonl (feeds the visual office) (done, reviewed)
 
@@ -39,8 +39,8 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 ## Phase 3 Second specialist
 
 - [x] 3.1 Code Reviewer chosen; spec approved by the owner; plan written; 87 sources written (81 verified); evals written first (14 cases + test repo with planted defects, local)
-- [~] 3.2 Build knowledge files, SKILL.md and agent; run evals; install copies (next: knowledge files)
-- [ ] 3.3 Contract tested on two agents; fix contract gaps
+- [x] 3.2 Knowledge files, SKILL.md and agent built; 10 of 11 evals pass (review-tests not run); installed in ~/.claude with --only (independent review of the knowledge files pending)
+- [x] 3.3 Contract tested on two agents (Architect and Reviewer both answered in the 7-field shape; one wording gap fixed: questions may ride with needs_approval)
 
 ## Phase 4 Orchestrator
 
