@@ -37,6 +37,7 @@ Owner  ⇄  Orchestrator (boss)  ⇄  Specialist agents (one per role)
 - **Specialist** = skill-shaped knowledge folder (`skills/<role>/`) + thin Claude Code agent file (`agents/<role>.md`). Decided in the Architect design.
 - **Handoff contract** (defined in Phase 1): what the boss sends (goal, context files, constraints, definition of done) and what the specialist returns (result, files written, questions for the owner, decisions needing approval, assumptions, verification evidence).
 - **Orchestrator** decides: which roles for this task, in what order, what runs in parallel, when the owner must approve, which model each role uses (Opus hard reasoning/review, Sonnet ordinary build, Haiku mechanical).
+- Every start, stop, handoff and written file is also appended as one line to `.agents/events.jsonl` (the event log). The visual office (Phase 7) only reads this log.
 - Small tasks use few roles; the boss may refuse to wake the whole house for a one-line change.
 
 ## 4. Roles (31 = 30 specialists + boss). Core-12 first.
@@ -62,6 +63,7 @@ Owner  ⇄  Orchestrator (boss)  ⇄  Specialist agents (one per role)
 - **Phase 3 — Second specialist (Reviewer or QA):** proves the contract on two agents.
 - **Phase 4 — Orchestrator:** own design doc, built and tested against the first two specialists.
 - **Phase 5 — Remaining roles** in six groups (product, design, engineering, quality+security, release+ops, docs+growth), each group: research → spec → build → evals → release.
+- **Phase 7 — Visual office (owner idea, 2026-10-22):** when a team run starts, the boss opens a local web dashboard that shows the team as a visual office: one desk per role, who is working, waiting or idle, files and messages moving between agents, and an inbox for the owner's approvals. Built from an event log the contract requires (task 1.6), so it needs no change to the specialists.
 - **Phase 6 — Integration:** router line in `hire-an-engineer`, optional plugin bundle, end-to-end test (build a small real app with the whole team), docs, release.
 
 ## 6. Definition of done for one agent

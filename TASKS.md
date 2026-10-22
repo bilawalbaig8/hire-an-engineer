@@ -10,7 +10,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 0.2 Master plan for the whole agent team
 - [x] 0.3 Task list in repo (TASKS.md) + live progress page
 - [?] 0.4 Owner approves Architect spec and master plan
-- [ ] 0.5 Commit specs on feat/specialized-agents
+- [x] 0.5 Commit specs on feat/specialized-agents
 - [ ] 0.6 Implementation plan for Phases 1-2 (writing-plans)
 
 ## Phase 1 Contract & template
@@ -20,6 +20,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [ ] 1.3 Validator and packager support for agents/
 - [ ] 1.4 Install script + INSTALL.md section (copy to ~/.claude)
 - [ ] 1.5 Eval pattern for agents (typical, edge, refusal cases)
+- [ ] 1.6 Event log in the contract: every agent start, stop, handoff and file written is one line in .agents/events.jsonl (feeds the visual office)
 
 ## Phase 2 Architect
 
@@ -61,6 +62,15 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [ ] 6.2 Plugin bundle (skills + agents) if worth it
 - [ ] 6.3 End-to-end test: build a small real app with the whole team
 - [ ] 6.4 Docs, CHANGELOG, release hire-an-engineer 0.3.0
+
+## Phase 7 Visual office
+
+- [ ] 7.1 Design spec: office floor, one desk per role, who is working / waiting / idle, handoffs as moving files, approvals inbox
+- [ ] 7.2 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
+- [ ] 7.3 Web UI: office view, timeline, files panel, approvals inbox
+- [ ] 7.4 Boss opens the office automatically when a team run starts; owner answers approvals inside it
+- [ ] 7.5 Test with a replay of a recorded team run
+- [ ] 7.6 Package, install script, docs
 
 ## Roles (31)
 
