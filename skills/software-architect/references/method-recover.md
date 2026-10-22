@@ -215,6 +215,17 @@ Conformance table:
 
 Every row, every box and every arrow in your output carries a label (`verified in code`, `inferred`, `unknown`). Include a short "Not covered" list (what you did not read, what the scripts cannot see).
 
+## The summary you give (always, in this order)
+
+Whatever the form of the answer (the handoff `summary`, or a plain reply when you run alone), answer the question that was asked first:
+
+1. **How it is organised:** the main parts and what each does, the entry points, where the data lives, and the main flow, in a few plain sentences. This comes first even when you found serious problems.
+2. **The biggest problems**, worst first, each with its label (`verified in code`, `inferred`, `unknown`) and the file that shows it. Include layering violations and import cycles when the graph shows them.
+3. **What you could not check or did not analyse**, said plainly: for example "no git history, so hotspots and change coupling were not analysed", code you did not read, things you could not run.
+4. **What to do next:** the smallest safe changes in order, and which role should make them (you do not change product code).
+
+If the owner said "no need to change anything", write nothing into the project: give the findings in the reply and offer to save them as architecture files.
+
 ## Fallbacks
 
 - **No git history:** skip step 5, say hotspots and change coupling were not analysed, and still label everything.
