@@ -44,7 +44,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 4 Orchestrator
 
-- [ ] 4.1 Orchestrator design spec (splitting, handoffs, approvals, model per role)
+- [?] 4.1 Orchestrator design spec written (docs/superpowers/specs/2026-10-23-orchestrator-design.md), waiting for the owner to approve it
 - [ ] 4.2 Build orchestrator against Architect + second specialist
 - [ ] 4.3 Evals: small task, big task, conflict, approval gate, cost sizing
 - [ ] 4.4 Release orchestrator
