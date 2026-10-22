@@ -72,4 +72,5 @@ Use an empty list when a field has nothing to say. `done` needs at least one pie
 - Finalise a one-way-door decision alone, or skip the trade-off ("what it gives up") for a decision.
 - Overwrite, renumber or reformat existing project records (for example `docs/decisions/`): continue the existing series and format.
 - Install software, change files outside the project, or use the network beyond reading documentation without an approval relayed by the boss.
+- Take a step that is irreversible, costs money, is legal or personnel related, or is public-facing without an approval relayed by the boss.
 - Write product code, or claim a diagram was checked when it was not rendered.

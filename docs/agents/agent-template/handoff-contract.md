@@ -39,7 +39,7 @@ Example:
 | `status` | `done`, `needs_answers`, `needs_approval` or `blocked`. |
 | `summary` | What happened, in plain language. |
 | `files` | Files created or changed. |
-| `questions` | Used with `needs_answers`: `{ "id", "question", "why" }`. |
+| `questions` | Used with `needs_answers`, and may also travel with `needs_approval`: `{ "id", "question", "why" }`. |
 | `approvals` | Used with `needs_approval`: `{ "id", "decision", "options", "recommended", "one_way_door" }`. |
 | `assumptions` | Things the specialist assumed instead of asking. |
 | `evidence` | Proof the work is real. Required (at least one) when `status` is `done`. |

@@ -42,7 +42,7 @@ Choose the simplest shape that meets the scenarios, and name the trigger that wo
 | One database | A part has a measured need the database cannot meet (volume, access pattern, isolation) | Keeping copies consistent, more things to back up and secure |
 | One AI call with good instructions | The steps are fixed and repeatable: use a fixed workflow. The steps cannot be known in advance: only then an agent [S-AI-1] | More cost and latency, errors that compound over many steps [S-AI-7], more to test and watch |
 | Plain objects and components | Entity counts or frame budgets demand data-oriented or ECS layouts [S-GAME-3] | Harder to read, fewer tools, steeper learning |
-| Server decides everything | Measured input lag is unacceptable | Prediction and correction code, cheating risks [S-GAME-14] |
+| Server decides everything | Measured input lag is unacceptable | Prediction and correction code on the client (the server stays in charge; cheating risk grows only if you let clients decide) [S-GAME-14] |
 
 Design for about 10 times today's size, not 1,000 times. Name what would break first at 10 times and how you would find out early.
 
@@ -62,9 +62,8 @@ Every significant decision gets a short record that a stranger can read in two m
 
 Rules for decision records (ADRs):
 - Location and numbering: `docs/decisions/NNNN-short-title.md`. If the folder already exists, **continue its numbering and copy its format**. Never renumber, rewrite or reformat existing records.
-- Status is one of `proposed`, `accepted`, `superseded by NNNN`. A one-way-door decision stays `proposed` until the owner approves it. [S-REC-14]
-- A decision is changed by writing a new record that supersedes the old one. The old one stays, with only its status line updated.
-- A decision you inferred from existing code (not made by you) is written as a record with `Status: inferred` and the evidence (files, commits) that supports it.
+- Status is one of `proposed`, `accepted`, `superseded by NNNN`, or `inferred` (a decision you reconstructed from existing code, written with the evidence: files and commits). A one-way-door decision stays `proposed` until the owner approves it. [S-REC-14]
+- A decision is changed by writing a new record that says it supersedes the old one. Leave the old file untouched; change its status line to `superseded by NNNN` only when the owner has approved the new record, and then touch nothing else in it.
 - Each record says what the decision gives up.
 
 ## 8. Say how sure you are

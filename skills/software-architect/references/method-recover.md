@@ -12,8 +12,8 @@ All commands below use only git, the standard shell and the Python standard libr
 Goal: what is here, and every way execution starts.
 
 ```bash
-git ls-files | sed 's/.*\.//' | sort | uniq -c | sort -rn      # file types
-git ls-files | head -100                                        # layout
+git ls-files | sed 's/.*\.//' | sort | uniq -c | sort -rn      # file types (no git? use: find . -type f -not -path './.git/*' | sed 's/.*\.//' | sort | uniq -c | sort -rn)
+git ls-files | head -100                                        # layout (no git? use: find . -type f -not -path './.git/*' | head -100)
 ls; cat README* 2>/dev/null | head -60                          # first impressions only; verify in code
 ```
 Read build and deploy files: `package.json`, `pyproject.toml`, `requirements.txt`, `pom.xml`, `build.gradle`, `*.csproj`, `go.mod`, `Dockerfile`, `docker-compose.yml`, CI files in `.github/workflows/`, infrastructure files (`*.tf`, `*.yaml`), config and `.env.example` (never print secret values).
@@ -22,7 +22,7 @@ Find entry points (things that start work). Patterns by ecosystem:
 
 | Ecosystem | Look for |
 |---|---|
-| Python | `if __name__ == "__main__"`, `argparse`, `click`, `@app.route`, `@router.`, `FastAPI(`, `Flask(`, `celery`, `manage.py`, files named in `pyproject.toml` scripts |
+| Python | `if __name__ == "__main__"`, `argparse`, `HTTPServer(` / `http.server`, `click`, `@app.route`, `@router.`, `FastAPI(`, `Flask(`, `celery`, `manage.py`, files named in `pyproject.toml` scripts |
 | JS / TS | `"main"`, `"bin"`, `"scripts"` in `package.json`; `app.listen`, `express()`, Next.js `pages/` and `app/` folders, `export default async function handler`, queue consumers |
 | Java / Kotlin | `public static void main`, `@SpringBootApplication`, `@RestController`, `@Scheduled`, `@KafkaListener` |
 | C# / Unity | `static void Main`, `Program.cs`, `Startup`, ASP.NET controllers; Unity: scenes in build settings, `MonoBehaviour` with `Awake`/`Start`, `RuntimeInitializeOnLoadMethod`, `[assembly:` definitions and `.asmdef` files |
@@ -30,9 +30,9 @@ Find entry points (things that start work). Patterns by ecosystem:
 | Any | scheduled jobs (cron files, CI schedules), message consumers, webhooks, CLI commands |
 
 ```bash
-grep -rnE "if __name__ == .__main__.|argparse|@(app|router)\.|app\.(route|get|post)|click\.command" --include=*.py . | grep -v "^./.git"
+grep -rnE "if __name__ == .__main__.|argparse|HTTPServer\(|@(app|router)\.|app\.(route|get|post)|click\.command" --include=*.py . | grep -v "^./.git" | grep -vE "/tests?/|/test_"
 ```
-Output of step 1: a list of entry points, each marked `verified in code` with file and line, and a first guess of who and what talks to the system (`inferred` until confirmed).
+Test files are not entry points: leave `tests/` and `test_*` files out of the list. Output of step 1: a list of entry points, each marked `verified in code` with file and line, and a first guess of who and what talks to the system (`inferred` until confirmed).
 
 ### Step 2: data model and state
 Goal: what is stored, where, and who writes it. Data ownership usually reveals the real module boundaries.
@@ -52,11 +52,11 @@ import ast, sys
 from pathlib import Path
 
 root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
-SKIP = {".git", "node_modules", "venv", ".venv", "__pycache__", "build", "dist", "site-packages"}
+SKIP = {".git", "node_modules", "venv", ".venv", "__pycache__", "build", "dist", "site-packages", "tests", "test"}
 mods = {}
 for p in root.rglob("*.py"):
     rel = p.relative_to(root)
-    if SKIP & set(rel.parts):
+    if SKIP & set(rel.parts) or rel.name.startswith("test_"):
         continue
     parts = list(rel.with_suffix("").parts)
     if parts[-1] == "__init__":
@@ -79,7 +79,14 @@ for m, p in mods.items():
         print("skipped (cannot parse):", p)
         continue
     pkg = m if p.name == "__init__.py" else m.rpartition(".")[0]
+    typing_only = set()          # imports under `if TYPE_CHECKING:` are not runtime dependencies
     for n in ast.walk(tree):
+        if isinstance(n, ast.If) and "TYPE_CHECKING" in ast.dump(n.test):
+            for b in n.body:
+                typing_only.update(id(d) for d in ast.walk(b))
+    for n in ast.walk(tree):
+        if id(n) in typing_only:
+            continue
         if isinstance(n, ast.Import):
             targets = [a.name for a in n.names]
         elif isinstance(n, ast.ImportFrom):
@@ -120,6 +127,8 @@ for v in sorted(edges):
     if v not in index:
         visit(v)
 
+if len(mods) >= 5 and not any(edges.values()):
+    print("WARNING: many modules but no edges. The import root is probably a subfolder (for example src/). Rerun from that folder and say which root you used.")
 print("EDGES (importer -> imported):")
 for a in sorted(edges):
     for b in sorted(edges[a]):
@@ -129,7 +138,7 @@ fan_in = {m: sum(m in e for e in edges.values()) for m in mods}
 print("FAN-IN (most imported first):", sorted(fan_in.items(), key=lambda kv: -kv[1])[:5])
 ```
 
-What it sees: imports written in Python files, including imports inside functions. What it misses: dynamic imports, string-based wiring, dependency injection configured elsewhere, other languages. So it is `verified in code` for the edges it prints and `unknown` for what it cannot see. For other languages: read import statements with `grep -rn "^import\|^from\|require(\|using "`, or ask before installing dependency-cruiser (JS/TS) or use ArchUnit (Java). [S-REC-18] [S-REC-17]
+What it sees: imports written in Python files, including imports inside functions; it leaves out test files and imports guarded by `TYPE_CHECKING`. Run it from the folder that holds the top-level packages (for a `src/` layout, from `src`); if it warns about no edges, you used the wrong root. What it misses: dynamic imports, string-based wiring, dependency injection configured elsewhere, other languages. So it is `verified in code` for the edges it prints and `unknown` for what it cannot see. For other languages: read import statements with `grep -rn "^import\|^from\|require(\|using "`, or ask before installing dependency-cruiser (JS/TS) or use ArchUnit (Java). [S-REC-18] [S-REC-17]
 
 Look for: cycles (anything printed under CYCLES), a lower layer importing a higher one (for example a data module importing a request handler), a screen or handler reaching straight into storage while a service layer exists, one module imported by nearly everything (a hidden centre), and modules nobody imports (dead or entry points).
 
@@ -145,7 +154,7 @@ Files changed most often (hotspot candidates; confirm that they are also complex
 ```bash
 git log --diff-filter=M --format= --name-only | grep . | sort | uniq -c | sort -rn | head -15
 ```
-This also works with Windows-friendly Python (standard library only). It prints churn and **change coupling**: files that keep changing together, even across module boundaries, which reveals the real dependencies. Commits touching more than 30 files are ignored (bulk edits, formatting):
+This also works with Windows-friendly Python (standard library only). It prints churn and **change coupling**: files that keep changing together, even across module boundaries, which reveals the real dependencies. Commits touching more than 30 files are ignored for the coupling table only (bulk edits, formatting); they still count in churn:
 ```python
 import collections, itertools, subprocess
 
@@ -174,7 +183,7 @@ print("CHANGE COUPLING (share = pair commits / commits of the rarer file):")
 for (a, b), n in pairs.most_common(8):
     print(f"  {n:3d} together  {n / min(churn[a], churn[b]):.0%}  {a}  <->  {b}")
 ```
-Run it from the project folder. Treat small numbers with care: a pair that changed together twice is a hint, not a finding.
+Run it from the project folder inside a git repository (outside one it stops with an error: say hotspots were not analysed). If file names print with odd quoting, run `git config core.quotePath false` first. Treat small numbers with care: a pair that changed together twice is a hint, not a finding.
 
 Why-archaeology: find when something appeared and what the author said.
 ```bash

@@ -1,6 +1,6 @@
 # Desktop apps, plugins and editors
 
-When to read this: the system is a desktop program, a tool with an extension or plugin system, an editor, or a web-technology app packaged for the desktop. Sources in this field are mostly unverified; where a claim is general practice it says so.
+When to read this: the system is a desktop program, a tool with an extension or plugin system, an editor, or a web-technology app packaged for the desktop. Status: `starter`. Sources in this field are all unverified; where a claim is general practice it says so.
 
 ## Decisions that matter most
 

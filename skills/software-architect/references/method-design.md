@@ -2,7 +2,7 @@
 
 When to read this: the request is to design (or redesign) a system, an app, a game, a platform or an AI feature, and there is no existing architecture to recover.
 
-You never talk to the owner directly. You answer the boss in the 7-field handoff shape (`status`, `summary`, `files`, `questions`, `approvals`, `assumptions`, `evidence`). Questions and approvals travel back to the boss.
+When you run under a boss, you never talk to the owner directly (run alone in a normal conversation, you talk to the person yourself). You answer the boss in the 7-field handoff shape (`status`, `summary`, `files`, `questions`, `approvals`, `assumptions`, `evidence`). Questions and approvals travel back to the boss.
 
 ## The five steps
 
@@ -46,7 +46,7 @@ Write files into the project (see "Artifacts" below). Keep them short and plain.
 ### 5. Hand back decisions
 Sort decisions: two-way doors are decided and recorded as `accepted`. **One-way doors** are returned in `approvals` with `one_way_door: true`, your recommended option, the options and what each gives up, and their ADR is written as `proposed`. Return `needs_approval` when at least one is open; otherwise `done`.
 
-## When the request already prescribes the answer
+## When the request already prescribes the answer, or hands you the decision
 
 Sometimes the owner names the solution ("I want microservices, Kubernetes and an event bus", "use this database", "skip the comparison, just give the answer"). Do not only send questions back, and do not simply obey:
 
@@ -54,7 +54,8 @@ Sometimes the owner names the solution ("I want microservices, Kubernetes and an
 2. Give your own recommendation: the simplest shape that meets the stated need, with the trigger that would justify the heavier choice. If the requested option is a reasonable fit, say so and recommend it.
 3. Write the artifacts for the recommended shape (scenarios, a short overview, risks, the decision record) so there is something concrete to approve. The requested option appears in the comparison with what it gives up.
 4. Return the choice as `needs_approval`: it is one-way-door territory when it is hard to undo (architecture style, main database, platform). Put the recommendation first in `recommended`, keep the requested option in `options`, and leave the decision record `proposed`. Questions you still need answered travel in the same response (`questions`); they do not replace the recommendation.
-5. "Skip the trade-offs" or "just one line" is a request about length, not about content: keep the answer short, but still state in one or two sentences what the choice gives up, and still write the decision record.
+5. "You decide, don't ask me" or "finalise it" is a delegation, not an approval: a hard-to-undo choice is still returned as `needs_approval` with your recommendation (questions may ride along in the same response).
+6. "Skip the trade-offs" or "just one line" is a request about length, not about content: keep the answer short, but still state in one or two sentences what the choice gives up, and still write the decision record.
 
 ## Artifacts
 
@@ -110,6 +111,7 @@ If `docs/decisions/` already has records, copy *their* format and number instead
 
 ## What goes in the response
 
+- `questions` and `approvals`: always present; empty lists when there are none. Questions may travel together with `needs_approval`.
 - `status`: `needs_answers` (first turn, questions), `needs_approval` (a one-way door is open), `done` (everything written), or `blocked` (say why).
 - `summary`: plain language for a non-engineer, 5 to 10 sentences: what you chose, why, what it gives up, what you need decided. No jargon without a one-line explanation. Include one simple picture (see `diagrams`).
 - `files`: every path you created or changed.

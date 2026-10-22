@@ -1,6 +1,6 @@
 # Architecture diagrams
 
-When to read this: you are about to draw, update or review any architecture diagram, or choose a diagram tool. These rules extend the general diagram guidance of the `hire-an-engineer` skill (draw only when it beats words; keep it readable on a phone) with architecture-specific rules.
+When to read this: you are about to draw, update or review any architecture diagram, or choose a diagram tool. These rules extend the general diagram guidance of the hire-an-engineer skill (its documents reference, section 7, if that skill is installed: draw only when it beats words; keep it readable on a phone) with architecture-specific rules.
 
 ## 1. Pick the diagram by the question
 
@@ -21,7 +21,7 @@ The C4 model uses four zoom levels (context, container, component, code); draw t
 
 ## 2. Tools and defaults
 
-- **Default: Mermaid text** stored in the project as a `.mmd` file or a fenced `mermaid` block in a Markdown file. Many places render it directly (GitHub, many editors, documentation sites), it diffs well, and an agent can write it. [S-DIA-1]
+- **Default: Mermaid text** stored in the project as a `.mmd` file or a fenced `mermaid` block in a Markdown file. Many viewers render it directly (check yours), it diffs well, and an agent can write it. [S-DIA-1]
 - **Model-first tools** (one model, many views) when the project needs them: LikeC4 (command-line validate and export, plus an agent-facing server) or Structurizr DSL. [S-DIA-5] [S-DIA-2] Pick one per project and keep the model file in the repository.
 - **Fallbacks:** D2 when layout quality matters [S-DIA-4]; PlantUML for heavy UML or an existing PlantUML estate [S-DIA-3]; Excalidraw for hand sketches only. [S-DIA-7]
 - **Commands** (not run here: confirm them before relying on them): Mermaid CLI `npx -p @mermaid-js/mermaid-cli mmdc -i in.mmd -o out.svg` needs a headless browser download; PlantUML `java -jar plantuml.jar --svg diagram.puml`; D2 `d2 in.d2 out.svg`. The Structurizr command line changed recently, so check its current documentation. **Ask the boss to ask the owner before installing any tool.**
@@ -33,8 +33,8 @@ The C4 model uses four zoom levels (context, container, component, code); draw t
 3. Every box has a name, a short type (person, service, database, queue, screen) and, where useful, the technology.
 4. Every arrow has a short verb label and a clear direction; add the protocol or data kind when it matters. No unlabelled arrows.
 5. Show the system boundary and external systems explicitly.
-6. A legend or key explains shapes, colours and line styles. Colour and shape must mean something and be used consistently.
-7. Draw links you only inferred as dashed lines, and say so in the legend. Verified links are solid. [S-DIA-8]
+6. A legend or key explains shapes, colours and line styles; one caption line under the picture is enough. Colour and shape must mean something and be used consistently. An external system is not drawn as a database.
+7. Draw links you only inferred as dashed lines, and say so in the legend. Verified links are solid. (The C4 checklist asks for a key that explains line styles. [S-DIA-8])
 8. Highlight at most one or two things that matter for the question (the risk, the new part).
 9. Add a one-line caption saying what the picture shows and for whom.
 10. It must read on a phone-sized screen: short labels, few boxes, no tiny text.
@@ -51,11 +51,12 @@ System context:
 flowchart LR
   customer(["Customer<br/>person"])
   system["Shop system<br/>software system"]
-  pay[("Payment provider<br/>external system")]
+  pay["Payment provider<br/>external system"]
   customer -->|"places orders"| system
   system -->|"charges cards"| pay
   system -. "emails receipts (inferred)" .-> mail["Email service<br/>external system"]
 ```
+Legend: rounded box = person, rectangle = software system or external system, solid arrow = designed or verified link, dashed arrow = inferred link.
 
 Container view:
 ```mermaid
@@ -72,6 +73,7 @@ flowchart LR
   api -->|"reads and writes"| db
   worker -->|"reads"| db
 ```
+Legend: rounded box = person, rectangle = part of the system, cylinder = database, frame = system boundary, solid arrow = designed or verified link.
 
 Sequence (one use case):
 ```mermaid
@@ -87,6 +89,7 @@ sequenceDiagram
   A-->>W: 201 created
   W-->>U: confirmation
 ```
+Legend: rectangle = participant, solid arrow = request, dashed arrow = reply.
 
 Entity-relationship:
 ```mermaid
@@ -103,15 +106,17 @@ erDiagram
     date created
   }
 ```
+Legend: box = table, line ends show how many (one, many), the verb names the relationship.
 
 Dependency graph (existing code; verified edges solid, inferred dashed, a cycle marked):
 ```mermaid
 flowchart TD
-  api["api/orders"] --> svc["services/orders"]
-  svc --> repo["repositories/orders"]
-  svc <--> inv["services/inventory"]
+  api["api/orders"] -->|"imports"| svc["services/orders"]
+  svc -->|"imports"| repo["repositories/orders"]
+  svc <-->|"import each other (cycle)"| inv["services/inventory"]
   api -. "inferred: calls storage directly" .-> repo
 ```
+Legend: box = module, solid arrow = verified import, dashed arrow = inferred link, a two-way arrow = import cycle.
 
 State diagram:
 ```mermaid
@@ -123,6 +128,7 @@ stateDiagram-v2
   Online --> Idle : stop
   Online --> Connecting : connection lost
 ```
+Legend: rounded box = state, arrow = event that causes the change.
 
 ## 5. Draw, render, look, fix
 
