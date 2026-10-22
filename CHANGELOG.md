@@ -4,7 +4,7 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
-### [0.3.0] - Unreleased
+### [0.3.0] - 2026-10-23
 - New `platform-targets.md`: mobile apps (accounts, signing keys, store review, children's audience, iOS needs a Mac), browser extensions (Manifest V3, minimum permissions, never all-sites on banking/webmail), data/ML projects, scripts scheduled on the person's own PC; first-release checklists; routed from SKILL.md, `project-cases.md`, `versioning-release.md`, `technical-products.md`.
 - Person-to-person handover checklist in `documents.md` §5. Chat-only resume pack (language, cost mode, accounts, pending approvals, last environment) in `project-memory.md` and the PROJECT_STATE template; hand back the whole file, never a diff.
 - Rules from three complex-project test runs and a three-session salon-platform build: pasted cards/passwords/keys are never used, repeated or stored; "you decide" is not approval and money/account/deploy approvals are never batched; core-logic tests are never waived; rescue copies originals outside the repo and removes secrets before the first snapshot; person-only checks come before switching approach when stuck; simplest rung for the current stage; labelled self-review fallback with "fresh review owed"; later-session reviews count as fresh only for code it did not write; failing test committed before code; timestamps only from `date`; unverifiable prices are never quoted; Large projects read only three references before the first reply.
