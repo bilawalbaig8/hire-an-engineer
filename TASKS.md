@@ -26,28 +26,29 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 2 Architect
 
-- [x] 2.1 Write sources.md from the four verified research passes (written: 123 sources, 86 verified / 37 unverified; fact-check review parked for the final review)
+- [x] 2.1 sources.md: 123 sources, 86 verified / 37 unverified; fact-check of 25 verified rows found no mismatch (5 links bot-blocked, check in a browser)
 - [x] 2.2 core-principles, method-design, method-recover, review-checklists (done; commands verified on a throwaway repo)
 - [x] 2.3 Field references: web/backend/cloud, distributed/data, mobile, desktop/plugins, game/engine, real-time/netcode, AI systems, security, data pipelines (done, 9 files)
 - [x] 2.4 diagrams.md (C4, Mermaid default; 6 templates rendered and checked in a browser) (done)
 - [x] 2.5 SKILL.md router and agents/architect.md (done)
-- [x] 2.6 Evals written first: 12 cases + test project (done; re-review parked for the final review)
-- [?] 2.7 Run evals, fix, rerun (5 of 7 first-batch cases pass after 1 fix; the 2 recover cases: owner runs them in a fresh session)
+- [x] 2.6 Evals written first: 12 cases + test project; re-review done (4 Important items fixed, 4 further fixes applied)
+- [x] 2.7 Evals run, fixed, rerun: 7 of 7 first-batch cases pass; the 2 recover cases were run by the owner in fresh sessions
 - [x] 2.8 THIRD_PARTY_NOTICES, CHANGELOG (done), whole-branch review fixes (done); installed copy of skill + agent in ~/.claude (done 2026-10-23, identical to repo; hire-an-engineer untouched)
 - [ ] 2.9 Commit; release software-architect 0.1.0 (only when owner says)
 
 ## Phase 3 Second specialist
 
 - [x] 3.1 Code Reviewer chosen; spec approved by the owner; plan written; 87 sources written (81 verified); evals written first (14 cases + test repo with planted defects, local)
-- [x] 3.2 Knowledge files, SKILL.md and agent built; 10 of 11 evals pass (review-tests not run); installed in ~/.claude with --only (independent review of the knowledge files pending)
+- [x] 3.2 Knowledge files, SKILL.md and agent built; 10 of 11 evals pass (review-tests not run); installed in ~/.claude with --only; independent review of the knowledge files still pending
 - [x] 3.3 Contract tested on two agents (Architect and Reviewer both answered in the 7-field shape; one wording gap fixed: questions may ride with needs_approval)
 
 ## Phase 4 Orchestrator
 
-- [?] 4.1 Orchestrator design spec written (docs/superpowers/specs/2026-10-23-orchestrator-design.md), waiting for the owner to approve it
-- [ ] 4.2 Build orchestrator against Architect + second specialist
-- [ ] 4.3 Evals: small task, big task, conflict, approval gate, cost sizing
-- [ ] 4.4 Release orchestrator
+- [x] 4.1 Orchestrator design spec written and approved by the owner; Claude Code docs checked (boss runs in the main session, claude --agent works, subagents can nest)
+- [x] 4.2 Built: skill (SKILL.md + 7 references), agents/orchestrator.md, roster.md + check_roster.py (tests first), 58 sources (57 verified); installed in ~/.claude with --only (10 files, identical to repo)
+- [x] 4.2b Roster check, agent validator, 125 tests pass; skill fixed after eval (run folder for every specialist run, boss never redoes a specialist check)
+- [~] 4.3 Evals (12 cases, local): 9 pass (tiny, small-review, unknown-role, question batching, design-then-review, injection, resume-run, refused-launch, specialist-blocked); approval-gate, conflicting-advice, cap-reached are inconclusive and need a rerun with real project files
+- [ ] 4.4 CHANGELOG entries for code-reviewer and orchestrator (todo); release orchestrator 0.1.0 only when the owner says
 
 ## Phase 5 Remaining roles
 
@@ -73,8 +74,8 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 7 Visual office
 
-- [?] 7.1 Mock designs: 3 clickable layouts, orchestra + office theme, conductor boss, a cute character per role (mock built and published as an Artifact; waiting for the owner to pick a layout A, B or C and say what to change)
-- [ ] 7.2 Owner approves the final design; written spec (desks, states, handoff animation, files panel, approvals inbox)
+- [?] 7.1 Mock v2 built (monkeys, Office / Orchestra / Pixel themes, fit-to-screen, Panels drawer) and published as an Artifact; owner liked it but Pixel theme is to be redone or dropped; waiting for the owner to pick layout A, B or C
+- [ ] 7.2 Decided (master plan): local window opened by a hook when a job starts; owner answers in terminal or window; verify the window-to-session channel with a small test first. Owner approves the final design; written spec (desks, states, handoff animation, files panel, approvals inbox)
 - [ ] 7.3 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
 - [ ] 7.4 Working UI built from the approved design (office view, timeline, files panel, approvals inbox)
 - [ ] 7.5 Boss opens the office automatically when a team run starts; owner answers approvals inside it
@@ -86,7 +87,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 | Role | Group | Priority | Status |
 |---|---|---|---|
-| Orchestrator | Boss | core 12 | Not started |
+| Orchestrator | Boss | core 12 | Built |
 | Product Manager | Product | core 12 | Not started |
 | Business Analyst | Product | core 12 | Not started |
 | Market Researcher | Product | later | Not started |
@@ -95,7 +96,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 | UX/UI Designer | Design | core 12 | Not started |
 | Motion/Graphic Designer | Design | later | Not started |
 | Content Writer | Design | later | Not started |
-| Solution Architect | Architecture | core 12 | Next |
+| Solution Architect | Architecture | core 12 | Built |
 | Database Architect | Architecture | core 12 | Not started |
 | Frontend Engineer | Engineering | core 12 | Not started |
 | Mobile Engineer | Engineering | later | Not started |
@@ -105,7 +106,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 | AI/ML Engineer | Engineering | later | Not started |
 | Data Engineer | Engineering | later | Not started |
 | QA/Test Engineer | Quality | core 12 | Not started |
-| Code Reviewer | Quality | core 12 | Not started |
+| Code Reviewer | Quality | core 12 | Built |
 | Performance Engineer | Quality | later | Not started |
 | Accessibility Specialist | Quality | later | Not started |
 | Security Engineer | Security | core 12 | Not started |
