@@ -1,0 +1,16 @@
+# Team roster
+
+The single list of specialists the Orchestrator may call. Checked against `agents/*.md` by `python scripts/check_roster.py`.
+A role that is not in this table does not exist yet; the boss must say so instead of inventing it. The boss itself
+(`orchestrator`) is not listed. Add a row in the same commit that adds the agent file.
+
+| Name | Skill | Model | Owns |
+|---|---|---|---|
+| architect | software-architect | opus | Architecture designs and recovered architectures, decision records (`docs/decisions/`), diagrams, risks |
+| code-reviewer | code-reviewer | opus | Review reports (`docs/reviews/`): spec compliance and quality verdicts on a change |
+
+Rules the boss follows with this table:
+
+- One owner per artifact: the role above that owns a folder is the only one that writes there; others comment.
+- The model column is the model the boss passes when it calls the specialist.
+- Mechanical steps (list changed files, run a test command) may go to a smaller model with a narrow brief.
