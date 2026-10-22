@@ -114,3 +114,9 @@ The owner asked for roles beyond software engineering. A research pass (2026-10-
 ## 9. My calls (please check)
 
 Order Architect → second specialist → boss → rest; copy-install before plugin bundle; Opus for Architect/Reviewer/Orchestrator, Sonnet for ordinary-build roles, Haiku for mechanical steps; core-12 chosen as listed; releases per skill with tags `<skill>-v<version>`.
+
+### Phase 7 additions (owner, 2026-10-23; design calls delegated to the architect role)
+- **Start:** the owner starts a normal Claude CLI or Code session. When a job is given, a hook starts a local server (localhost only, nothing leaves the machine) and opens the office window in the browser.
+- **Themes:** all themes ship (Office default, Orchestra, Pixel) and the owner switches with one control. The Pixel theme in mock v2 did not please the owner and is redone or dropped before the final build.
+- **Two ways to work:** the owner may answer questions and approvals either in the terminal or in the window, whichever is faster; the first answer wins and both places show the result. Window to session needs a verified channel: first check the Claude Code docs (push external events) and run a small test; fallback is a read-only window with answers in the terminal.
+- **Not a goal:** replacing Claude with a separate app; the window is a view and an optional second input.
