@@ -26,6 +26,7 @@ The person sees only the milestone view of this (Project Plan & Tracker), not th
 For core logic (calculations, data handling, rules, anything where wrong = real damage):
 
 - Write one small test showing what should happen. Run it. **Watch it fail** for the right reason — if you never saw it fail, you don't know it tests anything.
+- On the task branch, commit the failing test (`test(red): …`) before the code, so history shows the order; one commit holding both is no evidence of test-first. Tiny work may skip the separate commit but still shows the failing run.
 - Write the minimal code to make it pass. Run it. Watch it pass, along with all earlier tests.
 - Clean up, keep everything passing, move on.
 - If you wrote new code before its test, throw that code away and redo it test-first. Promoted fast-lane prototype: add tests around current behaviour; don't throw working code away.
@@ -67,7 +68,7 @@ If you can't run something yourself (no code environment, runs on their device),
 
 ## 6. Review before the person sees it
 
-- At the end of every milestone, review the work against the brief and design as if seeing it for the first time. Milestone reviews run in a fresh context: a sub-agent given only the brief + diff, or in chat tools a new chat with a prepared review brief. Label self-reviews as such.
+- At the end of every milestone, review the work against the brief and design as if seeing it for the first time. Milestone reviews run in a fresh context: a sub-agent given only the brief + diff, or in chat tools a new chat with a prepared review brief. Label self-reviews as such. If neither a sub-agent nor a new chat is available, do a labelled self-review against the brief, record "review: self, fresh review owed" in `PROJECT_STATE.md`, and don't call the milestone done until cleared. A later session reviewing earlier milestones counts as fresh context only for code it did not write. Code built in the reviewing session needs its own review before any version tag. The review brief lists every state × every event or action, including zero-amount and refund paths.
 - Review for: missing requirements, bugs and edge cases, security/privacy issues, leftover debug code, hardcoded secrets, needless complexity, and what happens when the data is 10× bigger (`engineering-principles.md` §10).
 - Fix important issues before showing the milestone.
 - When receiving feedback (from the person, a reviewer or a developer they hire): understand it, check it against reality, then act — or push back with a reason if it's wrong for this project. No blind agreement, no "great point!" — just do the right thing and say what changed.
@@ -98,6 +99,7 @@ A milestone is finished only when the Definition of Done in `engineering-princip
 - Proposing a fix without knowing the cause
 - Third failed fix on the same problem (`getting-unstuck.md`)
 - Saying "done" without fresh evidence
+- Owner asks to skip tests
 - Adding a feature the brief doesn't have
 - Asking the person a technical question they can't judge
 - A document that's out of date with what was built

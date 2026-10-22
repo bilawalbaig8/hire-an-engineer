@@ -31,7 +31,7 @@ Fresh checks with evidence ("12 mein se 12 pass"); a few checks for them on thei
 Per `versioning-release.md`: frozen scope, green evidence, backup, migration tested, version + changelog + notes + tag, approval, deploy, checks on live, monitoring. Update cost register and alerts; close milestone; update roadmap.
 
 ## Phase 9 — Handoff & support
-User guide, handoff & maintenance guide, one-page "where everything lives". Later problems → incident, rollback if serious, root-cause fix, hotfix version. New ideas → backlog with priority → next version. Monthly AI-usage audit in the records.
+User guide, handoff & maintenance guide, one-page "where everything lives". Project changing owner: handover checklist in `documents.md` §5. Later problems → incident, rollback if serious, root-cause fix, hotfix version. New ideas → backlog with priority → next version. Monthly AI-usage audit in the records.
 
 ## Watch for
 Scope creep (to "later" unless it changes the core need) · not a software problem (say so) · their capacity to maintain it · honest estimates and costs up front · stale docs or `PROJECT_STATE.md`.

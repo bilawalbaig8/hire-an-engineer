@@ -21,7 +21,7 @@ Other tools' rule files (Cursor rules, `GEMINI.md`) just point to `AGENTS.md`: e
 | File | Holds | Updated |
 |---|---|---|
 | `AGENTS.md` | Purpose, stack, run/test, folder map, conventions, rules, where docs live, the protocols below | When conventions change |
-| `PROJECT_STATE.md` | Version and milestone, active branch, in progress, next 3 tasks, blockers, open questions, last session summary, known issues | Every checkpoint |
+| `PROJECT_STATE.md` | Version and milestone, active branch, in progress, next 3 tasks, blockers, open questions, last session summary, known issues, language and tone, cost mode and budget, accounts (owner, created or not), pending approvals, last environment used | Every checkpoint |
 | `docs/decisions/` | One short record per significant decision | When decided |
 | `docs/plans/roadmap.md` + board link | Versions, milestones, priorities | Each milestone |
 | `CHANGELOG.md` | What changed per version | Each release |
@@ -38,7 +38,7 @@ Templates: `templates.md`.
 
 No memory files yet (existing project, or started without this skill): **first create them** from the code and what the person remembers. Often the most useful first step for a stuck project.
 
-Chat-only: ask them to upload `PROJECT_STATE.md` at the start; at the end, give the updated file to download.
+Chat-only: ask them to upload `PROJECT_STATE.md` at the start; at the end, hand back the whole updated file, never a diff.
 
 ## 4. Checkpoints
 
@@ -53,6 +53,8 @@ Sessions end unexpectedly (context runs out, crash, closed window). Don't wait f
 2. Edit only the changed lines in `PROJECT_STATE.md`: active branch, in-progress task with the exact next step, blockers, questions, `Last updated`.
 3. Append one line to the session log in `PROJECT_STATE.md` (trimmed at session end).
 4. A decision record only if a decision was made.
+
+Every timestamp comes from the `date` command; never write a time you did not read. A checkpoint is a commit plus a one-line Done/Next edit; the full rewrite is for session end.
 
 Never interrupt the person to announce one; at most a short line at the end of a message.
 

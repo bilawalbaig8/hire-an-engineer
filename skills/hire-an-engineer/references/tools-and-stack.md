@@ -4,7 +4,7 @@
 
 ## 1. The approach ladder
 
-Stop at the **first** rung that fully meets the must-haves. Each rung up adds cost, setup and maintenance. (Automating an existing manual process? Use `process-automation.md` §5 instead.)
+Stop at the **first** rung that fully meets the must-haves for the current stage, not the planned one; record the later switch as a planned decision with its trigger (e.g. "when there is a second customer"). Example: a weekly job reading a Google Sheet starts as a script inside the Sheet (Apps Script), before any separate server with stored Google logins. Each rung up adds cost, setup and maintenance. (Automating an existing manual process? Use `process-automation.md` §5 instead.)
 
 | Rung | Approach | Good when | Watch out |
 |---|---|---|---|

@@ -51,6 +51,7 @@ Keep it updated with every schema change.
 - Create schema with a migration script (never by clicking around in live), seed test data that looks realistic, and fake data only in test.
 - Store connection strings/keys as secrets in hosting/GitHub — never in code or docs.
 - Record in the Tools & Setup Guide: provider, project names, region, plan/cost, who owns the account, where backups go.
+- SQLite: set `busy_timeout` and turn a lock timeout into a clear domain error. Test competing writes with two connections or threads, not only one connection.
 
 ## 5. Changing the schema (migrations)
 

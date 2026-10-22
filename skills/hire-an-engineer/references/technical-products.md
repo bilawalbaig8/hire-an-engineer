@@ -13,6 +13,7 @@ Size the task normally (`project-cases.md`); the engine does not make it Large.
 - Unity: commit the `.meta` files with their assets; never commit `Library/`, `Temp/` or `Logs/`.
 - Test with the engine's own framework (Unity Test Framework, GUT/GdUnit, Unreal Automation).
 - If an engine skill or MCP tool is installed, follow it for editor and engine steps.
+- Cannot run the editor? Prefer steps checkable in files (e.g. `Packages/manifest.json`) over Asset Store or GUI steps. Keep core logic in plain C# (no `UnityEngine`) with an asmdef and EditMode tests; run them headless when the editor is available.
 
 ---
 
@@ -115,7 +116,7 @@ For Slack-like tools, collaboration apps, marketplaces:
 
 - **Web:** static hosting, caching headers, progressive loading.
 - **Playable ads:** usually a single self-contained HTML file with all assets inlined, strict size limits, no external requests, network-specific hooks (e.g. MRAID / network SDK calls for the store/CTA redirect and lifecycle events), orientation handling, mute by default, quick first frame. **Requirements differ per ad network and change — look up each target network's current specs** and encode them as export validation rules and per-network export presets. Include event tracking hooks for analytics.
-- **Mobile apps:** web wrapper (e.g. Capacitor) before native; check store requirements.
+- **Mobile apps:** web wrapper (e.g. Capacitor) before native; check store requirements. Accounts, signing keys, review and rollout: `platform-targets.md` §1.
 
 ## 9. Roadmap pattern
 

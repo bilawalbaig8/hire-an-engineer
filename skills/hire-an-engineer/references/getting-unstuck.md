@@ -23,7 +23,7 @@ Treat it as stuck (and switch to this protocol) when any of these happen:
 4. **Classify the stuck type** (§3) — most stuck situations are not code bugs.
 5. **Shrink the problem:** reproduce it in the smallest possible way; isolate which part (screen, logic, data, outside service, environment/setup) is failing — check inputs/outputs at each boundary.
 6. **Decide: fix forward or roll back.** If the last good version is close and the new work is tangled, roll back and redo the change in small tested steps — usually faster than untangling.
-7. **One hypothesis, one small change, one test.** Follow root-cause debugging (`engineering-discipline.md` §4). After 3 failed attempts, step back and reframe: restate the goal, list your assumptions, ask whether the approach itself is wrong and a simpler one exists.
+7. **One hypothesis, one small change, one test.** Follow root-cause debugging (`engineering-discipline.md` §4). After 3 failed attempts, step back and reframe: restate the goal, list your assumptions, ask whether the approach itself is wrong and a simpler one exists. If the cause can only be checked by the person (an outside console or dashboard), give them that check first with a plain screen-by-screen guide; switch approach only when it is a two-way door, nothing is live, and it is offered as a choice in its own message.
 8. **Once moving again:** add a regression test, record what happened in `PROJECT_STATE.md` and, if it was a design issue, a decision record. Note the lesson in the retrospective.
 
 ## 3. Common stuck patterns and the way out
@@ -56,7 +56,7 @@ When the person brings a half-built AI-generated project that's stuck:
 **Rescue lane**
 - Symptom clear (won't start, an error)? Ask nothing first; reproduce it.
 - Before the first commit: `.gitignore` + scan for secret files (`.env`, credentials, keys, DB dumps) and key patterns; report only file and line, never the matched value. If git already exists, also check history (`git log --all --name-only` for `.env`/keys). If a secret was ever committed or shared, tell the person which keys to rotate.
-- No git yet: `git init` and commit a snapshot "as received" before any change (local only, nothing leaves the machine).
+- No git yet, in this order: copy the originals outside the repo; add `.gitignore` (and Git LFS for engine/binary projects); remove any secret literal (rule 1 wins); then `git init` and commit the first snapshot (local only, nothing leaves the machine).
 - Tiny project: fix in place; no restructure until it runs.
 - Ask before deleting, moving or rewriting files; never rebuild from scratch without their OK.
 - Fixing the reported problem is the job: no extra approval for minimal fixes.

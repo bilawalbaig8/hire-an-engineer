@@ -43,6 +43,8 @@ Last updated: [YYYY-MM-DD HH:MM] by [tool/session]
 **Version:** v0.3.0 · **Milestone:** M3 — editor MVP (60%)
 **Status:** 🟢 / 🟡 / 🔴 — [one line]
 **Active branch:** [name]
+**Language / tone:** [e.g. Roman Urdu + English, casual] · **Cost mode:** record-only / managed · **Budget:** [amount]
+**Last environment:** [tool, machine, date]
 
 Keep each section ≤ 5 lines.
 
@@ -56,6 +58,10 @@ Keep each section ≤ 5 lines.
 - …
 ## Open questions for owner
 - …
+## Accounts
+- [service] — owner: [person] — created: yes/no
+## Pending approvals (not executed, re-ask)
+- [action] — asked [date]
 ## Known issues
 - …
 ## Last session summary

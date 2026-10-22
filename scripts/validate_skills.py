@@ -44,6 +44,21 @@ for skill_dir in sorted((ROOT / "skills").iterdir()):
             continue
         if not ((skill_dir / "references" / ref).exists() or (skill_dir / ref).exists()):
             errors.append(f"{name}: references missing file `{ref}`")
+    # every reference file must be routed from SKILL.md
+    refs_dir = skill_dir / "references"
+    ref_files = sorted(refs_dir.glob("*.md")) if refs_dir.exists() else []
+    for ref in ref_files:
+        if ref.name not in text:
+            errors.append(f"{name}: references/{ref.name} is not mentioned in SKILL.md (unrouted)")
+    # every `file.md` §N link must point to a heading "## N." / "## N " / "### N" in that file
+    for src in [skill_md] + ref_files:
+        for target, num in re.findall(r"`?([a-z0-9-]+\.md)`? ?§ ?(\d+)", src.read_text(encoding="utf-8")):
+            target_path = refs_dir / target
+            if not target_path.exists():
+                continue  # a missing file is reported by the check above
+            heading = re.compile(rf"^#{{2,3}} {num}(\.| |$)", re.M)
+            if not heading.search(target_path.read_text(encoding="utf-8")):
+                errors.append(f"{name}: {src.name} links `{target}` §{num} but that file has no '## {num}.' heading")
     lines = text.count("\n")
     if lines > 500:
         errors.append(f"{name}: SKILL.md has {lines} lines (keep under 500)")
