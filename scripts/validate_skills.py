@@ -33,7 +33,7 @@ for skill_dir in sorted((ROOT / "skills").iterdir()):
     mentioned = set(re.findall(r"`([a-z0-9-]+\.md)`", text))
     for ref in (skill_dir / "references").glob("*.md") if (skill_dir / "references").exists() else []:
         mentioned |= set(re.findall(r"`([a-z0-9-]+\.md)`", ref.read_text(encoding="utf-8")))
-    allowed_project_files = {"agents.md", "project_state.md", "readme.md", "changelog.md", "claude.md", "gemini.md"}
+    allowed_project_files = {"agents.md", "project_state.md", "readme.md", "changelog.md", "claude.md", "gemini.md", "plan.md", "summary.md", "decisions.md"}
     for ref in sorted(mentioned):
         if ref.lower() in allowed_project_files:
             continue
