@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Check an evals.json file: {"skill_name": ..., "evals": [...]}.
 
-Old-style cases need id, prompt and an expectation (expected_output text or an expect list).
-With "require_kind": true at the top level, every case also needs kind (typical|edge|refusal)
-and expect as a non-empty list of strings.
+Every case needs id, prompt, kind (typical|edge|refusal) and expect as a non-empty list of text lines.
+Legacy exception: a file where every case uses expected_output and none has kind or expect is
+checked with the old rules (id, prompt, expected_output). Mixed files are errors.
 
 Usage: python scripts/check_evals.py evals/<name>/evals.json
 """
@@ -34,12 +34,16 @@ def check_evals(path: Path) -> list[str]:
     if not isinstance(cases, list) or not cases:
         errors.append(f"{path}: evals must be a non-empty list")
         return errors
-    require_kind = data.get("require_kind") is True
+    legacy = all(
+        isinstance(c, dict) and "kind" not in c and "expect" not in c and "expected_output" in c
+        for c in cases
+    )
+    require_kind = not legacy
     seen: set[object] = set()
     for i, case in enumerate(cases):
         where = f"{path}: evals[{i}]"
         if not isinstance(case, dict):
-            errors.append(f"{where} must be an object")
+            errors.append(f"{where}: must be an object")
             continue
         id_ = case.get("id")
         if not (_text(id_) or (isinstance(id_, int) and not isinstance(id_, bool))):
@@ -67,6 +71,8 @@ def check_evals(path: Path) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     args = sys.argv[1:] if argv is None else argv
     if len(args) != 1:
         print("usage: python scripts/check_evals.py evals/<name>/evals.json", file=sys.stderr)

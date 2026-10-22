@@ -126,3 +126,38 @@ def test_response_missing_approvals_is_error():
     r = good_response()
     del r["approvals"]
     assert any("approvals" in e and "missing" in e for e in ac.validate_response(r))
+
+
+def test_blank_list_entries_are_errors():
+    assert any("evidence" in e for e in ac.validate_response(good_response(evidence=[""])))
+    assert any("files" in e for e in ac.validate_response(good_response(files=["  "])))
+    req = {"goal": "g", "context_files": [], "constraints": [], "done_when": [""]}
+    assert any("done_when" in e for e in ac.validate_request(req))
+
+
+def test_cli_reads_bom_file(tmp_path):
+    import subprocess
+    p = tmp_path / "r.json"
+    p.write_text(json.dumps(good_response()), encoding="utf-8-sig")
+    script = Path(ac.__file__)
+    r = subprocess.run([sys.executable, str(script), "check-response", str(p)], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+
+
+def test_json_examples_in_contract_doc_are_valid(tmp_path):
+    import re
+    import subprocess
+    doc = Path(ac.__file__).resolve().parent.parent / "docs" / "agents" / "agent-template" / "handoff-contract.md"
+    blocks = re.findall(r"```json\n(.*?)\n```", doc.read_text(encoding="utf-8"), re.S)
+    assert len(blocks) >= 4
+    seen = set()
+    for i, block in enumerate(blocks):
+        obj = json.loads(block)
+        # Matching rule: a "goal" key marks a request, "status" a response, "ts" an event.
+        cmd = next(c for k, c in (("goal", "check-request"), ("status", "check-response"), ("ts", "check-event")) if k in obj)
+        seen.add(cmd)
+        f = tmp_path / f"b{i}.json"
+        f.write_text(block, encoding="utf-8")
+        r = subprocess.run([sys.executable, str(Path(ac.__file__)), cmd, str(f)], capture_output=True, text=True)
+        assert r.returncode == 0, f"{cmd}: {r.stdout}"
+    assert seen == {"check-request", "check-response", "check-event"}

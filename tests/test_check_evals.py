@@ -32,7 +32,7 @@ def test_old_style_file_passes(tmp_path):
 
 
 def test_new_style_file_passes(tmp_path):
-    data = {"skill_name": "x", "require_kind": True, "evals": [new_case("a"), new_case("b", "edge"), new_case("c", "refusal")]}
+    data = {"skill_name": "x", "evals": [new_case("a"), new_case("b", "edge"), new_case("c", "refusal")]}
     assert ce.check_evals(write(tmp_path, data)) == []
 
 
@@ -46,24 +46,41 @@ def test_real_hire_an_engineer_evals_pass():
 def test_eval_missing_expect(tmp_path):
     case = new_case()
     del case["expect"]
-    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "require_kind": True, "evals": [case]}))
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [case]}))
     assert any("expect" in e for e in errs)
 
 
 def test_eval_empty_expect_list(tmp_path):
     case = new_case()
     case["expect"] = []
-    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "require_kind": True, "evals": [case]}))
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [case]}))
     assert any("expect" in e for e in errs)
 
 
 def test_eval_bad_kind(tmp_path):
-    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "require_kind": True, "evals": [new_case(kind="weird")]}))
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [new_case(kind="weird")]}))
     assert any("kind" in e and "weird" in e for e in errs)
 
 
-def test_kind_not_required_without_flag(tmp_path):
+def test_all_old_style_file_is_treated_as_legacy(tmp_path):
     assert ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [old_case()]})) == []
+
+
+def test_new_style_file_is_strict_without_any_flag(tmp_path):
+    case = new_case()
+    del case["kind"]
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [case]}))
+    assert any("kind" in e for e in errs)
+
+
+def test_mixed_old_and_new_cases_are_errors(tmp_path):
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": [new_case("a"), old_case(2)]}))
+    assert any("evals[1]" in e and "kind" in e for e in errs)
+
+
+def test_object_error_has_colon_style(tmp_path):
+    errs = ce.check_evals(write(tmp_path, {"skill_name": "x", "evals": ["nope"]}))
+    assert any("evals[0]: must be an object" in e for e in errs)
 
 
 def test_old_case_needs_some_expectation(tmp_path):
@@ -123,6 +140,17 @@ def test_cli_skips_missing_target(tmp_path):
     r = run_cli(str(tmp_path / "nope.json"))
     assert r.returncode == 0
     assert "skipped" in r.stdout
+
+
+def test_cli_works_without_utf8_env(tmp_path):
+    import os
+    env = {k: v for k, v in os.environ.items() if k not in ("PYTHONUTF8", "PYTHONIOENCODING")}
+    p = write(tmp_path, {"skill_name": "x", "evals": [new_case()]})
+    r = subprocess.run([sys.executable, str(SCRIPTS / "check_evals.py"), str(p)], capture_output=True, env=env)
+    assert r.returncode == 0, r.stderr
+    p2 = write(tmp_path, {"skill_name": "x", "evals": []})
+    r = subprocess.run([sys.executable, str(SCRIPTS / "check_evals.py"), str(p2)], capture_output=True, env=env)
+    assert r.returncode == 1 and r.stderr == b""
 
 
 def test_cli_exit_1_on_error(tmp_path):

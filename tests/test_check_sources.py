@@ -130,3 +130,42 @@ def test_cli_exit_0_when_clean(tmp_path):
     skill = write_sources(tmp_path, HEADER + row())
     r = run_cli(str(skill))
     assert r.returncode == 0
+
+
+def test_grouped_citation_unknown_id_caught(tmp_path):
+    skill = write_sources(tmp_path, HEADER + row("S-FND-1"))
+    (skill / "references" / "core.md").write_text("Both agree [S-FND-1, S-WEB-2].\n", encoding="utf-8")
+    errs = cs.check_refs(skill)
+    assert any("S-WEB-2" in e and "unknown" in e for e in errs)
+
+
+def test_parenthesised_and_bare_citations_caught(tmp_path):
+    skill = write_sources(tmp_path, HEADER + row("S-FND-2", "unverified"))
+    (skill / "references" / "core.md").write_text("Do it (S-FND-2).\nAlso S-FND-2 says so.\nAnd S-NOPE-1.\n", encoding="utf-8")
+    errs = cs.check_refs(skill)
+    assert sum("S-FND-2" in e and "unverified" in e for e in errs) == 2
+    assert any("S-NOPE-1" in e and "unknown" in e for e in errs)
+
+
+def test_escaped_pipe_in_title_is_one_cell(tmp_path):
+    body = HEADER + "| S-FND-1 | A \\| B | An Author | 2021 | https://example.org/a | Teaches | Paid | verified |\n"
+    assert cs.check_sources(write_sources(tmp_path, body) / "references" / "sources.md") == []
+
+
+def test_gfm_separator_variants(tmp_path):
+    for sep in ("|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|", "|--|--|--|--|--|--|--|--|", "|:--|:--|:--|:--|:--|:--|:--|:--|"):
+        head = "| ID | Title | Author | Year | URL | Use | Cost/licence | Status |\n" + sep + "\n"
+        d = tmp_path / str(abs(hash(sep)))
+        d.mkdir()
+        errs = cs.check_sources(write_sources(d, head + row()) / "references" / "sources.md")
+        assert errs == [], sep
+
+
+def test_cli_works_without_utf8_env(tmp_path):
+    import os
+    skill = write_sources(tmp_path, HEADER + row())
+    env = {k: v for k, v in os.environ.items() if k not in ("PYTHONUTF8", "PYTHONIOENCODING")}
+    r = subprocess.run([sys.executable, str(SCRIPTS / "check_sources.py"), str(skill)],
+                       capture_output=True, env=env)
+    assert r.returncode == 0, r.stderr
+    assert "ok".encode() in r.stdout

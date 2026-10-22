@@ -47,11 +47,51 @@ def test_missing_frontmatter():
     assert any("frontmatter" in e for e in errs)
 
 
-def test_tools_must_be_list(tmp_path):
+def test_tools_missing_is_rejected(tmp_path):
     p = tmp_path / "t.md"
     p.write_text(
-        "---\nname: t\ndescription: d\nmodel: opus\ntools: Read, Write\nskill: demo\n---\n"
+        "---\nname: t\ndescription: d\nmodel: opus\nskill: demo\n---\n"
         "## Handoff\n\nhandoff-contract.md\n",
         encoding="utf-8",
     )
     assert any("tools" in e for e in va.validate_agent_file(p, SKILLS))
+
+
+def _agent_with_tools(tmp_path, tools_line):
+    p = tmp_path / "t.md"
+    p.write_text(
+        f"---\nname: t\ndescription: d\nmodel: opus\n{tools_line}\nskill: demo\n---\n"
+        "## Handoff\n\nhandoff-contract.md\n",
+        encoding="utf-8",
+    )
+    return p
+
+
+def test_tools_comma_string_is_accepted(tmp_path):
+    p = _agent_with_tools(tmp_path, "tools: Read, Grep, Bash(git status)")
+    assert va.validate_agent_file(p, SKILLS) == []
+
+
+def test_tools_yaml_list_is_accepted(tmp_path):
+    p = _agent_with_tools(tmp_path, "tools:\n  - Read\n  - Grep")
+    assert va.validate_agent_file(p, SKILLS) == []
+
+
+def test_tools_string_with_empty_item_is_rejected(tmp_path):
+    p = _agent_with_tools(tmp_path, "tools: Read, , Grep")
+    assert any("tools" in e for e in va.validate_agent_file(p, SKILLS))
+
+
+def test_tools_empty_string_or_list_is_rejected(tmp_path):
+    for line in ('tools: ""', "tools: []", "tools: 5", 'tools: [Read, ""]'):
+        p = _agent_with_tools(tmp_path, line)
+        assert any("tools" in e for e in va.validate_agent_file(p, SKILLS)), line
+
+
+def test_cli_works_without_utf8_env():
+    import os
+    import subprocess
+    env = {k: v for k, v in os.environ.items() if k not in ("PYTHONUTF8", "PYTHONIOENCODING")}
+    r = subprocess.run([sys.executable, str(Path(va.__file__)), str(FIX / "good")], capture_output=True, env=env)
+    assert r.returncode == 0, r.stderr
+    assert b"demo" in r.stdout

@@ -35,8 +35,8 @@ def _str_list(obj, key, errors, required=True, non_empty=False):
             errors.append(f"{key}: missing (list of text)")
         return
     v = obj[key]
-    if not isinstance(v, list) or not all(isinstance(x, str) for x in v):
-        errors.append(f"{key}: must be a list of text")
+    if not isinstance(v, list) or not all(_is_str(x) for x in v):
+        errors.append(f"{key}: must be a list of non-blank text")
     elif non_empty and not v:
         errors.append(f"{key}: must not be empty")
 
@@ -61,7 +61,7 @@ def _list_of_dicts(obj, key, fields, errors, required=False):
             elif kind == "bool" and not isinstance(val, bool):
                 errors.append(f"{key}[{i}].{name}: must be true or false")
             elif kind == "strlist" and (
-                not isinstance(val, list) or not val or not all(isinstance(x, str) for x in val)
+                not isinstance(val, list) or not val or not all(_is_str(x) for x in val)
             ):
                 errors.append(f"{key}[{i}].{name}: must be a non-empty list of text")
 
@@ -169,7 +169,7 @@ def main(argv):
         print("usage: agent_contract.py check-request|check-response|check-event FILE")
         return 2
     try:
-        obj = json.loads(Path(argv[2]).read_text(encoding="utf-8"))
+        obj = json.loads(Path(argv[2]).read_text(encoding="utf-8-sig"))
     except (OSError, ValueError) as e:
         print(f"cannot read JSON from {argv[2]}: {e}")
         return 1

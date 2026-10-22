@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check a skill's references/sources.md and that every [S-AREA-n] citation points at it.
+"""Check a skill's references/sources.md and that every S-AREA-n citation points at it.
 
 Usage: python scripts/check_sources.py skills/<name>
 """
@@ -11,13 +11,14 @@ from pathlib import Path
 
 HEADER = ["ID", "Title", "Author", "Year", "URL", "Use", "Cost/licence", "Status"]
 ID_RE = re.compile(r"^S-[A-Z]+-\d+$")
-REF_RE = re.compile(r"\[(S-[A-Z]+-\d+)\]")
-SEPARATOR_RE = re.compile(r"^:?-{3,}:?$")
+REF_RE = re.compile(r"\bS-[A-Z]+-\d+\b")
+SEPARATOR_RE = re.compile(r"^:?-+:?$")
 STATUSES = ("verified", "unverified")
 
 
 def _cells(line: str) -> list[str]:
-    return [c.strip() for c in line.strip().strip("|").split("|")]
+    parts = re.split(r"(?<!\\)\|", line.strip().strip("|"))
+    return [c.replace("\\|", "|").strip() for c in parts]
 
 
 def load_sources(path: Path) -> tuple[dict[str, str], list[str]]:
@@ -76,7 +77,7 @@ def check_refs(skill_dir: Path) -> list[str]:
             continue
         for n, line in enumerate(md.read_text(encoding="utf-8-sig").splitlines(), 1):
             for m in REF_RE.finditer(line):
-                id_ = m.group(1)
+                id_ = m.group(0)
                 where = f"{md}:{n}:"
                 if id_ not in statuses:
                     errors.append(f"{where} {id_} is unknown (not in sources.md)")
@@ -86,6 +87,8 @@ def check_refs(skill_dir: Path) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     args = sys.argv[1:] if argv is None else argv
     if len(args) != 1:
         print("usage: python scripts/check_sources.py skills/<name>", file=sys.stderr)

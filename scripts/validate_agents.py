@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate every agents/<role>.md: frontmatter, linked skill folder, and the Handoff section."""
+"""Validate every agents/<role>.md (optional argument: another project root): frontmatter, linked skill folder, and the Handoff section."""
 import re
 import sys
 from pathlib import Path
@@ -35,8 +35,10 @@ def validate_agent_file(path: Path, skills_dir: Path) -> list:
     if fm.get("model") not in MODELS:
         errors.append(f"model '{fm.get('model')}' must be one of {', '.join(sorted(MODELS))}")
     tools = fm.get("tools")
-    if not isinstance(tools, list) or not tools or not all(isinstance(t, str) and t.strip() for t in tools):
-        errors.append("tools must be a YAML list of non-empty strings")
+    # The Claude Code docs allow a comma-separated string or a YAML list.
+    items = [t.strip() for t in tools.split(",")] if isinstance(tools, str) else tools
+    if not isinstance(items, list) or not items or not all(isinstance(t, str) and t.strip() for t in items):
+        errors.append("tools must be a comma-separated string or a YAML list, with no empty items")
     skill = fm.get("skill")
     if not isinstance(skill, str) or not skill.strip():
         errors.append("missing skill")
@@ -57,15 +59,19 @@ def validate_agent_file(path: Path, skills_dir: Path) -> list:
     return errors
 
 
-def main() -> int:
-    agents_dir = ROOT / "agents"
+def main(argv=None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    args = sys.argv[1:] if argv is None else argv
+    root = Path(args[0]) if args else ROOT
+    agents_dir = root / "agents"
     files = sorted(agents_dir.glob("*.md")) if agents_dir.is_dir() else []
     if not files:
         print("No agents found")
         return 0
     failed = False
     for f in files:
-        errs = validate_agent_file(f, ROOT / "skills")
+        errs = validate_agent_file(f, root / "skills")
         if errs:
             failed = True
             for e in errs:
