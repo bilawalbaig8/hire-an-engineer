@@ -80,6 +80,11 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 - Used as inspiration for: `references/ai-agents.md` (workflow-before-agent, loop limits, tool design, least access, state in files, evals, tracing) — general practice, written fresh
 - License: CC0-1.0. No text is reproduced.
 
+## OpenViking
+- Source: https://github.com/volcengine/OpenViking
+- Used as inspiration for: `references/ai-agents.md` §5 (layered summary → overview → full content, scoped retrieval) — concept only, written fresh
+- License: AGPL-3.0. No text or code is reproduced.
+
 ## Anthropic-Cybersecurity-Skills
 - Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
 - Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh

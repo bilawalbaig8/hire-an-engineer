@@ -45,6 +45,8 @@ Tools are the agent's hands; design them like a screen for a new employee:
 - Long-running work keeps its state in files or the database (task, plan, progress, results), so a crash or a new run continues instead of starting over. Never rely on the chat or the prompt as memory.
 - Give each step only the context it needs; a short, focused prompt beats a huge one. Put fixed instructions first so they can be cached (`cost-management.md` §1).
 - What the system "learns" (good examples, rules from past mistakes) is saved as reviewed records or rule files a human can read and edit, never silently.
+- **When memory or knowledge grows large,** organise it in folders by project, user or topic, and keep a one-line summary (and, for big folders, a short overview) beside each folder or file. The agent reads summaries first and opens full files only when they're relevant — fewer tokens, better answers. Update the summary whenever the content changes.
+- **Search the right part, not everything:** scope each lookup to the current project, user or folder before searching; a search over all data mixes in other people's or other projects' content and can leak it.
 
 ## 6. Prove it works: evals before launch
 
