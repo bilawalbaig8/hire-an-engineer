@@ -28,7 +28,7 @@ This is repository tooling, versioned together with the first agent skill (softw
 - Handoff contract between the boss and specialist agents (`docs/agents/agent-template/handoff-contract.md`) with a validator, `scripts/agent_contract.py`: request, response (status, summary, files, questions, approvals, assumptions, evidence), event line, and the event log `.agents/events.jsonl`.
 - `scripts/validate_agents.py` checks `agents/*.md` (name, description, model, tools, skill folder, `## Handoff` section); runs in CI with the new tests.
 - `scripts/package_skill.py` includes the agent files that name the skill (`agents/<file>.md` at the archive root) and warns when an agent file cannot be read.
-- `scripts/install_agents.py` copies skills and agents to `~/.claude` (or `--dest`): dry run first, never overwrites a changed file without `--force`, never deletes.
+- `scripts/install_agents.py` copies skills and agents to `~/.claude` (or `--dest`): dry run first, never overwrites a changed file without `--force`, never deletes; `--only NAME` installs just that skill and its agent files and ignores everything else.
 - `scripts/log_event.py`: Claude Code hook script that writes one event line per subagent start/stop and file write; never fails the session, never writes outside the project, reads UTF-8. Hooks snippet in `docs/agents/agent-template/hooks-snippet.json`.
 - `scripts/check_sources.py` and `scripts/check_evals.py` guard `sources.md` (verified/unverified, unique IDs, citations resolve) and `evals.json`.
 - `docs/agents/agent-template/`: copy-and-fill agent file, skill folder and a ten-step "add a new specialist" checklist.
