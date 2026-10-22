@@ -46,7 +46,10 @@ Tools are the agent's hands; design them like a screen for a new employee:
 - Give each step only the context it needs; a short, focused prompt beats a huge one. Put fixed instructions first so they can be cached (`cost-management.md` §1).
 - What the system "learns" (good examples, rules from past mistakes) is saved as reviewed records or rule files a human can read and edit, never silently.
 - **When memory or knowledge grows large,** organise it in folders by project, user or topic, and keep a one-line summary (and, for big folders, a short overview) beside each folder or file. The agent reads summaries first and opens full files only when they're relevant — fewer tokens, better answers. Update the summary whenever the content changes.
+- **Memories age.** Every saved memory or learned rule records where it came from, when, and how sure it is (seen once vs confirmed many times). When a new fact contradicts an old one, replace or retire the old one — never keep both. Mark entries not used or re-confirmed for a long time as stale and review or drop them on a schedule (e.g. monthly); last month's winning pattern can be wrong this month. Never auto-capture secrets or other people's personal data into memory.
 - **Search the right part, not everything:** scope each lookup to the current project, user or folder before searching; a search over all data mixes in other people's or other projects' content and can leak it.
+
+**Facts need sources.** When the AI researches or reports (market scans, summaries, comparisons, analysis), every factual claim carries its source (link or document, and date) right beside it; numbers say where they came from. Anything without a source is labelled as the AI's inference or an assumption, never stated as fact. Code checks that each cited source exists and was actually read in this run; spot-check a few against the source. A report whose claims can't be traced is not done.
 
 ## 6. Prove it works: evals before launch
 
@@ -75,7 +78,8 @@ Run the evals on every change of prompt, model, tool or setting, and keep the re
 - [ ] Max steps, time, spend, retries and kill switch set in code (§2)
 - [ ] Tools single-purpose, inputs validated, errors say what next (§3)
 - [ ] Least access; every irreversible action needs approval (§4)
-- [ ] State saved outside the prompt; a run can resume (§5)
+- [ ] State saved outside the prompt; a run can resume; memories carry source, date and confidence, old ones retired (§5)
+- [ ] Research and report outputs cite a source for every fact; inferences labelled (§5)
 - [ ] Evals written, run, passing the agreed bar, results saved (§6)
 - [ ] Every run logged with steps and cost (§7)
 - [ ] Fallback for service failure tested (§8)

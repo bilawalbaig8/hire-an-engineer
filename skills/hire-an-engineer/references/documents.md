@@ -13,6 +13,7 @@
 - Title, date, version and a 2–3 line summary at the top.
 - Every diagram captioned in plain words; every table has headers.
 - No placeholders ("TBD") — decide or ask.
+- Facts from outside (prices, limits, market numbers, research) carry their source and date beside them; your own estimates and assumptions are labelled as such.
 - Updated in the same change as the code; bump version, note what changed.
 - Readable by someone who wasn't in the conversation.
 

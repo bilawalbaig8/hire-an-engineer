@@ -85,6 +85,16 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 - Used as inspiration for: `references/ai-agents.md` §5 (layered summary → overview → full content, scoped retrieval) — concept only, written fresh
 - License: AGPL-3.0. No text or code is reproduced.
 
+## agentmemory
+- Source: https://github.com/rohitg00/agentmemory
+- Used as inspiration for: `references/ai-agents.md` §5 (memory lifecycle: provenance, confidence, superseding, decay) — concept only, written fresh
+- License: Apache-2.0. No text or code is reproduced.
+
+## Scientific Agent Skills (K-Dense)
+- Source: https://github.com/K-Dense-AI/scientific-agent-skills
+- Used as inspiration for: `references/ai-agents.md` §5 and `references/documents.md` §2 (evidence-traceable claims) — concept only, written fresh
+- License: MIT. No text or code is reproduced.
+
 ## Anthropic-Cybersecurity-Skills
 - Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
 - Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh
