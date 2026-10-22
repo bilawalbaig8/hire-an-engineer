@@ -32,7 +32,7 @@ A finding is real when you can state the input and the wrong result: "quantity 1
 - **Half-finished changes.** Two writes that must succeed together are done separately (two commits, or a file and a database row). If the second fails, the first stays. Ask: what state is the system in if it stops here? Look for a transaction, an undo step, or a design where partial states are harmless.
 - **Repeats and retries.** Doing the same operation twice (a double click, a retry, a duplicated message) should not double-charge, double-count or restore stock twice. Look for a request id, a status check ("already refunded") or a natural idempotency.
 - **Shared state and concurrency.** Check-then-act on shared data (read stock, then write stock) can interleave with another request; shared collections modified from several threads or tasks; a lock held across a slow call; a lock acquired in different orders. For concurrent code ask which data is shared, who writes it, and what guarantees ordering. [S-MNT-6]
-- **Money and measurements.** Money in whole minor units (cents), never floating point; check rounding rules explicitly; do not mix units (seconds and milliseconds, metres and feet, bytes and kilobytes); watch integer overflow and division that truncates.
+- **Money and measurements.** Money as integer minor units using the currency's exponent (JPY 0, KWD and BHD 3) or a decimal type, never binary float; check rounding rules explicitly; do not mix units (seconds and milliseconds, metres and feet, bytes and kilobytes); watch integer overflow and division that truncates.
 - **Resource handling.** Files, connections and locks opened and not closed on every path (including error paths); resources created in a loop.
 - **Absent values.** A value that can be missing is used as if it were present; an optional field is assumed; a lookup result is not checked before use.
 - **Conditions and flow.** Inverted conditions, `and` where `or` was meant, a condition that is always true or false, unreachable branches, a missing `else`, a `return` placed inside a loop, shadowed variables, copy-pasted code where one name was not changed.
@@ -49,7 +49,7 @@ A finding is real when you can state the input and the wrong result: "quantity 1
 
 ## Reading the tests as evidence
 
-If tests exist, run the focused ones for the touched code (read-only, no installs) and report the result. A new failure in an old test is a strong, cheap-to-confirm finding. If you cannot run them, say so and say which test you would run.
+If tests exist, run the focused ones for the touched code only as `review-method` allows (running tests is code execution; no installs) and report the result. A new failure in an old test is a strong, cheap-to-confirm finding. If you cannot run them, say so and say which test you would run.
 
 ## Severity hints
 

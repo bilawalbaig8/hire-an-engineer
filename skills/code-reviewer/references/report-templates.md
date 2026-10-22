@@ -4,12 +4,12 @@ When to read this: when you write the review file and the handoff response. Keep
 
 ## 1. The review file
 
-Path: `docs/reviews/YYYY-MM-DD-<topic>.md` in the reviewed project (create the folder if needed; never overwrite an earlier review, add a new file). If the project folder is not writable or the boss said not to write files, put the same content in the reply and say no file was written.
+Path: `docs/reviews/YYYY-MM-DD-<topic>.md` in the reviewed project (create the folder if needed; never overwrite an earlier review: a same-day, same-topic name gets a numeric suffix, `-2`, `-3`). The file lands in the working tree and may be committed with the change; say so. If the project folder is not writable or the boss said not to write files, put the same content in the reply and say no file was written.
 
 ```
 # Review: <topic>
 
-Range reviewed: <branch or commit range>     Requirement: <path or "none given; intent inferred from the commit message">
+Range reviewed: <branch or commit range>     Requirement: <path or "none given; intent inferred from the commit message, listed in assumptions">
 Date: YYYY-MM-DD     Size: N files, +A / -D lines     Read in full: <list>     Sampled or skipped: <list and why>
 
 ## Verdict
@@ -63,7 +63,7 @@ All seven fields every time, as one JSON object:
   "questions": [{"id": "q1", "question": "...", "why": "..."}],
   "approvals": [{"id": "a1", "decision": "...", "options": ["..."], "recommended": "...", "one_way_door": true}],
   "assumptions": ["intent inferred from the commit message", "..."],
-  "evidence": ["git diff main..review/x read: 3 files, +41 lines", "python -m unittest: 3 tests, 1 failure (test_discount_at_ten)", "findings: 2 Critical, 1 Important, 0 Minor"]
+  "evidence": ["git diff main...review/x read: 3 files, +41 lines", "python -m unittest: 3 tests, 1 failure (test_discount_at_ten)", "findings: 2 Critical, 1 Important, 0 Minor"]
 }
 ```
 
@@ -71,6 +71,7 @@ How to fill it:
 - `status`: `done` when the review is finished (even if the verdict is "needs fixes": the review is done); `needs_answers` when you need the range, the requirement or another fact; `needs_approval` when a hard-to-undo concern needs the owner; `blocked` when you cannot get the change.
 - `summary`: plain language for a non-engineer. First sentence is the verdict. Then at most three bullets of the top findings, then what must be decided. No jargon without a one-line explanation.
 - `files`: the review file, nothing else (you change no code).
+- Questions and `needs-check` items go under `questions`; they never count toward the verdict. A migration that breaks running code plus an intentional data drop: verdict needs fixes, `status` `needs_approval`.
 - `approvals`: only for hard-to-undo concerns. Put your recommendation first in `recommended` and keep every option's cost in the option text.
 - `assumptions`: everything you assumed instead of asking.
 - `evidence`: something the boss can check without trusting you: the range and files you read, commands and their results, counts of findings by severity. "I reviewed it carefully" is not evidence. A `done` response must have evidence.

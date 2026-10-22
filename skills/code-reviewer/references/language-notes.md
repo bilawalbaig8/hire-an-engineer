@@ -23,15 +23,15 @@ When to read this: when the change is in one of these languages or touches SQL, 
 
 ## C# and .NET
 - Follow the project's conventions and the framework design guidelines for public APIs: naming, exceptions, disposal. [S-LNG-15] [S-LNG-16]
-- **Disposable resources** (streams, connections, HTTP clients) created without disposal or created per call; `async void` outside event handlers; blocking on `.Result`/`.Wait()` in async code; swallowed exceptions; shared mutable state across tasks. (general practice)
+- **Disposable resources** (streams, connections) created without disposal; **`HttpClient` is the opposite case:** share one or use `IHttpClientFactory`; a new one per call, even disposed, causes socket exhaustion, and a shared static one is not a leak; `async void` outside event handlers; blocking on `.Result`/`.Wait()` in async code; swallowed exceptions; shared mutable state across tasks. (general practice)
 
 ## Unity (C#)
 - **Per-frame cost:** allocation in `Update` (new lists, string building, boxing), `Find`/`FindObjectsOfType`/`FindGameObjectsWithTag` and `GetComponent` in hot loops; cache references in `Awake` or `Start`. [S-UNI-1]
 - **Pooling:** frequent `Instantiate`/`Destroy` should use a pool; Unity provides an object pool type and a profiler to measure. [S-UNI-5]
-- **Destroyed objects:** a destroyed Unity object compares equal to null through Unity's custom equality, but the null-conditional (`?.`) and null-coalescing (`??`) operators bypass that check; code that keeps using an object after `Destroy` throws. Check references after destruction and on scene changes. [S-UNI-4]
+- **Destroyed objects:** a destroyed Unity object compares equal to null through Unity's custom `==` [S-UNI-4], but the null-conditional (`?.`), null-coalescing (`??`), `is null` / `is not null`, pattern matching, `ReferenceEquals`, interface-typed references and unconstrained generics bypass that check (common knowledge, not backed by a cited source). Only engine-backed members throw `MissingReferenceException`; plain C# members keep working. `Destroy` is deferred to the end of the frame, so `obj == null` right after `Destroy` is still false. Check references after destruction and on scene changes.
 - **Serialization:** serialized fields, public versus private, renamed fields losing data, nested types and collections have rules that surprise people. [S-UNI-3]
-- **Update order, coroutines left running, event handlers not unsubscribed, physics in `Update` rather than `FixedUpdate`.** (general practice)
-- You cannot compile or run Unity code here: say so, and label runtime claims `likely` or `needs-check`. A vendor performance guide exists (unverified source S-UNI-2).
+- **Update order, coroutines left running, event handlers not unsubscribed, continuous forces and `Rigidbody` movement done in `Update` rather than `FixedUpdate` (not one-shot impulses, raycasts or input reads).** (general practice)
+- You cannot compile or run Unity code here: say so, and label runtime claims `likely` or `needs-check`; a Unity runtime claim may be `confirmed` only after a full trace. A vendor performance guide exists (unverified source S-UNI-2).
 
 ## Java and Kotlin
 - Equality and hashing (`equals` with `hashCode`), mutable objects as map keys, unchecked casts, resource handling with try-with-resources, `Optional` misuse. [S-LNG-17]
@@ -54,6 +54,9 @@ When to read this: when the change is in one of these languages or touches SQL, 
 
 ## User interface changes (accessibility basics)
 - Text alternatives for images, keyboard operation, visible focus, colour contrast, labels on form fields, not relying on colour alone. [S-ACC-1] [S-ACC-2]
+
+## Not covered yet
+C and C++, shell scripts, Swift, PHP, Ruby and Rust have no notes here yet. If the change is in one of them, say so in the report and review it with the general lenses only.
 
 ## Sources
 [S-LNG-1] [S-LNG-2] [S-LNG-3] [S-LNG-4] [S-LNG-5] [S-LNG-6] [S-LNG-7] [S-LNG-8] [S-LNG-9] [S-LNG-10] [S-LNG-11] [S-LNG-12] [S-LNG-13] [S-LNG-14] [S-LNG-15] [S-LNG-16] [S-LNG-17] [S-LNG-18] [S-LNG-19] [S-LNG-20] [S-LNG-21] [S-LNG-22] [S-LNG-23] [S-UNI-1] [S-UNI-3] [S-UNI-4] [S-UNI-5] [S-DBS-1] [S-DBS-2] [S-DBS-3] [S-DBS-6] [S-API-1] [S-API-2] [S-API-3] [S-API-4] [S-LOG-1] [S-LOG-2] [S-LOG-3] [S-LOG-4] [S-ACC-1] [S-ACC-2] and, as an unverified lead only, S-UNI-2

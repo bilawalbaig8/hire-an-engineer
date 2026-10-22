@@ -16,9 +16,9 @@ This is a review lens, not a full security audit. If the change needs threat mod
 
 | Class | What to look for |
 |---|---|
-| **Injection** | User input joined into SQL, shell commands, file paths, templates, LDAP or regular expressions by string concatenation or formatting. The fix is a parameter or a safe API, never "sanitising by hand". Name the triggering input (a quote character, `../`, a semicolon). |
+| **Injection** | User input joined into SQL, shell commands, file paths, templates, LDAP or regular expressions by string concatenation or formatting. The fix is a parameter, a safe API, or an allow-list for identifiers (table and column names, `ORDER BY` direction), never hand-sanitising values. Name the triggering input (a quote character, `../`, a semicolon). |
 | **Broken access control** | A new action with no permission check; a check that trusts the client (a hidden button, a role in the request); an object looked up by id without checking it belongs to the caller; an admin function reachable by any user. Compare with the stated rules (README, requirement). [S-SEC-2] [S-SEC-3] |
-| **Authentication and sessions** | Home-made password handling, passwords or tokens compared with `==` or stored in plain text, tokens that never expire, tokens in URLs or logs, missing rate limits on sign-in. |
+| **Authentication and sessions** | Home-made password handling, passwords or tokens stored in plain text, or secrets compared with `==` (timing leak: use a constant-time compare or the library's verify function), tokens that never expire, tokens in URLs or logs, missing rate limits on sign-in. |
 | **Secrets** | Keys, passwords, tokens or connection strings in the code, tests, examples or config files in the repository. Treat a committed live secret as compromised: say it must be removed from the code and rotated, not only deleted from the latest version. |
 | **Input validation and output** | Missing length, type or range checks at the boundary; output written into HTML, URLs or logs without escaping; error messages that reveal internals. |
 | **Files and paths** | Uploads without type and size checks, user-controlled file names, path traversal, files written to a shared folder, temp files with predictable names. |
@@ -26,7 +26,7 @@ This is a review lens, not a full security audit. If the change needs threat mod
 | **Deserialisation and dynamic code** | Loading untrusted data with formats that can run code; `eval`/`exec` or reflection on outside strings. |
 | **Cryptography** | Home-made schemes; outdated algorithms; fixed or reused IVs and salts; random numbers from a non-secure generator for tokens. Recommend a standard library or service. |
 | **Data exposure** | Responses returning more fields than needed; personal data in logs or analytics; debug endpoints left on. [S-LOG-2] [S-LOG-3] |
-| **Dependencies** | A new package: does it exist, who maintains it, is the name a lookalike, is it needed at all, does it have an install script? A version pinned? Check the project's health signals where you can. [S-SEC-10] |
+| **Dependencies** | A new package: does it exist, who maintains it, is the name a lookalike, is it needed at all, does it have an install script? A version pinned? Use local evidence only (lockfile, installed or vendored package metadata); otherwise raise a needs-check question. [S-SEC-10] |
 | **Denial of service** | Unbounded input size, expensive work per request, regular expressions with catastrophic backtracking, unbounded loops on user-controlled counts. |
 | **Configuration** | Debug mode, permissive cross-origin rules, default credentials, open ports, publicly readable storage. |
 | **Logging** | No audit trail for sensitive actions, or secrets and personal data written to logs. |
@@ -41,12 +41,12 @@ This is a review lens, not a full security audit. If the change needs threat mod
 State the attacker, the input and the impact in one sentence each.
 
 ## How to word a finding
-"`shop/search.py` builds the query by joining the `term` text into SQL. An input like `' OR 1=1 --` returns every order and a crafted one can modify data. Use a query parameter."
+"`shop/search.py` builds the query by joining the `term` text into SQL. An input like `' OR 1=1 --` returns every order. Use a query parameter."
 
 ## Do not
 - Write or run exploit code against anything; read and reason only.
 - Call something secure because it uses a framework; check how the framework is used.
-- Report a theoretical weakness with no path to it as Critical; label it `needs-check` and explain what would make it real.
+- Report a theoretical weakness with no path to it as Critical; label it `needs-check`, put it under questions (it does not count toward the verdict) and explain what would make it real.
 - Paste secrets into the report: describe where they are, never print their values.
 
 ## When to hand over

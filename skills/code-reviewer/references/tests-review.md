@@ -27,11 +27,11 @@ Coverage numbers do not prove quality; a line can be run without being checked. 
 
 ## If the change has no tests
 
-Say so, and say which behaviours most need one. A change to money, permissions, data migrations or parsing without tests is an Important finding; a cosmetic change without tests is fine.
+Say so, and say which behaviours most need one. A change to money, permissions, data migrations or parsing without tests is Important when the project has a test suite, otherwise a recommendation; a cosmetic change without tests is fine.
 
 ## Running tests
 
-If the project has a test command and it is safe (no installs, no network, no writes outside temp files), run the tests for the touched code and report the real result. A new failure in an existing test is a strong finding (a regression); name the test. If you did not run tests, say that and do not say they pass.
+Running tests is code execution, not reading: follow "What you can run" in `review-method` (trusted change, test config and scripts read, offline, no writes; if unsure, ask). If the project has a test command and that allows it, run the tests for the touched code and report the real result. A new failure in an existing test is a strong finding (a regression); name the test. If you did not run tests, say that and do not say they pass.
 
 ## Severity
 

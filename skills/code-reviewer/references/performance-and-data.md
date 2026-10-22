@@ -9,7 +9,7 @@ Performance findings need numbers or at least orders of magnitude. Ask:
 1. **How often does this run?** (per request, per frame, per row, once at startup)
 2. **How much data does it touch now, and at 10 times?**
 3. **What does each step cost?** (a database or network call is thousands of times slower than a memory access. [S-PRF-3])
-4. **What is the real bottleneck?** Do not guess; where it matters ask for a measurement (profile, query plan, timing). A structured way to look at a system's resources is to check use, saturation and errors for each. [S-PRF-2] [S-PRF-1]
+4. **What is the real bottleneck?** Do not guess; where it matters ask for a measurement (profile, query plan, timing). A structured way to look at a system's resources is to check utilization, saturation and errors (USE) for each. [S-PRF-2] [S-PRF-1]
 5. **Is it on a hot path?** A slow startup step is Minor; the same code inside a request handler or a frame loop is Important. Keep the severity tied to how often and how much.
 
 ## Common problems
@@ -33,9 +33,9 @@ These are the places where a mistake loses data, so review them slowly.
 
 - **Atomicity:** changes that must succeed together are in one transaction. Two separate commits are a finding. Know what isolation the database gives and what it does not; concurrent updates on the same rows can still conflict or deadlock. [S-DBS-3] [S-DBS-4]
 - **Migrations:**
-  - Destructive steps (dropping or renaming a column or table, changing a type, adding NOT NULL without a default) while the code still uses the old shape are Critical: the code and the schema must never disagree. The safe path is usually in steps: add the new, copy data, switch the code, then remove the old later.
+  - Destructive steps (dropping or renaming a column or table, changing a type, while the code still uses the old shape are Critical: the code and the schema must never disagree. Adding NOT NULL without a default is not destructive, but it fails on tables that have rows or breaks old code that omits the column. The safe path is usually in steps: add the new, copy data, switch the code, then remove the old later.
   - Long locks on large tables, backfilling millions of rows in one transaction, adding an index that blocks writes: ask how it will run in production.
-  - Can it be undone? If not, say so and return it to the boss as a hard-to-undo concern.
+  - Can it be undone? If not, say so. A migration that breaks running code is a defect; an intentional, correct data drop is an approval; when both exist, follow the migration rule in `review-method`.
   - There are catalogues of unsafe migration patterns (one is an unverified source, S-DBS-5); the project's own migration style guide, if any, applies. [S-DBS-6]
 - **Schema design:** missing keys or constraints that the code relies on; storing money as floating point; storing lists in text columns; no unique constraint where the code assumes one.
 - **Data quality and privacy:** new fields with personal data, retention, who can read them.
