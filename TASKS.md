@@ -26,7 +26,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 2 Architect
 
-- [ ] 2.1 Write sources.md from the four verified research passes
+- [~] 2.1 Write sources.md from the four verified research passes (written: 123 sources, 86 verified / 37 unverified; fact-check review pending)
 - [ ] 2.2 core-principles, method-design, method-recover
 - [ ] 2.3 Field references: web/backend/cloud, distributed/data, mobile, desktop/plugins, game/engine, real-time/netcode, AI systems, security, data pipelines
 - [ ] 2.4 diagrams.md (C4, Mermaid default, render + check) and review-checklists.md
