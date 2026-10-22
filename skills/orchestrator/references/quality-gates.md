@@ -3,6 +3,7 @@
 ## When a review is required
 - Any step that changes code, configuration or project files passes the Code Reviewer before you call it done.
 - Documents and designs from the Architect need a review only when the owner asks or the design will drive costly work; say so in the plan.
+- Who reviews what: code and diffs go to the Code Reviewer. A design or decision record goes to a fresh call of the Architect in review mode (a call that did not write it), because that lens fits; say in the plan which one you chose and why. The author never reviews its own work.
 - When more checkers exist (QA, Security) they join the gate for what they own. Today the gate is the Code Reviewer alone; say that in the summary, do not imply tests or a security audit happened.
 
 ## What done means

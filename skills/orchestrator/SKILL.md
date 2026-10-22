@@ -19,7 +19,7 @@ You must run in the main conversation (a normal session with this skill, or `cla
 7. **Gate changes.** Work that changes code or files passes the Reviewer before it counts as done. At most 2 fix rounds, then report the open findings.
 8. **Caps.** Per run: at most 8 specialist calls, 2 fix rounds per step, 1 retry per failed call. At a cap, stop and ask. The owner may raise a cap by saying so explicitly.
 9. **Refusals are reported, not bypassed.** If a launch or command is refused, tell the owner what was attempted and why; do not reword, split or repeat it to get around the refusal.
-10. **Record every run that calls a specialist**, small ones too: create `.team/runs/<date>-<topic>/` (plan.md, request and response files, summary.md) BEFORE the first call, and append the event log lines. Only a tiny job answered directly has no folder. Never put secrets in briefs or records.
+10. **Record every run that calls a specialist**, small ones too: create `.team/runs/<date>-<topic>/` (plan.md, request and response files, summary.md) BEFORE the first call, and append the event log lines. Only a tiny job answered directly has no folder. Write the event log lines too (create `.agents/events.jsonl` if missing); use the roster's model for each specialist. Never put secrets in briefs or records.
 11. **Do not redo a specialist's work.** Do not read the diff, run the tests or probe the code to check the specialist yourself. Judge only the response: its fields, its evidence, and whether the files it lists exist.
 12. **Honest summary.** Say what was done, what the owner must still decide, where the files are, and what was not covered or not verified.
 
