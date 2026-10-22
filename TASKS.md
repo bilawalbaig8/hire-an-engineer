@@ -38,8 +38,8 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 3 Second specialist
 
-- [?] 3.1 Code Reviewer chosen; design spec written (docs/superpowers/specs/2026-10-23-code-reviewer-design.md), waiting for the owner to approve it
-- [ ] 3.2 Build, evals, install copies
+- [x] 3.1 Code Reviewer chosen; spec approved by the owner; plan written; 87 sources written (81 verified); evals written first (14 cases + test repo with planted defects, local)
+- [~] 3.2 Build knowledge files, SKILL.md and agent; run evals; install copies (next: knowledge files)
 - [ ] 3.3 Contract tested on two agents; fix contract gaps
 
 ## Phase 4 Orchestrator
