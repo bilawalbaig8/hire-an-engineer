@@ -13,8 +13,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import agent_contract  # noqa: E402
-
 LOG_PATH = Path(".agents") / "events.jsonl"
 
 
@@ -70,12 +68,25 @@ def project_dir_for(payload: dict) -> Path:
                 or _text(payload.get("cwd")) or os.getcwd())
 
 
+def _safe_log_path(project_dir: Path) -> Path:
+    """Log path inside the project; refuse symlinks and escapes."""
+    agents = project_dir / LOG_PATH.parent
+    log = project_dir / LOG_PATH
+    if agents.is_symlink() or log.is_symlink():
+        raise ValueError(".agents or events.jsonl is a symlink; refusing to write")
+    if not log.resolve().is_relative_to(project_dir.resolve()):
+        raise ValueError("log path is outside the project; refusing to write")
+    return log
+
+
 def main() -> int:
     try:
-        payload = json.loads(sys.stdin.read())
+        import agent_contract  # inside try: a missing module must not break the host
+
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
         event = event_from_hook(payload)
         if event is not None:
-            agent_contract.append_event(project_dir_for(payload) / LOG_PATH, event)
+            agent_contract.append_event(_safe_log_path(project_dir_for(payload)), event)
     except Exception as exc:  # never break the host session
         print(f"log_event: {exc}", file=sys.stderr)
     return 0
