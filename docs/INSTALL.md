@@ -38,3 +38,14 @@ Download the newer release (or `git pull`), delete the old `hire-an-engineer` fo
 - Windows PowerShell: `Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\skills\hire-an-engineer"; Copy-Item -Recurse hire-an-engineer "$env:USERPROFILE\.claude\skills\"`
 
 Your projects keep their own `AGENTS.md` and `PROJECT_STATE.md`, so nothing is lost.
+
+## Agents (Claude Code)
+The installer copies `skills/` and `agents/*.md` from this repo into your Claude Code folder (default `~/.claude`):
+```
+python scripts/install_agents.py
+```
+- Preview first: `python scripts/install_agents.py --dry-run` lists every file as `new`, `same` or `differs` and writes nothing.
+- It never overwrites a file that differs from the repo copy. If any file differs it stops, lists them and writes nothing (exit code 1).
+- To replace the differing files with the repo versions, add `--force`.
+- Use `--dest PATH` to install somewhere else, and `--verbose` to also list unchanged files.
+- Running it again when nothing changed writes zero files.
