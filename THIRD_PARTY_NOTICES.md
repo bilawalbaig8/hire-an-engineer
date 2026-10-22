@@ -99,3 +99,8 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 - Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
 - Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh
 - License: Apache-2.0. No text or code is reproduced.
+
+## Sources for the Architect (software-architect skill)
+- Full list with author, year, URL, licence and check status: `skills/software-architect/references/sources.md` (123 sources researched 2026-10-22).
+- Used in: `skills/software-architect/references/` (planned). Ideas are summarised in our own words; no text, figures or code are copied.
+- Families and licences noted by the publishers: C4 model (Simon Brown, CC BY 4.0); arc42 (CC BY-SA 4.0; ideas summarised, text not copied); Domain-Driven Design Reference (Eric Evans, CC BY 4.0); Documenting Architecture Decisions (Michael Nygard, CC0 1.0); MADR (MIT or CC0); Google Site Reliability Engineering books (CC BY-NC-ND 4.0, read and summarised only); Google API Improvement Proposals and Google Cloud Well-Architected Framework (CC BY 4.0); Microsoft REST API Guidelines (CC BY 4.0); OWASP ASVS and Threat Modeling Cheat Sheet (CC BY-SA 4.0; ideas summarised); Mermaid CLI, LikeC4, Excalidraw, dependency-cruiser (MIT); D2 (MPL-2.0); ArchUnit (Apache-2.0); code-maat (GPL-3.0, tool referenced only). Books, papers and vendor documentation are credited by title and author and used for ideas only.
