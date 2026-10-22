@@ -75,6 +75,11 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 - Used in: `references/documents.md` §7 and `references/plain-language.md` (diagram-or-prose test, type selection, complexity budget, focal-accent rule, connector and legend rules, anti-patterns, import and pre-output checks — rewritten, tool-agnostic; no templates or code included)
 - License: MIT — Copyright (c) 2025 Cathryn Lavery. The MIT permission notice above applies.
 
+## awesome-harness-engineering
+- Source: https://github.com/ai-boost/awesome-harness-engineering (curated reading list, including Anthropic's "Building Effective Agents" and "Writing Effective Tools for Agents", and its HARNESS_CHECKLIST template)
+- Used as inspiration for: `references/ai-agents.md` (workflow-before-agent, loop limits, tool design, least access, state in files, evals, tracing) — general practice, written fresh
+- License: CC0-1.0. No text is reproduced.
+
 ## Anthropic-Cybersecurity-Skills
 - Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
 - Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh

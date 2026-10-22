@@ -61,7 +61,7 @@ Pick the simplest that handles the volume, logic and apps involved (check curren
 | **No-code automation** (Zapier, Make, n8n, Power Automate) | Connecting common apps, simple–medium logic, low–medium volume | Per-task pricing, complex logic gets messy, vendor limits |
 | **Google Apps Script / Office Scripts** | Work inside Google Workspace / Microsoft 365 | Quotas, needs code maintenance |
 | **Python script** (scheduled locally or in the cloud, e.g. GitHub Actions schedule) | Files, data processing, reports, complex logic, high volume | Needs hosting/scheduling, maintenance |
-| **AI agent / AI steps** (LLM API in a flow, or an AI assistant with connectors and scheduled tasks) | Reading unstructured text/PDFs, classifying, drafting | Must be checked; cost per run; privacy |
+| **AI agent / AI steps** (LLM API in a flow, or an AI assistant with connectors and scheduled tasks) | Reading unstructured text/PDFs, classifying, drafting | Must be checked; cost per run; privacy — build per `ai-agents.md` |
 | **Browser automation / RPA** | Only when an app has no API or export | Fragile — breaks when the website changes; check the site's terms |
 | **Small custom app** | Process needs its own screens, approvals, records | Most effort — use the full workflow |
 
