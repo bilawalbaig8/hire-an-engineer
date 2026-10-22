@@ -6,6 +6,8 @@ a list of error strings; an empty list means valid.
 
 CLI: python scripts/agent_contract.py check-request|check-response|check-event FILE
 """
+from __future__ import annotations
+
 import json
 import re
 import sys
@@ -39,8 +41,12 @@ def _str_list(obj, key, errors, required=True, non_empty=False):
         errors.append(f"{key}: must not be empty")
 
 
-def _list_of_dicts(obj, key, fields, errors):
-    v = obj.get(key, [])
+def _list_of_dicts(obj, key, fields, errors, required=False):
+    if key not in obj:
+        if required:
+            errors.append(f"{key}: missing (list)")
+        return
+    v = obj[key]
     if not isinstance(v, list):
         errors.append(f"{key}: must be a list")
         return
@@ -60,7 +66,7 @@ def _list_of_dicts(obj, key, fields, errors):
                 errors.append(f"{key}[{i}].{name}: must be a non-empty list of text")
 
 
-def validate_request(obj):
+def validate_request(obj: dict) -> list[str]:
     if not isinstance(obj, dict):
         return ["request: must be a JSON object"]
     errors = []
@@ -76,7 +82,7 @@ def validate_request(obj):
     return errors
 
 
-def validate_response(obj):
+def validate_response(obj: dict) -> list[str]:
     if not isinstance(obj, dict):
         return ["response: must be a JSON object"]
     errors = []
@@ -87,7 +93,7 @@ def validate_response(obj):
         errors.append("summary: required text")
     for key in ("files", "assumptions", "evidence"):
         _str_list(obj, key, errors)
-    _list_of_dicts(obj, "questions", {"id": "str", "question": "str", "why": "str"}, errors)
+    _list_of_dicts(obj, "questions", {"id": "str", "question": "str", "why": "str"}, errors, required=True)
     _list_of_dicts(
         obj,
         "approvals",
@@ -99,6 +105,7 @@ def validate_response(obj):
             "one_way_door": "bool",
         },
         errors,
+        required=True,
     )
     if status == "done" and not obj.get("evidence"):
         errors.append("evidence: status done needs at least one piece of evidence")
@@ -119,7 +126,7 @@ def _valid_ts(ts):
     return True
 
 
-def validate_event(obj):
+def validate_event(obj: dict) -> list[str]:
     if not isinstance(obj, dict):
         return ["event: must be a JSON object"]
     errors = []
@@ -140,7 +147,7 @@ def validate_event(obj):
     return errors
 
 
-def append_event(path, event):
+def append_event(path: Path, event: dict) -> None:
     errors = validate_event(event)
     if errors:
         raise ValueError("invalid event: " + "; ".join(errors))

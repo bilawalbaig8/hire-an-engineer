@@ -114,3 +114,15 @@ def test_append_event_writes_one_line_and_rejects_invalid(tmp_path):
     with pytest.raises(ValueError):
         ac.append_event(p, good_event(type="nope"))
     assert p.read_text(encoding="utf-8") == before
+
+
+def test_response_missing_questions_is_error():
+    r = good_response()
+    del r["questions"]
+    assert any("questions" in e and "missing" in e for e in ac.validate_response(r))
+
+
+def test_response_missing_approvals_is_error():
+    r = good_response()
+    del r["approvals"]
+    assert any("approvals" in e and "missing" in e for e in ac.validate_response(r))
