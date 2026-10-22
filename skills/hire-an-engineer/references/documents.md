@@ -4,7 +4,7 @@
 
 - **Source of truth:** Markdown + Mermaid in the repo's `docs/`. Every AI tool can read it; it's versioned with the code.
 - **Sharing:** when the person needs to send or present a document, export it in what they use (Word, PDF, Google Docs, Notion) or the environment's doc/artifact tool. Read the environment's document skill first if it has one. The Markdown stays master.
-- **Size:** minimum files per size: `project-memory.md` §1 (Tiny = README + PROJECT_STATE.md). Small → one `docs/project.md`. Medium/Large → separate files indexed in `docs/README.md`.
+- **Size:** minimum files per size: `project-memory.md` §1. Small → one `docs/project.md`. Medium/Large → separate files indexed in `docs/README.md`.
 
 ## 2. Quality bar and the two layers
 

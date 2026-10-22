@@ -49,7 +49,7 @@ Sessions end unexpectedly (context runs out, crash, closed window). Don't wait f
 **Also checkpoint immediately:** before anything risky (migrations, big refactors, deploys, deletes); after any decision the person makes; when switching tasks or getting stuck; when they step away.
 
 **A checkpoint is small:**
-1. **Commit** work in progress on its branch with a clear message. Never stash: stashes are invisible to other tools.
+1. **Commit** work in progress on its branch with a clear message. Never stash: stashes are invisible to other tools. Tiny projects working on `main`: checkpoint on a `wip/` branch; only passing work reaches `main`.
 2. Edit only the changed lines in `PROJECT_STATE.md`: active branch, in-progress task with the exact next step, blockers, questions, `Last updated`.
 3. Append one line to the session log in `PROJECT_STATE.md` (trimmed at session end).
 4. A decision record only if a decision was made.

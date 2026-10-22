@@ -32,7 +32,7 @@ Simple, not enterprise:
   `feat: add order form`, `fix: reject letters in phone number`, `test: …`, `docs: …`, `chore: …`
 - Commit after each passing test step (TDD cycle); never commit secrets or failing tests to `main`.
 - Merge via pull request; delete the branch after merge.
-- Tiny single-person projects may commit straight to `main` — but still small commits, tests passing, tags for versions.
+- Tiny single-person projects may commit passing work straight to `main` (small commits, tags for versions); work in progress and checkpoints go on a `wip/` branch, merged when green.
 
 ## 4. Issues, labels, milestones and Projects board
 

@@ -1,8 +1,18 @@
 # Complex Technical Products — game engines, developer tools, platforms
 
-Contents: Scoping these products · Game engine runtime architecture · Editor architecture · Performance budgets · Testing engines and technical products · Developer-facing products (APIs, SDKs, engines) · Platforms (multi-tenant, real-time) · Export targets (web, playable ads, mobile) · Roadmap pattern · Roles that carry extra weight
+Contents: Working inside an existing engine project · Scoping these products · Game engine runtime architecture · Editor architecture · Performance budgets · Testing engines and technical products · Developer-facing products (APIs, SDKs, engines) · Platforms (multi-tenant, real-time) · Export targets (web, playable ads, mobile) · Roadmap pattern · Roles that carry extra weight
 
-Read when the idea is a **game engine or game framework**, an **editor/creation tool**, a **developer tool** (SDK, library, API, CLI, plugin), or a **platform** (multi-tenant SaaS, real-time collaboration, marketplace). These are always Large-tier projects. Everything else in the skill still applies; this file adds what these products specifically need.
+Read when the idea is a **game engine or game framework**, an **editor/creation tool**, a **developer tool** (SDK, library, API, CLI, plugin), or a **platform** (multi-tenant SaaS, real-time collaboration, marketplace). Building the engine, editor, SDK or platform itself is Large-tier; using an existing engine for a game or tool is not (see below). Everything else in the skill still applies; this file adds what these products specifically need.
+
+---
+
+## Working inside an existing engine project (Unity, Godot, Unreal)
+
+Size the task normally (`project-cases.md`); the engine does not make it Large.
+- Big binaries (art, audio, builds) in Git LFS; use the engine's own `.gitignore`.
+- Unity: commit the `.meta` files with their assets; never commit `Library/`, `Temp/` or `Logs/`.
+- Test with the engine's own framework (Unity Test Framework, GUT/GdUnit, Unreal Automation).
+- If an engine skill or MCP tool is installed, follow it for editor and engine steps.
 
 ---
 

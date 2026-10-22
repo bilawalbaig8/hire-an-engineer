@@ -4,6 +4,9 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.2.1] - 2026-10-22
+- Fixes from a full review of the skill: engine/dev-tool work is Large only when building the engine itself, with a new short section for working inside an existing Unity/Godot/Unreal project; Tiny minimum files listed once (`project-memory.md` §1); `roles.md` now matches the review, security and cost rules at every size and splits "PM" into product and project manager; Tiny work in progress goes on a `wip/` branch so main only gets passing work; gap-report CLI body carries the triage headings so labels apply; hosting and backup advice no longer overclaims free plans; build-usage estimates only on request or a budget tripwire; person-handover routed correctly; WCAG 2.2; secret scans never print the matched value. Validator no longer crashes on a Windows console.
+
 ### [0.2.0] - 2026-10-22
 - Thinking toolkit: one-way vs two-way doors, physics-or-convention, attacker's view for security, look-up/estimate/buffer for numbers, and a new debugging and performance section (check the real code, simplest first, competing hypotheses, find the bottleneck); router sends bugs with unclear causes, security, estimates and slowness there. Adapted from cc-thinking-skills.
 - New `engineering-principles.md` §10 Data and performance choices: real data size and 10× design, maps for lookups, no nested loops on large data, built-in sort/search, let the database filter/sort/paginate, structures by data shape (trees/graphs as rows), loops instead of deep recursion, cache with expiry, realistic-size tests; "10× data" question added to every code review.

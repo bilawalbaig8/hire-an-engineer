@@ -37,7 +37,7 @@ Decide per category: needed or not, which tool. List only what's needed.
 ## 3. How to choose
 
 - Their stated preferences and what they already use or pay for come first, unless clearly harmful (then say why).
-- Free tiers for v1; say when cost starts.
+- Free tiers for v1; say when cost starts. Free plans change and often exclude commercial use (e.g. Vercel Hobby), backups or always-on running, and may pause inactive projects: check the provider's current pricing page and terms against how the person will use it.
 - Popular, well-documented, few moving parts; one tool per job.
 - Check current availability and pricing with a quick search when it affects the decision.
 - Present a short table: Tool · Is ke liye · Kharcha · Pehle se hai? · Status — then confirm before setting up.

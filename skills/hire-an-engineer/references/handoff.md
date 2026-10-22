@@ -1,5 +1,7 @@
 # Handoff — switching tools and chat → coding agent
 
+Covers switching AI tools and chat → coding agent only. Handing a project to a person (developer, hire): `documents.md` §5 Handoff & maintenance, `workflow.md` Phase 9.
+
 Read when the person switches AI tools, or when a chat-only environment reaches the build stage.
 
 ## Switching tools

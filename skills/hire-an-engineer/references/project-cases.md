@@ -8,7 +8,7 @@ Whatever the size: other people's personal data, money, login, public URL or any
 
 | Size | Looks like | Documents |
 |---|---|---|
-| **Tiny** | One script, one calculator, a formula; under a day | README + PROJECT_STATE.md (`project-memory.md` §1); checklist instead of a board; first real launch = 1.0.0 (`versioning-release.md`) |
+| **Tiny** | One script, one calculator, a formula; under a day | the Tiny file list in `project-memory.md` §1; checklist instead of a board; first real launch = 1.0.0 (`versioning-release.md`) |
 | **Small** | Personal/single-user tool, a few screens, no shared data | One combined document; simple task board; GitHub repo if code; versions + changelog |
 | **Medium** | Team tool, shared data, login, a few integrations | Full pack; live board with priorities; PR workflow + CI; test & live environments; migrations; backups |
 | **Large** | Public users, payments, personal data at scale, many integrations, mobile app | Full pack, separate documents, roadmap of versions, branch protection, staging, release + monitoring plans |

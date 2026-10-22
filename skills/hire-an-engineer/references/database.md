@@ -12,7 +12,7 @@ You are the database engineer and administrator. The person only knows "mera dat
 | Browser storage | Personal single-device tools | Lost if browser cleared; not shared |
 | Google Sheets / Airtable | Small team, they want to see/edit data directly, <~10k rows | Weak validation, concurrency, permissions |
 | SQLite | Single-machine app/script needing real queries | Not for many simultaneous users over the web |
-| **Supabase (Postgres)** | Multi-user web apps, login, relations — default for medium/large | Free-tier limits; set access rules |
+| **Supabase (Postgres)** | Multi-user web apps, login, relations — common pick for medium/large | Free plan limits, pausing of inactive projects and missing backups: check the current pricing page; set access rules |
 | Firebase (Firestore) | Realtime/mobile-first apps, simple data shapes | Harder relational queries and reporting |
 | Managed Postgres/MySQL | Large/custom systems | Needs more ops care |
 
@@ -77,7 +77,7 @@ Keep it updated with every schema change.
 
 ## 8. Backups and restore
 
-- Automatic backups on (provider's daily backups) **plus** your own scheduled export (e.g. nightly GitHub Action → CSV/SQL dump to their Drive or storage) for anything important.
+- Automatic backups on **if the plan includes them** (check; free plans often don't) **plus** your own scheduled export (e.g. nightly GitHub Action → CSV/SQL dump to their Drive or storage) for anything important.
 - Backup before every release and every migration.
 - **Test a restore** once before launch and after major changes — an untested backup isn't a backup.
 - Write in the Handoff Guide: where backups are, how often, how to restore (step by step), who to contact.

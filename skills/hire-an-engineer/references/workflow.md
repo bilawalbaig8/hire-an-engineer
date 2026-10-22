@@ -22,7 +22,7 @@ UX/UI first: journeys → screens → wireframes → visual plan → clickable m
 Roadmap with versions, milestones (first = thinnest end-to-end core action), Gantt, risks, person-owned tasks; prioritised task board (`project-management.md`). Implementation plan in the technical layer; test plan per milestone (`engineering-discipline.md`, `engineering-principles.md`).
 
 ## Phase 6 — Build
-Board order; branch per task; PR + review; CI green (Small+; Tiny commits to main with tests); tests first for core logic; small commits; migrations for DB changes; screens to the approved mockup; checkpoint after every task/commit (`github.md`, `project-memory.md`). Keep moving; log rulings; stop only for approvals, risks, or changes to what they asked for.
+Board order; branch per task; PR + review; CI green (Small+; Tiny commits to main only when tests pass, work in progress on a `wip/` branch); tests first for core logic; small commits; migrations for DB changes; screens to the approved mockup; checkpoint after every task/commit (`github.md`, `project-memory.md`). Keep moving; log rulings; stop only for approvals, risks, or changes to what they asked for.
 
 ## Phase 7 — Verify & report
 Fresh checks with evidence ("12 mein se 12 pass"); a few checks for them on their device; test report, board, status (🟢/🟡/🔴, done, next, needed from you). Every milestone report ends with a 3–5 step "check it yourself" script for their device. Usability test with real users before others rely on it. Stuck or failing repeatedly → `getting-unstuck.md`.

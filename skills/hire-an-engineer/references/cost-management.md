@@ -31,7 +31,7 @@ When the software itself calls an AI model (chat, summaries, classification, gen
 
 ## 2. AI usage logging and audit
 
-Every AI call the product makes is logged (add this table to the database design):
+Every AI call the product makes is logged (add this table to the database design; for Tiny scripts a CSV or log file with the same fields is enough):
 
 | Field | Purpose |
 |---|---|
@@ -56,8 +56,8 @@ A table in the Tools & Setup Guide (or its own sheet), kept current:
 
 | Item | Provider / plan | Monthly cost now | Free-tier limit | When it starts costing | Owner | Billing link |
 |---|---|---|---|---|---|---|
-| Hosting | Vercel Hobby | 0 | … | … | Person | … |
-| Database | Supabase Free | 0 | … | … | Person | … |
+| Hosting | e.g. Vercel (Hobby is non-commercial only; check current terms) | 0 | … | … | Person | … |
+| Database | e.g. Supabase (free plan: check backups and pausing) | 0 | … | … | Person | … |
 | AI API | … | ~estimate | — | per use | Person | … |
 | Domain | … | yearly | — | — | Person | … |
 | Build usage (AI agents) | … | measured or "not visible here" | — | — | Person | — |
@@ -66,7 +66,7 @@ Check and update at every release. Before any change that adds cost (new service
 
 ## 4. Budgets and alerts
 
-- Agree a monthly budget with the person for running and AI costs, including your own build usage. Before each milestone give a one-line estimate of build usage where measurable (labelled estimate); give an actual only if the user shares it (some tools show usage to the user, e.g. a cost command; you usually can't read it: ask them to share it, otherwise estimate).
+- Agree a monthly budget with the person for running and AI costs, including your own build usage. Give a one-line build-usage estimate (labelled estimate) only when the user asks or a budget tripwire fires; record an actual only if the user shares it (some tools show usage to the user, e.g. a cost command; you usually can't read it: ask them to share it, otherwise estimate).
 - Set spending limits/alerts in every provider that supports them (AI API, hosting, database), at e.g. 50%, 80% and 100% of budget. Ask permission before changing billing settings; the person sets payment details themselves.
 - In the product: hard caps on AI usage per user/day; alert the person if daily AI cost exceeds a threshold.
 - Watch free-tier limits and warn before they're crossed.

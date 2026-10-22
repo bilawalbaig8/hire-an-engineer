@@ -4,6 +4,11 @@ import re, sys
 from pathlib import Path
 import yaml
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except (AttributeError, ValueError):
+    pass
+
 ROOT = Path(__file__).resolve().parent.parent
 errors = []
 

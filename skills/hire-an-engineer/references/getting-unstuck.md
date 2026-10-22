@@ -55,7 +55,7 @@ When the person brings a half-built AI-generated project that's stuck:
 
 **Rescue lane**
 - Symptom clear (won't start, an error)? Ask nothing first; reproduce it.
-- Before the first commit: `.gitignore` + scan for secret files (`.env`, credentials, keys, DB dumps) and key patterns. If git already exists, also check history (`git log --all --name-only` for `.env`/keys). If a secret was ever committed or shared, tell the person which keys to rotate.
+- Before the first commit: `.gitignore` + scan for secret files (`.env`, credentials, keys, DB dumps) and key patterns; report only file and line, never the matched value. If git already exists, also check history (`git log --all --name-only` for `.env`/keys). If a secret was ever committed or shared, tell the person which keys to rotate.
 - No git yet: `git init` and commit a snapshot "as received" before any change (local only, nothing leaves the machine).
 - Tiny project: fix in place; no restructure until it runs.
 - Ask before deleting, moving or rewriting files; never rebuild from scratch without their OK.
