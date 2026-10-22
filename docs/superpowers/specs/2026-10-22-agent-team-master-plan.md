@@ -40,7 +40,7 @@ Owner  ⇄  Orchestrator (boss)  ⇄  Specialist agents (one per role)
 - Every start, stop, handoff and written file is also appended as one line to `.agents/events.jsonl` (the event log). The visual office (Phase 7) only reads this log.
 - Small tasks use few roles; the boss may refuse to wake the whole house for a one-line change.
 
-## 4. Roles (31 = 30 specialists + boss). Core-12 first.
+## 4. Roles, first wave (31 = 30 specialists + boss). Core-12 first.
 
 | Group | Roles (★ = core 12) |
 |---|---|
@@ -54,6 +54,30 @@ Owner  ⇄  Orchestrator (boss)  ⇄  Specialist agents (one per role)
 | Infra and release | DevOps/Platform ★, SRE/Monitoring, Release Manager |
 | Docs and support | Technical Writer, Support/Feedback Analyst |
 | Growth | Analytics/Growth Analyst, ASO/SEO/Marketing |
+
+## 4b. Second wave: creative studio roles (owner request, 2026-10-22)
+
+The owner asked for roles beyond software engineering. A research pass (2026-10-22) proposed 36; after merges, 35 rows are added (66 roles in all, with the 31 above). Full list and status per role: `TASKS.md`. Summary:
+
+| Group | Roles |
+|---|---|
+| Art & creative | Creative Director*, Art Director*, Concept Artist, 2D Artist/Illustrator*, 3D Artist, Animator, VFX Artist, Technical Artist, Sound Designer, Video Editor*, Storyboard/Scriptwriter*, Art QA |
+| Game design | Game Designer*, Systems/Economy Designer*, Level Designer*, Live-Ops Manager, Playtest QA* |
+| Data & AI | Data Scientist*, BI Developer, Prompt/AI-Ops Engineer; modes: Data Analyst (of Analytics), AI Engineer (of AI/ML) |
+| Marketing | Ad Marketer*, Performance/UA Marketer*, Social/Community, Influencer/PR, Email/CRM |
+| Business | HR/Recruiter, Finance/FP&A, Legal/Contracts, Sales/Account Manager, Operations/Procurement, Localisation |
+| Web | Web Designer (mode of UX/UI), Web Developer (mode of Frontend) |
+
+\* = "wave 2 core": the 12 built first in the second wave. Next after them: Animator, 3D Artist, Technical Artist, Prompt/AI-Ops, Localisation.
+
+**Ownership rules (so agents never contradict each other):** every artifact has one named owner; others comment, never overwrite; the Orchestrator settles ties.
+- Creative Director owns concept and brand voice; Art Director owns the style guide and approves final art; Motion/Graphic executes inside it; UX/UI owns flows and layouts and may not invent brand style.
+- Data Engineer owns pipelines and data quality; Analytics owns metric definitions ("what happened"); Data Scientist owns models and causal questions and uses Analytics' metrics.
+- AI/ML Engineer has two modes: training/evaluation, and applied (integration, prompts in products). Prompt/AI-Ops owns shared prompt libraries and evals.
+- Frontend owns app code and the design system; Web Developer owns marketing and landing sites only.
+- Ad Marketer owns concepts and test plans; Performance Marketer owns channels, budgets and bids; Growth Analyst owns measurement and the verdict on a test.
+
+**Standing rule for all agents: draft, analyse, recommend. A named human performs every irreversible, financial, legal, personnel or public-facing action.** In particular: HR never decides hiring, firing, pay or promotion and never sends offers; Finance never moves money, approves payments or files anything; Legal never gives final advice or signs off; Performance Marketer proposes spend changes and a human approves live spend; PR, Social and Email draft and a human publishes or sends; Sales drafts pricing and a human commits it; Procurement prepares requests and a human orders and pays.
 
 ## 5. Phases (details and status in `TASKS.md`)
 
