@@ -51,18 +51,18 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 5 Remaining roles
 
-- [ ] 5.1 Group A Product: PM, Business Analyst, Researcher, Delivery Manager
-- [ ] 5.2 Group B Design: UX Researcher, UX/UI, Motion, Content writer
-- [ ] 5.3 Group C Engineering: Frontend, Backend, Mobile, Game, Integration, AI/ML, Data
-- [ ] 5.4 Group D Quality & security: QA, Reviewer, Performance, Accessibility, Security, Privacy
-- [ ] 5.5 Group E Release & ops: DevOps, SRE, Release Manager, Technical Writer, Support
-- [ ] 5.6 Group F Growth: Analytics, ASO/SEO/Marketing
-- [ ] 5.7 Wave 2 Art & creative: Creative Director, Art Director, Concept Artist, 2D Artist, 3D Artist, Animator, VFX, Technical Artist, Sound Designer, Video Editor, Storyboard/Scriptwriter, Art QA
-- [ ] 5.8 Wave 2 Game design: Game Designer, Level Designer, Systems/Economy Designer, Live-Ops Manager, Playtest QA
-- [ ] 5.9 Wave 2 Data & AI: Data Scientist, BI Developer, Prompt/AI-Ops (+ modes: Data Analyst, applied AI Engineer)
-- [ ] 5.10 Wave 2 Marketing: Ad Marketer, Performance/UA Marketer, Social/Community, Influencer/PR, Email/CRM
-- [ ] 5.11 Wave 2 Business (draft-only, human signs off): HR, Finance, Legal, Sales, Operations, Localisation
-- [ ] 5.12 Wave 2 Web modes: Web Designer (UX/UI mode), Web Developer (Frontend mode)
+- [?] 5.1 ON HOLD, owner will say which roles to build: Group A Product: PM, Business Analyst, Researcher, Delivery Manager
+- [?] 5.2 ON HOLD, owner will say which roles to build: Group B Design: UX Researcher, UX/UI, Motion, Content writer
+- [?] 5.3 ON HOLD, owner will say which roles to build: Group C Engineering: Frontend, Backend, Mobile, Game, Integration, AI/ML, Data
+- [?] 5.4 ON HOLD, owner will say which roles to build: Group D Quality & security: QA, Reviewer, Performance, Accessibility, Security, Privacy
+- [?] 5.5 ON HOLD, owner will say which roles to build: Group E Release & ops: DevOps, SRE, Release Manager, Technical Writer, Support
+- [?] 5.6 ON HOLD, owner will say which roles to build: Group F Growth: Analytics, ASO/SEO/Marketing
+- [?] 5.7 ON HOLD, owner will say which roles to build: Wave 2 Art & creative: Creative Director, Art Director, Concept Artist, 2D Artist, 3D Artist, Animator, VFX, Technical Artist, Sound Designer, Video Editor, Storyboard/Scriptwriter, Art QA
+- [?] 5.8 ON HOLD, owner will say which roles to build: Wave 2 Game design: Game Designer, Level Designer, Systems/Economy Designer, Live-Ops Manager, Playtest QA
+- [?] 5.9 ON HOLD, owner will say which roles to build: Wave 2 Data & AI: Data Scientist, BI Developer, Prompt/AI-Ops (+ modes: Data Analyst, applied AI Engineer)
+- [?] 5.10 ON HOLD, owner will say which roles to build: Wave 2 Marketing: Ad Marketer, Performance/UA Marketer, Social/Community, Influencer/PR, Email/CRM
+- [?] 5.11 ON HOLD, owner will say which roles to build: Wave 2 Business (draft-only, human signs off): HR, Finance, Legal, Sales, Operations, Localisation
+- [?] 5.12 ON HOLD, owner will say which roles to build: Wave 2 Web modes: Web Designer (UX/UI mode), Web Developer (Frontend mode)
 
 ## Phase 6 Integration
 
