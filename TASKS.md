@@ -47,8 +47,9 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 4.1 Orchestrator design spec written and approved by the owner; Claude Code docs checked (boss runs in the main session, claude --agent works, subagents can nest)
 - [x] 4.2 Built: skill (SKILL.md + 7 references), agents/orchestrator.md, roster.md + check_roster.py (tests first), 58 sources (57 verified); installed in ~/.claude with --only (10 files, identical to repo)
 - [x] 4.2b Roster check, agent validator, 125 tests pass; skill fixed after eval (run folder for every specialist run, boss never redoes a specialist check)
-- [~] 4.3 Evals (12 cases, local): 9 pass (tiny, small-review, unknown-role, question batching, design-then-review, injection, resume-run, refused-launch, specialist-blocked); approval-gate, conflicting-advice, cap-reached are inconclusive and need a rerun with real project files
-- [ ] 4.4 CHANGELOG entries for code-reviewer and orchestrator (todo); release orchestrator 0.1.0 only when the owner says
+- [x] 4.3 Evals: all 12 cases pass (headless, stub and real specialists); fixes made along the way: run folder for every run, no self-checking, real UTC timestamps, event log always written, roster models, who reviews designs. Complex end-to-end test on the shop code with the real team passed (7 specialist calls, ADR written and reviewed 3 times)
+- [x] 4.4 CHANGELOG entries for code-reviewer and orchestrator (done)
+- [?] 4.5 Release orchestrator 0.1.0 (only when the owner says; nothing is released now)
 
 ## Phase 5 Remaining roles
 
@@ -75,9 +76,9 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 ## Phase 7 Visual office
 
 - [x] 7.1 Design final: mock v2 (docs/agents/visual-office/mock-v2.html) approved by the owner on 2026-10-23 (all three themes and layouts stay switchable; no more mocks). Implement and test this; new roles are added to the office as they are built
-- [~] 7.2 Written implementation spec from mock v2 (event to scene mapping, local server, hook that opens the window, answer channel from window to session, role registry fed by docs/agents/roster.md) - in progress
-- [ ] 7.3 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
-- [ ] 7.4 Working UI built from the approved design (office view, timeline, files panel, approvals inbox)
+- [x] 7.2 Implementation spec written: docs/agents/visual-office/event-mapping.md (event to scene mapping, new boss events, role registry, test plan) and research-channel.md (window to session channel options)
+- [~] 7.3 Event pipeline: local server done (scripts/office_server.py, 24 tests: /events, /roster, /state, /answer); new boss events in the contract and boss in progress; hook launcher in progress
+- [~] 7.4 Live UI from mock v2 (docs/agents/visual-office/index.html) in progress
 - [ ] 7.5 Boss opens the office automatically when a team run starts; owner answers approvals inside it
 - [ ] 7.6 Test with a real problem: give the boss a task, specialists work, check the result is correct
 - [ ] 7.7 Check the office tells the truth: replay the events and compare with what really happened; fix mismatches
