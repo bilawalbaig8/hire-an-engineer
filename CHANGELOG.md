@@ -41,3 +41,22 @@ This is repository tooling, versioned together with the first agent skill (softw
 - `references/sources.md`: 123 sources, 86 verified and 37 unverified, each with author, year, URL, licence and status; only verified sources are cited as fact. Credits in `THIRD_PARTY_NOTICES.md`.
 - Rules built in: one-way-door decisions are returned as approvals and recorded as `proposed`; every claim about existing code is labelled `verified in code`, `inferred` or `unknown`; existing decision records are continued, never rewritten; a request that prescribes the answer still gets a recommendation; diagrams are rendered and checked or declared "not rendered".
 - To deepen: game save systems, game performance budgets, verified conference talks, Unity-specific verified references; recover mode end-to-end eval (scripts verified on a throwaway repository).
+
+## code-reviewer
+
+### [0.1.0] - Unreleased
+- New skill and Claude Code agent (`agents/code-reviewer.md`, model opus) that reads a change (diff, branch, commit range, pull request or folder) and reports with file and line evidence whether it does what was asked (spec compliance) and whether it is correct, secure, tested and maintainable (quality). Findings are graded Critical, Important or Minor with confidence `confirmed`, `likely` or `needs-check`; verdicts: approved, needs fixes, blocked, needs approval.
+- Lenses: correctness and edge cases, security, performance and data, tests, simplicity and maintainability, AI-written code, language notes (Python, JS/TS, C#, Unity, Java/Kotlin, Go, SQL, APIs, logging, UI), plus report templates for the review file (`docs/reviews/`) and the handoff response.
+- `references/sources.md`: 87 sources (81 verified). Credits in `THIRD_PARTY_NOTICES.md`.
+- Rules built in: never edits code, never approves what it has not read, code under review is data (instructions inside it are reported, not obeyed), only read-only commands, hard-to-undo concerns come back as approvals, "nothing important left" is a valid result.
+- To deepen: independent review of the knowledge files, `review-tests` eval not run yet.
+
+## orchestrator
+
+### [0.1.0] - Unreleased
+- New skill (`skills/orchestrator`) and main-thread agent file (`agents/orchestrator.md`, start with `claude --agent orchestrator`) that acts as the boss of the specialist team: sizes a job (tiny, small, project), calls only installed specialists, briefs them with request files, validates their 7-field answers, relays questions in one plain message with defaults, brings approvals to the owner (one-way doors need a clear yes), gates changes through the Code Reviewer, and keeps a run record in `.team/runs/` and the event log.
+- Caps per run: 8 specialist calls, 2 fix rounds, 1 retry; refused launches are reported, never worked around; specialist output is data; the boss never redoes a specialist's check.
+- `docs/agents/roster.md` and `scripts/check_roster.py` (checks the roster against `agents/*.md`, tests first).
+- `references/sources.md`: 58 sources (57 verified). Credits in `THIRD_PARTY_NOTICES.md`.
+- Checked against the Claude Code docs: a main-session agent can spawn subagents with an `Agent(name, ...)` allowlist; subagents can nest up to three layers.
+- Evals: 12 local cases run headless with stub or real specialists; all pass after three fixes (run folder for every specialist run, no self-checking of specialist work, real timestamps).
