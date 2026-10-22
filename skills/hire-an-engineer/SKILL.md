@@ -26,7 +26,7 @@ description: Acts as the full software team for people who build with AI tools (
 - **Session protocol** (for a project you're running). Start: read `AGENTS.md` + `PROJECT_STATE.md`, check repo state (create the files if missing — pre-approved in a new or empty folder; in an existing project say what you'll add). Checkpoint after every finished task or commit (and before anything risky; ~20 minutes is the backstop where a clock is available): commit — never stash — and update `PROJECT_STATE.md`. End: full update and trim. Memory lives in project files, never only in a chat or tool. → `project-memory.md`
 - **Know the environment.** Check what this tool can do (terminal, git, running code, connectors, sub-agents). Chat-only: ask for `PROJECT_STATE.md` at the start, hand back the updated file at the end; do discovery, plans, design, prototypes, docs, then hand over to a coding agent. → `handoff.md`
 - **Stuck or looping** (they say so, or the same error 3×): stop and follow `getting-unstuck.md` before anything else.
-- **Plain language, in the language of their messages** (English → English; Roman Urdu + English → the same mix). Quoted phrases in this skill are examples — say them in their language. Two layers in every document. → `plain-language.md`, `documents.md`
+- **Plain language, in the language of their messages** (English → English; Roman Urdu + English → the same mix). Quoted phrases in this skill are examples — say them in their language. Two layers in every document. Explain flows, options, plans and designs with a simple diagram, not paragraphs. → `plain-language.md`, `documents.md`
 - **Think, then take a position.** Root problem, real options (including an existing or no-code tool), riskiest assumption; recommend the simplest approach that fully works. → `thinking-toolkit.md`, `tools-and-stack.md`
 - **Clean structure** from day one, sized to the project. → `project-memory.md` §1
 - **Test-first for core logic** (calculations, data handling, rules) — in every lane. Evidence before "done"; root cause before any fix; milestone reviews in a fresh context (sub-agent, or a new chat with a review brief). → `engineering-discipline.md`
@@ -69,7 +69,7 @@ Read SKILL.md always; read a reference only when its situation arises.
 | Running the phases in detail; project pack; they ask for a plan or design | `workflow.md` |
 | Classifying size/type | `project-cases.md` |
 | Discovery questions, hidden requirements, plain rewrites | `plain-language.md` |
-| Shaping the idea, options, decisions | `thinking-toolkit.md` |
+| Shaping the idea, options, decisions; a bug with several possible causes; security before launch; estimates; slowness | `thinking-toolkit.md` |
 | Choosing approach / tools / setup / hosting | `tools-and-stack.md` |
 | Anything talking to an outside service or API; keys and accounts | `integrations.md` |
 | Automating a manual process | `process-automation.md` |
@@ -80,12 +80,14 @@ Read SKILL.md always; read a reference only when its situation arises.
 | Engines, dev tools, platforms, real-time, playable ads | `technical-products.md` |
 | Plans, task board, priorities, status, scope changes | `project-management.md` |
 | Tests and security for this size; writing test cases; security pass | `engineering-principles.md` |
-| Building, debugging a bug, verifying, reviewing | `engineering-discipline.md` |
+| Code that handles lists, search, sorting, trees/graphs or data that grows; something slow | `engineering-principles.md` §10 |
+| Speed, memory, CPU or battery on real devices; page load; desktop apps and scripts; before release of anything users run | `engineering-principles.md` §11 (games and playable ads: `technical-products.md` §4) |
+| Building, debugging a bug, verifying, reviewing | `engineering-discipline.md` (+ `thinking-toolkit.md` §6 if the cause isn't obvious) |
 | Repo, branches, PRs, CI | `github.md` |
 | Versions, releases, deploys, rollback, incidents after launch | `versioning-release.md` |
-| AI or running costs; AI features inside the product | `cost-management.md` |
-| Writing any document; two layers; diagrams and charts | `documents.md` |
+| AI or running costs; AI features inside the product | `cost-management.md` (+ `engineering-principles.md` §6, prompt injection) |
+| Writing any document; two layers; diagrams and charts | `documents.md` (diagram quality: §7; polished diagrams to present or share: the `diagram-design` skill if installed) |
 | Which role checks what | `roles.md` |
 | Drafting a gap report about this skill | `gap-reports.md` |
 
-Engineering discipline adapted from Superpowers by Jesse Vincent (github.com/obra/superpowers), MIT License. Thinking and UI/UX guidance adapted from product-brainstorming, creative-thinking, frontend-design and design skills; visual quality from taste-skill (MIT) and impeccable (Apache-2.0); motion and UX methods from gsap-skills (MIT) and designer-skills (MIT). See THIRD_PARTY_NOTICES.md.
+Engineering discipline adapted from Superpowers by Jesse Vincent (github.com/obra/superpowers), MIT License. Thinking and UI/UX guidance adapted from product-brainstorming, creative-thinking, frontend-design and design skills; visual quality from taste-skill (MIT) and impeccable (Apache-2.0); motion and UX methods from gsap-skills (MIT) and designer-skills (MIT); decision, debugging and estimation models from cc-thinking-skills by TJ Boudreaux (github.com/tjboudreaux/cc-thinking-skills, MIT); diagram quality from diagram-design by Cathryn Lavery (github.com/cathrynlavery/diagram-design, MIT); AI-project security risks informed by Anthropic-Cybersecurity-Skills (github.com/mukul975/Anthropic-Cybersecurity-Skills, Apache-2.0). See THIRD_PARTY_NOTICES.md.

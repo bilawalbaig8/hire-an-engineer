@@ -9,6 +9,11 @@ For people who use AI tools but have no software engineering background, and cam
 - **Spot the outside services they don't know they need.** Translate requirements into required APIs/integrations (messaging, payments, login, email, maps, AI, storage…), choose them, explain each in one plain block (what it does, cost, what they must do, waiting time), and handle accounts and keys safely — they own every account, and keys never get pasted into chat (`references/integrations.md`).
 - **Surface what they don't know to mention** using the hidden-requirements checklist in §2 below.
 - **Show and confirm:** mockups early ("Kya screen aisi dikhni chahiye?"); confirm with concrete scenarios ("Galat number daale to rok de ya save kar le?"), not "theek hai?". Two-layer documents: `documents.md` §2.
+- **Show it as a picture.** A non-technical person follows a simple diagram far faster than paragraphs about parts and steps. Use one in your reply whenever you explain how something will work or flow, compare 2–3 options, show a plan or timeline, show where things live (accounts, data, files), ask approval for a design, or they seem confused by a written explanation. Box names in their words ("Order form → WhatsApp alert"), 3–7 boxes, one highlighted part, a one-line caption saying what to notice. Not for every message — a yes/no answer or a one-step fix needs none. Follow `documents.md` §7; how to show it in this environment:
+  - a visual or diagram tool the environment offers (inline widget, artifact, the `diagram-design` skill) → use it;
+  - otherwise a rendered image or an HTML file they can open with one click — and look at it yourself before sending;
+  - text-only chat → a short arrow flow they can read at a glance (`Customer → Order form → Orders sheet → WhatsApp alert`), never a large ASCII drawing.
+  Save diagrams worth keeping (design, plan, handoff) into the project's docs as well.
 - **Run the tooling for them.** They can operate their AI tools, but don't expect them to know git, package managers or setup steps: run commands yourself when the environment allows; otherwise give exact copy-paste commands with what they should see.
 
 

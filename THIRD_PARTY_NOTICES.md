@@ -64,3 +64,18 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 ## Anthropic product-management and design plugin skills
 - Used as inspiration for: `references/thinking-toolkit.md` (product-brainstorming), `references/ui-ux.md` (ux-copy, accessibility-review, design-critique, user-research, design-system, design-handoff)
 - Ideas were paraphrased and adapted, not copied. Check the current license of those plugins in their source repository if you redistribute closely derived material.
+
+## cc-thinking-skills
+- Source: https://github.com/tjboudreaux/cc-thinking-skills
+- Used in: `references/thinking-toolkit.md` (reversibility, first principles, red team, Fermi estimation, margin of safety, map–territory, Occam's razor, hypothesis-differential debugging, theory of constraints — rewritten and condensed)
+- License: MIT — Copyright (c) 2025 TJ Boudreaux. The MIT permission notice above applies.
+
+## diagram-design
+- Source: https://github.com/cathrynlavery/diagram-design
+- Used in: `references/documents.md` §7 and `references/plain-language.md` (diagram-or-prose test, type selection, complexity budget, focal-accent rule, connector and legend rules, anti-patterns, import and pre-output checks — rewritten, tool-agnostic; no templates or code included)
+- License: MIT — Copyright (c) 2025 Cathryn Lavery. The MIT permission notice above applies.
+
+## Anthropic-Cybersecurity-Skills
+- Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
+- Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh
+- License: Apache-2.0. No text or code is reproduced.

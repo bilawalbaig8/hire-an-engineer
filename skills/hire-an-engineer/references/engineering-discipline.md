@@ -68,7 +68,7 @@ If you can't run something yourself (no code environment, runs on their device),
 ## 6. Review before the person sees it
 
 - At the end of every milestone, review the work against the brief and design as if seeing it for the first time. Milestone reviews run in a fresh context: a sub-agent given only the brief + diff, or in chat tools a new chat with a prepared review brief. Label self-reviews as such.
-- Review for: missing requirements, bugs and edge cases, security/privacy issues, leftover debug code, hardcoded secrets, needless complexity.
+- Review for: missing requirements, bugs and edge cases, security/privacy issues, leftover debug code, hardcoded secrets, needless complexity, and what happens when the data is 10× bigger (`engineering-principles.md` §10).
 - Fix important issues before showing the milestone.
 - When receiving feedback (from the person, a reviewer or a developer they hire): understand it, check it against reality, then act — or push back with a reason if it's wrong for this project. No blind agreement, no "great point!" — just do the right thing and say what changed.
 

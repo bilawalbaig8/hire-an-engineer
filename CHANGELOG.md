@@ -4,6 +4,13 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.2.0] - Unreleased
+- Thinking toolkit: one-way vs two-way doors, physics-or-convention, attacker's view for security, look-up/estimate/buffer for numbers, and a new debugging and performance section (check the real code, simplest first, competing hypotheses, find the bottleneck); router sends bugs with unclear causes, security, estimates and slowness there. Adapted from cc-thinking-skills.
+- New `engineering-principles.md` §10 Data and performance choices: real data size and 10× design, maps for lookups, no nested loops on large data, built-in sort/search, let the database filter/sort/paginate, structures by data shape (trees/graphs as rows), loops instead of deep recursion, cache with expiry, realistic-size tests; "10× data" question added to every code review.
+- New `engineering-principles.md` §11 Runtime performance: browser, devices, OS: budgets (LCP, INP, CLS, memory, idle CPU) measured on weak devices; browser rules (images, JS, fonts, workers, network, long lists, memory leaks, device matrix) and OS/desktop/script rules (streaming, non-blocking work, idle, cleanup, cross-platform paths, concurrency).
+- Security: risks specific to AI-built projects in §6 — prompt injection in AI features, checking new packages before install (hallucinated/typosquatted names), local pre-commit secret checks and leaked-key handling.
+- Diagrams: new `documents.md` §7 Diagram quality (draw only when it beats words, type by content, ≤9 boxes/≤12 arrows, 1–2 highlights, clean connectors, no generic AI look, captions, phone-readable, redraw rules, pre-show check); Mermaid stays the editable source, a dedicated diagram skill (e.g. diagram-design) for diagrams to present. `plain-language.md` and SKILL.md: explain flows, options, plans and designs to the person with a simple diagram in the reply, with fallbacks per environment. Adapted from diagram-design.
+
 ### [0.1.0] - 2026-10-21
 - First public release: full-team workflow, project memory (AGENTS.md, PROJECT_STATE.md, ~20-min checkpoints), getting-unstuck protocol, UI/UX, database, integrations, process automation, technical products, cost tracking, router-based SKILL.md.
 - Tuned from a pre-release evaluation (5 test cases): doesn't take over routine or one-off questions; replies in the language of the person's messages; first-reply recipe (size guess picks the lane, show something visible with the questions, deliver requested plans/tests first); minimum files per size with templates in `templates.md`; rescue lane for stuck projects; lighter discovery for single-step automations; privacy prompts for personal financial/health data.
