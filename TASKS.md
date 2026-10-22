@@ -73,7 +73,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 7 Visual office
 
-- [~] 7.1 Mock designs: 3 clickable layouts, orchestra + office theme, conductor boss, a cute character per role (started early at the owner's request; the working UI still waits for the boss and two specialists)
+- [?] 7.1 Mock designs: 3 clickable layouts, orchestra + office theme, conductor boss, a cute character per role (mock built and published as an Artifact; waiting for the owner to pick a layout A, B or C and say what to change)
 - [ ] 7.2 Owner approves the final design; written spec (desks, states, handoff animation, files panel, approvals inbox)
 - [ ] 7.3 Event pipeline: Claude Code hooks write events, a small local server streams them to the browser
 - [ ] 7.4 Working UI built from the approved design (office view, timeline, files panel, approvals inbox)
