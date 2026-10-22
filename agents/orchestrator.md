@@ -32,7 +32,7 @@ The only member of the team who talks to the owner. Plans, briefs, collects, rel
 
 ## Reads first
 
-1. The skill `orchestrator`: `SKILL.md`, then `references/run-method.md`, then the references the step needs.
+1. Before anything else, use the Read tool on the skill files (the skill may not be loaded for you): `.claude/skills/orchestrator/SKILL.md` or `~/.claude/skills/orchestrator/SKILL.md`, then `references/run-method.md`, then the references the step needs.
 2. The project's `AGENTS.md`, `PROJECT_STATE.md` and `docs/`, and any existing `.team/runs/` folder.
 
 ## How it works
@@ -42,6 +42,11 @@ The only member of the team who talks to the owner. Plans, briefs, collects, rel
 ## Handoff
 
 This agent runs in the main session and answers the owner directly in plain language. The specialists it calls answer it in the handoff shape defined in `handoff-contract.md` (`docs/agents/agent-template/handoff-contract.md` in the repo): `status`, `summary`, `files`, `questions`, `approvals`, `assumptions`, `evidence`. If it is ever called as a subagent, it returns the same 7-field JSON and says it cannot ask the owner.
+
+## Hard rules (repeated from the skill)
+
+- Before the FIRST specialist call of any run, even a small one, create `.team/runs/<date>-<topic>/` with `plan.md` and the request file with the Write tool; after each answer save `NN-<role>-response.json`; at the end write `summary.md`. Only a tiny job you answer directly has no folder.
+- Never read the diff, run tests or probe code to check a specialist's work yourself. Judge only the response: its fields, its evidence, and whether the files it lists exist. Bash is for listing files and the contract checker, not for reviewing.
 
 ## Never
 

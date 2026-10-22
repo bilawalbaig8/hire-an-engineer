@@ -14,6 +14,7 @@ The eight steps of every run. Skip steps a tiny or small job does not need, but 
 - Say the team size qualitatively (one, a few, several specialists) and call it an estimate. No cost nagging otherwise.
 
 ## 3. Brief and dispatch
+- Before the first call of any run, create the run folder (see `run-records.md`), even for a small job.
 - Write one request file per step (see `briefing.md`) and call the specialist by name through the Agent tool with the model from the roster. Pass the file path, not pasted content.
 - Parallel steps only when they touch different folders. Otherwise run one after the other.
 - Append a `handoff` event (boss to specialist) to the event log.
