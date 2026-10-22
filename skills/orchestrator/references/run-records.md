@@ -22,7 +22,7 @@ Append one JSON line per event to `.agents/events.jsonl` (never edit old lines):
 ```
 - You write `handoff` (boss to specialist, and back), `approval_requested`, `approval_given`.
 - The hook writes `agent_start`, `agent_stop`, `file_written`. Specialists write nothing.
-- `ts` is UTC ISO 8601 ending in Z. If the project has `scripts/agent_contract.py`, use `append_event` or run `check-event`.
+- `ts` is the real current UTC time, ISO 8601 ending in Z: get it with `date -u +%Y-%m-%dT%H:%M:%SZ` (Bash) for every line; never invent or round timestamps. If the project has `scripts/agent_contract.py`, use `append_event` or run `check-event`.
 - Never log a secret.
 
 ## Resuming
