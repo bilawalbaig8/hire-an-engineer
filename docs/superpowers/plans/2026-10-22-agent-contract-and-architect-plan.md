@@ -39,7 +39,7 @@
 ### Task 1: Handoff contract and validator
 
 **Files:**
-- Create: `scripts/agent_contract.py`, `tests/test_agent_contract.py`, `templates/agent-template/handoff-contract.md`
+- Create: `scripts/agent_contract.py`, `tests/test_agent_contract.py`, `docs/agents/agent-template/handoff-contract.md`
 
 **Interfaces:**
 - Produces: `RESPONSE_STATUSES = ("done", "needs_answers", "needs_approval", "blocked")`; `EVENT_TYPES = ("agent_start", "agent_stop", "handoff", "file_written", "approval_requested", "approval_given")`; `validate_request(obj: dict) -> list[str]`; `validate_response(obj: dict) -> list[str]`; `validate_event(obj: dict) -> list[str]`; `append_event(path: Path, event: dict) -> None` (raises `ValueError` listing errors, creates parent folders, appends one JSON line). Each validate function returns a list of error strings, empty when valid.
@@ -50,9 +50,9 @@
 - [ ] **Step 1: Write failing tests** in `tests/test_agent_contract.py`: `test_valid_response_done_has_no_errors`; `test_done_without_evidence_is_error`; `test_needs_answers_requires_questions`; `test_needs_approval_requires_approvals`; `test_unknown_status_is_error`; `test_request_requires_goal_and_done_when`; `test_event_file_written_requires_path`; `test_handoff_requires_from_and_to`; `test_append_event_writes_one_line_and_rejects_invalid` (invalid event leaves the file unchanged).
 - [ ] **Step 2: Run** `pytest tests/test_agent_contract.py -q`. Expected: FAIL (module missing).
 - [ ] **Step 3: Implement** `scripts/agent_contract.py` with the signatures above plus a CLI `python scripts/agent_contract.py check-request|check-response|check-event FILE` (exit 1 and print errors if invalid). Hand-written checks, no new dependency.
-- [ ] **Step 4: Write `templates/agent-template/handoff-contract.md`**: plain-language contract: who talks to the owner (boss only), request, response, how questions and approvals flow, what counts as `evidence`, the event log line and its path `.agents/events.jsonl`, one worked example each (valid request, `needs_answers` response, `needs_approval` response, event lines). Examples must pass the CLI.
+- [ ] **Step 4: Write `docs/agents/agent-template/handoff-contract.md`**: plain-language contract: who talks to the owner (boss only), request, response, how questions and approvals flow, what counts as `evidence`, the event log line and its path `.agents/events.jsonl`, one worked example each (valid request, `needs_answers` response, `needs_approval` response, event lines). Examples must pass the CLI.
 - [ ] **Step 5: Run** `pytest tests/test_agent_contract.py -q` (PASS) and the CLI on the three examples saved to a temp folder (exit 0).
-- [ ] **Step 6: Commit** `git add scripts/agent_contract.py tests/test_agent_contract.py templates/agent-template/handoff-contract.md` then `git commit -m "feat: handoff contract and validator"`.
+- [ ] **Step 6: Commit** `git add scripts/agent_contract.py tests/test_agent_contract.py docs/agents/agent-template/handoff-contract.md` then `git commit -m "feat: handoff contract and validator"`.
 
 ### Task 2: Agent file validator
 
@@ -105,17 +105,17 @@
 ### Task 5: Event log hook
 
 **Files:**
-- Create: `scripts/log_event.py`, `tests/test_log_event.py`, `templates/agent-template/hooks-snippet.json`
+- Create: `scripts/log_event.py`, `tests/test_log_event.py`, `docs/agents/agent-template/hooks-snippet.json`
 
 **Interfaces:**
 - Consumes: `append_event`, `validate_event` (Task 1).
 - Produces: `event_from_hook(payload: dict) -> dict | None` maps a Claude Code hook payload to one event (`SubagentStart` to `agent_start`, `SubagentStop` to `agent_stop`, `PostToolUse` of Write/Edit to `file_written`); returns `None` for everything else. CLI reads the hook JSON from stdin and appends to `.agents/events.jsonl` in the project folder; never fails the host (exit 0 always, errors to stderr).
 
-- [ ] **Step 1: Check the real hook payload first.** Use a `claude-code-guide` lookup (or the Claude Code hooks documentation) for the exact field names of `SubagentStart`, `SubagentStop` and `PostToolUse` payloads; record them in `templates/agent-template/handoff-contract.md` under "Event sources". Do not guess field names.
+- [ ] **Step 1: Check the real hook payload first.** Use a `claude-code-guide` lookup (or the Claude Code hooks documentation) for the exact field names of `SubagentStart`, `SubagentStop` and `PostToolUse` payloads; record them in `docs/agents/agent-template/handoff-contract.md` under "Event sources". Do not guess field names.
 - [ ] **Step 2: Write failing tests** using payload dicts built from Step 1: `test_subagent_start_maps_to_agent_start`; `test_subagent_stop_maps_to_agent_stop`; `test_write_tool_maps_to_file_written_with_relative_path`; `test_other_events_return_none`; `test_cli_never_raises_on_garbage_stdin`.
 - [ ] **Step 3: Run** `pytest tests/test_log_event.py -q`. Expected: FAIL.
 - [ ] **Step 4: Implement** `scripts/log_event.py`; `run_id` is the hook's session id.
-- [ ] **Step 5: Write** `templates/agent-template/hooks-snippet.json` (the `hooks` block to merge into a project's `.claude/settings.json` that calls the script), and verify by a manual run: pipe one sample payload into the script and confirm one valid line appears (check with `agent_contract.py check-event`).
+- [ ] **Step 5: Write** `docs/agents/agent-template/hooks-snippet.json` (the `hooks` block to merge into a project's `.claude/settings.json` that calls the script), and verify by a manual run: pipe one sample payload into the script and confirm one valid line appears (check with `agent_contract.py check-event`).
 - [ ] **Step 6: Run** tests (PASS). **Commit** with `feat: event log hook for the visual office`.
 
 ### Task 6: Sources checker and eval checker
@@ -136,7 +136,7 @@
 ### Task 7: Agent template and doc pass for Part 1
 
 **Files:**
-- Create: `templates/agent-template/agent.md`, `templates/agent-template/skill/SKILL.md`, `templates/agent-template/skill/references/example.md`, `templates/agent-template/README.md`
+- Create: `docs/agents/agent-template/agent.md`, `docs/agents/agent-template/skill/SKILL.md`, `docs/agents/agent-template/skill/references/example.md`, `docs/agents/agent-template/README.md`
 - Modify: `CHANGELOG.md`, `TASKS.md`, `AGENTS.md` (add "Agents" lines: folder map entry for `agents/`, the contract path)
 
 **Interfaces:**

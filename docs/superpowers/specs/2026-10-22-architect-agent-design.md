@@ -136,7 +136,7 @@ File sizes and exact wording; exact ordering of references; exact CLI invocation
 7. **0.1.0 scope:** core files plus all field references, each at a depth the verified sources support; the thinnest fields are marked "starter" and deepened in later versions.
 8. **One decision-record series:** the Architect uses `docs/decisions/NNNN-*.md`, the same series `hire-an-engineer` already writes, and continues an existing series in Recover mode. Only the overview, diagrams, risks and scenarios go in `docs/architecture/`. No migration note needed.
 9. **Rendering and installs:** follow `hire-an-engineer`'s rule: ask before installing anything. Baseline is **Mermaid** (renders on GitHub, needs no install to be read). LikeC4/Structurizr/D2 only if the tool is already present or the owner approves installing it. If nothing can be rendered, the agent gives the diagram source, says it was not rendered, and does not claim it was checked.
-10. **Reuse for later roles:** a `templates/agent-template/` (agent file + skill-shaped folder with the standard sections) is built now alongside the Architect. No generator yet. Shared material stays inside `software-architect` until a second role needs it, then moves.
+10. **Reuse for later roles:** a `docs/agents/agent-template/` (agent file + skill-shaped folder with the standard sections) is built now alongside the Architect. No generator yet. Shared material stays inside `software-architect` until a second role needs it, then moves.
 
 ## 11c. Owner decision: orchestrator ("boss") agent (2026-10-22)
 
@@ -144,11 +144,11 @@ The owner decided there will be an **Orchestrator** that gives every specialist 
 - The Orchestrator is the **only agent that talks to the owner**. Specialists (Architect first) do their part and return a result. If a specialist needs an answer from the owner, it returns its questions to the Orchestrator, which asks the owner and resumes the specialist with the answer. The same applies to approvals of one-way-door decisions.
 - The Architect is therefore built as a **specialist that works under a boss**: its Design mode is split into "return questions" → "receive answers" → "produce artifacts and return decisions needing approval". Its skill folder still works standalone, so until the Orchestrator exists the main session plays the boss.
 - The Orchestrator is a **separate, later design** (its own document and branch step): task splitting, who does what, handoff format, project memory shared between agents, approval gates, model per role. It is not built in this change. Order: Architect first (this document), then Orchestrator, then the other roles.
-- The handoff format between boss and specialist (what goes in, what comes back: result, questions, decisions needing approval, assumptions, files written) is defined in `templates/agent-template/` so the Orchestrator can be written against it.
+- The handoff format between boss and specialist (what goes in, what comes back: result, questions, decisions needing approval, assumptions, files written) is defined in `docs/agents/agent-template/` so the Orchestrator can be written against it.
 
 ## 11d. Order of work and distribution (2026-10-22)
 
-- **Order:** (1) handoff contract in `templates/agent-template/`, (2) Architect, (3) a second core specialist (Reviewer or QA) so the contract is tested on two agents, (4) Orchestrator, built against those two, (5) remaining roles in groups of 3–4.
+- **Order:** (1) handoff contract in `docs/agents/agent-template/`, (2) Architect, (3) a second core specialist (Reviewer or QA) so the contract is tested on two agents, (4) Orchestrator, built against those two, (5) remaining roles in groups of 3–4.
 - **Distribution (owner left it to me):** copy-install first. `agents/*.md` plus an install script and `docs/INSTALL.md` section that copies them (and the skill folder) to `~/.claude/agents/` and `~/.claude/skills/`. A Claude Code plugin bundle is considered later, when there are enough roles.
 
 ## 12. Calls made without the owner (please check)

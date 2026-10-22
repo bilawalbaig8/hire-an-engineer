@@ -82,7 +82,7 @@ The owner asked for roles beyond software engineering. A research pass (2026-10-
 ## 5. Phases (details and status in `TASKS.md`)
 
 - **Phase 0 — Plan and spec:** this plan, the Architect design, task list, owner approval.
-- **Phase 1 — Contract and template:** handoff contract, `templates/agent-template/`, validator/packager support for `agents/`, install script, eval pattern for agents.
+- **Phase 1 — Contract and template:** handoff contract, `docs/agents/agent-template/`, validator/packager support for `agents/`, install script, eval pattern for agents.
 - **Phase 2 — Architect:** research written into `sources.md`, knowledge files for every field, two modes (Design, Recover/Review), diagrams, evals, release `software-architect` 0.1.0.
 - **Phase 3 — Second specialist (Reviewer or QA):** proves the contract on two agents.
 - **Phase 4 — Orchestrator:** own design doc, built and tested against the first two specialists.
