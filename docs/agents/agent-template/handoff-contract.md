@@ -141,3 +141,19 @@ python scripts/agent_contract.py check-event event.json
 ```
 
 Exit code 0 means valid. Exit code 1 prints what is wrong.
+
+## Event sources
+
+The event log (`.agents/events.jsonl`) is filled by a Claude Code hook that runs `scripts/log_event.py`.
+Field names below were read from the official hooks reference, https://code.claude.com/docs/en/hooks (checked 2026-10-22). The hook sends one JSON object on stdin.
+
+Common fields, all events: `session_id`, `transcript_path`, `cwd`, `hook_event_name`. Inside a subagent also `agent_id` and `agent_type`. The environment variable `CLAUDE_PROJECT_DIR` is the project root.
+
+| Hook event | Extra fields used | Becomes event |
+|---|---|---|
+| `SubagentStart` | `agent_id`, `agent_type` | `agent_start`, `agent` = `agent_type` |
+| `SubagentStop` | `agent_id`, `agent_type`, `agent_transcript_path`, `last_assistant_message`, `stop_hook_active` | `agent_stop`, `agent` = `agent_type` |
+| `PostToolUse` with `tool_name` `Write` or `Edit` | `tool_input.file_path` (absolute path), `tool_response`; Write also `tool_input.content`, Edit also `old_string`, `new_string`, `replace_all` | `file_written`, `path` = file path relative to the project |
+
+`run_id` is the hook's `session_id`. For `file_written`, `agent` is `agent_type` when present, otherwise `main`.
+Everything else is ignored. Not confirmed in the docs: any field beyond those listed; the script uses none.

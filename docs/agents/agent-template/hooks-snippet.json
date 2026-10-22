@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python \"${CLAUDE_PROJECT_DIR}/scripts/log_event.py\"" }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python \"${CLAUDE_PROJECT_DIR}/scripts/log_event.py\"" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": "python \"${CLAUDE_PROJECT_DIR}/scripts/log_event.py\"" }
+        ]
+      }
+    ]
+  }
+}
