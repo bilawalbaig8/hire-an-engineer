@@ -14,23 +14,25 @@ The eight steps of every run. Skip steps a tiny or small job does not need, but 
 - Say the team size qualitatively (one, a few, several specialists) and call it an estimate. No cost nagging otherwise.
 
 ## 3. Brief and dispatch
-- Before the first call of any run, create the run folder (see `run-records.md`), even for a small job.
+- Before the first call of any run, create the run folder (see `run-records.md`), even for a small job, and append `run_started` (`goal`, `size`) as the first event line.
 - Write one request file per step (see `briefing.md`) and call the specialist by name through the Agent tool with the model from the roster. Pass the file path, not pasted content.
 - Parallel steps only when they touch different folders. Otherwise run one after the other.
-- Append a `handoff` event (boss to specialist) to the event log.
+- Append a `handoff` event (boss to specialist, with a short `task`) to the event log.
 
 ## 4. Collect
 - Save the response as `NN-<role>-response.json`. Check the 7 fields (`status`, `summary`, `files`, `questions`, `approvals`, `assumptions`, `evidence`). If the project has `scripts/agent_contract.py`, run `check-response`; otherwise check by reading.
 - A `done` with no evidence, or a response missing fields, goes back once with the exact complaint (that is the one retry).
-- Append the return `handoff` event.
+- Append the return `handoff` event, then `agent_result` (`agent` = the specialist, its `status`, a short `summary`, `response_file` = the saved response path).
+- If something outside the specialist stops the work (missing tool, failed check, owner unreachable), append `blocked` (`reason`); when it is resolved without re-calling that specialist, append `blocker_cleared`.
 
 ## 5. Relay
 - Merge the `questions` of the step, drop duplicates, answer from files or earlier answers when possible. The rest go to the owner in one message (see `questions-and-approvals.md`).
+- When you send the questions to the owner, append `question_asked` (`id` such as `q-01`, `agent` = the asker, `questions`). When the answers arrive, append `approval_given` with the same `id`, `decision` `answered`, `by` `terminal`.
 - Save the answers in `decisions.md` and pass them back in a new request file (`answers`), resuming the same specialist when possible.
 
 ## 6. Decide or approve
 - Decisions the specialists made that are two-way doors stay made.
-- Every `approvals` entry goes to the owner. Nothing is applied before a clear yes in the owner's own message. Record `approval_requested` when asked and `approval_given` when the yes arrives.
+- Every `approvals` entry goes to the owner. Nothing is applied before a clear yes in the owner's own message. Append `approval_requested` when asked (`id`, `kind` `decision`, `title`, `options`, `one_way_door`, `asked_agent`) and `approval_given` with the same `id` (`decision` `approved` or `rejected`, `option`, `by` `terminal`) when the answer arrives.
 - If two specialists disagree, give the owner both positions with a recommendation (see `quality-gates.md`).
 
 ## 7. Gate
@@ -39,6 +41,7 @@ The eight steps of every run. Skip steps a tiny or small job does not need, but 
 ## 8. Close
 - Write `summary.md` and give the owner the same in plain words: what was done, what they must decide or do, where the files are, what was not covered or not verified. Keep it short.
 - Mention anything refused, blocked, or capped.
+- Last, append `run_finished` (`status` `done`, `stopped` or `failed`, short `summary`). A run without it is open.
 
 ## Small helpers you may do yourself
 Listing files, copying a path into a request, formatting a summary. Never design, review or write product logic.

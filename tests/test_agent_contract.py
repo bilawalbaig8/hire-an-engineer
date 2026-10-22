@@ -153,8 +153,8 @@ def test_json_examples_in_contract_doc_are_valid(tmp_path):
     seen = set()
     for i, block in enumerate(blocks):
         obj = json.loads(block)
-        # Matching rule: a "goal" key marks a request, "status" a response, "ts" an event.
-        cmd = next(c for k, c in (("goal", "check-request"), ("status", "check-response"), ("ts", "check-event")) if k in obj)
+        # Matching rule: a "ts" key marks an event (checked first: run_started has "goal", agent_result has "status"), else "goal" a request, "status" a response.
+        cmd = next(c for k, c in (("ts", "check-event"), ("goal", "check-request"), ("status", "check-response")) if k in obj)
         seen.add(cmd)
         f = tmp_path / f"b{i}.json"
         f.write_text(block, encoding="utf-8")

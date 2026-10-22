@@ -22,7 +22,17 @@ EVENT_TYPES = (
     "file_written",
     "approval_requested",
     "approval_given",
+    "run_started",
+    "run_finished",
+    "agent_result",
+    "question_asked",
+    "blocked",
+    "blocker_cleared",
 )
+RUN_FINISHED_STATUSES = ("done", "stopped", "failed")
+APPROVAL_KINDS = ("decision", "questions")
+APPROVAL_DECISIONS = ("answered", "approved", "rejected")
+APPROVAL_SOURCES = ("terminal", "window")
 
 
 def _is_str(v):
@@ -58,6 +68,8 @@ def _list_of_dicts(obj, key, fields, errors, required=False):
             val = item.get(name)
             if kind == "str" and not _is_str(val):
                 errors.append(f"{key}[{i}].{name}: required text")
+            elif kind == "str_opt" and name in item and not _is_str(val):
+                errors.append(f"{key}[{i}].{name}: must be text")
             elif kind == "bool" and not isinstance(val, bool):
                 errors.append(f"{key}[{i}].{name}: must be true or false")
             elif kind == "strlist" and (
@@ -126,6 +138,65 @@ def _valid_ts(ts):
     return True
 
 
+def _opt_str(obj, key, errors):
+    if key in obj and not _is_str(obj[key]):
+        errors.append(f"{key}: must be non-blank text")
+
+
+def _validate_event_fields(etype, obj, errors):
+    if etype == "run_started":
+        if not _is_str(obj.get("goal")):
+            errors.append("goal: required for run_started")
+        _opt_str(obj, "size", errors)
+    elif etype == "run_finished":
+        if obj.get("status") not in RUN_FINISHED_STATUSES:
+            errors.append(f"status: run_finished needs one of {', '.join(RUN_FINISHED_STATUSES)}")
+        if not _is_str(obj.get("summary")):
+            errors.append("summary: required for run_finished")
+    elif etype == "agent_result":
+        if obj.get("status") not in RESPONSE_STATUSES:
+            errors.append(f"status: agent_result needs one of {', '.join(RESPONSE_STATUSES)}")
+        if not _is_str(obj.get("summary")):
+            errors.append("summary: required for agent_result")
+        _opt_str(obj, "response_file", errors)
+    elif etype == "question_asked":
+        if not _is_str(obj.get("id")):
+            errors.append("id: required for question_asked")
+        if not isinstance(obj.get("questions"), list) or not obj.get("questions"):
+            errors.append("questions: required for question_asked (non-empty list)")
+        else:
+            _list_of_dicts(obj, "questions", {"id": "str", "question": "str", "why": "str"}, errors)
+    elif etype == "blocked":
+        if not _is_str(obj.get("reason")):
+            errors.append("reason: required for blocked")
+    elif etype == "approval_requested":
+        if "kind" in obj:
+            if obj["kind"] not in APPROVAL_KINDS:
+                errors.append(f"kind: must be one of {', '.join(APPROVAL_KINDS)}")
+            if not _is_str(obj.get("id")):
+                errors.append("id: required when kind is present")
+        for key in ("id", "title", "why", "asked_agent"):
+            _opt_str(obj, key, errors)
+        if "one_way_door" in obj and not isinstance(obj["one_way_door"], bool):
+            errors.append("one_way_door: must be true or false")
+        if "options" in obj:
+            _list_of_dicts(obj, "options", {"id": "str", "label": "str", "note": "str_opt"}, errors)
+    elif etype == "approval_given":
+        if "decision" in obj:
+            if obj["decision"] not in APPROVAL_DECISIONS:
+                errors.append(f"decision: must be one of {', '.join(APPROVAL_DECISIONS)}")
+            if not _is_str(obj.get("id")):
+                errors.append("id: required when decision is present")
+        for key in ("id", "option"):
+            _opt_str(obj, key, errors)
+        if "by" in obj and obj["by"] not in APPROVAL_SOURCES:
+            errors.append(f"by: must be one of {', '.join(APPROVAL_SOURCES)}")
+        if "answers" in obj:
+            _list_of_dicts(obj, "answers", {"id": "str", "answer": "str"}, errors)
+    elif etype == "handoff":
+        _opt_str(obj, "task", errors)
+
+
 def validate_event(obj: dict) -> list[str]:
     if not isinstance(obj, dict):
         return ["event: must be a JSON object"]
@@ -144,6 +215,7 @@ def validate_event(obj: dict) -> list[str]:
         for key in ("from", "to"):
             if not _is_str(obj.get(key)):
                 errors.append(f"{key}: required for handoff")
+    _validate_event_fields(etype, obj, errors)
     return errors
 
 

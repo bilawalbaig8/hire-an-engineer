@@ -113,27 +113,72 @@ afterwards). This is the trail the owner can read to see what happened. Who writ
 
 - The hook (`scripts/log_event.py`, see "Event sources") writes `agent_start`, `agent_stop`
   and `file_written`.
-- The boss writes `handoff`, `approval_requested` and `approval_given`, using
-  `append_event` from `scripts/agent_contract.py` (it checks the line before writing).
+- The boss writes `handoff`, `approval_requested` and `approval_given`, and also the run events
+  (`run_started`, `agent_result`, `question_asked`, `blocked`, `blocker_cleared`, `run_finished`), using `append_event` from
+  `scripts/agent_contract.py` (it checks the line before writing).
 - A specialist writes nothing to the log.
 
-| Field | Meaning |
-|---|---|
-| `ts` | Time in UTC, ISO 8601, e.g. `2026-10-22T10:00:00Z`. |
-| `type` | `agent_start`, `agent_stop`, `handoff`, `file_written`, `approval_requested`, `approval_given`. |
-| `agent` | Name of the agent writing the line. |
-| `run_id` | One id shared by everything in the same job. |
-| `path` | Only for `file_written`: the file. |
-| `from`, `to` | Only for `handoff`: who passes work to whom. |
+Every line has `ts` (UTC, ISO 8601, e.g. `2026-10-22T10:00:00Z`), `type`, `agent` (who the line is
+about; the boss for run and approval lines) and `run_id` (one id shared by everything in the same job).
+Extra fields per type:
+
+| Type | Written by | Extra fields | Meaning |
+|---|---|---|---|
+| `agent_start` | hook | none | A specialist starts. |
+| `agent_stop` | hook | none | A specialist ends (the hook cannot see its status). |
+| `file_written` | hook | `path` (required) | A file was written or edited. |
+| `handoff` | boss | `from`, `to` (required), `task` (optional short sentence, no secrets) | Work passes from one agent to another. |
+| `run_started` | boss | `goal` (required), `size` (optional) | A job begins. |
+| `run_finished` | boss | `status` (`done`, `stopped`, `failed`), `summary` (both required) | The job closes. |
+| `agent_result` | boss | `status` (`done`, `needs_answers`, `needs_approval`, `blocked`), `summary` (required), `response_file` (optional) | The status of a specialist response, written after saving it. `agent` is the specialist. |
+| `question_asked` | boss | `id` (e.g. `q-01`), `questions` (non-empty list of `{id, question, why}`) | The owner is asked questions. `agent` is the specialist that asked. |
+| `blocked` | boss | `reason` (required) | A blocker that is not a specialist response. `agent` is the blocked specialist. |
+| `blocker_cleared` | boss | none | The blocker is gone without re-calling that specialist. |
+| `approval_requested` | boss | optional `id`, `kind` (`decision` or `questions`; needs `id`), `title`, `why`, `options` (list of `{id, label, note, recommended}`), `one_way_door` (true or false), `asked_agent` | The owner is asked to decide. |
+| `approval_given` | boss (terminal) or office server (window) | optional `id`, `decision` (`answered`, `approved`, `rejected`; needs `id`), `option`, `answers` (list of `{id, answer}`), `by` (`terminal` or `window`) | The owner answered; same `id` as the request. |
+
+Old lines without the optional fields stay valid. Unknown extra fields are ignored.
 
 Example lines (save one per file to check them with the CLI):
 
 ```json
-{"ts": "2026-10-22T10:00:00Z", "type": "handoff", "agent": "boss", "run_id": "run-1", "from": "boss", "to": "architect"}
+{"ts": "2026-10-22T10:00:00Z", "type": "handoff", "agent": "boss", "run_id": "run-1", "from": "boss", "to": "architect", "task": "Plan the login page"}
 ```
 
 ```json
 {"ts": "2026-10-22T10:05:00Z", "type": "file_written", "agent": "architect", "run_id": "run-1", "path": "docs/plan.md"}
+```
+
+```json
+{"ts": "2026-10-22T09:59:00Z", "type": "run_started", "agent": "boss", "run_id": "run-1", "goal": "Add an email login page", "size": "project"}
+```
+
+```json
+{"ts": "2026-10-22T10:06:00Z", "type": "agent_result", "agent": "architect", "run_id": "run-1", "status": "needs_answers", "summary": "Needs the sign-in method", "response_file": ".team/runs/2026-10-22-login/01-architect-response.json"}
+```
+
+```json
+{"ts": "2026-10-22T10:07:00Z", "type": "question_asked", "agent": "architect", "run_id": "run-1", "id": "q-01", "questions": [{"id": "q1", "question": "Email and password, or a one-time link?", "why": "It changes the design"}]}
+```
+
+```json
+{"ts": "2026-10-22T10:08:00Z", "type": "approval_requested", "agent": "boss", "run_id": "run-1", "id": "a1", "kind": "decision", "title": "Where to store accounts", "why": "Hard to change later", "options": [{"id": "o1", "label": "sqlite", "note": "simple", "recommended": true}, {"id": "o2", "label": "postgres", "note": "hosted"}], "one_way_door": true, "asked_agent": "architect"}
+```
+
+```json
+{"ts": "2026-10-22T10:09:00Z", "type": "approval_given", "agent": "boss", "run_id": "run-1", "id": "a1", "decision": "approved", "option": "o1", "by": "terminal"}
+```
+
+```json
+{"ts": "2026-10-22T10:10:00Z", "type": "blocked", "agent": "architect", "run_id": "run-1", "reason": "Cannot run the tests: Python is missing"}
+```
+
+```json
+{"ts": "2026-10-22T10:11:00Z", "type": "blocker_cleared", "agent": "architect", "run_id": "run-1"}
+```
+
+```json
+{"ts": "2026-10-22T10:30:00Z", "type": "run_finished", "agent": "boss", "run_id": "run-1", "status": "done", "summary": "Login page planned, built and reviewed"}
 ```
 
 ## Checking a file
