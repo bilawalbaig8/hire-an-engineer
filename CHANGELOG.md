@@ -32,3 +32,12 @@ This is repository tooling, versioned together with the first agent skill (softw
 - `scripts/log_event.py`: Claude Code hook script that writes one event line per subagent start/stop and file write; never fails the session, never writes outside the project, reads UTF-8. Hooks snippet in `docs/agents/agent-template/hooks-snippet.json`.
 - `scripts/check_sources.py` and `scripts/check_evals.py` guard `sources.md` (verified/unverified, unique IDs, citations resolve) and `evals.json`.
 - `docs/agents/agent-template/`: copy-and-fill agent file, skill folder and a ten-step "add a new specialist" checklist.
+
+## software-architect
+
+### [0.1.0] - Unreleased
+- New skill and Claude Code agent (`agents/architect.md`, model opus) that designs and reviews software architecture for any kind of project and recovers the architecture of existing code. Two modes: Design (questions that change the design, testable quality scenarios, 2-3 options with what each gives up, artifacts in `docs/architecture/` and decision records in `docs/decisions/`) and Recover/Review (six steps with commands and Python scripts that need no installs: inventory and entry points, data model, import graph and cycles, behaviour trace, git hotspots and change coupling, conformance and write-up).
+- Field references: web/backend/cloud, distributed systems and data, security architecture, mobile, desktop and plugins, games and Unity (starter), real-time and netcode and state machines, AI and agent systems, data pipelines; plus core principles, review checklists and diagrams (Mermaid default, six templates checked in a browser).
+- `references/sources.md`: 123 sources, 86 verified and 37 unverified, each with author, year, URL, licence and status; only verified sources are cited as fact. Credits in `THIRD_PARTY_NOTICES.md`.
+- Rules built in: one-way-door decisions are returned as approvals and recorded as `proposed`; every claim about existing code is labelled `verified in code`, `inferred` or `unknown`; existing decision records are continued, never rewritten; a request that prescribes the answer still gets a recommendation; diagrams are rendered and checked or declared "not rendered".
+- To deepen: game save systems, game performance budgets, verified conference talks, Unity-specific verified references; recover mode end-to-end eval (scripts verified on a throwaway repository).
