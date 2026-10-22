@@ -21,7 +21,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 1.2 Agent template (agent file + skill folder + 10-step checklist) in docs/agents/agent-template (done)
 - [x] 1.3 Validator and packager support for agents/ (done, reviewed)
 - [x] 1.4 Install script + INSTALL.md section (copy to ~/.claude) (done, reviewed; real install only after owner OK)
-- [~] 1.5 Eval pattern for agents (typical, edge, refusal cases) and sources/evals checkers (built; independent review waiting for the Part 1 final review)
+- [x] 1.5 Eval pattern for agents (typical, edge, refusal cases) and sources/evals checkers (done, whole-branch review passed after one fix wave)
 - [x] 1.6 Event log in the contract: every agent start, stop, handoff and file written is one line in .agents/events.jsonl (feeds the visual office) (done, reviewed)
 
 ## Phase 2 Architect
@@ -31,7 +31,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [ ] 2.3 Field references: web/backend/cloud, distributed/data, mobile, desktop/plugins, game/engine, real-time/netcode, AI systems, security, data pipelines
 - [ ] 2.4 diagrams.md (C4, Mermaid default, render + check) and review-checklists.md
 - [ ] 2.5 SKILL.md router and agents/architect.md
-- [ ] 2.6 Evals written first: 5 design cases, 2 recover cases, refusal cases
+- [~] 2.6 Evals written first: 5 design cases, 2 recover cases, refusal cases
 - [ ] 2.7 Run evals, fix, rerun
 - [ ] 2.8 THIRD_PARTY_NOTICES, CHANGELOG, validate, repo + installed copies identical
 - [ ] 2.9 Commit; release software-architect 0.1.0 (only when owner says)
