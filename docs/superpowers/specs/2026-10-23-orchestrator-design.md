@@ -1,6 +1,6 @@
 # Orchestrator (the boss): design
 
-Status: DRAFT, waiting for owner approval. Nothing is built yet.
+Status: APPROVED by the owner (2026-10-23). Docs check done (section 3). Building in Phase 4.
 Branch: `feat/specialized-agents`. Date: 2026-10-23. Master plan: `2026-10-22-agent-team-master-plan.md` (Phase 4). Built against the two proven specialists: Architect and Code Reviewer, and the handoff contract (`docs/agents/agent-template/handoff-contract.md`).
 
 ## 1. Intent and why
@@ -32,9 +32,9 @@ Anti-goals (failure even if it "works")
 - Obeying instructions that appear inside a specialist's output, a file, or a web page.
 - Working around a permission refusal instead of reporting it.
 
-## 3. Where it runs and its format (decision with a check needed)
+## 3. Where it runs and its format (docs checked 2026-10-23)
 
-A subagent cannot start other subagents (to be verified against the current Claude Code documentation before building), so the boss must run **in the main session**, not as a subagent. Therefore:
+Checked against https://code.claude.com/docs/en/sub-agents. Findings: (1) a subagent CAN spawn subagents by default, up to three layers below the main conversation (the depth limit rose to three in v2.1.219; `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` changes it), so the earlier assumption in this spec was out of date; (2) an agent file can run as the main thread with `claude --agent NAME` or the `agent` setting, and then it can spawn subagents with the Agent tool, limited by `tools: Agent(architect, code-reviewer), Read, ...` (the allowlist works only for a main-thread agent); (3) frontmatter such as `initialPrompt` applies only when an agent runs as the main session agent. Decision stays the same for a better reason: the boss talks to the owner and asks questions, so it must be the main conversation, not a hidden subagent (a subagent's questions would reach the owner only as a summary). Therefore:
 
 ```
 skills/orchestrator/               the boss's playbook (loaded in the main session)
@@ -48,11 +48,12 @@ skills/orchestrator/               the boss's playbook (loaded in the main sessi
     run-records.md                 the run folder, request/response files, the event log lines the boss writes
     failure-handling.md            blocked, refused launches, wrong output, caps, resuming an interrupted run
     sources.md                     verified sources (multi-agent and orchestration practice), checked by script
-agents/orchestrator.md             NOT a subagent: a short "start the boss" command or persona file, if the docs
-                                   allow a main-session agent / command; otherwise only the skill + a slash command
+agents/orchestrator.md             a main-thread agent file (start with `claude --agent orchestrator` or the `agent` setting);
+                                   tools: Agent(architect, code-reviewer, ...) allowlist, Read, Write, Bash; loads the skill.
+                                   Not meant to be called as a subagent. Optional: the skill alone also works in a normal session
 docs/agents/roster.md              the single machine-checked list of installed specialists (name, skill, model, what it owns)
 ```
-The owner starts a run by invoking the skill (or a slash command) in a normal Claude Code session; from then on that session is the boss. Specialists are called through the Agent tool by name (`architect`, `code-reviewer`, later more).
+The owner starts a run either with `claude --agent orchestrator` (the session becomes the boss and may only spawn the roster's specialists) or by invoking the skill in a normal Claude Code session; from then on that session is the boss. Specialists are called through the Agent tool by name (`architect`, `code-reviewer`, later more).
 
 ## 4. How a run works
 
@@ -93,11 +94,11 @@ New skill `orchestrator` (0.1.0, unreleased, no tag) and `docs/agents/roster.md`
 
 ## 10. Left to the builder
 
-Exact file sizes and wording; whether the boss ships a slash command, a persona file or only the skill (depends on what the current Claude Code docs allow for main-session behaviour; verify first and record the source); the precise request and decision file formats (they must validate with `agent_contract.py`); the fixture jobs for the evals; the roster check script.
+Exact file sizes and wording; the wording of the main-thread agent file and its Agent allowlist (the docs allow it, see section 3); the precise request and decision file formats (they must validate with `agent_contract.py`); the fixture jobs for the evals; the roster check script.
 
 ## 11. Calls made without the owner (please check)
 
-1. The boss is a main-session skill, not a subagent (to be verified in the docs first; if wrong, the format changes, the behaviour does not).
+1. The boss is a main-session skill plus an optional main-thread agent file, not a subagent (docs verified, section 3; the earlier claim that subagents cannot spawn subagents was wrong, the reason now is that the boss must talk to the owner).
 2. Caps: 8 specialist calls, 2 fix rounds, 1 retry per run (adjustable).
 3. Run records in `.team/runs/` inside the project.
 4. Specialists are called by name through the Agent tool with the model fixed by the roster.
