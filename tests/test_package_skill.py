@@ -41,13 +41,16 @@ def names(archive: Path) -> list:
         return sorted(z.namelist())
 
 
-def test_agent_files_for_skill_matches_frontmatter(tmp_path):
+def test_agent_files_for_skill_matches_frontmatter(tmp_path, capsys):
     add_agents(tmp_path)
     (tmp_path / "agents" / "broken.md").write_text("no frontmatter\n", encoding="utf-8")
     found = ps.agent_files_for_skill("alpha", tmp_path / "agents")
     assert [p.name for p in found] == ["builder.md"]
     assert ps.agent_files_for_skill("beta", tmp_path / "agents")[0].name == "other.md"
     assert ps.agent_files_for_skill("alpha", tmp_path / "missing") == []
+    err = capsys.readouterr().err
+    assert "broken.md" in err
+    assert "other.md" not in err  # parses, names another skill: no warning
 
 
 def test_package_contains_agent_file(tmp_path):
@@ -74,3 +77,16 @@ def test_package_without_agent_unchanged(tmp_path):
     (tmp_path / "agents" / "builder.md").unlink()
     run_packager(skill, out)
     assert names(out / "alpha.zip") == expected
+
+
+def test_package_warns_on_unparseable_agent(tmp_path):
+    skill = make_repo(tmp_path)
+    add_agents(tmp_path)
+    (tmp_path / "agents" / "broken.md").write_text("no frontmatter\n", encoding="utf-8")
+    out = tmp_path / "dist"
+    r = subprocess.run(
+        [sys.executable, str(SCRIPTS / "package_skill.py"), str(skill), str(out)],
+        check=True, capture_output=True, text=True,
+    )
+    assert "broken.md" in r.stderr
+    assert "agents/broken.md" not in names(out / "alpha.zip")

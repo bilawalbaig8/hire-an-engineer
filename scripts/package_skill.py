@@ -22,13 +22,16 @@ def agent_files_for_skill(skill_name: str, agents_dir: Path) -> list[Path]:
     found = []
     for f in sorted(agents_dir.glob("*.md")):
         m = re.match(r"^---\n(.*?)\n---\n", f.read_text(encoding="utf-8"), re.S)
-        if not m:
+        fm = None
+        if m:
+            try:
+                fm = yaml.safe_load(m.group(1))
+            except yaml.YAMLError:
+                fm = None
+        if not isinstance(fm, dict):
+            print(f"warning: agents/{f.name} skipped: cannot read frontmatter", file=sys.stderr)
             continue
-        try:
-            fm = yaml.safe_load(m.group(1))
-        except yaml.YAMLError:
-            continue
-        if isinstance(fm, dict) and fm.get("skill") == skill_name:
+        if fm.get("skill") == skill_name:
             found.append(f)
     return found
 
