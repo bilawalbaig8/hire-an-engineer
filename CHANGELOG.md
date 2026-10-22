@@ -4,7 +4,7 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
-### [0.2.0] - Unreleased
+### [0.2.0] - 2026-10-22
 - Thinking toolkit: one-way vs two-way doors, physics-or-convention, attacker's view for security, look-up/estimate/buffer for numbers, and a new debugging and performance section (check the real code, simplest first, competing hypotheses, find the bottleneck); router sends bugs with unclear causes, security, estimates and slowness there. Adapted from cc-thinking-skills.
 - New `engineering-principles.md` §10 Data and performance choices: real data size and 10× design, maps for lookups, no nested loops on large data, built-in sort/search, let the database filter/sort/paginate, structures by data shape (trees/graphs as rows), loops instead of deep recursion, cache with expiry, realistic-size tests; "10× data" question added to every code review.
 - New `engineering-principles.md` §11 Runtime performance: browser, devices, OS: budgets (LCP, INP, CLS, memory, idle CPU) measured on weak devices; browser rules (images, JS, fonts, workers, network, long lists, memory leaks, device matrix) and OS/desktop/script rules (streaming, non-blocking work, idle, cleanup, cross-platform paths, concurrency).
