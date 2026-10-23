@@ -74,15 +74,24 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 - [x] AI-1 Build evals, knowledge files and agent file, then run the evals and fix failures (headless agent working; owner approved the role file)
 - [x] AI-2 Checks: validate_agents, validate_skills, check_sources, check_evals, full pytest; read the eval table
-- [ ] AI-3 Add to roster, boss allowlist, team-roster, CHANGELOG, THIRD_PARTY_NOTICES; set Tested if evals pass
-- [ ] AI-4 Install with --only, commit and push (only after the owner says OK)
+- [x] AI-3 Add to roster, boss allowlist, team-roster, CHANGELOG, THIRD_PARTY_NOTICES; set Tested if evals pass
+- [x] AI-4 Install with --only, commit and push (only after the owner says OK)
 
 ## Data Scientist
 
 - [x] DS-1 Build evals, knowledge files and agent file, then run the evals and fix failures (headless agent working; owner approved the role file)
 - [x] DS-2 Checks: validate_agents, validate_skills, check_sources, check_evals, full pytest; read the eval table
-- [ ] DS-3 Add to roster, boss allowlist, team-roster, CHANGELOG, THIRD_PARTY_NOTICES; set Tested if evals pass
-- [ ] DS-4 Install with --only, commit and push (only after the owner says OK)
+- [x] DS-3 Add to roster, boss allowlist, team-roster, CHANGELOG, THIRD_PARTY_NOTICES; set Tested if evals pass
+- [x] DS-4 Install with --only, commit and push (only after the owner says OK)
+
+## Visual office
+
+- [~] OFF-1 Own characters, props, desks and a Data & AI zone for AI Engineer and Data Scientist in the live office UI (agent working)
+
+## Role documents
+
+- [ ] DOC-1 Gemini CLI installed (done); you log in once: run gemini in a terminal, then /auth
+- [ ] DOC-2 Wave 1 role documents with Gemini research: Backend, Database Architect, DevOps, Security Engineer, QA/Test, AppSec Reviewer
 
 ## Phase 6 Integration
 

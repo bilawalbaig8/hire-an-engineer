@@ -118,6 +118,8 @@ One-way door rule: `one_way_door: true` shows the door tag on the card, the chip
 | reviewer | Code Reviewer | Quality and Security | `code-reviewer` | yes |
 | security | Security Engineer | Quality and Security | `security`, `security-engineer` | no |
 | devops | DevOps Engineer | Ops | `devops`, `devops-platform` | no |
+| aieng | AI Engineer | Data & AI | `ai-engineer` | yes |
+| datasci | Data Scientist | Data & AI | `data-scientist` | yes |
 | owner | You, the owner | Visitor seat / box seat | never in the log as `agent`; stands for the human | n/a |
 
 Rule: the agent file name in `agents/*.md` (equal to the `agent_type` the hook logs) is the key. Aliases above are only a seed; the source of truth is a registry file (3.2).
