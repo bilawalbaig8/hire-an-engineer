@@ -48,3 +48,9 @@ Plain-language guide to `permissions-snippet.json`. It is optional, and it is no
 - For headless runs, evals and automation use the project-local install: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer`.
 - In an interactive session the person is asked once and can allow the read.
 - Check an install with `--dry-run` (`0 new, N same, 0 differ`). Never use `--force` on hire-an-engineer files; use `--only`.
+
+## The boss needs one allow rule for its event script (tested 2026-10-23)
+In a headless run, `python .claude/skills/orchestrator/scripts/team_event.py ...` is refused unless it is allowed, and the boss then stops and asks (correct behaviour). The snippet now allows exactly that script (project-local and `~/.claude` paths) and nothing else. In an interactive session you are asked once instead.
+
+## Headless runs: use the command-line flag (tested 2026-10-23)
+In `claude -p` (headless) the `allow` rules of a project `settings.json` were NOT applied (even a minimal file with only `Bash(python:*)`), but the flag worked: `claude -p "..." --agent orchestrator --allowedTools "Bash(python .claude/skills/orchestrator/scripts/team_event.py:*)"` (put the prompt first). The `deny` rules did apply. Interactive sessions: you are asked and can choose to always allow (unverified whether settings `allow` is honoured there).
