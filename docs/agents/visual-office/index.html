@@ -631,6 +631,10 @@ body[data-theme=pixel] .banner{font-size:18px}
 .chk input{width:18px;height:18px;accent-color:var(--accent)}
 .flist:not(.showrec) li.rec{display:none}
 .flist li{cursor:pointer}
+.flist li.fhide{display:none!important}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.fchips button{font:700 12px var(--body);padding:3px 9px;min-height:28px;border-radius:999px;border:var(--bw) solid var(--line);background:var(--paper2);color:var(--ink);cursor:pointer}
+.fchips button[aria-pressed=true]{background:var(--accent);color:var(--accent-fg)}
 .ftag{grid-column:2;display:inline-block;justify-self:start;font:700 11px var(--body);padding:0 6px;border-radius:4px;background:var(--paper3);color:var(--ink);border:1px solid var(--line)}
 .log li.unk{opacity:.7}
 .log li.unk .tag{color:var(--ink2)}
@@ -772,6 +776,7 @@ body[data-theme=pixel] .banner{font-size:18px}
     </div>
     <div class="tabpanel" id="p-files" data-panel="files" role="tabpanel" aria-labelledby="tab-files" hidden>
       <label class="chk"><input type="checkbox" id="showRec"> Show run records (.team/runs)</label><p class="note" id="recNote"></p>
+      <div class="fchips" id="fchips" role="group" aria-label="Filter files by top folder" hidden></div>
       <ul class="flist" id="flist"></ul><p class="empty" id="flEmpty">No files yet.</p>
     </div>
     <div class="tabpanel" id="p-legend" data-panel="legend" role="tabpanel" aria-labelledby="tab-legend" hidden>
@@ -1232,7 +1237,7 @@ var S={clock:0,t0ms:0,running:false,started:false,finished:false,ended:false,idl
   skipped:0,seen:0,stale30:false,last:performance.now(),conn:'connecting',rosterSig:null,answerRO:false,sumT:0};
 var REG=Object.create(null);   // agent id -> [{root,fig,chip,task,...}]
 var CARDS=Object.create(null); // request id -> card element
-var LOG=[],JOBS=Object.create(null),JOBORDER=[],CUR=Object.create(null),follow=true,viewsBuilt=false,LISTCAP=500,cardN=0;
+var LOG=[],JOBS=Object.create(null),JOBORDER=[],CUR=Object.create(null),RAW=[],WIN=[],follow=true,viewsBuilt=false,LISTCAP=500,cardN=0;
 var reduceMotion=function(){return window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;};
 var DEFTXT={done:'Finished',needs_answers:'Has questions for you',needs_approval:'Needs your decision',blocked:'Blocked'};
 
@@ -1324,11 +1329,37 @@ function fixGroups(){
 
 /* ---------- log store, jobs and the normaliser ---------- */
 function newestKey(){return JOBORDER.length?JOBORDER[JOBORDER.length-1]:null}
+/* The hook writes the session id as run_id, the Boss writes the job id. Events of one job therefore carry two ids.
+   A run_started window ties them: an event whose run_id has no run_started of its own, and whose time falls inside
+   a job window (2 min slack before the start and after the finish; open jobs stay open 30 min after their last Boss line),
+   belongs to that job. */
+var JOINTOL=120000,JOINOPEN=30*60000;
+function scanWin(){
+  WIN.length=0;
+  RAW.forEach(function(r){
+    if(!r||typeof r!=='object'||Array.isArray(r))return;
+    var ms=Date.parse(r.ts);if(isNaN(ms)||typeof r.type!=='string')return;
+    var run=r.run_id!=null?str(r.run_id,80):'no-run';
+    if(r.type==='run_started')WIN.push({run:run,first:ms,last:ms,fin:Infinity});
+    else if(r.type==='run_finished')finishWin(run,ms);
+  });
+}
+function finishWin(run,ms){for(var i=WIN.length-1;i>=0;i--)if(WIN[i].run===run&&WIN[i].fin===Infinity&&WIN[i].first<=ms+JOINTOL){WIN[i].fin=ms;return}}
+function linkRun(run,ms){
+  var i,w,best=null;
+  for(i=WIN.length-1;i>=0;i--){w=WIN[i];if(w.run===run&&ms>=w.first-JOINTOL){if(ms>w.last&&w.fin===Infinity)w.last=ms;return run}}
+  for(i=0;i<WIN.length;i++){w=WIN[i];
+    if(ms>=w.first-JOINTOL&&ms<=(w.fin===Infinity?w.last+JOINOPEN:w.fin)+JOINTOL&&(!best||w.first>best.first))best=w;
+  }
+  return best?best.run:run;
+}
+function resetJobs(){LOG.length=0;Object.keys(JOBS).forEach(function(k){delete JOBS[k]});JOBORDER.length=0;Object.keys(CUR).forEach(function(k){delete CUR[k]})}
+function rebuildJobs(){resetJobs();S.skipped=0;scanWin();RAW.forEach(ingest)}
 function ingest(raw){
   if(!raw||typeof raw!=='object'||Array.isArray(raw)){S.skipped++;return null}
   var type=typeof raw.type==='string'?raw.type.slice(0,60):'',ms=Date.parse(raw.ts);
   if(!type||isNaN(ms)){S.skipped++;return null}
-  var run=raw.run_id!=null?str(raw.run_id,80):'no-run',key=CUR[run],J=key?JOBS[key]:null;
+  var run=linkRun(raw.run_id!=null?str(raw.run_id,80):'no-run',ms),key=CUR[run],J=key?JOBS[key]:null;
   if(!J||(type==='run_started'&&J.started)){
     var n=J?J.n+1:1;key=run+(n>1?'#'+n:'');
     J=JOBS[key]={key:key,run:run,n:n,t0:ms,idx:[],goal:'',finished:false,status:'',started:false,last:ms,lastT:0};
@@ -1436,7 +1467,13 @@ function closeRequest(e,t){
   r.given={decision:dec,option:e.option,answers:e.answersArr||mapAnswers(req,e.answersRaw),by:e.by||'',t:t};
   e.rid=id;
   var ag=S.agents[req.asker];
-  if(ag&&(ag.state==='waiting'||ag.state==='approval')){ag.state='idle';ag.text=dec==='rejected'?'Rework requested':'Answer received';ag.since=t}
+  if(ag&&(ag.state==='waiting'||ag.state==='approval')){
+    /* the asker may still have another open request: then it keeps waiting for that one */
+    var more=null;S.inboxOrder.forEach(function(k){var o=S.inbox[k];if(k!==id&&o.status==='pending'&&o.req.asker===req.asker)more=o.req});
+    if(more){ag.state=more.kind==='questions'?'waiting':'approval';
+      ag.text=(more.kind==='questions'?'Has '+more.questions.length+' question'+(more.questions.length===1?'':'s')+' for you':'Needs your decision'+(more.title?': '+more.title:'')).slice(0,120)}
+    else{ag.state='idle';ag.text=dec==='rejected'?'Rework requested':'Answer received'}
+    ag.since=t}
   resolveCard(id);sortCards();
 }
 function markStale(){
@@ -1450,7 +1487,7 @@ function markStale(){
     $$('.actions,.ask',c).forEach(function(n){n.hidden=true});
     var st=$('[data-role=state]',c);if(st)st.outerHTML='<p class="verdict na">Never answered</p>';
   });
-  sortCards();
+  setOwner();sortCards();
 }
 function bossReply(e){
   var r=S.inbox[e.id],c=CARDS[e.id];if(!r||!c)return;
@@ -1750,7 +1787,7 @@ function renderAll(){
   $('#panelsBtn').setAttribute('aria-label','Panels, '+(pc?pc+' waiting for you':'nothing waiting')+(drawerOpen?', open':', closed'));
   $('#inboxEmpty').hidden=S.inboxOrder.length>0;
   $('#tlCount').textContent=S.log.length;$('#logEmpty').hidden=S.log.length>0;
-  $('#flCount').textContent=S.files.length;$('#flEmpty').hidden=S.files.length>0;
+  $('#flCount').textContent=S.files.length;$('#flEmpty').hidden=S.files.length>0;paintFileChips();
   var hid=S.files.filter(function(f){return f.rec}).length;
   $('#recNote').textContent=hid&&!$('#showRec').checked?hid+' run record file'+(hid===1?'':'s')+' hidden':'';
   $('#logNote').textContent=(S.skipped?S.skipped+' line'+(S.skipped===1?'':'s')+' skipped (not valid events). ':'')+(S.log.length>LISTCAP?'Showing the latest '+LISTCAP+' of '+S.log.length+'.':'');
@@ -1888,8 +1925,25 @@ function logLi(t,e,anim){
   }
   li.innerHTML=h+'</div>';return li;
 }
+var FF='',FFSIG='';
+function topOf(p){var q=String(p).replace(/^\.\//,'').split('/');return q.length>1?q[0]:'(top level)'}
+function paintFileChips(){
+  var box=$('#fchips');if(!box)return;
+  var cnt={},order=[];S.files.forEach(function(f){var k=topOf(f.path);if(!(k in cnt)){cnt[k]=0;order.push(k)}cnt[k]++});
+  if(FF&&!(FF in cnt))FF='';
+  var sig=FF+'|'+order.map(function(k){return k+':'+cnt[k]}).join(',')+'|'+S.files.length;
+  if(sig===FFSIG)return;FFSIG=sig;
+  box.hidden=order.length<2;box.innerHTML='';
+  order.sort(function(a,b){return (a==='.team')-(b==='.team')||cnt[b]-cnt[a]||(a<b?-1:1)});
+  [''].concat(order).forEach(function(k){
+    var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',String(FF===k));
+    b.textContent=(k===''?'All':(k==='.team'?'.team (run records)':k))+' ('+(k===''?S.files.length:cnt[k])+')';
+    b.onclick=function(){FF=(FF===k?'':k);FFSIG='';if(FF==='.team'){var sr=$('#showRec');if(!sr.checked){sr.checked=true;$('#flist').classList.add('showrec');renderAll()}}$$('#flist li').forEach(function(li){li.classList.toggle('fhide',!!FF&&li.dataset.top!==FF)});paintFileChips()};
+    box.appendChild(b);
+  });
+}
 function fileLi(f){
-  var li=el('li',(f.rec?'rec':'')+(f.upd?' upd':''));li.tabIndex=0;li.title='Click to copy the path';
+  var li=el('li',(f.rec?'rec':'')+(f.upd?' upd':'')+(FF&&topOf(f.path)!==FF?' fhide':''));li.tabIndex=0;li.title='Click to copy the path';li.dataset.top=topOf(f.path);
   var tags=(f.upd?'<span class="ftag">updated</span>':'')+(f.rec?'<span class="ftag">run record</span>':'');
   li.innerHTML='<code>'+esc(f.path)+'</code>'+tags+'<span class="by">by '+esc(nm(f.agent))+' at '+fmt(f.t)+'</span>';
   var go=function(){try{navigator.clipboard.writeText(f.path).then(function(){var b=$('.by',li);if(b)b.textContent='Copied: '+f.path})}catch(e){}};
@@ -2100,7 +2154,8 @@ function fit(){
   var cs=getComputedStyle(wrap);
   var W=wrap.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
   var H=wrap.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
-  if(W<50||H<50)return;
+  if(W<50||H<50){fitRetry();return}   // stage not laid out (hidden tab, size 0): try again shortly
+  fitTries=0;
   var box=activeBox(),sc=$('.scene',box),best=null;
   sc.style.transform='none';
   ['land','mid','port'].forEach(function(v){
@@ -2113,10 +2168,16 @@ function fit(){
   box.style.width=Math.floor(DW[best.v]*best.k)+'px';box.style.height=Math.ceil(best.h*best.k)+'px';
   box.dataset.k=best.k.toFixed(3);box.dataset.v=best.v;
 }
-var fitQueued=false;
+var fitQueued=false,fitTries=0,fitRetryT=null;
 function fitSoon(){if(fitQueued)return;fitQueued=true;var go=function(){if(!fitQueued)return;fitQueued=false;fit()};requestAnimationFrame(go);setTimeout(go,120)}
-if(window.ResizeObserver)new ResizeObserver(fitSoon).observe($('#main'));
-window.addEventListener('resize',fitSoon);
+function fitRetry(){if(fitRetryT||fitTries>=40)return;fitTries++;fitRetryT=setTimeout(function(){fitRetryT=null;fit()},250)}
+/* fit again whenever the stage may have changed size without a resize we saw: tab shown again, page restored from cache, window focus, zoom */
+function fitNow(){fitQueued=false;fit();fitSoon()}
+if(window.ResizeObserver){var fitRO=new ResizeObserver(fitSoon);fitRO.observe($('#main'));fitRO.observe(document.documentElement)}
+window.addEventListener('resize',fitNow);
+window.addEventListener('pageshow',fitNow);
+window.addEventListener('focus',fitSoon);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)fitNow()});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitSoon);
 
 /* ============================================================
@@ -2249,7 +2310,7 @@ function scheduleRetry(){clearTimeout(CN.retryT);CN.retry=Math.min(CN.retry+1,6)
 function armFlush(ms){clearTimeout(CN.timer);CN.timer=setTimeout(flush,ms)}
 function fetchState(){return fetch('state',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function resetData(){
-  LOG.length=0;Object.keys(JOBS).forEach(function(k){delete JOBS[k]});JOBORDER.length=0;Object.keys(CUR).forEach(function(k){delete CUR[k]});
+  resetJobs();RAW.length=0;WIN.length=0;
   S.seen=0;S.skipped=0;S.job=null;follow=true;
 }
 function startSource(){
@@ -2283,17 +2344,27 @@ function flush(){
   if(buf.length<S.seen)resetData();            // the file is shorter than before: replaced or truncated
   var first=S.seen===0,tail=buf.slice(S.seen);
   if(first||tail.length>8){
-    tail.forEach(function(v){S.seen++;ingest(v)});
+    tail.forEach(function(v){S.seen++;RAW.push(v)});rebuildJobs();
     var key=(follow||!S.job||!JOBS[S.job])?newestKey():S.job;
     if(S.replay){S.replay=null;S.running=false}
     if(key)showJob(key);else{S.job=null;resetView();finishLoad()}
   }else tail.forEach(liveLine);
   setConn('live');
+  if(first)S.loadMs=Math.round(performance.now());   // ms from page start to the first catch-up (test hook)
   paintRunSel();
   fetchState().then(reconcile);
 }
 function liveLine(v){
-  S.seen++;
+  S.seen++;RAW.push(v);
+  if(v&&typeof v==='object'&&v.type==='run_started'){
+    /* a new job window can pull earlier hook lines into it: rebuild the jobs from the whole log */
+    rebuildJobs();
+    if(S.replay){paintRunSel();return}
+    var k0=(follow||!S.job||!JOBS[S.job])?newestKey():S.job;
+    if(k0)showJob(k0);else paintRunSel();
+    return;
+  }
+  if(v&&typeof v==='object'&&v.type==='run_finished'&&v.ts){var fm=Date.parse(v.ts);if(!isNaN(fm))finishWin(v.run_id!=null?str(v.run_id,80):'no-run',fm)}
   var rec=ingest(v);
   if(!rec){renderAll();return}
   var J=JOBS[rec.job];
@@ -2355,7 +2426,7 @@ window.Office={
   S:S,LOG:LOG,JOBS:JOBS,fit:fit,setTheme:setTheme,setLayout:setLayout,setDrawer:setDrawer,setMode:setMode,showJob:showJob,
   getState:function(){
     var ag={};AGENTS.concat([OWNER]).forEach(function(a){var s=S.agents[a.id];ag[a.id]={state:s.state,text:s.text,files:s.files,hand:s.hand}});
-    return {mode:MODE,conn:S.conn,job:S.job,goal:S.goal,finished:S.finished,blocks:S.blocks,files:S.files.length,log:S.log.length,handoffs:S.handoffs.length,skipped:S.skipped,
+    return {mode:MODE,conn:S.conn,loadMs:S.loadMs,job:S.job,goal:S.goal,finished:S.finished,blocks:S.blocks,files:S.files.length,log:S.log.length,handoffs:S.handoffs.length,skipped:S.skipped,
       pending:S.inboxOrder.filter(function(id){return S.inbox[id].status==='pending'}),inbox:S.inboxOrder.slice(),agents:ag};
   },
   audit:function(themes,layouts,t){var out=[];(themes||['office','orchestra','pixel']).forEach(function(th){(layouts||['A','B','C']).forEach(function(l){
