@@ -38,5 +38,16 @@ State what you checked and what you found: "`fastjsonx` is not a standard module
 - Silent failure handling and plausible-but-wrong logic: **Important**.
 - Style drift and duplication: **Minor** unless it caused inconsistent behaviour.
 
+## Reviewing a prompt, model or eval-set change (AI-Ops release review)
+
+When the change comes from the AI Engineer's Release check, the reviewer is a different role from the author. Check, with file and line evidence:
+- A held-out set exists, was not written or tuned by the author, and its result is in the release-check file as `k of n` before and after. A gain on the open set with a loss on the held-out set is a finding, not a pass.
+- No new regression in refusal, attack or privacy cases, whatever the totals say.
+- The recorded outputs are real files for both versions, on the same inputs; a result without them is `unknown`.
+- The prompt register row names version, date, what changed, why, eval-set version and a rollback target; the rollback is prepared, and no live switch was made by the author.
+- No real keys, real personal data or live model calls were used without a relayed approval.
+- The author is not listed as the reviewer. If it is, say so as an **Important** finding.
+The verdict stays a recommendation; the owner decides.
+
 ## Sources
 [S-AIC-1] [S-AIC-2] [S-AIC-3] [S-SEC-10] [S-MNT-3] and, as unverified leads only, S-AIC-4 and S-AIC-5

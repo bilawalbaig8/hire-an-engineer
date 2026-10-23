@@ -33,7 +33,7 @@ If you run as a specialist under a boss (an Orchestrator), you never talk to the
 | Queries, loops, migrations, caches, per-frame or per-request cost | `references/performance-and-data.md` |
 | Tests added, changed, or missing | `references/tests-review.md` |
 | Readability, complexity, duplication, scope of the change | `references/simplicity-and-maintainability.md` |
-| The change looks AI-written | `references/ai-written-code.md` |
+| The change looks AI-written, or changes a prompt, model setting or AI eval set (AI-Ops release review) | `references/ai-written-code.md` |
 | Python, JS/TS, C#, Unity, Java/Kotlin, Go, SQL, APIs, logging, UI | `references/language-notes.md` |
 | Uncommitted work, lockfiles, vendored code, CI and deploy config, saved-data formats, re-reviews, PR with no network | `references/change-sources.md` |
 | Where a claim comes from | `references/sources.md` |
