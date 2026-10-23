@@ -1,0 +1,26 @@
+{
+  "_comment": "Copy the 'permissions' block into your project's .claude/settings.json (merge, do not overwrite). Keys starting with an underscore are notes and can be deleted. See PERMISSIONS.md.",
+  "permissions": {
+    "deny": [
+      "Edit(/.agents/**)",
+      "Write(/.agents/**)",
+      "NotebookEdit(/.agents/**)"
+    ],
+    "ask": [
+      "Bash(pytest *)",
+      "Bash(python -m pytest *)",
+      "Bash(python -m unittest *)",
+      "Bash(dotnet test *)",
+      "Bash(go test *)"
+    ]
+  },
+  "_opt_in_allow_examples": {
+    "_comment": "OPT-IN ONLY. Running a reviewed repository's tests executes that repository's code. Move a line into permissions.allow only for a repository you trust. Never add npm/yarn/pnpm test, make, or anything with a bare wildcard.",
+    "allow": [
+      "Bash(python -m pytest -p no:cacheprovider tests/)",
+      "Bash(python -m unittest discover -s tests)",
+      "Bash(dotnet test --no-restore)",
+      "Bash(GOFLAGS=-mod=vendor GOPROXY=off go test ./...)"
+    ]
+  }
+}
