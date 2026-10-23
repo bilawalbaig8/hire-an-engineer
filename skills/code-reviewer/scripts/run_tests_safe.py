@@ -62,7 +62,10 @@ def extract_ref(repo: Path, ref: str, dest: Path) -> None:
                 raise Misuse(f"unsafe path in archive: {member.name}")
             if member.issym() or member.islnk():
                 continue  # links are never created
-            tar.extract(member, dest)
+            if hasattr(tarfile, "data_filter"):
+                tar.extract(member, dest, filter="data")
+            else:
+                tar.extract(member, dest)
 
 
 def detect_runner(copy: Path) -> str | None:
