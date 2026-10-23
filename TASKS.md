@@ -86,7 +86,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Visual office
 
-- [~] OFF-1 Own characters, props, desks and a Data & AI zone for AI Engineer and Data Scientist in the live office UI (agent working)
+- [x] OFF-1 Own characters, props, desks and a Data & AI zone for AI Engineer and Data Scientist in the live office UI (agent working)
 
 ## Role documents
 
