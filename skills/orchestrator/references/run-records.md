@@ -31,6 +31,7 @@ NN is two digits in call order (01, 02, ...). A re-call of the same role gets th
 | `run_finished` | `status` (`done`, `stopped`, `failed`), `summary` | `python SCRIPT event run_finished --run-id ID --status done --summary "Login page planned, built and reviewed"` |
 
 - Every line has `ts`, `type`, `agent`, `run_id`. `run_id` is the run folder name, the same on every line of the run.
+- `run_started` also writes `.agents/current_run` (the run id) and `run_finished` removes it, so the hook logs the same `run_id` and adds the Claude session id as an optional `session_id` field.
 - `agent` defaults to `orchestrator` for `run_started`, `run_finished`, `handoff`, `approval_*`; pass `--agent <specialist>` for `agent_result`, `question_asked`, `blocked`, `blocker_cleared`.
 - `ts` is set by the script from the real clock; never pass or invent one. Answers to questions use `--decision answered` and `--answers-json`.
 - If the script refuses, fix the command and run it again; do not write the line another way.

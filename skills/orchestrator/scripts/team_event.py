@@ -131,6 +131,8 @@ def validate_event_line(event) -> list[str]:
     for key in ("agent", "run_id"):
         if not _is_str(event.get(key)):
             errors.append(f"{key}: required text")
+    if "session_id" in event:
+        errors += _check_kind("session_id", "str", event["session_id"])
     if etype in EVENT_TABLE:
         spec = EVENT_TABLE[etype]
         for name, kind in spec["required"].items():
@@ -180,6 +182,27 @@ def write_event(log: Path, event: dict) -> str:
     with log.open("a", encoding="utf-8", newline="\n") as f:
         f.write(line + "\n")
     return line
+
+
+CURRENT_RUN = "current_run"
+
+
+def _write_current_run(log: Path, run_id: str) -> None:
+    """<log folder>/current_run = the run id, so the hook can use the same id. Atomic."""
+    target = Path(log).parent / CURRENT_RUN
+    tmp = target.with_name(CURRENT_RUN + ".tmp")
+    tmp.write_bytes((run_id + "\n").encode("utf-8"))
+    tmp.replace(target)
+
+
+def _clear_current_run(log: Path, run_id: str) -> None:
+    """Remove current_run when it holds this run id; a different run's file stays."""
+    target = Path(log).parent / CURRENT_RUN
+    try:
+        if target.read_text(encoding="utf-8-sig").strip() == run_id:
+            target.unlink()
+    except (OSError, ValueError):
+        pass
 
 
 # ---------- request / response checks (mirror scripts/agent_contract.py) ----------
@@ -436,7 +459,15 @@ def cmd_event(a) -> int:
         log = Path(a.log)
     else:
         log = Path(a.project or ".") / DEFAULT_LOG
-    print(write_event(log, event))
+    line = write_event(log, event)
+    try:
+        if event["type"] == "run_started":
+            _write_current_run(log, event["run_id"])
+        elif event["type"] == "run_finished":
+            _clear_current_run(log, event["run_id"])
+    except OSError as e:
+        print(f"warning: could not update {CURRENT_RUN}: {e}", file=sys.stderr)
+    print(line)
     return 0
 
 

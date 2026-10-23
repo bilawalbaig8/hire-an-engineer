@@ -8,12 +8,15 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 LOG_PATH = Path(".agents") / "events.jsonl"
+CURRENT_RUN = Path(".agents") / "current_run"
+CURRENT_RUN_MAX_AGE = 12 * 3600  # seconds; an older file is a run that never finished
 
 
 def _text(value) -> str:
@@ -33,14 +36,31 @@ def _relative_path(file_path: str, project_dir: str) -> str:
     return rel.as_posix()
 
 
+def current_run_id(project_dir: Path) -> str:
+    """The boss's run id from .agents/current_run, or "" (missing, empty, garbled, stale)."""
+    try:
+        path = Path(project_dir) / CURRENT_RUN
+        if not path.is_file() or time.time() - path.stat().st_mtime > CURRENT_RUN_MAX_AGE:
+            return ""
+        text = path.read_bytes()[:1024].decode("utf-8").strip()
+    except (OSError, ValueError):
+        return ""
+    if not text or len(text) > 200 or any(ord(c) < 32 for c in text):
+        return ""
+    return text
+
+
 def event_from_hook(payload: dict) -> dict | None:
     if not isinstance(payload, dict):
         return None
-    run_id = _text(payload.get("session_id"))
+    session_id = _text(payload.get("session_id"))
     name = payload.get("hook_event_name")
-    if not run_id:
+    if not session_id:
         return None
-    event = {"ts": _now(), "run_id": run_id}
+    run_id = current_run_id(project_dir_for(payload))
+    event = {"ts": _now(), "run_id": run_id or session_id}
+    if run_id:
+        event["session_id"] = session_id
     if name in ("SubagentStart", "SubagentStop"):
         agent = _text(payload.get("agent_type"))
         if not agent:

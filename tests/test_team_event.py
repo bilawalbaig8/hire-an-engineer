@@ -395,3 +395,67 @@ def test_check_run_pending_approval(tmp_path):
 
 def test_check_run_missing_folder(tmp_path):
     assert te.check_run(tmp_path / "nope")[0]
+
+
+# ---------- .agents/current_run ----------
+
+def _started(proj, run_id):
+    return run_cli("event", "run_started", "--run-id", run_id, "--goal", "g", "--project", str(proj))
+
+
+def _finished(proj, run_id):
+    return run_cli("event", "run_finished", "--run-id", run_id, "--status", "done",
+                   "--summary", "s", "--project", str(proj))
+
+
+def test_run_started_writes_current_run(tmp_path):
+    assert _started(tmp_path, "2026-10-23-shop-recover").returncode == 0
+    f = tmp_path / ".agents" / "current_run"
+    assert f.read_bytes() == b"2026-10-23-shop-recover\n"
+
+
+def test_run_finished_removes_current_run(tmp_path):
+    _started(tmp_path, "r1")
+    assert _finished(tmp_path, "r1").returncode == 0
+    assert not (tmp_path / ".agents" / "current_run").exists()
+
+
+def test_run_finished_of_other_run_keeps_current_run(tmp_path):
+    _started(tmp_path, "r2")
+    assert _finished(tmp_path, "r1").returncode == 0
+    assert (tmp_path / ".agents" / "current_run").read_text(encoding="utf-8").strip() == "r2"
+
+
+def test_run_finished_without_file_is_fine(tmp_path):
+    assert _finished(tmp_path, "r1").returncode == 0
+
+
+def test_refused_run_started_writes_no_current_run(tmp_path):
+    r = run_cli("event", "run_started", "--run-id", "r1", "--project", str(tmp_path))
+    assert r.returncode == 2
+    assert not (tmp_path / ".agents" / "current_run").exists()
+
+
+def test_run_started_overwrites_stale_current_run(tmp_path):
+    _started(tmp_path, "old")
+    _started(tmp_path, "new")
+    assert (tmp_path / ".agents" / "current_run").read_text(encoding="utf-8").strip() == "new"
+
+
+def test_other_events_do_not_touch_current_run(tmp_path):
+    _started(tmp_path, "r1")
+    run_cli("event", "handoff", "--run-id", "r1", "--from", "orchestrator", "--to", "architect",
+            "--project", str(tmp_path))
+    assert (tmp_path / ".agents" / "current_run").exists()
+
+
+def test_current_run_follows_log_folder(tmp_path):
+    log = tmp_path / "x" / "ev.jsonl"
+    run_cli("event", "run_started", "--run-id", "r9", "--goal", "g", "--log", str(log))
+    assert (tmp_path / "x" / "current_run").read_text(encoding="utf-8").strip() == "r9"
+
+
+def test_session_id_optional_in_team_event_validation():
+    ev = make("run_started")
+    assert te.validate_event_line({**ev, "session_id": "s1"}) == []
+    assert any("session_id" in e for e in te.validate_event_line({**ev, "session_id": ""}))

@@ -215,6 +215,7 @@ def validate_event(obj: dict) -> list[str]:
         for key in ("from", "to"):
             if not _is_str(obj.get(key)):
                 errors.append(f"{key}: required for handoff")
+    _opt_str(obj, "session_id", errors)
     _validate_event_fields(etype, obj, errors)
     return errors
 

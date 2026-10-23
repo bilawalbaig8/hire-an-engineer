@@ -131,3 +131,90 @@ def test_cli_reads_stdin_as_utf8(tmp_path):
     assert r.returncode == 0
     line = (proj / ".agents" / "events.jsonl").read_text(encoding="utf-8").splitlines()[0]
     assert json.loads(line)["path"] == "docs/café.md"
+
+
+# ---------- current_run: the boss's run id replaces the session id ----------
+
+def _hook_payload(proj):
+    return base("SubagentStart", cwd=str(proj), agent_type="architect")
+
+
+def _set_current_run(proj, text, age_hours=0):
+    f = proj / ".agents" / "current_run"
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_bytes(text.encode("utf-8") if isinstance(text, str) else text)
+    if age_hours:
+        import time
+        t = time.time() - age_hours * 3600
+        os.utime(f, (t, t))
+
+
+def test_current_run_switches_run_id_and_adds_session_id(tmp_path, monkeypatch):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    _set_current_run(tmp_path, "2026-10-23-shop-recover\n")
+    e = le.event_from_hook(_hook_payload(tmp_path))
+    assert e["run_id"] == "2026-10-23-shop-recover" and e["session_id"] == "abc123"
+    assert ac.validate_event(e) == []
+
+
+def test_current_run_applies_to_file_written(tmp_path, monkeypatch):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    _set_current_run(tmp_path, "run-7")
+    p = base("PostToolUse", cwd=str(tmp_path), tool_name="Write",
+             tool_input={"file_path": str(tmp_path / "a.md")})
+    e = le.event_from_hook(p)
+    assert e["run_id"] == "run-7" and e["session_id"] == "abc123" and e["path"] == "a.md"
+
+
+def test_no_current_run_behaves_as_before(tmp_path, monkeypatch):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    e = le.event_from_hook(_hook_payload(tmp_path))
+    assert e["run_id"] == "abc123" and "session_id" not in e
+
+
+def test_current_run_uses_claude_project_dir(tmp_path, monkeypatch):
+    other = tmp_path / "other"
+    other.mkdir()
+    monkeypatch.setenv("CLAUDE_PROJECT_DIR", str(tmp_path))
+    _set_current_run(tmp_path, "run-env")
+    e = le.event_from_hook(_hook_payload(other))
+    assert e["run_id"] == "run-env"
+
+
+def test_stale_current_run_ignored(tmp_path, monkeypatch):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    _set_current_run(tmp_path, "old-run", age_hours=13)
+    e = le.event_from_hook(_hook_payload(tmp_path))
+    assert e["run_id"] == "abc123" and "session_id" not in e
+    _set_current_run(tmp_path, "fresh-run", age_hours=11)
+    assert le.event_from_hook(_hook_payload(tmp_path))["run_id"] == "fresh-run"
+
+
+@pytest.mark.parametrize("content", ["", "   \n", b"\xff\xfe\x00bad", "a\x00b", "x" * 500])
+def test_garbled_current_run_ignored(tmp_path, monkeypatch, content):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    _set_current_run(tmp_path, content)
+    e = le.event_from_hook(_hook_payload(tmp_path))
+    assert e["run_id"] == "abc123" and "session_id" not in e
+
+
+def test_current_run_is_a_directory_no_crash(tmp_path, monkeypatch):
+    monkeypatch.delenv("CLAUDE_PROJECT_DIR", raising=False)
+    (tmp_path / ".agents" / "current_run").mkdir(parents=True)
+    assert le.event_from_hook(_hook_payload(tmp_path))["run_id"] == "abc123"
+
+
+def test_cli_writes_boss_run_id_with_session_id(tmp_path):
+    _set_current_run(tmp_path, "2026-10-23-shop-recover")
+    data = json.dumps(_hook_payload(tmp_path))
+    assert run_cli(SCRIPT, data, tmp_path).returncode == 0
+    line = json.loads((tmp_path / ".agents" / "events.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert line["run_id"] == "2026-10-23-shop-recover" and line["session_id"] == "abc123"
+
+
+def test_contract_session_id_optional_and_validated():
+    ev = {"ts": "2026-10-23T10:00:00Z", "type": "agent_start", "agent": "a", "run_id": "r"}
+    assert ac.validate_event(ev) == []
+    assert ac.validate_event({**ev, "session_id": "s1"}) == []
+    assert any("session_id" in e for e in ac.validate_event({**ev, "session_id": ""}))
+    assert any("session_id" in e for e in ac.validate_event({**ev, "session_id": 5}))

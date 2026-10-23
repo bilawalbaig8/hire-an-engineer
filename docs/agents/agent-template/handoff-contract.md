@@ -119,7 +119,7 @@ afterwards). This is the trail the owner can read to see what happened. Who writ
 - A specialist writes nothing to the log.
 
 Every line has `ts` (UTC, ISO 8601, e.g. `2026-10-22T10:00:00Z`), `type`, `agent` (who the line is
-about; the boss for run and approval lines) and `run_id` (one id shared by everything in the same job).
+about; the boss for run and approval lines) and `run_id` (one id shared by everything in the same job). An event may also carry an optional `session_id` (non-blank text): the Claude session that wrote it.
 Extra fields per type:
 
 | Type | Written by | Extra fields | Meaning |
@@ -204,5 +204,5 @@ Common fields, all events: `session_id`, `transcript_path`, `cwd`, `hook_event_n
 | `SubagentStop` | `agent_id`, `agent_type`, `agent_transcript_path`, `last_assistant_message`, `stop_hook_active` | `agent_stop`, `agent` = `agent_type` |
 | `PostToolUse` with `tool_name` `Write` or `Edit` | `tool_input.file_path` (absolute path), `tool_response`; Write also `tool_input.content`, Edit also `old_string`, `new_string`, `replace_all` | `file_written`, `path` = file path relative to the project |
 
-`run_id` is the hook's `session_id`. For `file_written`, `agent` is `agent_type` when present, otherwise `main`.
+`run_id` is the hook's `session_id`, unless `.agents/current_run` exists (written by `run_started`, removed by `run_finished`, ignored when older than 12 hours): then `run_id` is its content and the Claude session id goes in the extra `session_id` field. For `file_written`, `agent` is `agent_type` when present, otherwise `main`.
 Everything else is ignored. Not confirmed in the docs: any field beyond those listed; the script uses none.
