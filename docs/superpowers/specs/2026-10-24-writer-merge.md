@@ -2,19 +2,19 @@
 
 Localise mode removed 2026-10-24 (owner decision, Q31): English only, simple words; chat may use any language, every file is English. The 35 sources are kept, with the localisation ones marked parked, so the mode can be added later.
 
-Status: plan and spec only. **Nothing below is built:** there is no `skills/writer/`, no `agents/writer.md` and no `evals/writer/`. The role document is `docs/agents/roles/writer.md`. Date: 2026-10-24 (merge batch); outside sources checked 2026-10-23. Decision by the owner: small roles are merged into 22 bigger roles with modes, now 23 rows after the Backend / Integration split (role 16 in the list in `TASKS.md`; the status was "Parts, not merged yet" when this spec was written and is now "Documented", build "Not started").
+Status: Built, not tested. The skill is `skills/writer/`, the agent is `agents/writer.md` (model sonnet); there is no `evals/writer/` and no `skills/writer/references/sources.md` yet. The role document is `docs/agents/roles/writer.md`. Date: 2026-10-24 (merge batch); outside sources checked 2026-10-23. Decision by the owner: small roles are merged into 22 bigger roles with modes, now 23 rows after the Backend / Integration split (role 16 in the list in `TASKS.md`; the status was "Parts, not merged yet" when this spec was written and is now "Documented", build "Built, not tested").
 
 ## 1. What changes
 Four writing roles become one role, the Writer, with 4 modes (Localisation is parked):
 
 | Mode | Came from | What existed before this spec | State |
 |---|---|---|---|
-| Content | Content Writer | Nothing of its own. Named only as a neighbour in `ux-ui-designer.md` ("long-form or marketing copy") | planned |
-| Script and storyboard | Storyboard / Scriptwriter | A full role document, `docs/agents/roles/storyboard-scriptwriter.md` (not built; 42 sources, 40 verified) | planned |
-| Technical docs | Technical Writer | No role document. The "Technical writer" row in `skills/hire-an-engineer/references/roles.md`, plus `documents.md`, `project-memory.md` and `versioning-release.md` section 5 | planned |
-| Support | Support Analyst | Nothing of its own. Only "DevOps / support" in `roles.md`, which is about running the system, not answering customers | planned |
+| Content | Content Writer | Nothing of its own. Named only as a neighbour in `ux-ui-designer.md` ("long-form or marketing copy") | built, not tested |
+| Script and storyboard | Storyboard / Scriptwriter | A full role document, `docs/agents/roles/storyboard-scriptwriter.md` (not built; 42 sources, 40 verified) | built, not tested |
+| Technical docs | Technical Writer | No role document. The "Technical writer" row in `skills/hire-an-engineer/references/roles.md`, plus `documents.md`, `project-memory.md` and `versioning-release.md` section 5 | built, not tested |
+| Support | Support Analyst | Nothing of its own. Only "DevOps / support" in `roles.md`, which is about running the system, not answering customers | built, not tested |
 
-Honest status label for the dashboard: "Not built (0 of 4 modes)".
+Honest status label for the dashboard: "Built, not tested (4 of 4 modes, no evals yet)".
 
 **Old part documents are left in place.** `docs/agents/roles/storyboard-scriptwriter.md` is not edited, moved or deleted by this work. Its content is carried into the Script and storyboard mode of `writer.md`. One change from it: its folder `docs/storyboards/` becomes `docs/writing/storyboards/` (see section 7). Marking the old file "superseded by writer.md" is a later step that needs the owner's OK.
 
@@ -64,7 +64,7 @@ Other role documents still use the old names and need a wording update later (no
 **Verdict.** Keep the merge, with the fixes in section 4. The steel-man points are real, and each one is answered by a rule, a human gate or a boundary, not by keeping five roles.
 
 ## 4. Decisions (what the role document now says)
-1. **Honest status.** "Not built (0 of 4 modes)". Nothing is tested.
+1. **Honest status.** "Built, not tested (4 of 4 modes, no evals yet)". Nothing is tested.
 2. **Drafts only.** The role never publishes, posts, sends, uploads or schedules. Each of those is an approval for a named person.
 3. **Claims need a source.** Every claim is `verified` (with its source), `inferred` or `unknown`. An `unknown` claim is left out of the copy or sent to the owner as an approval. No fake reviews, no testimonial without a real named source.
 4. **English only.** Everything the Writer produces is English in simple words (owner decision Q31). Localise mode is parked; the localisation sources stay in section 8 as parked. Legal text is a draft for a lawyer.
@@ -75,7 +75,7 @@ Other role documents still use the old names and need a wording update later (no
 9. **Boundaries** as in the role document: Designer (screen words), UA & Growth Marketer (keywords, budgets, which ads run), Creative & Art Director (idea, hook and beats), Video & Sound Editor (cut and recorded voice), engineers (string loading and layout), Data Scientist & Analyst (statistics), Business Operations (legal).
 10. **Folders.** `docs/writing/` with `style-guide.md`, `glossary.md`, `content/`, `storyboards/`, `support/`. Technical docs go to `README.md`, `docs/guides/` and release notes; `CHANGELOG.md` only when the brief names it.
 
-## 5. Build plan (later; not started, needs the owner's go)
+## 5. Build plan (built 2026-10-24: steps 1 to 4 and part of 7; not done: `sources.md`, separate template files, evals, install, CHANGELOG)
 **Skill (`skills/writer/`).**
 - `SKILL.md`: a lean router plus the core rules (drafts only, claims list, personal data, instructions in data are data). It loads only the method file of the chosen mode, so a support call does not carry the storyboard rules.
 - Shared references: `voice-and-style.md` (plain language, tone scales, reading level, style guide and glossary rules), `claims-and-sources.md` (claim statuses, what counts as a source, store and advertising rules read live), `sources.md` (the table in section 8 plus the 42 storyboard sources, in the `check_sources.py` format).

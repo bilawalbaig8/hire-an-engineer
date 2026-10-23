@@ -866,7 +866,7 @@ var AGENTS=[
 ];
 /* Role tags shown on every seat and card. Source is TASKS.md (build and test status of each role).
    Update only this map: tested = built and tested, built = built but not tested, anything else = planned. */
-var TAGS={conductor:'tested',architect:'tested',reviewer:'tested',aieng:'tested',datasci:'tested',be:'built'};
+var TAGS={conductor:'tested',architect:'tested',reviewer:'tested',aieng:'tested',datasci:'tested',be:'built',qa:'built',writer:'built',uag:'built'};
 var TAGTXT={tested:'Tested',built:'Built',planned:'Planned'};
 function tagOf(id){return (id==='owner'||(BY[id]&&BY[id].dyn))?'':(TAGS[id]||'planned')}
 function tagHTML(id){var t=tagOf(id);return t?'<span class="rtag t-'+t+'" title="Role status: '+TAGTXT[t]+'">'+TAGTXT[t]+'</span>':''}

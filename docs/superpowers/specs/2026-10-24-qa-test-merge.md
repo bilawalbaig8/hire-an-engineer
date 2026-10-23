@@ -1,19 +1,19 @@
 # QA / Test Engineer: merged role (spec and plan)
 
-Status: plan and spec only. Nothing below is built: there is no `skills/qa-test-engineer/`, no `agents/qa-test-engineer.md` and no `evals/qa-test-engineer/`. The role document is `docs/agents/roles/qa-test-engineer.md` (rewritten for the merge). Date: 2026-10-24 (research done 2026-10-23). Decision by the owner: small roles are merged into 23 bigger roles with modes (role 9 in the list in `TASKS.md`).
+Status: Built, not tested. The skill is `skills/qa-test-engineer/`, the agent is `agents/qa-test-engineer.md`; there are no evals yet. The role document is `docs/agents/roles/qa-test-engineer.md` (rewritten for the merge). Date: 2026-10-24 (research done 2026-10-23). Decision by the owner: small roles are merged into 23 bigger roles with modes (role 9 in the list in `TASKS.md`).
 
 ## 1. What changes
 Five roles become one: QA / Test Engineer, Playtest QA, Art QA, Performance and Accessibility. Two of them had a role document (the old `qa-test-engineer.md` and `art-qa.md`); Playtest QA, Performance and Accessibility had no document, only lines in other roles (`game-technical-engineer.md` already points whole-game profiling and playtests to "QA / Test Engineer, Performance mode" and "Playtest mode"; `ux-ui-designer.md` points audits to an "Accessibility Specialist").
 
 | Mode | Came from | Document before | State |
 |---|---|---|---|
-| Test (Plan, Run, Automate; release gate; held-out AI cases) | QA / Test Engineer | written (old `qa-test-engineer.md`, 38 sources) | planned |
-| Playtest (games) | Playtest QA | none; new research | planned |
-| Art QA (Gate, Spot check, Re-check) | Art QA | written (`art-qa.md`, 40 sources) | planned |
-| Performance | Performance | none; new research | planned |
-| Accessibility | Accessibility | none; new research | planned |
+| Test (Plan, Run, Automate; release gate; held-out AI cases) | QA / Test Engineer | written (old `qa-test-engineer.md`, 38 sources) | built, not tested |
+| Playtest (games) | Playtest QA | none; new research | built, not tested |
+| Art QA (Gate, Spot check, Re-check) | Art QA | written (`art-qa.md`, 40 sources) | built, not tested |
+| Performance | Performance | none; new research | built, not tested |
+| Accessibility | Accessibility | none; new research | built, not tested |
 
-Honest status label for the dashboard: "Not started (0 of 5 modes)". The old part document `docs/agents/roles/art-qa.md` is left in place, unchanged, as background and as the full list of the Art QA sources. The old `qa-test-engineer.md` was rewritten; its 38 sources are kept in the new section 10. No other existing file was changed (`roster.md`, `CHANGELOG.md`, `ux-ui-designer.md`, `game-technical-engineer.md` are untouched; `TASKS.md` row 9 now reads "Documented / Not started"; see section 5, "Checks and housekeeping", for the follow-ups they need).
+Honest status label for the dashboard: "Built, not tested (5 of 5 modes, no evals yet)". The old part document `docs/agents/roles/art-qa.md` is left in place, unchanged, as background and as the full list of the Art QA sources. The old `qa-test-engineer.md` was rewritten; its 38 sources are kept in the new section 10. No other existing file was changed (`roster.md`, `CHANGELOG.md`, `ux-ui-designer.md`, `game-technical-engineer.md` are untouched; `TASKS.md` row 9 now reads "Documented / Not started"; see section 5, "Checks and housekeeping", for the follow-ups they need).
 
 ## 2. Why merge (steel-man for the merge)
 - All five share one job: run or look at the finished thing, compare it with a written expectation, and write a reproducible report. They share the same method (plan first, safe data, run, reproduce, report with evidence, say what was not run) and the same "done" rules.

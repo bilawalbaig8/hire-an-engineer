@@ -1,6 +1,6 @@
 # QA / Test Engineer
 
-Status: not built. There is no skill, agent file or eval for any mode yet. This page describes the whole merged role. The plan and spec for the merge is `docs/superpowers/specs/2026-10-24-qa-test-merge.md`.
+Status: built, not tested. The agent is agents/qa-test-engineer.md, the skill is skills/qa-test-engineer/, the roster row is in docs/agents/roster.md. There are no evals yet. This page describes the whole merged role. The plan and spec for the merge is `docs/superpowers/specs/2026-10-24-qa-test-merge.md`.
 
 The owner decided that five roles become one: QA / Test Engineer, Playtest QA, Art QA, Performance and Accessibility. It has 5 modes. **Test** proves that the product works and keeps working. **Playtest** checks a game with players. **Art QA** checks finished art and creative files against the style guide and the platform rules. **Performance** measures speed, memory and size against a budget. **Accessibility** checks that people with disabilities can use the product. The old part document `art-qa.md` stays in place as background; this page is the one that counts.
 

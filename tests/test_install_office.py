@@ -162,7 +162,7 @@ def test_installed_server_serves_live_ui_and_roster(installed_server):
     status, body = _get(port, "/")
     assert status == 200 and body == (ROOT / "docs/agents/visual-office/index.html").read_bytes()
     status, body = _get(port, "/roster")
-    assert status == 200 and [r["name"] for r in json.loads(body)] == ["architect", "code-reviewer", "ai-engineer", "data-scientist", "backend-engineer"]
+    assert status == 200 and [r["name"] for r in json.loads(body)] == ["architect", "code-reviewer", "ai-engineer", "data-scientist", "backend-engineer", "qa-test-engineer", "writer", "ua-growth-marketer"]
     assert _get(port, "/office_server.py")[0] == 404  # scripts are not served
 
 

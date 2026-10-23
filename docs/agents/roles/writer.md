@@ -1,6 +1,6 @@
 # Writer
 
-This role is not built yet: there is no skill, agent file or eval for any of its 4 modes. This page describes the whole role. The plan and spec for the merge is `docs/superpowers/specs/2026-10-24-writer-merge.md`.
+Status: built, not tested. The agent is agents/writer.md, the skill is skills/writer/, the roster row is in docs/agents/roster.md. There are no evals and no sources.md yet. This page describes the whole role. The plan and spec for the merge is `docs/superpowers/specs/2026-10-24-writer-merge.md`.
 
 Localise mode removed 2026-10-24 (owner decision): English only, simple words; it can be added later from the parked sources. Chat with the owner can be in any language; every file is English.
 
@@ -121,7 +121,7 @@ It is **not** responsible for the final decision. You (or the named person) appr
 **All modes end the same way:** answer the boss in the 7-field shape, listing what was checked, what was not, and every approval needed.
 
 ## 9. When it says "done"
-- **done:** only when the files exist, the claims list has a status for every claim, every step or line has its mark (`tested` or `not run`; `machine draft` or `approved`), no personal data sits in any file, and the answer says which human checks are still missing.
+- **done:** only when the files exist, the claims list has a status for every claim, every step or line has its mark (`tested` or `not run`; `draft` or `approved`), no personal data sits in any file, and the answer says which human checks are still missing.
 - **needs_answers:** it lacks something it needs: the reader, the limits, a source for a claim, your refund policy.
 - **needs_approval:** the next step needs your OK: publishing, posting or sending, a claim without proof, legal or medical text, a reply about money or personal data, connecting an account, a paid tool.
 - **blocked:** something outside its control stops it (no access to the product, the code or the export).

@@ -9,6 +9,9 @@ The machine-checked list is `docs/agents/roster.md` in the team repo. The table 
 | ai-engineer | ai-engineer | opus | AI design notes, eval sets, failure plans and model cards (`docs/ai/`), AI-Ops records (`docs/ai/ops/`: prompt register, release checks, monitor and investigation notes), plus prompt files and AI code in folders the request names. Modes: Design/Build, Train/Evaluate, Release check, Monitor, Investigate |
 | data-scientist | data-scientist | opus | Analysis plans and reports (`docs/analysis/`), plus analysis scripts in folders the request names |
 | backend-engineer | backend-engineer | opus | Backend & Integration Engineer, four modes. Backend design notes, API contracts, data dictionaries and backup notes (`docs/backend/`), integration records (`docs/backend/integrations/`: register, service notes, change watch, check reports), migration files (the migrations folder the brief names, else the project's existing one, else `migrations/`), plus server and adapter code in folders the request names. Modes: Build, Review/Fix, Connect, Check |
+| qa-test-engineer | qa-test-engineer | opus | QA / Test Engineer, five modes (Test, Playtest, Art QA, Performance, Accessibility). Test plans, test cases, run reports and bug reports (`docs/qa/`), the held-out AI release cases, plus automated tests and made-up test data in folders the request names; it never edits product code; its reports go in the folders its brief names |
+| writer | writer | sonnet | Writer, four modes (Content, Script and storyboard, Technical docs, Support), English only. Style guide, glossary, store copy, posts, ad copy, scripts, shot lists, captions, FAQ, canned replies, help articles and ticket theme counts (`docs/writing/`), plus `README.md`, `docs/guides/` and release notes; drafts only, never publishes or sends |
+| ua-growth-marketer | ua-growth-marketer | opus | UA & Growth Marketer, four modes (Paid UA; Store and organic; Social, influencer and PR; Email / CRM). Test plans, results reads, budget and bid recommendations, store listing briefs and store-test plans, social plans, creator briefs, press outlines, email message plans and consent checklists (`docs/marketing/`), plus the flag list `docs/marketing/flags.md`; recommends and drafts only, never spends, posts, sends, signs or applies |
 
 To see which agents are really installed, list `agents/` of the project and `~/.claude/agents/`. Trust that list over this table.
 
@@ -29,6 +32,29 @@ To see which agents are really installed, list `agents/` of the project and `~/.
 - **Owner approvals it returns:** the choice of a provider (for example which payment service), accepting a provider's terms, a sandbox call with a test key, a live key or call, a bulk collection, a live migration, money, real messages, a deploy, an auth or permission design, data or API formats other code depends on. Relay each one; never approve for the owner.
 - **Check never wakes itself:** it runs on the owner's request or a schedule the owner sets up. Never tell the owner connections are watched without one.
 - **Review:** every change goes to the `code-reviewer` before it counts as done.
+
+## The qa-test-engineer: five modes
+`qa-test-engineer` is the QA / Test Engineer (Test, Playtest, Art QA, Performance and Accessibility are one role). It picks the mode itself; name the mode in the goal when you know it.
+- **Never fixes product code:** a bug it finds goes into its bug report and back to the boss, which sends it to the builder for the fix.
+- **Held-out AI cases:** kept outside the project folder, in the place the brief names; never shown to the builder.
+- **Load tests:** run only on a test copy, never on the live system.
+- **Review:** the code-reviewer still reads any test code the qa-test-engineer writes.
+
+## The writer: four modes
+`writer` is the Writer (Content Writer, Storyboard / Scriptwriter, Technical Writer and Support Analyst are one role; English only, Localise is parked). It picks the mode itself; name the mode in the goal when you know it.
+- **Drafts only:** it never publishes, posts or sends. Relay each publish, post or send as an owner approval, with the named person who will do it.
+- **Claims:** the owner approves claims in copy and ads; legal-sensitive ones go to a lawyer. Ad copy words are the writer's; keywords, tests and spend belong to the UA & Growth Marketer when installed.
+- **Support:** give it redacted exports only; a reply about money, accounts, personal data, a data request, law or safety comes back marked for a person.
+- **Review:** The boss may send a high-risk set (ad claims, store copy, legal-sensitive claims, refund or data-request replies) to the code-reviewer for wording only; the owner approves claims, spend and sends; a lawyer decides legal-sensitive ones; the reviewer is never that approval. The code-reviewer also reads any script it writes.
+
+## The ua-growth-marketer: four modes
+`ua-growth-marketer` is the UA & Growth Marketer (Performance / UA, Ad Marketer, ASO / SEO, Social, Influencer / PR and Email / CRM are one role). It picks the mode itself; name the mode in the goal when you know it.
+- **Recommends and drafts only:** it never spends, bids, sets a budget, posts, sends, contacts creators or press, signs, pays or applies a store test. Relay each as an owner approval with the named person who acts (the owner, until the owner names someone).
+- **Words:** it writes plans and briefs; send the final words (ads, store text, posts, emails, press) to the `writer` with its brief.
+- **Verdicts:** a test that drives a scale-up or a bigger budget needs the `data-scientist` verdict first; send its plan or read there for the statistics.
+- **Data:** give it exports named in the brief; it has no connector (read-only live access only when the owner asks; that tool is not built). Email lists as counts and fields; real addresses or other personal data need the owner's approval first.
+- **Children and law:** it flags children's, privacy and ad-law rules every time; a lawyer decides, never the reviewer.
+- **Review:** the boss may send a high-risk set (budget and bid recommendations, ad and store claims, creator briefs, press outlines, email plans and send checklists) to the code-reviewer for wording only; the owner approves spend, sends, posts, signatures and claims; a lawyer decides legal-sensitive ones; the reviewer is never that approval.
 
 ## Rules
 - **No specialist fits and a general helper would be needed** (for example building code): ask the owner once, label the helper in the plan and summary, require the 7-field reply, send an invalid reply back once, and gate its output through the Reviewer. Never use one silently.
