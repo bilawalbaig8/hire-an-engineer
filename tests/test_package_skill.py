@@ -104,3 +104,11 @@ def test_package_includes_scripts_subfolder_but_not_pycache(tmp_path):
         listing = names(out / f"alpha{ext}")
         assert "alpha/scripts/tool.py" in listing
         assert not any("__pycache__" in n for n in listing)
+
+
+def test_main_rejects_a_folder_without_skill_md(tmp_path, capsys):
+    import package_skill as ps
+    (tmp_path / "nope").mkdir()
+    assert ps.main(["package_skill.py", str(tmp_path / "nope"), str(tmp_path / "out")]) == 2
+    assert "SKILL.md" in capsys.readouterr().err
+    assert not (tmp_path / "out").exists()

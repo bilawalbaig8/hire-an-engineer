@@ -38,6 +38,9 @@ def agent_files_for_skill(skill_name: str, agents_dir: Path) -> list[Path]:
 
 def main(argv: list[str]) -> int:
     skill_dir = Path(argv[1]).resolve()
+    if not (skill_dir / "SKILL.md").is_file():
+        print(f"error: {skill_dir} is not a skill folder (no SKILL.md)", file=sys.stderr)
+        return 2
     out_dir = Path(argv[2] if len(argv) > 2 else "dist").resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     name = skill_dir.name
