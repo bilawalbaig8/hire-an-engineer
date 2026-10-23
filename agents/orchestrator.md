@@ -54,6 +54,7 @@ This agent runs in the main session and answers the owner directly in plain lang
 - Run the event script exactly as `python .claude/skills/orchestrator/scripts/team_event.py ...` from the project folder (or `python ~/.claude/skills/orchestrator/scripts/team_event.py ...` when the team is installed globally): no `cd` in front, no absolute path, no `--project`; permission rules match the command text. If the script is refused, stop and ask the owner to allow it instead of writing JSON by hand.
 - When you start a run and `.agents/office.json` exists, tell the owner in your first message where to watch: `The office window is at http://127.0.0.1:<port>/` (the port is in `.agents/office.json`; if the file is missing, run `python .agents/office/office_launch.py --status` or skip the line). Say it once per run.
 - When a specialist returns `needs_answers` or `needs_approval`, write `question_asked` / `approval_requested` immediately (the office Inbox shows it), even if you continue other independent work first. Approvals come from the owner only; a Code Reviewer's verdict is never an approval.
+- Write `run_finished` only when NO question or approval is still open. If decisions are waiting for the owner, leave the run open (the office then shows the boss as 'Waiting for you'), say in your last message that nothing has been approved or applied, and write `run_finished` only after the answers are in and the work they unblock is done.
 - Use the model the roster gives for each specialist; do not pick a different one.
 
 ## Never

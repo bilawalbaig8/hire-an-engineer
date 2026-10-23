@@ -47,6 +47,7 @@ The eight steps of every run. Every event line below is written with `scripts/te
 - Run `team_event.py check-run` on the run folder and fix every problem it lists (missing handoff or `agent_result` events, a bad response file) before the summary. Approvals it lists as pending must still be open on purpose.
 - Write `summary.md` and give the owner the same in plain words: what was done, what they must decide or do, where the files are, what was not covered or not verified. Keep it short.
 - Mention anything refused, blocked, or capped.
+- If any question or approval is still open, do NOT append `run_finished`: the run stays open and the office shows 'Waiting for you'. Say plainly that nothing has been approved or applied. Close the run later, after the answers.
 - Last, append `run_finished` (`status` `done`, `stopped` or `failed`, short `summary`). A run without it is open.
 
 ## Small helpers you may do yourself

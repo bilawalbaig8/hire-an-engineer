@@ -1477,7 +1477,7 @@ function closeRequest(e,t){
   resolveCard(id);sortCards();
 }
 function markStale(){
-  var stale=S.finished||(S.job&&S.job!==newestKey());
+  var stale=!!(S.job&&S.job!==newestKey());
   if(!stale)return;
   S.inboxOrder.forEach(function(id){
     var r=S.inbox[id];if(r.status!=='pending')return;
@@ -1496,6 +1496,26 @@ function bossReply(e){
   var st=$('[data-role=state]',c);if(st)st.textContent='Answered. Your decision is still needed.';
 }
 
+function bossStatus(e){
+  var c=S.agents.conductor;if(!c)return;
+  if(S.finished){
+    var np=pendingCount();
+    if(c.state==='waiting'){if(np===0){c.state='done';c.text=(S.summary||'Job finished').slice(0,120)}else c.text='Waiting for you: '+np+' decision'+(np>1?'s':'')}
+    return;
+  }
+  if(c.state!=='working'&&c.state!=='waiting')return;
+  var busy=[],id,txt;
+  for(id in S.agents){if(id==='conductor'||id==='owner')continue;if(S.agents[id].state==='working')busy.push(sn(id))}
+  var n=pendingCount();
+  if(busy.length&&c.state==='waiting')c.state='working';
+  if(busy.length)txt='Waiting for '+busy.slice(0,2).join(' and ')+(busy.length>2?' +'+(busy.length-2):'');
+  else if(n>0){c.state='waiting';txt='Waiting for you: '+n+' decision'+(n>1?'s':'')}
+  else if(e.type==='handoff'&&e.from==='conductor'&&e.to!=='conductor')txt='Briefing '+sn(e.to);
+  else if(e.type==='agent_result'&&e.agent!=='conductor')txt='Checking '+sn(e.agent)+"'s answer";
+  else if(e.type==='file_written'&&e.agent==='conductor')txt='Writing the run record';
+  else return;
+  c.text=txt.slice(0,120);
+}
 function fire(e){
   var A=S.agents,t=e.t,a=A[e.agent];
   if(!a)return;
@@ -1508,6 +1528,7 @@ function fire(e){
       S.finished=true;S.ended=true;S.status=e.status||'done';S.summary=e.summary;clearHold(a);
       if(S.status==='failed'){a.state='blocked';a.text=e.summary||'Job failed'}
       else if(S.status==='stopped'){a.state='idle';a.text=e.summary||'Job stopped'}
+      else if(pendingCount()>0){a.state='waiting';a.text='Waiting for you: '+pendingCount()+' decision'+(pendingCount()>1?'s':'')}
       else{a.state='done';a.text=e.summary||'Job finished'}
       a.since=t;a.touched=true;markStale();break;
     case 'agent_start':
@@ -1541,6 +1562,7 @@ function fire(e){
       clearHold(a);if(a.state==='blocked'){a.state='idle';a.text='Block cleared';a.since=t}break;
     case 'boss_reply':bossReply(e);break;
   }
+  bossStatus(e);
   setOwner();
   if(!S.batch)S.stale30=false;
   S.lastT=Math.max(S.lastT,t);
