@@ -46,7 +46,7 @@ def main(argv: list[str]) -> int:
         target = out_dir / f"{name}{ext}"
         with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as z:
             for f in sorted(skill_dir.rglob("*")):
-                if f.is_file() and not f.name.startswith("."):
+                if f.is_file() and not f.name.startswith(".") and "__pycache__" not in f.parts:
                     z.write(f, Path(name) / f.relative_to(skill_dir))
             for a in agents:
                 z.write(a, Path("agents") / a.name)

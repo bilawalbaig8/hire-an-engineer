@@ -1,6 +1,6 @@
 # Run method
 
-The eight steps of every run. Skip steps a tiny or small job does not need, but never skip step 6 or 7 when they apply.
+The eight steps of every run. Every event line below is written with `scripts/team_event.py` of this skill (commands in `run-records.md`), never by hand. Skip steps a tiny or small job does not need, but never skip step 6 or 7 when they apply.
 
 ## 1. Intake
 - Restate the job in one or two plain sentences and the owner's definition of done.
@@ -39,6 +39,7 @@ The eight steps of every run. Skip steps a tiny or small job does not need, but 
 - Anything that changes code or files passes the Reviewer first (see `quality-gates.md`). Findings go back to the producing specialist as a new request. After 2 fix rounds, report the open findings instead of looping.
 
 ## 8. Close
+- Run `team_event.py check-run` on the run folder and fix every problem it lists (missing handoff or `agent_result` events, a bad response file) before the summary. Approvals it lists as pending must still be open on purpose.
 - Write `summary.md` and give the owner the same in plain words: what was done, what they must decide or do, where the files are, what was not covered or not verified. Keep it short.
 - Mention anything refused, blocked, or capped.
 - Last, append `run_finished` (`status` `done`, `stopped` or `failed`, short `summary`). A run without it is open.

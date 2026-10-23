@@ -109,3 +109,13 @@ def test_cli_exit_1_on_differs(src, dest, monkeypatch):
     (dest / "agents" / "architect.md").write_text("changed", encoding="utf-8")
     assert ia.main(["--dest", str(dest)]) == 1
     assert ia.main(["--dest", str(dest), "--force"]) == 0
+
+
+def test_scripts_subfolder_is_copied(src, dest):
+    scripts = src / "skills" / "demo" / "scripts"
+    (scripts / "__pycache__").mkdir(parents=True)
+    (scripts / "tool.py").write_text("print(1)", encoding="utf-8")
+    (scripts / "__pycache__" / "tool.pyc").write_bytes(b"x")
+    ia.install(src, dest)
+    assert (dest / "skills" / "demo" / "scripts" / "tool.py").read_text(encoding="utf-8") == "print(1)"
+    assert not (dest / "skills" / "demo" / "scripts" / "__pycache__").exists()

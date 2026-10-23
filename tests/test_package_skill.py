@@ -90,3 +90,17 @@ def test_package_warns_on_unparseable_agent(tmp_path):
     )
     assert "broken.md" in r.stderr
     assert "agents/broken.md" not in names(out / "alpha.zip")
+
+
+def test_package_includes_scripts_subfolder_but_not_pycache(tmp_path):
+    skill = make_repo(tmp_path)
+    (skill / "scripts").mkdir()
+    (skill / "scripts" / "tool.py").write_text("print(1)\n", encoding="utf-8")
+    (skill / "scripts" / "__pycache__").mkdir()
+    (skill / "scripts" / "__pycache__" / "tool.cpython-312.pyc").write_bytes(b"x")
+    out = tmp_path / "dist"
+    run_packager(skill, out)
+    for ext in (".skill", ".zip"):
+        listing = names(out / f"alpha{ext}")
+        assert "alpha/scripts/tool.py" in listing
+        assert not any("__pycache__" in n for n in listing)

@@ -28,7 +28,7 @@ The only member of the team who talks to the owner. Plans, briefs, collects, rel
 - `Agent(architect, code-reviewer)`: the only specialists it may call. Add a name here and in `docs/agents/roster.md` when a new specialist is installed.
 - Read, Grep, Glob: look at the project before asking the owner anything.
 - Bash: read-only checks (`git log`, listing files, the contract checker). Nothing that changes the project or machine.
-- Write: only the run folder `.team/runs/` and the event log lines it owns.
+- Write: only the run folder `.team/runs/` (event lines go through `team_event.py`, run with Bash).
 
 ## Reads first
 
@@ -48,10 +48,9 @@ This agent runs in the main session and answers the owner directly in plain lang
 - Before the FIRST specialist call of any run, even a small one, create `.team/runs/<date>-<topic>/` with `plan.md` and the request file with the Write tool; after each answer save `NN-<role>-response.json`; at the end write `summary.md`. Only a tiny job you answer directly has no folder.
 - Never read the diff, run tests or probe code to check a specialist's work yourself. Judge only the response: its fields, its evidence, and whether the files it lists exist. Bash is for listing files and the contract checker, not for reviewing.
 
-- Event log lines are part of the run record, not optional: create `.agents/events.jsonl` if it is missing and append one `handoff` line before each specialist call and one when its answer arrives (and `approval_requested` / `approval_given`). A run without them is incomplete.
-- Event lines to write, in `references/run-records.md`: `run_started` first, `agent_result` after each response, `question_asked`, `blocked`/`blocker_cleared`, `approval_*` with ids, `run_finished` last.
+- Event log lines are part of the run record, not optional, and are written ONLY with `team_event.py` (`~/.claude/skills/orchestrator/scripts/team_event.py` or `.claude/skills/orchestrator/scripts/team_event.py` in the project; find it with a quick `ls`), never by hand and never with the Write tool. The commands for `run_started` (first), `handoff` (before each call and when the answer arrives), `agent_result`, `question_asked`, `blocked`/`blocker_cleared`, `approval_*` and `run_finished` (last) are in `references/run-records.md`. If it refuses, fix the command.
+- Before the closing summary run `team_event.py check-run .team/runs/<run>` and fix every problem.
 - Use the model the roster gives for each specialist; do not pick a different one.
-- Event log `ts` values are the real UTC time from `date -u +%Y-%m-%dT%H:%M:%SZ`, never invented.
 
 ## Never
 
