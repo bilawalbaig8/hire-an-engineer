@@ -50,9 +50,9 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 4.3 Evals: all 12 cases pass (headless, stub and real specialists); fixes made along the way: run folder for every run, no self-checking, real UTC timestamps, event log always written, roster models, who reviews designs. Complex end-to-end test on the shop code with the real team passed (7 specialist calls, ADR written and reviewed 3 times)
 - [x] 4.4 CHANGELOG entries for code-reviewer and orchestrator (done)
 - [?] 4.5 Release orchestrator 0.1.0 (only when the owner says; nothing is released now)
-- [~] 4.6 Hardening from the thinking-skills review and the live office test: team_event.py (boss writes events with a script, not by hand) + check-run (automatic run folder gate) - in progress
-- [ ] 4.7 Permission rules snippet: specialists cannot write .agents/ (no forged events), Reviewer gets a safe test-run allowlist; test it in a temp project
-- [ ] 4.8 Re-run the 14 Code Reviewer evals after the 18 fixes; verify the 37 unverified Architect sources and deepen the game-engine references
+- [x] 4.6 Hardening: team_event.py (boss writes events with a script, validated, real UTC time) + check-run (automatic run folder gate), hook and boss events share one run_id (done, 313+ tests)
+- [x] 4.7 Permission rules: specialists cannot write .agents/ (tested in main session and subagent); event script allowed; headless needs --allowedTools (tested); caveats in docs/agents/PERMISSIONS.md
+- [x] 4.8 Code Reviewer 14 of 14 evals pass after fixes; Architect sources 122 of 123 verified (+78 game sources); game references deepened (4 files), architect asks architecture-changing questions before writing files
 
 ## Phase 5 Remaining roles
 
@@ -71,22 +71,22 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 
 ## Phase 6 Integration
 
-- [ ] 6.1 Router line in hire-an-engineer pointing to the team
-- [ ] 6.2 Plugin bundle (skills + agents) if worth it
-- [ ] 6.3 End-to-end test: build a small real app with the whole team
+- [x] 6.1 Router row in hire-an-engineer pointing to the team (done in repo and installed copy; CHANGELOG 0.4.0 Unreleased); branch merged with main (0.2.1, 0.3.0)
+- [x] 6.2 Plugin bundle: ruled not worth it yet (install scripts copy skills, agents and the office with --only / --project; revisit when more roles exist)
+- [?] 6.3 End-to-end test building a small real app with the whole team: needs engineer roles (not built yet); an analysis, design and review run on real code passed several times
 - [?] 6.3a FIRST finish the roles the owner names for the real trial (owner will say which), THEN real-project trial: run the team on one of the owner's real projects (game or app), 3 real jobs, log every miss, fix the skills
-- [ ] 6.4 Docs, CHANGELOG, release hire-an-engineer 0.3.0
+- [?] 6.4 Docs (INSTALL, PERMISSIONS, LAUNCH, INSTALL-OFFICE) and CHANGELOG done; release of the agents (0.1.0 each) and hire-an-engineer 0.4.0 only when the owner says
 
 ## Phase 7 Visual office
 
 - [x] 7.1 Design final: mock v2 (docs/agents/visual-office/mock-v2.html) approved by the owner on 2026-10-23 (all three themes and layouts stay switchable; no more mocks). Implement and test this; new roles are added to the office as they are built
 - [x] 7.2 Implementation spec written: docs/agents/visual-office/event-mapping.md (event to scene mapping, new boss events, role registry, test plan) and research-channel.md (window to session channel options)
-- [~] 7.3 Event pipeline: local server done (scripts/office_server.py, 24 tests: /events, /roster, /state, /answer); new boss events in the contract and boss in progress; hook launcher in progress
-- [~] 7.4 Live UI from mock v2 (docs/agents/visual-office/index.html) in progress
-- [ ] 7.5 Boss opens the office automatically when a team run starts; owner answers approvals inside it
-- [ ] 7.6 Test with a real problem: give the boss a task, specialists work, check the result is correct
-- [ ] 7.7 Check the office tells the truth: replay the events and compare with what really happened; fix mismatches
-- [ ] 7.8 Package, install script, docs
+- [x] 7.3 Event pipeline done: server (/events /roster /state /answer), hook launcher, boss events via team_event.py, one shared run_id
+- [x] 7.4 Live UI built from mock v2 (docs/agents/visual-office/index.html), tested on real logs in all 3 themes and layouts
+- [x] 7.5 Boss opens the office automatically (SessionStart hook, tested headless, server survives the session); answers in the window or the terminal via the office MCP tool (42 tests, real CLI tested; interactive behaviour and Desktop app unverified)
+- [x] 7.6 Tested with real problems: the boss, Architect and reviews on the shop code, 4 live runs; found and fixed 8 problems (event format, permissions, install location, run_id, files tab)
+- [x] 7.7 Truth check: replayed a real log against a reference timeline (25 cut points, 9 theme/layout combinations): see docs/agents/visual-office/truth-check-report.md
+- [x] 7.8 Package and install: scripts/install_office.py (office into any project) + INSTALL-OFFICE.md; verified on a fresh project: install, boss run (one run_id, check-run OK), hook launch
 
 ## Roles (66)
 
