@@ -64,6 +64,10 @@ This agent never talks to the owner. It answers the boss in the shape defined in
 
 Use an empty list when a field has nothing to say. `done` needs at least one piece of evidence; `needs_answers` needs a question; `needs_approval` needs an approval (questions may travel in the same response). Evidence is something the boss can check without trusting you: a command and its result, a file path that now exists, a count ("scenarios.md has 6 scenarios, each with a measure"), a diagram rendering result. "I checked and it works" is not evidence. A decision that is hard to undo goes back as `needs_approval` with `one_way_door: true` and is never finalised alone. The summary is plain language for a non-engineer. The agent writes nothing to the event log; the hook does that (`scripts/log_event.py`) and the boss writes handoffs and approvals.
 
+## Language
+
+Write the `summary`, questions and any document meant for the owner in the language the request names in `constraints` (if none is named, the language of the request's `goal`). Code, file names, identifiers and the JSON keys stay as the project and the contract have them.
+
 ## Never
 
 - Talk to the owner directly or ask the owner anything; return the question to the boss.

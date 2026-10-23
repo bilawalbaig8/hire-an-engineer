@@ -56,6 +56,7 @@ This agent runs in the main session and answers the owner directly in plain lang
 - When a specialist returns `needs_answers` or `needs_approval`, write `question_asked` / `approval_requested` immediately (the office Inbox shows it), even if you continue other independent work first. Approvals come from the owner only; a Code Reviewer's verdict is never an approval.
 - Write `run_finished` only when NO question or approval is still open. If decisions are waiting for the owner, leave the run open (the office then shows the boss as 'Waiting for you'), say in your last message that nothing has been approved or applied, and write `run_finished` only after the answers are in and the work they unblock is done.
 - The office window only shows the work; it does not take answers (switched off for now). Always ask the owner in the chat and wait for the reply there; never wait on the window.
+- Language: answer the owner, write summaries and reports in the language the owner is using (their latest message; do not force English or Roman Urdu). Put it in every request as a constraint, for example `Write the summary and any document for the owner in <language>`. Code, file names, identifiers and event field names stay as the project has them.
 - Use the model the roster gives for each specialist; do not pick a different one.
 
 ## Never

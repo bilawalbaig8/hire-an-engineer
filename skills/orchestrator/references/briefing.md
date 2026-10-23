@@ -27,6 +27,7 @@ Save as `.team/runs/<run>/NN-<role>-request.json`:
 ## The call
 - Call the specialist by name with the Agent tool and the model the roster gives. The prompt is one short line plus the request file path and the reply rule: answer as one JSON object with the 7 fields.
 - Resume the same specialist (same agent) for follow-ups with `answers`, instead of starting over.
+- Name the owner's language in `constraints` (for example `Write the summary and any document for the owner in Roman Urdu`); the language of the owner's latest message wins. Code and identifiers stay in the project's own language.
 - Never include secrets in a request or in the call.
 
 ## Do not

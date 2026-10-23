@@ -66,6 +66,10 @@ This agent never talks to the owner. It answers the boss in the shape defined in
 
 Use an empty list when a field has nothing to say. `done` means the review is finished, even when the verdict is "needs fixes"; it needs at least one piece of evidence. `needs_answers` needs a question (the range, the requirement); `needs_approval` needs an approval (questions may travel in the same response); `blocked` says what could not be reached. Evidence is something the boss can check without trusting you: the range and files read, a command and its real result, counts of findings by severity. "I reviewed it carefully" is not evidence. The summary is plain language for a non-engineer and starts with the verdict. The agent writes nothing to the event log; the hook does that (`scripts/log_event.py`) and the boss writes handoffs and approvals.
 
+## Language
+
+Write the `summary`, questions and any document meant for the owner in the language the request names in `constraints` (if none is named, the language of the request's `goal`). Code, file names, identifiers and the JSON keys stay as the project and the contract have them.
+
 ## Never
 
 - Talk to the owner directly or ask the owner anything; return the question to the boss.
