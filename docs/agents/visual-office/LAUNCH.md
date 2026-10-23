@@ -33,3 +33,9 @@ State lives in `<project>/.agents/office.json`: `{pid, port, started, opened}`. 
 - Hooks inside the Claude Desktop app (docs say it reads the same settings files; hook execution and browser opening there were not tested).
 - That the detached server survives the end of the Claude session on every Windows setup (tested only with the unit tests, which use a real subprocess).
 - Whether a `SessionStart` hook may print `hookSpecificOutput`: not needed, so the script prints nothing.
+
+## Starting the boss and installing the team
+- Start the boss in the project folder with `claude --agent orchestrator`.
+- Install per project for headless runs, evals and automation: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer`. Global install (`--only NAME`, copies to `~/.claude`) is for interactive sessions.
+- Headless runs (`claude -p ...`) refuse to read `~/.claude/skills/`, so a global install is not enough there (see PERMISSIONS.md).
+- After installing, run again with `--dry-run` and expect `0 new, N same, 0 differ`. Never use `--force` on hire-an-engineer files.

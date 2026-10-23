@@ -41,3 +41,10 @@ Plain-language guide to `permissions-snippet.json`. It is optional, and it is no
 - https://code.claude.com/docs/en/permissions (evaluation order deny, ask, allow; path rule syntax; Bash matching; redirects; "Read and Edit deny rules apply to ... built-in file tools ... not to ... a Python or Node script")
 - https://code.claude.com/docs/en/settings (scopes, precedence, lists merge across files)
 - https://code.claude.com/docs/en/sub-agents (subagents inherit permission rules; deny rules apply to the main conversation and subagents)
+
+## Headless runs cannot read `~/.claude/skills/` (tested)
+- In a headless run (`claude -p ...`) reading files under `~/.claude/skills/` is refused. Permission rules did not help: `Read(~/.claude/skills/**)`, an absolute `//c/...` form and `additionalDirectories` were all still refused.
+- Result: the boss could not read its own skill files and improvised (wrong event format, `.md` requests).
+- For headless runs, evals and automation use the project-local install: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer`.
+- In an interactive session the person is asked once and can allow the read.
+- Check an install with `--dry-run` (`0 new, N same, 0 differ`). Never use `--force` on hire-an-engineer files; use `--only`.

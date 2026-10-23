@@ -50,3 +50,11 @@ python scripts/install_agents.py
 - Use `--dest PATH` to install somewhere else, and `--verbose` to also list unchanged files.
 - Running it again when nothing changed writes zero files.
 - It never removes stale files: if you delete a skill file or agent in the repo, delete the installed copy by hand.
+
+### Installing the agent team: global or project-local
+- Global: `python scripts/install_agents.py --only NAME` copies to `~/.claude`. Use it in normal interactive sessions, where you can approve a read when asked.
+- Project-local: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer` puts the files inside the project folder.
+- Headless runs (`claude -p ...`), evals and automation: use the project-local install. A headless run refuses to read `~/.claude/skills/`, and permission rules did not help (tested: `Read(~/.claude/skills/**)`, an absolute `//c/...` path and `additionalDirectories` were all still refused). The boss then cannot read its own skill files and improvises (wrong event format, `.md` requests). In an interactive session you are asked once and can allow it.
+- Start the boss in the project folder with `claude --agent orchestrator`.
+- After installing, run the installer again with `--dry-run`; it should report `0 new, N same, 0 differ`.
+- Never use `--force` on hire-an-engineer files; use `--only`.
