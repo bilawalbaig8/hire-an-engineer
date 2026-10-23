@@ -44,6 +44,7 @@ def test_install_creates_everything(tmp_path):
     assert set(s["hooks"]) == {"SubagentStart", "SubagentStop", "PostToolUse", "SessionStart"}
     assert "Write(/.agents/**)" in s["permissions"]["deny"]
     assert "allow" not in s["permissions"] and "ask" not in s["permissions"]
+    assert s["agent"] == "orchestrator"  # plain `claude` in this project starts as the boss
     assert s["hooks"]["SessionStart"][0]["hooks"][0]["async"] is True
     assert "${CLAUDE_PROJECT_DIR}/.agents/office/log_event.py" in s["hooks"]["SubagentStart"][0]["hooks"][0]["command"]
     assert not (tmp_path / ".mcp.json").exists()  # window answers are off: no MCP server by default
@@ -181,3 +182,23 @@ def test_log_event_hook_works_from_installed_copy(tmp_path):
                        capture_output=True, text=True, env=env, cwd=str(tmp_path))
     assert r.returncode == 0, r.stderr
     assert (tmp_path / ".agents" / "events.jsonl").is_file()
+
+
+def test_no_default_agent_flag_leaves_the_agent_setting_out(tmp_path):
+    r = run(tmp_path, "--no-default-agent")
+    assert r.returncode == 0, r.stderr
+    assert "agent" not in read(tmp_path / ".claude" / "settings.json")
+
+
+def test_an_existing_different_agent_setting_is_kept_and_reported(tmp_path):
+    (tmp_path / ".claude").mkdir()
+    (tmp_path / ".claude" / "settings.json").write_text(json.dumps({"agent": "my-agent"}), encoding="utf-8")
+    r = run(tmp_path)
+    assert r.returncode == 0, r.stderr
+    assert read(tmp_path / ".claude" / "settings.json")["agent"] == "my-agent"
+    assert "my-agent" in r.stdout and "orchestrator" in r.stdout
+
+
+def test_default_agent_is_idempotent(tmp_path):
+    run(tmp_path)
+    assert "all same" in run(tmp_path).stdout

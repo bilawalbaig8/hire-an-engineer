@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+BOSS_AGENT = "orchestrator"
 OFFICE_REL = Path(".agents") / "office"
 SCRIPTS = ("office_server.py", "office_launch.py", "office_mcp.py", "log_event.py", "agent_contract.py", "check_roster.py")
 # (source relative to the repo, destination relative to .agents/office/)
@@ -86,9 +87,13 @@ def _optional_lines(src_root: Path) -> list[str]:
     return [f"allow: {r}" for r in perms.get("allow", [])] + [f"ask:   {r}" for r in perms.get("ask", [])]
 
 
-def merge_settings(data: dict, deny: list[str]) -> tuple[dict, list[str]]:
+def merge_settings(data: dict, deny: list[str], default_agent: bool = True) -> tuple[dict, list[str]]:
     """Add the office hooks and deny rules to a settings dict; returns (dict, list of what was added)."""
     added: list[str] = []
+    if default_agent:  # plain `claude` in this project then starts as the boss
+        if "agent" not in data:
+            data["agent"] = BOSS_AGENT
+            added.append(f"agent {BOSS_AGENT}")
     hooks = data.setdefault("hooks", {})
     if not isinstance(hooks, dict):
         raise ValueError("settings.json: 'hooks' is not an object; nothing was changed")
@@ -120,7 +125,7 @@ def merge_settings(data: dict, deny: list[str]) -> tuple[dict, list[str]]:
     return data, added
 
 
-def plan(src_root: Path, project: Path, with_mcp: bool = False) -> list[Item]:
+def plan(src_root: Path, project: Path, with_mcp: bool = False, default_agent: bool = True) -> list[Item]:
     items: list[Item] = []
     office = project / OFFICE_REL
     for rel_src, rel_dst in FILES:
@@ -134,7 +139,10 @@ def plan(src_root: Path, project: Path, with_mcp: bool = False) -> list[Item]:
     # settings.json
     sp = project / ".claude" / "settings.json"
     existing = _load_json(sp)
-    data, added = merge_settings(existing if existing is not None else {}, _deny_rules(src_root))
+    data, added = merge_settings(existing if existing is not None else {}, _deny_rules(src_root), default_agent)
+    if default_agent and existing is not None and existing.get("agent") not in (None, BOSS_AGENT):
+        items.append(Item("conflict", f".claude/settings.json: 'agent' is already {existing.get('agent')!r}, left as it is "
+                                      f"(set it to {BOSS_AGENT!r} yourself if you want plain `claude` to start the boss)", dst=sp))
     if existing is None:
         items.append(Item("new", ".claude/settings.json (hooks + deny rule)", dst=sp, text=_dump(data)))
     elif added:
@@ -161,10 +169,11 @@ def plan(src_root: Path, project: Path, with_mcp: bool = False) -> list[Item]:
     return items
 
 
-def install(src_root: Path, project: Path, force: bool = False, dry_run: bool = False, with_mcp: bool = False) -> int:
+def install(src_root: Path, project: Path, force: bool = False, dry_run: bool = False, with_mcp: bool = False,
+            default_agent: bool = True) -> int:
     if not project.is_dir():
         raise NotADirectoryError(f"project folder not found: {project}")
-    items = plan(src_root, project, with_mcp=with_mcp)
+    items = plan(src_root, project, with_mcp=with_mcp, default_agent=default_agent)
     for it in items:
         if it.kind != "same":
             print(f"{it.kind} {it.label}")
@@ -212,9 +221,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--with-mcp", action="store_true",
                    help="also add the office MCP server to .mcp.json (only needed when window answers are switched on)")
+    p.add_argument("--no-default-agent", action="store_true",
+                   help="do not set \"agent\": \"orchestrator\" (by default plain `claude` in the project starts as the boss)")
     args = p.parse_args(argv)
     try:
-        install(REPO_ROOT, args.project.resolve(), force=args.force, dry_run=args.dry_run, with_mcp=args.with_mcp)
+        install(REPO_ROOT, args.project.resolve(), force=args.force, dry_run=args.dry_run, with_mcp=args.with_mcp, default_agent=not args.no_default_agent)
     except FileExistsError as e:
         print(e, file=sys.stderr)
         return 1

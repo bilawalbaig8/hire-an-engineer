@@ -39,3 +39,6 @@ To remove: delete `.agents/office/`, the office hooks in `.claude/settings.json`
 
 ## Window answers are off by default
 The office is a viewer. `install_office.py` no longer adds the office MCP server to `.mcp.json` (use `--with-mcp` if you switch window answers on), and `office_server.py` rejects `POST /answer` unless it is started with `--enable-answers`.
+
+## Plain `claude` starts the boss
+`install_office.py` sets `"agent": "orchestrator"` in the project's `.claude/settings.json`, so you only type `claude` in the project folder (no `--agent`). The boss answers small questions itself and only calls specialists for real jobs. An existing different `agent` setting is kept and reported; `--no-default-agent` skips the setting. Tested: plain `claude -p` in an installed project answers as the Orchestrator and the SessionStart hook starts the office.
