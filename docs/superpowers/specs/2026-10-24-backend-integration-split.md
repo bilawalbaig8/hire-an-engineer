@@ -1,6 +1,6 @@
 Superseded: the owner merged the two roles again (Backend & Integration Engineer, 4 modes). The current role document is `docs/agents/roles/backend-integration-engineer.md`; the plan is `docs/superpowers/specs/2026-10-24-backend-integration-merge.md`.
 
-Conflict X1, 2026-10-24: unresolved. The two role documents carry a note that the owner merged the roles again, and the built skill and agent contain Connect and Check. This split plan applies only if the owner confirms the split. See `docs/reviews/2026-10-24-owner-decisions.md`.
+Superseded 2026-10-24 (decision X1): Backend and Integration are one role again (Backend & Integration Engineer, 4 modes, built and tested). This split plan is kept for reference only. The merged plan is `2026-10-24-backend-integration-merge.md`.
 
 # Backend Engineer and Integration Engineer: split (spec and plan)
 
