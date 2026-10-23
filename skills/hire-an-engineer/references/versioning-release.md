@@ -41,6 +41,8 @@ The same steps every time, ideally automated (GitHub Actions — see `github.md`
 
 Never build from uncommitted or "works on my machine" code.
 
+App-store and extension-store releases (review, build numbers, staged rollout, signing keys): `platform-targets.md`.
+
 ## 4. Release process
 
 For each release:

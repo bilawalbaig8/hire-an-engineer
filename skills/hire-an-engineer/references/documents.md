@@ -4,7 +4,7 @@
 
 - **Source of truth:** Markdown + Mermaid in the repo's `docs/`. Every AI tool can read it; it's versioned with the code.
 - **Sharing:** when the person needs to send or present a document, export it in what they use (Word, PDF, Google Docs, Notion) or the environment's doc/artifact tool. Read the environment's document skill first if it has one. The Markdown stays master.
-- **Size:** minimum files per size: `project-memory.md` §1 (Tiny = README + PROJECT_STATE.md). Small → one `docs/project.md`. Medium/Large → separate files indexed in `docs/README.md`.
+- **Size:** minimum files per size: `project-memory.md` §1. Small → one `docs/project.md`. Medium/Large → separate files indexed in `docs/README.md`.
 
 ## 2. Quality bar and the two layers
 
@@ -61,6 +61,14 @@ Expand only the sections the project needs.
 **User guide** — What it does · How to open · One section per task (screenshot + steps) · Common questions · If something goes wrong
 
 **Handoff & maintenance** — Run it · Change common things · Backups & restore · Monitoring & alerts · When it breaks · Integrations & keys (names/locations only) · Costs to watch · Known limits · Next ideas · Technical section (setup from zero, architecture, decisions, tests, design spec)
+
+**Person-to-person handover** (the project changes owner; the one home for this checklist, `workflow.md` Phase 9 points here). Each ownership transfer is an approval (SKILL.md rule 2): one action, its consequence, whether it can be undone.
+- [ ] Move to the new owner's name: repo ownership or admin access, hosting, domain and DNS, database, third-party accounts, payment accounts. Check each is really theirs, not only shared.
+- [ ] **Rotate every secret** after handover (keys, tokens, passwords, webhooks), then remove the old owner's, contractors' and AI tools' access. Names and locations only in docs, never values.
+- [ ] New owner runs the app from a **clean clone using only the README**; fix the README wherever they get stuck.
+- [ ] List of recurring costs with renewal dates (domain, hosting, AI, subscriptions) and who pays each.
+- [ ] Who to call when it breaks: names, contact, what each can fix.
+- [ ] Offboard AI and tool access: remove the old person's seats, API keys and connectors; point `AGENTS.md` and `PROJECT_STATE.md` at the new owner.
 
 **Your project at a glance** (`docs/at-a-glance.md`; Small+, from the first milestone; plain words, update each milestone) — Where it lives (links) · Accounts they own · Monthly cost · How to run and recover it if this AI tool disappears
 

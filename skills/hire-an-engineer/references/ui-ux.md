@@ -86,7 +86,7 @@ Design and build all of these — missing states are where non-technical owners 
 
 ## 7. Accessibility and devices
 
-Minimum quality floor for everything built (WCAG 2.1 AA basics):
+Minimum quality floor for everything built (WCAG 2.2 AA basics):
 - Text contrast ≥ 4.5:1 (large text ≥ 3:1); don't rely on colour alone (add icons/text).
 - Tap targets ≥ 44×44 px; enough spacing between them.
 - Every input has a visible label; errors identified in text.

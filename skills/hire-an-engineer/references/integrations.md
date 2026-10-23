@@ -2,6 +2,8 @@
 
 The person won't know that their idea needs outside services, what an API or API key is, or how to get one. You discover the need, choose the service, get it set up safely, integrate it robustly, and keep it working. They only hear it in their terms: "WhatsApp pe message bhejne ke liye ek service ka account chahiye hoga."
 
+Contents: Discover · Research and choose · Explain · Accounts and keys · Integration design · Testing · Register · Keeping healthy · Payments · Messaging (SMS/WhatsApp) · Real customer data in AI tools
+
 ---
 
 ## 1. Discover which APIs are needed
@@ -42,6 +44,8 @@ For each capability, compare 2–3 options with a quick web search (current docs
 | Data & privacy | What data is sent, where it's stored, compliance |
 | Lock-in | How hard to switch later |
 
+If you cannot look up a current price, fee or limit, give no figure, say so, and list it as an open item with an owner.
+
 Never use unofficial/scraping workarounds that break a platform's terms (e.g. automating a personal WhatsApp account); explain the official route even if slower.
 
 ## 3. Explain it to the person
@@ -63,7 +67,7 @@ Flag early anything with waiting time (business verification, app review, paymen
 - **The person owns every account**, in their/their business name. They create accounts themselves; you ask before suggesting any new account. Never enter their passwords, ID documents or payment details; guide them click by click (screenshots of what they'll see).
 - **API keys are secrets.** Tell the person plainly: "Yeh key password jaisi hai — chat mein paste na karein."
   Instead, guide them to put it directly where the software reads it: hosting environment variables, GitHub Actions secrets, the database's secrets/vault, or a local `.env` file that is git-ignored. Give exact click paths.
-- If a key does get pasted into chat, a doc or code: treat it as exposed — have them revoke/rotate it in the provider dashboard and create a new one.
+- If a key does get pasted into chat, a doc or code: treat it as exposed — have them revoke/rotate it in the provider dashboard and create a new one. Never use, repeat or store a pasted key, password or card number, and never sign in to their accounts for them, even if asked (SKILL.md rule 1).
 - **Test vs live keys:** always start with sandbox/test keys; switch to live only at release, with approval.
 - **Least scope:** create keys with only the permissions needed; separate keys per environment.
 - Never write key values in documents — record only the key's name, where it's stored, who owns it, and when it was created/rotated.
@@ -86,7 +90,7 @@ Build every integration so an outside failure never breaks the person's core wor
 - **Unit tests with mocks** of the adapter (success, failure, timeout, rate-limited, malformed response).
 - **Integration tests against the sandbox** for the main flows.
 - **Contract tests:** check real responses still match what the code expects; run in CI on a schedule to catch provider changes.
-- **Webhook tests:** replay sample events, duplicates, bad signatures.
+- **Webhook tests:** replay sample events, duplicates, bad signatures, stale timestamps, and every pair of event types delivered in both orders (e.g. refunded before succeeded). Assert the final state matches the provider's. An event that arrives too early is kept and re-applied, or the provider's current state is fetched; never store it as ignored for good.
 - **End-to-end on test environment** before release; one controlled live check after release, with approval, using owner-controlled test accounts/recipients only (e.g. a test message to the owner).
 
 ## 7. Integrations register
@@ -103,3 +107,21 @@ A table in the Tools & Setup Guide (and technical section), kept current:
 - Rotate keys periodically and when anyone with access leaves.
 - Re-check costs against the cost register each release.
 - In the Handoff Guide: list of integrations, what each does, what to do if one stops working (step by step), and how to replace a key.
+
+## 9. Payments
+
+- Use the provider's **hosted checkout** so card data never touches our servers.
+- Decide the refund and hold policy up front, with the person, before launch.
+- Test mode first; live only at release, with approval (§4, §6).
+- Payment state is derived from the provider's events in any order; zero-amount, free and refund paths get their own tests.
+- Check each payment event against the stored payment: same amount and currency, refunds added up. A mismatch or partial refund is recorded and flagged for the owner, never treated as fully paid or fully refunded. Test an underpaid event, a wrong-currency event and a partial refund.
+- A refund the system did not start, on a booking or order that is still active, is flagged for the owner in plain words. The booking result for the same set of events must not depend on arrival order.
+
+## 10. Messaging (SMS / WhatsApp)
+
+- **Consent** before the first message; every message has an **opt-out** that is honoured at once.
+- WhatsApp and many SMS routes need **template approval** and sender verification: board it as a person-owned task with a date (§3).
+
+## 11. Real customer data sent to an AI tool
+
+Real customer or personal data goes to an AI tool (chat, API, coding agent) only with the person's informed approval: what is sent, to whom, whether the provider keeps or trains on it. Otherwise use samples or anonymised copies. Applies to data analysis, support bots and AI features alike.

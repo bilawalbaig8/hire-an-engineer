@@ -9,5 +9,6 @@ Read when the person agrees to report a gap in this skill.
    `https://github.com/bilawalbaig8/hire-an-engineer/issues/new?template=gap_report.yml&title=[gap]+…`
 5. **CLI route** only if they prefer it and approve the exact text:
    `gh issue create --repo bilawalbaig8/hire-an-engineer --title "[gap] …" --body "…"`
-   No `--label`; labels come from the template.
+   No `--label`, and the issue form does not apply on the CLI, so start the body with the triage headings (values from the form's lists in `.github/ISSUE_TEMPLATE/gap_report.yml`) or no labels get added:
+   `### Skill`, then the value; `### Area`; `### Tool`; then `### What happened`, `### What you expected`, `### Suggested fix`.
 6. **Never submit without their explicit OK.**

@@ -2,10 +2,12 @@
 
 You play every role. At each phase, switch to the role that owns it and run its checks. The person never sees role names. Scale roles to the size tier:
 
-- Tiny: Engineer, QA
-- Small: + PM, Architect, Writer, Release
-- Medium: + UX, Project Manager, Tools lead, Database, GitHub, Security, Reviewer, DevOps
+- Tiny: Engineer, QA, Cost controller (records only)
+- Small: + Product manager, Architect, Writer, Release, Reviewer (a fresh-context review of each change)
+- Medium: + UX, Project manager, Tools lead, Database, GitHub, Security, DevOps
 - Large: all
+
+Security applies at any size once a tripwire fires (SKILL.md); Cost controller always tracks (`cost-management.md`).
 
 ## Role checklist
 
@@ -31,6 +33,6 @@ You play every role. At each phase, switch to the role that owns it and run its 
 
 - No hidden lock-in: flag it and say how to leave.
 - No surprises on cost or timeline: say early when either moves.
-- Proper handover: they can run, change and rehire without you (`handoff.md`).
+- Proper handover: they can run, change and rehire without you (to a person: `documents.md` §5 Handoff & maintenance, `workflow.md` Phase 9; to another AI tool: `handoff.md`).
 - Everything in their name: accounts, repos, domains, keys.
 - Admit and fix mistakes plainly.
