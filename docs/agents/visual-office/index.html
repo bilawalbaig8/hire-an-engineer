@@ -769,7 +769,7 @@ body[data-theme=pixel] .banner{font-size:18px}
     <div class="tabpanel" id="p-inbox" data-panel="inbox" role="tabpanel" aria-labelledby="tab-inbox">
       <div class="cards" id="cards"></div>
       <p class="empty" id="inboxEmpty">Nothing waiting for you. Questions and decisions from the team will land here.</p>
-      <p class="note" id="inboxNote">Answers go to the Boss through the office server. You can also answer in the terminal; the first answer wins.</p>
+      <p class="note" id="inboxNote">This list shows what is waiting for you. Answer in your Claude session (the terminal).</p>
     </div>
     <div class="tabpanel" id="p-log" data-panel="log" role="tabpanel" aria-labelledby="tab-log" hidden>
       <ol class="log" id="log"></ol><p class="empty" id="logEmpty">The event log is empty so far.</p><p class="note" id="logNote"></p>
@@ -1231,6 +1231,7 @@ function charSVG(id){return id==='owner'?ownerSVG():monkeySVG(id);}
    ============================================================ */
 var QS=(function(){try{return new URLSearchParams(location.search)}catch(e){return {get:function(){return null}}}})();
 var MODE=QS.get('demo')==='1'?'demo':'live';
+function canAnswer(){return MODE==='demo'||QS.get('answers')==='1'}
 var S={clock:0,t0ms:0,running:false,started:false,finished:false,ended:false,idleOld:false,speed:1,quiet:false,batch:false,replay:null,queue:[],
   agents:Object.create(null),files:[],log:[],inbox:Object.create(null),inboxOrder:[],handoffs:[],blocks:0,
   goal:'',size:'',summary:'',status:'',job:null,hasStop:false,hasResult:false,pathSeen:Object.create(null),lastT:0,
@@ -2008,7 +2009,12 @@ function addCard(req){
   var c=el('article','icard');c.dataset.status='pending';c.dataset.id=id;c.dataset.n=n;c.dataset.door=req.oneWay?'1':'0';CARDS[id]=c;
   var from=req.asker==='conductor'?'From the <span class="bossn">'+esc(bossName())+'</span>':'From '+esc(an(req.asker))+', relayed by the <span class="bossn">'+esc(bossName())+'</span>';
   var h='<h3 id="h-'+n+'">'+esc(cardTitle(req))+'</h3><p class="from">'+from+'</p>';
-  if(req.kind==='questions'){
+  if(!canAnswer()){
+    h+=(req.oneWay?'<span class="door"><svg viewBox="0 0 12 14" aria-hidden="true"><path d="M1 1h7l3 2v10H1z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8.4" cy="8" r=".9" fill="#fff"/></svg>One-way door: hard to undo</span>':'')+(req.why?'<p class="why">'+esc(req.why)+'</p>':'');
+    if(req.kind==='questions')h+='<ol class="qlist">'+req.questions.map(function(q){return '<li>'+esc(q.q)+(q.hint?'<small> '+esc(q.hint)+'</small>':'')+'</li>'}).join('')+'</ol>';
+    else if(req.options.length)h+='<ul class="optlist">'+req.options.map(function(o){return '<li><b>'+esc(o.label)+'</b>'+(o.rec?' <span class="rec">Recommended</span>':'')+(o.note?'<small> '+esc(o.note)+'</small>':'')+'</li>'}).join('')+'</ul>';
+    h+='<p class="mini">Answer this in your Claude session (the terminal). This window only shows what is waiting for you.</p>';
+  }else if(req.kind==='questions'){
     h+='<form class="qform" aria-labelledby="h-'+n+'">'+req.questions.map(function(q,i){
       return '<label class="q"><span>'+(i+1)+'. '+esc(q.q)+'</span>'+(q.hint?'<small>'+esc(q.hint)+'</small>':'')+'<input type="text" name="q'+i+'" autocomplete="off" placeholder="Type your answer"></label>'}).join('')+
       '<div class="actions"><button type="submit" class="btn primary">Send answers</button>'+(req.hasSuggest?'<button type="button" class="btn" data-act="suggest">Use suggested answers</button>':'')+'</div></form>';

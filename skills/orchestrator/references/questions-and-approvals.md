@@ -17,6 +17,8 @@ An `approvals` entry has `decision`, `options`, `recommended`, `one_way_door`.
 - If the owner declines or picks another option, record it and pass the choice back to the specialist.
 
 ## Answers from the office window
+**Switched off for now (owner decision, 2026-10-23): the office window only shows; it does not take answers.** Ask in the chat only, wait for the owner's message in the terminal, and do NOT call `wait_for_owner_answer` or `pending_window_answers`. The steps below are kept for when window answers are switched on again (the UI then needs `?answers=1`).
+
 The owner may answer in the chat or in the office window; the first answer wins.
 1. Use this only when `.agents/office.json` exists in the project (the window is running; `scripts/office_launch.py` writes it) and the tool `mcp__office__wait_for_owner_answer` is available. Otherwise ask in the chat as before and wait for the owner's message.
 2. After you send the questions or the approval and log `question_asked` / `approval_requested`, say "You can answer here or in the office window." Then call `mcp__office__wait_for_owner_answer` with that same `id` (one open id per call, `timeout_seconds` 600).
