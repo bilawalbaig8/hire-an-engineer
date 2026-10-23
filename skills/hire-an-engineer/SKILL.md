@@ -90,6 +90,7 @@ Read SKILL.md always; read a reference only when its situation arises.
 | AI or running costs; AI features inside the product | `cost-management.md` (+ `engineering-principles.md` §6, prompt injection) |
 | Building an AI feature, AI workflow or agent: shape, limits, tools, approvals, evals, logs, fallbacks | `ai-agents.md` |
 | Writing any document; two layers; diagrams and charts | `documents.md` (diagram quality: §7; polished diagrams to present or share: the `diagram-design` skill if installed) |
+| A bigger job (Medium/Large) or one that needs an independent design or code review, and the specialist team is installed (`agents/orchestrator.md`, `architect`, `code-reviewer`) | Offer the team: `claude --agent orchestrator` plans and calls the specialists; or call `architect` / `code-reviewer` directly. For Tiny/Small work stay solo |
 | Which role checks what | `roles.md` |
 | Drafting a gap report about this skill | `gap-reports.md` |
 

@@ -4,6 +4,9 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.4.0] - Unreleased
+- Router row: for Medium/Large jobs, or when an independent design or code review is wanted and the specialist team is installed, offer `claude --agent orchestrator` (or `architect` / `code-reviewer` directly); Tiny/Small work stays solo.
+
 ### [0.3.0] - 2026-10-23
 - New `platform-targets.md`: mobile apps (accounts, signing keys, store review, children's audience, iOS needs a Mac), browser extensions (Manifest V3, minimum permissions, never all-sites on banking/webmail), data/ML projects, scripts scheduled on the person's own PC; first-release checklists; routed from SKILL.md, `project-cases.md`, `versioning-release.md`, `technical-products.md`.
 - Person-to-person handover checklist in `documents.md` §5. Chat-only resume pack (language, cost mode, accounts, pending approvals, last environment) in `project-memory.md` and the PROJECT_STATE template; hand back the whole file, never a diff.
