@@ -74,9 +74,7 @@ def event_from_hook(payload: dict) -> dict | None:
         file_path = _text(tool_input.get("file_path")) if isinstance(tool_input, dict) else ""
         if not file_path:
             return None
-        project_dir = (_text(os.environ.get("CLAUDE_PROJECT_DIR"))
-                       or _text(payload.get("cwd")) or os.getcwd())
-        rel = _relative_path(file_path, project_dir)
+        rel = _relative_path(file_path, str(project_dir_for(payload)))
         if not rel:
             return None
         event.update(type="file_written", agent=_text(payload.get("agent_type")) or "main", path=rel)
@@ -85,8 +83,23 @@ def event_from_hook(payload: dict) -> dict | None:
 
 
 def project_dir_for(payload: dict) -> Path:
-    return Path(_text(os.environ.get("CLAUDE_PROJECT_DIR"))
-                or _text(payload.get("cwd")) or os.getcwd())
+    """The project folder the hook belongs to.
+
+    CLAUDE_PROJECT_DIR is the folder the session was opened in, which can be a parent of the folder the work happens in
+    (measured: the session's project dir was the repo's parent while cwd was the repo). So a folder that opted in with
+    .agents/enabled wins: CLAUDE_PROJECT_DIR if it has the marker, else the nearest folder at or above the payload cwd
+    that has it. Without any marker the old order applies: CLAUDE_PROJECT_DIR, payload cwd, current directory.
+    """
+    env = _text(os.environ.get("CLAUDE_PROJECT_DIR"))
+    cwd = _text(payload.get("cwd"))
+    if env and (Path(env) / ENABLED_MARKER).is_file():
+        return Path(env)
+    if cwd:
+        start = Path(cwd)
+        for folder in (start, *start.parents):
+            if (folder / ENABLED_MARKER).is_file():
+                return folder
+    return Path(env or cwd or os.getcwd())
 
 
 def _safe_log_path(project_dir: Path) -> Path:
@@ -104,7 +117,7 @@ def main() -> int:
     try:
         import agent_contract  # inside try: a missing module must not break the host
 
-        payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8-sig"))  # tolerate a BOM (PowerShell 5.1 pipes add one)
         if "--only-if-enabled" in sys.argv[1:] and not (project_dir_for(payload) / ENABLED_MARKER).is_file():
             return 0  # global hook: do nothing in a project that did not opt in
         event = event_from_hook(payload)

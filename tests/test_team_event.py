@@ -336,7 +336,8 @@ def test_check_run_run_started_not_first(tmp_path):
     assert "not run_started" in text
 
 
-def test_check_run_no_events_or_no_log(tmp_path):
+def test_check_run_no_events_or_no_log(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)  # check_run falls back to ./.agents/events.jsonl; keep a live log out of this test
     run, log, events = build_run(tmp_path)
     assert any("event log not found" in p for p in problems_of(run))
     put(log, [dict(e, run_id="other") for e in events])

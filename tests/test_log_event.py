@@ -133,6 +133,31 @@ def test_cli_reads_stdin_as_utf8(tmp_path):
     assert json.loads(line)["path"] == "docs/café.md"
 
 
+def test_cli_accepts_stdin_with_a_bom(tmp_path):
+    payload = base("SubagentStart", cwd=str(tmp_path), agent_type="architect")
+    r = run_cli(SCRIPT, b"\xef\xbb\xbf" + json.dumps(payload).encode("utf-8"), tmp_path, raw=True)
+    assert r.returncode == 0 and r.stderr == b""
+    line = (tmp_path / ".agents" / "events.jsonl").read_text(encoding="utf-8").splitlines()[0]
+    assert json.loads(line)["type"] == "agent_start"
+
+
+def test_global_hook_finds_the_enabled_project_when_claude_project_dir_is_its_parent(tmp_path):
+    proj = tmp_path / "work"
+    (proj / ".agents").mkdir(parents=True)
+    (proj / ".agents" / "enabled").write_text("team\n", encoding="utf-8")
+    env = clean_env()
+    env["CLAUDE_PROJECT_DIR"] = str(tmp_path)  # the session was opened one folder above the project
+    for payload in (base("SubagentStart", cwd=str(proj), agent_type="architect"),
+                    base("PostToolUse", cwd=str(proj), tool_name="Write",
+                         tool_input={"file_path": str(proj / "docs" / "x.md")}, agent_type="architect")):
+        r = subprocess.run([sys.executable, str(SCRIPT), "--only-if-enabled"], input=json.dumps(payload).encode("utf-8"),
+                           capture_output=True, cwd=tmp_path, env=env)
+        assert r.returncode == 0 and r.stderr == b""
+    lines = [json.loads(x) for x in (proj / ".agents" / "events.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert [e["type"] for e in lines] == ["agent_start", "file_written"] and lines[1]["path"] == "docs/x.md"
+    assert not (tmp_path / ".agents").exists()
+
+
 # ---------- current_run: the boss's run id replaces the session id ----------
 
 def _hook_payload(proj):
