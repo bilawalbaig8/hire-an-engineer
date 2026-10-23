@@ -705,6 +705,9 @@ body[data-theme=pixel] .banner{font-size:18px}
 .flist .ftag.gone{background:#b3362b;color:#fff}
 .flist li.gone code{text-decoration:line-through}
 .calls{margin-left:10px;font:600 12px ui-monospace,Consolas,monospace;opacity:.8;white-space:nowrap}
+.fulltip{position:fixed;z-index:9999;max-width:min(340px,calc(100vw - 24px));padding:9px 11px;border-radius:6px;background:#17231f;color:#f4f7f5;font:13px/1.45 system-ui,Segoe UI,sans-serif;box-shadow:0 6px 22px rgba(0,0,0,.35);pointer-events:none;white-space:normal;overflow-wrap:anywhere}
+.fulltip[hidden]{display:none}
+.seat .task[data-full],.card-c .task[data-full]{cursor:help}
 </style>
 </head>
 <body data-theme="office" data-layout="A" data-drawer="open" data-sheet="off">
@@ -1395,7 +1398,7 @@ function prep(rec,known){
   if(r.from!=null)e.from=resolve(r.from);if(r.to!=null)e.to=resolve(r.to);
   if(e.type==='handoff'&&!e.from)e.from=e.agent;
   e.asked=r.asked_agent!=null?resolve(r.asked_agent):null;
-  e.task=str(r.task,200);e.path=str(r.path,300).replace(/\\/g,'/');e.summary=str(r.summary,400);e.reason=str(r.reason,300);
+  e.task=str(r.task,600);e.path=str(r.path,300).replace(/\\/g,'/');e.summary=str(r.summary,1000);e.reason=str(r.reason,600);
   e.goal=str(r.goal,300);e.size=str(r.size,40);e.status=str(r.status,30);
   e.id=r.id!=null?str(r.id,80):(r.approval_id!=null?str(r.approval_id,80):'');
   e.by=str(r.by,20);e.decision=str(r.decision,20);e.option=r.option!=null?str(r.option,80):'';e.answersRaw=r.answers;
@@ -1458,7 +1461,7 @@ function openRequest(e,t){
   var asker=S.agents[req.asker];
   if(asker&&req.asker!=='conductor'){
     clearHold(asker);asker.state=req.kind==='questions'?'waiting':'approval';
-    asker.text=reqLine(req).slice(0,170);
+    asker.text=reqLine(req).slice(0,600);
     asker.since=t;asker.touched=true;
   }
   addCard(req);sortCards();notifyPending();
@@ -1479,7 +1482,7 @@ function closeRequest(e,t){
     /* the asker may still have another open request: then it keeps waiting for that one */
     var more=null;S.inboxOrder.forEach(function(k){var o=S.inbox[k];if(k!==id&&o.status==='pending'&&o.req.asker===req.asker)more=o.req});
     if(more){ag.state=more.kind==='questions'?'waiting':'approval';
-      ag.text=reqLine(more).slice(0,170)}
+      ag.text=reqLine(more).slice(0,600)}
     else{ag.state='idle';ag.text=dec==='rejected'?'Rework requested':'Answer received'}
     ag.since=t}
   resolveCard(id);sortCards();
@@ -1508,7 +1511,7 @@ function bossStatus(e){
   var c=S.agents.conductor;if(!c)return;
   if(S.finished){
     var np=pendingCount();
-    if(c.state==='waiting'){if(np===0){c.state='done';c.text=(S.summary||'Job finished').slice(0,120)}else c.text='Waiting for you: '+np+' decision'+(np>1?'s':'')}
+    if(c.state==='waiting'){if(np===0){c.state='done';c.text=(S.summary||'Job finished').slice(0,600)}else c.text='Waiting for you: '+np+' decision'+(np>1?'s':'')}
     return;
   }
   if(c.state!=='working'&&c.state!=='waiting')return;
@@ -1522,7 +1525,7 @@ function bossStatus(e){
   else if(e.type==='agent_result'&&e.agent!=='conductor')txt='Checking '+sn(e.agent)+"'s answer";
   else if(e.type==='file_written'&&e.agent==='conductor')txt='Writing the run record';
   else return;
-  c.text=txt.slice(0,120);
+  c.text=txt.slice(0,600);
 }
 function fire(e){
   var A=S.agents,t=e.t,a=A[e.agent];
@@ -1531,7 +1534,7 @@ function fire(e){
   switch(e.type){
     case 'run_started':
       S.goal=e.goal||S.goal;S.size=e.size;clearHold(a);
-      a.state='working';a.text=(e.goal||'Reading the request').slice(0,120);a.since=t;a.touched=true;break;
+      a.state='working';a.text=(e.goal||'Reading the request').slice(0,600);a.since=t;a.touched=true;break;
     case 'run_finished':
       S.finished=true;S.ended=true;S.status=e.status||'done';S.summary=e.summary;clearHold(a);
       if(S.status==='failed'){a.state='blocked';a.text=e.summary||'Job failed'}
@@ -1551,7 +1554,7 @@ function fire(e){
     case 'agent_result':
       clearHold(a);S.hasResult=true;
       var st=own(RESSTATE,e.status)?RESSTATE[e.status]:'done';
-      a.state=st;a.text=(e.summary||(own(DEFTXT,e.status)?DEFTXT[e.status]:'Finished')).slice(0,120);a.since=t;a.touched=true;
+      a.state=st;a.text=(e.summary||(own(DEFTXT,e.status)?DEFTXT[e.status]:'Finished')).slice(0,600);a.since=t;a.touched=true;
       if(e.status==='blocked')S.blocks++;break;
     case 'handoff':
       var f=A[e.from],to=A[e.to];if(!f||!to)break;
@@ -1565,7 +1568,7 @@ function fire(e){
     case 'approval_requested':case 'question_asked':openRequest(e,t);break;
     case 'approval_given':closeRequest(e,t);break;
     case 'blocked':
-      clearHold(a);a.state='blocked';a.text=(e.reason||'Blocked').slice(0,120);a.since=t;a.touched=true;S.blocks++;break;
+      clearHold(a);a.state='blocked';a.text=(e.reason||'Blocked').slice(0,600);a.since=t;a.touched=true;S.blocks++;break;
     case 'blocker_cleared':
       clearHold(a);if(a.state==='blocked'){a.state='idle';a.text='Block cleared';a.since=t}break;
     case 'boss_reply':bossReply(e);break;
@@ -1808,7 +1811,7 @@ function paintAgent(id){
   REG[id].forEach(function(r){
     r.root.dataset.state=st.state;
     r.chip.textContent=stLabel(id,st);
-    if(r.task){r.task.textContent=st.text;r.task.title=st.text}
+    if(r.task){r.task.textContent=st.text;r.task.dataset.full=st.text;r.task.removeAttribute('title');r.task.tabIndex=0}
     if(r.nm)r.nm.textContent=an(id);
     if(r.role)r.role.textContent=roleText(id);
     r.fig.setAttribute('aria-label',an(id)+', '+propText(id)+'. Status: '+stLabel(id,st)+'. '+st.text);
@@ -2462,6 +2465,24 @@ function loadRoster(){
   }).catch(function(){});
 }
 setInterval(loadRoster,5000);
+(function(){
+  var tip=document.createElement('div');tip.className='fulltip';tip.hidden=true;tip.setAttribute('role','tooltip');document.body.appendChild(tip);
+  function show(el){
+    var txt=el&&el.dataset&&el.dataset.full;if(!txt){tip.hidden=true;return}
+    tip.textContent=txt;tip.hidden=false;
+    var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+    var x=Math.max(8,Math.min(innerWidth-tw-8,r.left+r.width/2-tw/2));
+    var y=r.bottom+8;if(y+th>innerHeight-8)y=Math.max(8,r.top-th-8);
+    tip.style.left=x+'px';tip.style.top=y+'px';
+  }
+  function target(ev){return ev.target&&ev.target.closest?ev.target.closest('.seat .task[data-full],.card-c .task[data-full]'):null}
+  document.addEventListener('mouseover',function(ev){var el=target(ev);if(el)show(el)});
+  document.addEventListener('mouseout',function(ev){if(target(ev))tip.hidden=true});
+  document.addEventListener('focusin',function(ev){var el=target(ev);if(el)show(el)});
+  document.addEventListener('focusout',function(ev){if(target(ev))tip.hidden=true});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')tip.hidden=true});
+  window.addEventListener('scroll',function(){tip.hidden=true},true);
+})();
 function applyMissing(){
   var set={};S.missing.forEach(function(p){set[p]=1});
   $$('#flist li').forEach(function(li){var c=$('code',li);if(!c)return;var gone=!!set[c.textContent];li.classList.toggle('gone',gone);
