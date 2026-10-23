@@ -27,6 +27,8 @@ The eight steps of every run. Every event line below is written with `scripts/te
 - Append the return `handoff` event, then `agent_result` (`agent` = the specialist, its `status`, a short `summary`, `response_file` = the saved response path).
 - If something outside the specialist stops the work (missing tool, failed check, owner unreachable), append `blocked` (`reason`); when it is resolved without re-calling that specialist, append `blocker_cleared`.
 
+- **Show pending decisions at once:** the moment a response has `needs_answers` or `needs_approval`, append `question_asked` / `approval_requested` for it (so the office Inbox shows it), even if you keep running other independent steps (for example a code review) before you ask the owner in the chat. Approvals always go to the owner, never to a reviewer: a reviewer's verdict is a quality verdict, not permission.
+
 ## 5. Relay
 - Merge the `questions` of the step, drop duplicates, answer from files or earlier answers when possible. The rest go to the owner in one message (see `questions-and-approvals.md`).
 - When you send the questions to the owner, append `question_asked` (`id` such as `q-01`, `agent` = the asker, `questions`). When the answers arrive, append `approval_given` with the same `id`, `decision` `answered`, `by` `terminal`.
