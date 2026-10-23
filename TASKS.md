@@ -50,6 +50,9 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 4.3 Evals: all 12 cases pass (headless, stub and real specialists); fixes made along the way: run folder for every run, no self-checking, real UTC timestamps, event log always written, roster models, who reviews designs. Complex end-to-end test on the shop code with the real team passed (7 specialist calls, ADR written and reviewed 3 times)
 - [x] 4.4 CHANGELOG entries for code-reviewer and orchestrator (done)
 - [?] 4.5 Release orchestrator 0.1.0 (only when the owner says; nothing is released now)
+- [~] 4.6 Hardening from the thinking-skills review and the live office test: team_event.py (boss writes events with a script, not by hand) + check-run (automatic run folder gate) - in progress
+- [ ] 4.7 Permission rules snippet: specialists cannot write .agents/ (no forged events), Reviewer gets a safe test-run allowlist; test it in a temp project
+- [ ] 4.8 Re-run the 14 Code Reviewer evals after the 18 fixes; verify the 37 unverified Architect sources and deepen the game-engine references
 
 ## Phase 5 Remaining roles
 
@@ -71,6 +74,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [ ] 6.1 Router line in hire-an-engineer pointing to the team
 - [ ] 6.2 Plugin bundle (skills + agents) if worth it
 - [ ] 6.3 End-to-end test: build a small real app with the whole team
+- [?] 6.3a FIRST finish the roles the owner names for the real trial (owner will say which), THEN real-project trial: run the team on one of the owner's real projects (game or app), 3 real jobs, log every miss, fix the skills
 - [ ] 6.4 Docs, CHANGELOG, release hire-an-engineer 0.3.0
 
 ## Phase 7 Visual office
