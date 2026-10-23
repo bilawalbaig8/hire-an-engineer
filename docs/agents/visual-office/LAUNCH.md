@@ -70,3 +70,6 @@ The window only reads this project's `.agents/events.jsonl`; reload the page if 
 
 ## Answering: terminal only for now (owner decision, 2026-10-23)
 The window is a viewer. Questions and approvals show in its Inbox as a read-only list ("Answer in your Claude session"); you answer in the terminal. The window answer buttons, the office MCP tools and the window chat are switched off: the code is kept (`scripts/office_server.py` POST /answer, `scripts/office_mcp.py`, the Inbox form with `?answers=1` or the demo), the boss does not use it. The chat work in progress is saved as a patch outside the repo; bring it back only when the owner asks.
+
+## New project, nothing installed yet
+Run once from the repo: `python scripts/setup_team.py --project <project folder>` (team, office, hooks, default agent). Then `claude` in that folder starts the boss. Before that a project is just normal Claude Code.

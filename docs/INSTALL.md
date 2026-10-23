@@ -61,3 +61,9 @@ python scripts/install_agents.py
 
 ## Virtual office (optional)
 To watch the agent team in a window, run `python scripts/install_office.py --project <project>`; see `docs/agents/visual-office/INSTALL-OFFICE.md`.
+
+## One command for a new project (team + office)
+```
+python scripts/setup_team.py --project <your project folder>
+```
+Installs the three skills and agents into `<project>/.claude`, the office into `<project>/.agents/office`, the hooks and the deny rule, and sets the project's default agent to the boss, so plain `claude` in that folder starts the Orchestrator and the office window opens by itself. Safe to run again (it only reports "same"); `--dry-run` shows what it would do; `--no-default-agent` keeps plain `claude` as normal Claude. Without this setup a project is just normal Claude Code.
