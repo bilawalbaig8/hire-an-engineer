@@ -17,6 +17,21 @@ Follow these ten steps. They match the Definition of Done in `docs/superpowers/s
 9. Make the repo copy and the installed copy identical: `python scripts/install_agents.py --dry-run` shows what would change; install only after the owner agrees; then check with `diff -rq skills/<skill-name> ~/.claude/skills/<skill-name>` and `diff -q agents/<role-name>.md ~/.claude/agents/<role-name>.md`. The installer never removes stale files, so delete files you removed from the repo by hand.
 10. Commit. Release (tag `<skill-name>-v<version>`) only when the owner says so.
 
+## Also part of every build (owner decision 2026-10-24)
+
+These are not separate tasks. A role is not done until each line below is done in the same build. Add them to the commit and to the checks in step 7.
+
+- **Boss can call it.** Add the agent to the `Agent(...)` list in `agents/orchestrator.md`, to the routing in `skills/orchestrator/references/team-roster.md`, and to `docs/agents/roster.md` (model and effort columns). `python scripts/check_roster.py` must pass. A role the boss cannot call is not built.
+- **Model and effort** follow the owner's table in `~/.claude/CLAUDE.md` and the spec; the boss may step a `sonnet` role up to `opus` after two failed runs and says so.
+- **Description limit.** The agent and skill descriptions stay at 1,024 characters or less, with room for the modes the spec plans. Count them before writing.
+- **Guards.** A role that holds keys, deploys or makes network calls gets the PreToolUse guard from the spec (DevOps and the Backend & Integration Engineer; decision Q9) and a test that the guard blocks a live command.
+- **Live access.** Where the spec allows live read access (decision Q15), add the browser or connector tool as read-only, and test that the role cannot edit or save in the source.
+- **Lessons.** Add `docs/lessons/<role>.md` to the role's reading list (it reads it before every job); the boss writes a lesson when the owner reports an issue (decision X2).
+- **Evals.** Write results as "k of n runs on N cases". A partial case is rerun after its fix. Held-out cases for another role's check are kept by the QA / Test Engineer outside the project folder (decision Q1).
+- **Office window.** Add the seat id and aliases for the agent name, and set its tag in the `TAGS` map in `docs/agents/visual-office/index.html` (Built, then Tested), then run `python scripts/sync_team_start.py`.
+- **Tracking.** Update the row in `TASKS.md` and in the tracker artifact (Documentation and Build columns), and the role document's status line.
+- **Install and push.** Install with `python scripts/install_agents.py --only <skill-name>`, run `check_installed.py`, commit, and push only when the owner says.
+
 Who writes the event log (`.agents/events.jsonl`): the hook (`scripts/log_event.py`) writes `agent_start`, `agent_stop` and `file_written`; the boss writes `handoff`, `approval_requested` and `approval_given` with `append_event`; a specialist writes nothing. See the contract.
 
 `hooks-snippet.json` only works where `scripts/log_event.py` and `scripts/agent_contract.py` exist (this repo, or a project that copied them) until the visual-office phase packages them.

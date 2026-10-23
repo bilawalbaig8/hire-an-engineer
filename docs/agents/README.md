@@ -31,4 +31,4 @@ The specialist team (a boss and specialists) lives in this repo next to the olde
 - Test projects stay local and are deleted after the test.
 
 ## Adding a role
-Follow `docs/agents/agent-template/README.md` (10 steps). Evals come before knowledge; the role document is written first and approved by the owner; a role is added to the roster in the same commit as its agent file.
+Follow `docs/agents/agent-template/README.md` (10 steps plus the 'Also part of every build' list: boss allowlist, roster, model and effort, guards, lessons, office seat and tag, tracking, install). Evals come before knowledge; the role document is written first and approved by the owner; a role is added to the roster in the same commit as its agent file.
