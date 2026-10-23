@@ -168,3 +168,48 @@ The AI Engineer starts from these files and does not contradict them. The URL is
 | S-OPS-1 | Semantic conventions for generative AI (OpenTelemetry semantic-conventions repository) | OpenTelemetry project | current | https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai | Shared names for tracing model calls (model, tokens, operation) so traces are comparable. | Free; Apache-2.0 per project (unverified here) | verified |
 | S-OPS-2 | unittest.mock: mock object library | Python Software Foundation | current | https://docs.python.org/3/library/unittest.mock.html | Standard-library mocks and patching: test model-calling code without a live call. | Free; PSF licence | verified |
 | S-OPS-3 | VCR.py: record and replay HTTP interactions | VCR.py contributors | current | https://vcrpy.readthedocs.io/ | Recorded fixtures for HTTP calls so tests replay instead of calling a paid API. Third-party tool. | Free; MIT per project (unverified here) | verified |
+
+## AI-Ops backing (release check, monitor, investigate)
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-AIO-1 | Your AI Product Needs Evals | Husain | 2024 | https://hamel.dev/blog/posts/evals/ | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-2 | A Field Guide to Rapidly Improving AI Products | Husain | 2025 | https://hamel.dev/blog/posts/field-guide/ | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-3 | Demystifying evals for AI agents | Anthropic | 2026 | https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-4 | Define success criteria and build evaluations | Anthropic Docs | current | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-5 | Working with evals | OpenAI Docs | current | https://developers.openai.com/api/docs/guides/evals | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-6 | Beyond Accuracy: Behavioral Testing of NLP Models with CheckList | Ribeiro et al. | 2020 | https://arxiv.org/abs/2005.04118 | AI-Ops backing: Evals | see publisher | verified |
+| S-AIO-7 | Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena | Zheng et al. | 2023 | https://arxiv.org/abs/2306.05685 | AI-Ops backing: Judges | see publisher | verified |
+| S-AIO-8 | Who Validates the Validators? | Shankar et al. | 2024 | https://arxiv.org/abs/2404.12272 | AI-Ops backing: Judges | see publisher | verified |
+| S-AIO-9 | Evaluating the Effectiveness of LLM-Evaluators | Yan | 2024 | https://eugeneyan.com/writing/llm-evaluators/ | AI-Ops backing: Judges | see publisher | verified |
+| S-AIO-10 | Get started with prompt management | Langfuse Docs | current | https://langfuse.com/docs/prompts/get-started | AI-Ops backing: Prompts as code | see publisher | verified |
+| S-AIO-11 | Prompt Registry | MLflow Docs | current | https://mlflow.org/docs/latest/genai/prompt-registry/ | AI-Ops backing: Prompts as code | see publisher | verified |
+| S-AIO-12 | Intro | Promptfoo Docs | current | https://www.promptfoo.dev/docs/intro/ | AI-Ops backing: Prompts as code | see publisher | verified |
+| S-AIO-13 | Prompt engineering | OpenAI Docs | current | https://developers.openai.com/api/docs/guides/prompt-engineering | AI-Ops backing: Prompts as code | see publisher | verified |
+| S-AIO-14 | Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design | Sclar et al. | 2023 | https://arxiv.org/abs/2310.11324 | AI-Ops backing: Prompts as code | see publisher | verified |
+| S-AIO-15 | How is ChatGPT's behavior changing over time? | Chen, Zaharia, Zou | 2023 | https://arxiv.org/abs/2307.09009 | AI-Ops backing: Model change | see publisher | verified |
+| S-AIO-16 | Model deprecations | Anthropic Docs | current | https://platform.claude.com/docs/en/about-claude/model-deprecations | AI-Ops backing: Model change | see publisher | verified |
+| S-AIO-17 | Deprecations | OpenAI Docs | current | https://developers.openai.com/api/docs/deprecations | AI-Ops backing: Model change | see publisher | verified |
+| S-AIO-18 | Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift | Rabanser, Gunnemann, Lipton | 2018 | https://arxiv.org/abs/1810.11953 | AI-Ops backing: Model change | see publisher | verified |
+| S-AIO-19 | A postmortem of three recent issues | Anthropic | 2025 | https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues | AI-Ops backing: Model change | see publisher | verified |
+| S-AIO-20 | Semantic conventions for generative AI | OpenTelemetry | current | https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai | AI-Ops backing: Tracing and logs | see publisher | verified |
+| S-AIO-21 | Observability primer | OpenTelemetry Docs | current | https://opentelemetry.io/docs/concepts/observability-primer/ | AI-Ops backing: Tracing and logs | see publisher | verified |
+| S-AIO-22 | Observability Engineering | Majors, Fong-Jones, Miranda | 2022 | https://openlibrary.org/search.json?title=Observability+Engineering&author=Charity+Majors | AI-Ops backing: Tracing and logs | see publisher | verified |
+| S-AIO-23 | Monitoring Distributed Systems | Google SRE book | 2016 | https://sre.google/sre-book/monitoring-distributed-systems/ | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-24 | Postmortem Culture | Google SRE book | 2016 | https://sre.google/sre-book/postmortem-culture/ | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-25 | Service Level Objectives | Google SRE book | 2016 | https://sre.google/sre-book/service-level-objectives/ | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-26 | Feature Toggles | Hodgson | 2017 | https://martinfowler.com/articles/feature-toggles.html | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-27 | Semantic Versioning 2.0.0 | Preston-Werner | current | https://semver.org/ | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-28 | Keep a Changelog 1.1.0 | Lacan | current | https://keepachangelog.com/en/1.1.0/ | AI-Ops backing: Operations | see publisher | verified |
+| S-AIO-29 | Hidden Technical Debt in Machine Learning Systems | Sculley et al. | 2015 | https://papers.nips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-30 | The ML Test Score | Breck et al. | 2017 | https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/ | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-31 | Rules of Machine Learning | Zinkevich | current | https://developers.google.com/machine-learning/guides/rules-of-ml | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-32 | AI Engineering | Huyen | 2024 | https://openlibrary.org/search.json?title=AI+Engineering&author=Chip+Huyen | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-33 | Building A Generative AI Platform | Huyen | 2024 | https://huyenchip.com/2024/07/25/genai-platform.html | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-34 | What We Learned from a Year of Building with LLMs (Part I) | Yan et al. | 2024 | https://www.oreilly.com/radar/what-we-learned-from-a-year-of-building-with-llms-part-i/ | AI-Ops backing: ML in production | see publisher | verified |
+| S-AIO-35 | Usage and Cost API | Anthropic Docs | current | https://platform.claude.com/docs/en/build-with-claude/usage-cost-api | AI-Ops backing: Cost and quota | see publisher | verified |
+| S-AIO-36 | Prompt caching | Anthropic Docs | current | https://platform.claude.com/docs/en/build-with-claude/prompt-caching | AI-Ops backing: Cost and quota | see publisher | verified |
+| S-AIO-37 | Rate limits | Anthropic Docs | current | https://docs.anthropic.com/en/api/rate-limits | AI-Ops backing: Cost and quota | see publisher | verified |
+| S-AIO-38 | FinOps Framework | FinOps Foundation | current | https://www.finops.org/framework/ | AI-Ops backing: Cost and quota | see publisher | verified |
+| S-AIO-39 | unittest.mock | Python docs | current | https://docs.python.org/3/library/unittest.mock.html | AI-Ops backing: Testing | see publisher | verified |
+| S-AIO-40 | Top 10 for LLM Applications | OWASP | current | https://genai.owasp.org/llm-top-10/ | AI-Ops backing: Risk | see publisher | verified |

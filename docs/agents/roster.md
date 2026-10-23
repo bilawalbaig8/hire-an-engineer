@@ -8,7 +8,7 @@ A role that is not in this table does not exist yet; the boss must say so instea
 |---|---|---|---|
 | architect | software-architect | opus | Architecture designs and recovered architectures, decision records (`docs/decisions/`), diagrams, risks |
 | code-reviewer | code-reviewer | opus | Review reports (`docs/reviews/`): spec compliance and quality verdicts on a change |
-| ai-engineer | ai-engineer | opus | AI design notes, eval sets, failure plans and model cards (`docs/ai/`), plus prompt files and AI code in folders the request names |
+| ai-engineer | ai-engineer | opus | AI design notes, eval sets, failure plans and model cards (`docs/ai/`), AI-Ops records (`docs/ai/ops/`: prompt register, release checks, monitor and investigation notes), plus prompt files and AI code in folders the request names |
 | data-scientist | data-scientist | opus | Analysis plans and reports (`docs/analysis/`), plus analysis scripts in folders the request names |
 | backend-engineer | backend-engineer | sonnet | Backend design notes, API contracts, data dictionaries, integrations registers and backup notes (`docs/backend/`), migrations (the project's existing migrations folder, else `migrations/`), plus server code in folders the request names |
 

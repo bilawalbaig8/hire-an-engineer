@@ -104,3 +104,43 @@ S-TRN-15 | Hugging Face | PEFT (parameter-efficient fine-tuning) documentation |
 S-TRN-16 | Hugging Face | Evaluate library documentation | current | https://huggingface.co/docs/evaluate/index
 S-TRN-17 | Edward J. Hu et al. | LoRA: Low-Rank Adaptation of Large Language Models | 2021 | https://arxiv.org/abs/2106.09685
 S-TRN-18 | Curtis G. Northcutt, Lu Jiang, Isaac L. Chuang | Confident Learning: Estimating Uncertainty in Dataset Labels | 2019 | https://arxiv.org/abs/1911.00068
+S-AIO-1 | Husain | Your AI Product Needs Evals | 2024 | https://hamel.dev/blog/posts/evals/
+S-AIO-2 | Husain | A Field Guide to Rapidly Improving AI Products | 2025 | https://hamel.dev/blog/posts/field-guide/
+S-AIO-3 | Anthropic | Demystifying evals for AI agents | 2026 | https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+S-AIO-4 | Anthropic Docs | Define success criteria and build evaluations | current | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+S-AIO-5 | OpenAI Docs | Working with evals | current | https://developers.openai.com/api/docs/guides/evals
+S-AIO-6 | Ribeiro et al. | Beyond Accuracy: Behavioral Testing of NLP Models with CheckList | 2020 | https://arxiv.org/abs/2005.04118
+S-AIO-7 | Zheng et al. | Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena | 2023 | https://arxiv.org/abs/2306.05685
+S-AIO-8 | Shankar et al. | Who Validates the Validators? | 2024 | https://arxiv.org/abs/2404.12272
+S-AIO-9 | Yan | Evaluating the Effectiveness of LLM-Evaluators | 2024 | https://eugeneyan.com/writing/llm-evaluators/
+S-AIO-10 | Langfuse Docs | Get started with prompt management | current | https://langfuse.com/docs/prompts/get-started
+S-AIO-11 | MLflow Docs | Prompt Registry | current | https://mlflow.org/docs/latest/genai/prompt-registry/
+S-AIO-12 | Promptfoo Docs | Intro | current | https://www.promptfoo.dev/docs/intro/
+S-AIO-13 | OpenAI Docs | Prompt engineering | current | https://developers.openai.com/api/docs/guides/prompt-engineering
+S-AIO-14 | Sclar et al. | Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design | 2023 | https://arxiv.org/abs/2310.11324
+S-AIO-15 | Chen, Zaharia, Zou | How is ChatGPT's behavior changing over time? | 2023 | https://arxiv.org/abs/2307.09009
+S-AIO-16 | Anthropic Docs | Model deprecations | current | https://platform.claude.com/docs/en/about-claude/model-deprecations
+S-AIO-17 | OpenAI Docs | Deprecations | current | https://developers.openai.com/api/docs/deprecations
+S-AIO-18 | Rabanser, Gunnemann, Lipton | Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift | 2018 | https://arxiv.org/abs/1810.11953
+S-AIO-19 | Anthropic | A postmortem of three recent issues | 2025 | https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues
+S-AIO-20 | OpenTelemetry | Semantic conventions for generative AI | current | https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
+S-AIO-21 | OpenTelemetry Docs | Observability primer | current | https://opentelemetry.io/docs/concepts/observability-primer/
+S-AIO-22 | Majors, Fong-Jones, Miranda | Observability Engineering | 2022 | https://openlibrary.org/search.json?title=Observability+Engineering&author=Charity+Majors
+S-AIO-23 | Google SRE book | Monitoring Distributed Systems | 2016 | https://sre.google/sre-book/monitoring-distributed-systems/
+S-AIO-24 | Google SRE book | Postmortem Culture | 2016 | https://sre.google/sre-book/postmortem-culture/
+S-AIO-25 | Google SRE book | Service Level Objectives | 2016 | https://sre.google/sre-book/service-level-objectives/
+S-AIO-26 | Hodgson | Feature Toggles | 2017 | https://martinfowler.com/articles/feature-toggles.html
+S-AIO-27 | Preston-Werner | Semantic Versioning 2.0.0 | current | https://semver.org/
+S-AIO-28 | Lacan | Keep a Changelog 1.1.0 | current | https://keepachangelog.com/en/1.1.0/
+S-AIO-29 | Sculley et al. | Hidden Technical Debt in Machine Learning Systems | 2015 | https://papers.nips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
+S-AIO-30 | Breck et al. | The ML Test Score | 2017 | https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/
+S-AIO-31 | Zinkevich | Rules of Machine Learning | current | https://developers.google.com/machine-learning/guides/rules-of-ml
+S-AIO-32 | Huyen | AI Engineering | 2024 | https://openlibrary.org/search.json?title=AI+Engineering&author=Chip+Huyen
+S-AIO-33 | Huyen | Building A Generative AI Platform | 2024 | https://huyenchip.com/2024/07/25/genai-platform.html
+S-AIO-34 | Yan et al. | What We Learned from a Year of Building with LLMs (Part I) | 2024 | https://www.oreilly.com/radar/what-we-learned-from-a-year-of-building-with-llms-part-i/
+S-AIO-35 | Anthropic Docs | Usage and Cost API | current | https://platform.claude.com/docs/en/build-with-claude/usage-cost-api
+S-AIO-36 | Anthropic Docs | Prompt caching | current | https://platform.claude.com/docs/en/build-with-claude/prompt-caching
+S-AIO-37 | Anthropic Docs | Rate limits | current | https://docs.anthropic.com/en/api/rate-limits
+S-AIO-38 | FinOps Foundation | FinOps Framework | current | https://www.finops.org/framework/
+S-AIO-39 | Python docs | unittest.mock | current | https://docs.python.org/3/library/unittest.mock.html
+S-AIO-40 | OWASP | Top 10 for LLM Applications | current | https://genai.owasp.org/llm-top-10/
