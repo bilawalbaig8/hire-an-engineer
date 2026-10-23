@@ -137,3 +137,64 @@ How to use these sources
 | S-TOOL-4 | statsmodels documentation | statsmodels developers | ongoing | https://www.statsmodels.org/stable/ | Regression, GLMs, tests and power calculations. | BSD licence docs | verified |
 | S-TOOL-5 | statistics: Mathematical statistics functions (Python standard library) | Python Software Foundation | ongoing | https://docs.python.org/3/library/statistics.html | What can be done with the standard library alone when nothing else is installed. | PSF licence docs | verified |
 | S-TOOL-6 | csv: CSV File Reading and Writing (Python standard library) | Python Software Foundation | ongoing | https://docs.python.org/3/library/csv.html | Reading data safely with the standard library. | PSF licence docs | verified |
+
+## BI / Analytics mode: metric definitions
+
+Rows below (S-MET, S-TRK, S-DSH, S-GRO, S-DTR) were re-checked on 2026-10-23 by script: the page loaded and its text held the title's key words. A book row marked `verified` with an Open Library URL means the catalogue listing was found, not the full text. "ongoing" means a living page with no clear year.
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-MET-1 | About MetricFlow | dbt Labs | ongoing | https://docs.getdbt.com/docs/build/about-metricflow | Define a metric once (measure, dimensions, time grain) so every report gives the same number. | Free to read; licence unverified | verified |
+| S-MET-2 | dbt Semantic Layer | dbt Labs | ongoing | https://docs.getdbt.com/docs/use-dbt-semantic-layer/dbt-sl | The "one definition, many tools" idea behind a metric dictionary. | Free to read; licence unverified | verified |
+| S-MET-3 | LookML terms and concepts | Google Cloud (Looker docs) | ongoing | https://cloud.google.com/looker/docs/lookml-terms-and-concepts | A modelling layer fixes measures and dimensions in one place. | Free to read; licence unverified | verified |
+| S-MET-4 | North Star Playbook | Amplitude | ongoing | https://amplitude.com/books/north-star | One North Star metric and the input metrics under it: the basis of a KPI tree. | Free to read; licence unverified | verified |
+| S-MET-5 | Lean Analytics: Use Data to Build a Better Startup Faster | Alistair Croll, Benjamin Yoskovitz | 2013 | https://leananalyticsbook.com/ | One metric that matters for the current stage; few metrics for small teams. | Book (paid); site free | verified |
+
+## BI / Analytics mode: tracking plans
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-TRK-1 | Naming conventions: why you need them for clean data | Segment (Twilio) | ongoing | https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/ | Event and property naming rules (object and action, one case style). | Free to read; licence unverified | verified |
+| S-TRK-2 | Plan your taxonomy | Amplitude Docs | ongoing | https://amplitude.com/docs/data/data-planning-playbook | Plan events, properties and owners before instrumenting. | Free to read; licence unverified | verified |
+| S-TRK-3 | Tracking Best Practices | Mixpanel Docs | ongoing | https://docs.mixpanel.com/docs/tracking-best-practices | What to track and what not to send, including personal data. | Free to read; licence unverified | verified |
+| S-TRK-4 | Introduction to structuring your data with schemas | Snowplow Documentation | ongoing | https://docs.snowplow.io/docs/fundamentals/schemas/ | Schema checks on every event so bad events are caught at collection. | Free to read; licence unverified | verified |
+
+## BI / Analytics mode: dashboard and report design
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-DSH-1 | Information Dashboard Design | Stephen Few | 2006 | https://openlibrary.org/search?q=information+dashboard+design+few | One screen, glanceable, the right display for each question. | Book (paid); catalogue listing only | verified |
+| S-DSH-2 | Show Me the Numbers | Stephen Few | 2004 | https://openlibrary.org/search?q=show+me+the+numbers+few | Choosing a table or a chart for business reports. | Book (paid); catalogue listing only | verified |
+| S-DSH-3 | The Visual Display of Quantitative Information | Edward Tufte | 1983 | https://openlibrary.org/search?q=visual+display+of+quantitative+information | Graphical integrity: charts that do not mislead, little decoration. | Book (paid); catalogue listing only | verified |
+| S-DSH-4 | Tips for Designing a Great Power BI Dashboard | Microsoft Learn | ongoing | https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards-design-tips | Audience first, few tiles, the most important number top left. | Free to read; licence unverified | verified |
+| S-DSH-5 | BI dashboard best practices | Metabase Learn | ongoing | https://www.metabase.com/learn/metabase-basics/querying-and-dashboards/dashboards/bi-dashboard-best-practices | One purpose per dashboard, filters and naming for small teams. | Free to read; licence unverified | verified |
+| S-DSH-6 | Best practice: Create a positive experience for Looker users | Google Cloud (Looker docs) | ongoing | https://cloud.google.com/looker/docs/best-practices/how-to-create-a-positive-experience-for-looker-users | Curated content, clear owners and clean-up so dashboards do not decay. | Free to read; licence unverified | verified |
+| S-DSH-7 | Tableau Governance | Tableau Blueprint (Salesforce) | ongoing | https://help.tableau.com/current/blueprint/en-us/bp_governance.htm | Content owners, certification and a review cycle for reports. | Free to read; licence unverified | verified |
+
+## BI / Analytics mode: product and growth analytics
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-GRO-1 | Startup Metrics for Pirates (AARRR) | Dave McClure | 2007 | https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version | The acquisition, activation, retention, referral, revenue funnel. Year from general knowledge. | Free to read; licence unverified | verified |
+| S-GRO-2 | New data shows losing 80% of mobile users is normal, and why the best apps do better | Andrew Chen | ongoing | https://andrewchen.com/new-data-shows-why-losing-80-of-your-mobile-users-is-normal-and-that-the-best-apps-do-much-better/ | Shape of mobile retention curves; a flattening curve is the goal. | Free to read; licence unverified | verified |
+| S-GRO-3 | Why Retention Is The Silent Killer | Reforge | ongoing | https://www.reforge.com/blog/retention-engagement-growth-silent-killer | Retention before growth; reading cohort curves. | Free to read; licence unverified | verified |
+| S-GRO-4 | What is good retention | Lenny Rachitsky | ongoing | https://www.lennysnewsletter.com/p/what-is-good-retention-issue-29 | Rough retention benchmarks by product type, and their limits. | Free to read; licence unverified | verified |
+| S-GRO-5 | SKAdNetwork | Apple Developer Documentation | ongoing | https://developer.apple.com/documentation/storekit/skadnetwork | What iOS install attribution can report: aggregated, delayed, privacy thresholds. | Free to read; licence unverified | verified |
+| S-GRO-6 | AdAttributionKit | Apple Developer Documentation | ongoing | https://developer.apple.com/documentation/adattributionkit | Apple's newer attribution framework, with similar privacy limits. | Free to read; licence unverified | verified |
+| S-GRO-7 | Overview of Attribution Reporting API | Google Privacy Sandbox | ongoing | https://privacysandbox.google.com/private-advertising/attribution-reporting | Android and web attribution with noise and limits; why numbers differ by platform. | Free to read; licence unverified | verified |
+| S-GRO-8 | Measuring Ad Effectiveness Using Geo Experiments | Jon Vaver, Jim Koehler | 2011 | https://research.google/pubs/measuring-ad-effectiveness-using-geo-experiments/ | Incrementality by region: did the ads cause the installs. Year from general knowledge. | Free to read; licence unverified | verified |
+| S-GRO-9 | Conversion Lift Testing for Incrementality Measurement | Meta for Business | ongoing | https://www.facebook.com/business/measurement/conversion-lift | Vendor description of lift tests with a test and a control group. The page refused the script on 2026-10-23. | Free to read; licence unverified | unverified |
+| S-GRO-10 | What is ROAS (return on ad spend) and how to measure it? | AppsFlyer Glossary | ongoing | https://www.appsflyer.com/glossary/roas/ | ROAS definition and cohort windows (D1, D7, D30). | Free to read; licence unverified | verified |
+| S-GRO-11 | What is LTV? How to calculate it and why it is important | AppsFlyer Glossary | ongoing | https://www.appsflyer.com/glossary/ltv/ | A simple LTV definition and its link to acquisition cost and payback. | Free to read; licence unverified | verified |
+| S-GRO-12 | View app statistics | Google Play Console Help | ongoing | https://support.google.com/googleplay/android-developer/answer/139628 | What the store console itself reports, as a cross-check for other tools. | Free to read; licence unverified | verified |
+
+## BI / Analytics mode: data trust for reports
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-DTR-1 | Source freshness | dbt Labs | ongoing | https://docs.getdbt.com/docs/deploy/source-freshness | State and check how fresh a source must be before a report is trusted. | Free to read; licence unverified | verified |
+| S-DTR-2 | Data discrepancies | Adjust Help Center | ongoing | https://help.adjust.com/en/article/data-discrepancies | Why attribution, store and network numbers differ; a reconcile checklist. Redirect loop for the script on 2026-10-23. | Free to read; licence unverified | unverified |
+| S-DTR-3 | Data Contracts guide | datacontract.com | ongoing | https://datacontract.com/ | What a data contract promises: schema, owner, quality, freshness. | Free to read; licence unverified | verified |
+| S-DTR-4 | Open Data Contract Standard | Bitol (Linux Foundation) | ongoing | https://bitol-io.github.io/open-data-contract-standard/latest/ | An open format for writing a data contract file. | Open standard | verified |
+| S-DTR-5 | Driving Data Quality with Data Contracts | Andrew Jones | 2023 | https://openlibrary.org/search?q=driving+data+quality+with+data+contracts | Contracts between the people who produce data and those who use it. | Book (paid); catalogue listing only | verified |
+| S-DTR-6 | Anomaly detection: A survey | Varun Chandola, Arindam Banerjee, Vipin Kumar | 2009 | https://doi.org/10.1145/1541880.1541882 | Types of anomalies and methods; the basis for flagging KPI jumps. | Paywalled; abstract free | verified |

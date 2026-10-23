@@ -107,13 +107,12 @@ One-way door rule: `one_way_door: true` shows the door tag on the card, the chip
 | Mock id | Display name | Desk zone (layout B) | Matches log `agent` name (aliases) | In `roster.md` today |
 |---|---|---|---|---|
 | conductor | Boss (theme Orchestra: Conductor) | glass office | `orchestrator`, `boss`, `main` when the boss runs the session | boss is not listed by design |
-| architect | Solution Architect | Engineering | `architect` | yes |
-| dbarch | Database Architect | Engineering | `database-architect`, `data-architect` (**assumption**: final names unknown) | no |
+| architect | Solution Architect (system design and data design modes; one character) | Engineering | `architect`; the old names `solution-architect`, `database-architect`, `data-architect` and `dbarch` also land here | yes |
 | pm | Product Manager | Product | `product-manager` | no |
 | ba | Business Analyst | Product | `business-analyst` | no |
 | ux | UX/UI Designer | Design | `ux-designer`, `ux-ui-designer` | no |
 | fe | Frontend Engineer | Engineering | `frontend`, `frontend-engineer` | no |
-| be | Backend Engineer | Engineering | `backend`, `backend-engineer`, `backend-api` | no |
+| be | Backend & Integration Engineer (Build, Review/Fix, Connect and Check modes; one character) | Engineering | `backend`, `backend-engineer`, `backend-api`; the old name `integration-engineer` also lands here | yes |
 | qa | QA / Test Engineer | Quality and Security | `qa`, `qa-test` | no |
 | reviewer | Code Reviewer | Quality and Security | `code-reviewer` | yes |
 | security | Security Engineer | Quality and Security | `security`, `security-engineer` | no |

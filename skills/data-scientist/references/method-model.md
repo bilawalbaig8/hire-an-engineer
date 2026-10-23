@@ -56,3 +56,16 @@ Clusters are descriptions, not truths: report the features used, the number of g
 - Long-term upkeep: models quietly decay and entangle with the product [S-MOD-7].
 
 Background: model assessment and validation [S-STA-13] [S-STA-14].
+
+## 6. Boundary with the AI Engineer (Train/Evaluate)
+
+The line is the purpose of the model, not the method:
+
+| The model is for | Who |
+|---|---|
+| A question about the business: who will churn, what drives purchases, which segments exist, is this score good enough to plan with | this mode (Data Scientist & Analyst) |
+| Running inside the product: a classifier, ranking or recommender that users meet, a fine-tuned model, embeddings, an LLM judge, and the evals of those | AI Engineer, Train/Evaluate mode |
+
+- If one request needs both (an analysis says a churn score is worth having, and then the product should use it), do the analysis here and return "build it into the product" to the boss for the AI Engineer.
+- Both roles follow the same validation basics: split before fitting, time-aware or grouped splits, baseline first, leakage checks, a short model card. This file and `stdlib-helpers.md` are this role's copy of them.
+- This role does not keep the AI Engineer's held-out release cases (the QA / Test Engineer does); it may help with the statistics of a check when the boss asks.

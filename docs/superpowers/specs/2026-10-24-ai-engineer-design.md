@@ -1,7 +1,7 @@
 # AI Engineer agent: design
 
-Status: DRAFT, waiting for owner approval. Spec, sources, evals and the role file are written first; nothing is installed or committed.
-Branch: `feat/specialized-agents`. Date: 2026-10-24. Master plan: `2026-10-22-agent-team-master-plan.md`. Role file for the owner (Roman Urdu): `docs/agents/roles/ai-engineer.md`.
+Status: built (this was the first design, written as a draft before the build). The skill, agent and evals exist; `TASKS.md` AI-1 to AI-4 are done (installed, committed). Design/Build and Train/Evaluate evals: 13 of 14 pass, one run each (`evals/ai-engineer/results-rerun-after-aiops.md`). Three AI-Ops modes were added later: see `2026-10-24-ai-engineer-ai-ops-merge.md`.
+Branch: `feat/specialized-agents`. Date: 2026-10-24. Master plan: `2026-10-22-agent-team-master-plan.md`. Role file for the owner (now in English): `docs/agents/roles/ai-engineer.md`.
 
 ## 1. Intent and why
 
@@ -114,3 +114,5 @@ Exact file sizes and wording; the helper snippets in the references; planted det
 5. No live provider call is ever made during the build or the evals; provider details (model names, limits, prices) are marked `unknown` until read from the live documentation during a job, because they change often.
 6. Source verification was done by script (page title, author, year); 2 of the 100 external sources are `unverified` and are used only with that word.
 7. The role file `docs/agents/roles/ai-engineer.md` was created at the coordinator's request; it is for this role only.
+
+Review pass 2026-10-24: status changed from "DRAFT, nothing installed" to built (13 of 14 evals pass); the role file is in English, not Roman Urdu.

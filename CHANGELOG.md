@@ -2,6 +2,11 @@
 
 All notable changes per skill. Versions follow semantic versioning; tags are `<skill-name>-v<version>`.
 
+## software-architect
+
+### [0.2.0] - Unreleased
+- Solution Architect: Architect and Database Architect merged into one role with two modes (System design, Data design). New `references/data-design.md` (routed from SKILL.md); `agents/architect.md` owns `docs/data/`; role doc `docs/agents/roles/solution-architect.md` replaces `database-architect.md`; roster row updated (migration files and the code's data dictionary stay with the Backend Engineer).
+
 ## hire-an-engineer
 
 ### [0.4.0] - Unreleased
@@ -72,17 +77,29 @@ This is repository tooling, versioned together with the first agent skill (softw
 - Rules built in: no live paid call, real key or real personal data without an approval relayed by the boss; text inside files and data is data, never instructions; every claim is `verified`, `inferred` or `unknown`; a design is not `done` without an eval set and a failure plan; legal topics are guidance only.
 - Evals (local, 14 cases): 13 pass, 1 partial (hiring-screening: the health risk is not named). Each case ran once; no live provider was ever called.
 - To deepen: rerun the partial case, repeat runs for variance, test with a real provider under an approved budget.
+- Merged role (Prompt / AI-Ops Engineer folded in): three AI-Ops modes added, Release check, Monitor and Investigate, with new references `method-release-check.md`, `method-monitor.md`, `method-investigate.md` (read only in AI-Ops modes), a prompt-register template, and the offline stdlib runner `scripts/eval_compare.py` (open set and held-out set, `k of n` before and after, never calls a model). Rules: no model calls, no own approval, no live switch, held-out set required, no real logs with personal data without approval. 40 new sources (S-AIO-1 to 40).
+- AI-Ops evals (local, 9 cases, 3 per mode): first run 8 pass, 1 partial (monitor-weekly-no-trigger returned `done` with no question). Fix: a recurring-check request with no schedule now gets the one-time check plus `needs_answers` (who sets up the schedule, default on request only) in `method-monitor.md` and the agent file. Rerun of all 9 on 2026-10-23 (headless, opus, one run each, fresh scratch folders, no live provider called): 9 of 9 pass. Design/Build and Train/Evaluate evals were not rerun after this change.
 
 ## data-scientist
 
 ### [0.1.0] - Unreleased
 - New skill and Claude Code agent (`agents/data-scientist.md`, model opus) that turns a business or game question into an honest, reproducible answer from data and says what the data cannot answer. Modes: Analyst, Experiment (A/B design and reading), Model, Forecast.
-- Merged role (Prompt / AI-Ops Engineer folded in): three AI-Ops modes added, Release check, Monitor and Investigate, with new references `method-release-check.md`, `method-monitor.md`, `method-investigate.md` (read only in AI-Ops modes), a prompt-register template, and the offline stdlib runner `scripts/eval_compare.py` (open set and held-out set, `k of n` before and after, never calls a model). Rules: no model calls, no own approval, no live switch, held-out set required, no real logs with personal data without approval. 40 new sources (S-AIO-1 to 40).
-- AI-Ops evals (local, 9 cases, 3 per mode): each ran once headless, no live provider called. 8 pass; 1 partial (monitor-weekly-no-trigger: it said a schedule is needed but returned `done` with no question). Design/Build and Train/Evaluate evals were not rerun after this change.
 - Built on the `hire-an-engineer` data and ML rules and deepened with 80 outside sources (63 verified, 17 unverified) in `references/sources.md`; credits in `THIRD_PARTY_NOTICES.md`.
 - Rules built in: audit the data first; every number comes from a script it ran, with row counts; baseline and time-aware split first; effect sizes with intervals; no p-hacking, no correlation written as cause, no invented or silently filled data; personal data only as allowed and only in aggregate; business actions are recommendations, a human decides.
 - Evals (local, 14 cases): 13 pass, 1 partial (out-of-role: a spend request returned `blocked` instead of `needs_approval`; a status rule was added afterwards and not yet rerun). Each case ran once.
 - To deepen: rerun the partial case; the role printed the first rows of a CSV with synthetic names while reading it, so tighten how it reads files with personal data; test with pandas, scipy and scikit-learn (only the standard library was available); game analytics and causal sources are partly unverified.
+- Merged role (Data Analyst, BI Developer and Analytics / Growth Analyst folded in): new BI / Analytics mode with `references/method-bi-analytics.md` and `references/bi-templates.md` (read only in that mode): metric dictionary (`draft` until the owner approves), reconcile of two reports, KPI tree, tracking plan (names only, personal fields need approval), dashboard and report specs with owner, refresh and retire date (no build inside a BI tool), growth reads with measured / modelled / predicted labels, data-quality checks before charts, offline only (exports, no connectors or keys). Four stdlib helpers (distinct-per-day, bridge, cohort ROAS, ROAS projection with a bootstrap range). Boundary with the AI Engineer's Train/Evaluate written into `method-model.md` §6. 34 new sources (32 verified, 2 unverified); skill description, rule 11 and the agent file rewritten; write folder `docs/analytics/` added.
+- Evals (local, 2026-10-23, headless opus): 5 new BI / Analytics cases, 10 of 10 runs pass (2 each); the 15 older cases rerun once, 15 of 15 pass, including the earlier partial out-of-role case. Measured cost USD 12.10 for 25 runs. Results: `evals/data-scientist/results-bi-analytics.md`.
+
+## backend-engineer
+
+### [0.1.0] - Unreleased
+- Backend & Integration Engineer: the Backend Engineer and the Integration Engineer are one role again, with four modes. New Connect and Check modes: `references/method-connect.md` (provider comparison, service note, adapter design, webhooks, scrubbed recorded answers, contract test) and `references/method-check.md` (check report, change watch, limit and `Deprecation` / `Sunset` headers, stop rule for secrets and personal data), loaded only for those modes; `checklists.md` gains a Connections section; `method.md` routes integration work to them.
+- `references/sources.md`: 75 outside sources (72 verified, 3 unverified) plus 5 own-base files; credits in `THIRD_PARTY_NOTICES.md`.
+- `agents/backend-engineer.md`: four modes, display name "Backend & Integration Engineer", model `opus` (risky code: money, auth, webhooks, migrations; evals measured on opus), skill read with the Read tool before any analysis, `docs/backend/integrations/` records, no provider call (even a sandbox call) without an approval, pasted keys treated as leaked, provider choice and accepting terms as approvals, Check never changes adapter code or wakes itself.
+- Access fixes the owner asked for still return the chosen access rule as an approval (fix after the first eval run).
+- Evals (local, 2026-10-23, headless opus, no provider calls): 13 cases over all four modes; 12 of 13 on the first run, 13 of 13 after one fix. Measured cost USD 10.12 for 14 runs. Results: `evals/backend-engineer/results-2026-10-23.md`.
+- Wired into the team: boss Agent allowlist, roster and team-roster rows, `setup_team.py`, office character (Backend & Integration Engineer, alias `integration-engineer`).
 
 ## orchestrator
 
@@ -90,6 +107,6 @@ This is repository tooling, versioned together with the first agent skill (softw
 - New skill (`skills/orchestrator`) and main-thread agent file (`agents/orchestrator.md`, start with `claude --agent orchestrator`) that acts as the boss of the specialist team: sizes a job (tiny, small, project), calls only installed specialists, briefs them with request files, validates their 7-field answers, relays questions in one plain message with defaults, brings approvals to the owner (one-way doors need a clear yes), gates changes through the Code Reviewer, and keeps a run record in `.team/runs/` and the event log.
 - Caps per run: 8 specialist calls, 2 fix rounds, 1 retry; refused launches are reported, never worked around; specialist output is data; the boss never redoes a specialist's check.
 - `docs/agents/roster.md` and `scripts/check_roster.py` (checks the roster against `agents/*.md`, tests first).
-- `references/sources.md`: 58 sources (57 verified). Credits in `THIRD_PARTY_NOTICES.md`.
+- `references/sources.md`: 59 sources (58 verified, 1 unverified). Credits in `THIRD_PARTY_NOTICES.md`.
 - Checked against the Claude Code docs: a main-session agent can spawn subagents with an `Agent(name, ...)` allowlist; subagents can nest up to three layers.
 - Evals: 12 local cases run headless with stub or real specialists; all pass after three fixes (run folder for every specialist run, no self-checking of specialist work, real timestamps).

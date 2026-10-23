@@ -62,3 +62,35 @@ S-TOOL-3 | SciPy developers | SciPy statistics reference (scipy.stats) | ongoing
 S-TOOL-4 | statsmodels developers | statsmodels documentation | ongoing | https://www.statsmodels.org/stable/
 S-TOOL-5 | Python Software Foundation | statistics: Mathematical statistics functions (Python standard library) | ongoing | https://docs.python.org/3/library/statistics.html
 S-TOOL-6 | Python Software Foundation | csv: CSV File Reading and Writing (Python standard library) | ongoing | https://docs.python.org/3/library/csv.html
+S-MET-1 | dbt Labs | About MetricFlow | ongoing | https://docs.getdbt.com/docs/build/about-metricflow
+S-MET-2 | dbt Labs | dbt Semantic Layer | ongoing | https://docs.getdbt.com/docs/use-dbt-semantic-layer/dbt-sl
+S-MET-3 | Google Cloud (Looker docs) | LookML terms and concepts | ongoing | https://cloud.google.com/looker/docs/lookml-terms-and-concepts
+S-MET-4 | Amplitude | North Star Playbook | ongoing | https://amplitude.com/books/north-star
+S-MET-5 | Alistair Croll, Benjamin Yoskovitz | Lean Analytics: Use Data to Build a Better Startup Faster | 2013 | https://leananalyticsbook.com/
+S-TRK-1 | Segment (Twilio) | Naming conventions: why you need them for clean data | ongoing | https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/
+S-TRK-2 | Amplitude Docs | Plan your taxonomy | ongoing | https://amplitude.com/docs/data/data-planning-playbook
+S-TRK-3 | Mixpanel Docs | Tracking Best Practices | ongoing | https://docs.mixpanel.com/docs/tracking-best-practices
+S-TRK-4 | Snowplow Documentation | Introduction to structuring your data with schemas | ongoing | https://docs.snowplow.io/docs/fundamentals/schemas/
+S-DSH-1 | Stephen Few | Information Dashboard Design | 2006 | https://openlibrary.org/search?q=information+dashboard+design+few
+S-DSH-2 | Stephen Few | Show Me the Numbers | 2004 | https://openlibrary.org/search?q=show+me+the+numbers+few
+S-DSH-3 | Edward Tufte | The Visual Display of Quantitative Information | 1983 | https://openlibrary.org/search?q=visual+display+of+quantitative+information
+S-DSH-4 | Microsoft Learn | Tips for Designing a Great Power BI Dashboard | ongoing | https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards-design-tips
+S-DSH-5 | Metabase Learn | BI dashboard best practices | ongoing | https://www.metabase.com/learn/metabase-basics/querying-and-dashboards/dashboards/bi-dashboard-best-practices
+S-DSH-6 | Google Cloud (Looker docs) | Best practice: Create a positive experience for Looker users | ongoing | https://cloud.google.com/looker/docs/best-practices/how-to-create-a-positive-experience-for-looker-users
+S-DSH-7 | Tableau Blueprint (Salesforce) | Tableau Governance | ongoing | https://help.tableau.com/current/blueprint/en-us/bp_governance.htm
+S-GRO-1 | Dave McClure | Startup Metrics for Pirates (AARRR) | 2007 | https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version
+S-GRO-2 | Andrew Chen | New data shows losing 80% of mobile users is normal, and why the best apps do better | ongoing | https://andrewchen.com/new-data-shows-why-losing-80-of-your-mobile-users-is-normal-and-that-the-best-apps-do-much-better/
+S-GRO-3 | Reforge | Why Retention Is The Silent Killer | ongoing | https://www.reforge.com/blog/retention-engagement-growth-silent-killer
+S-GRO-4 | Lenny Rachitsky | What is good retention | ongoing | https://www.lennysnewsletter.com/p/what-is-good-retention-issue-29
+S-GRO-5 | Apple Developer Documentation | SKAdNetwork | ongoing | https://developer.apple.com/documentation/storekit/skadnetwork
+S-GRO-6 | Apple Developer Documentation | AdAttributionKit | ongoing | https://developer.apple.com/documentation/adattributionkit
+S-GRO-7 | Google Privacy Sandbox | Overview of Attribution Reporting API | ongoing | https://privacysandbox.google.com/private-advertising/attribution-reporting
+S-GRO-8 | Jon Vaver, Jim Koehler | Measuring Ad Effectiveness Using Geo Experiments | 2011 | https://research.google/pubs/measuring-ad-effectiveness-using-geo-experiments/
+S-GRO-10 | AppsFlyer Glossary | What is ROAS (return on ad spend) and how to measure it? | ongoing | https://www.appsflyer.com/glossary/roas/
+S-GRO-11 | AppsFlyer Glossary | What is LTV? How to calculate it and why it is important | ongoing | https://www.appsflyer.com/glossary/ltv/
+S-GRO-12 | Google Play Console Help | View app statistics | ongoing | https://support.google.com/googleplay/android-developer/answer/139628
+S-DTR-1 | dbt Labs | Source freshness | ongoing | https://docs.getdbt.com/docs/deploy/source-freshness
+S-DTR-3 | datacontract.com | Data Contracts guide | ongoing | https://datacontract.com/
+S-DTR-4 | Bitol (Linux Foundation) | Open Data Contract Standard | ongoing | https://bitol-io.github.io/open-data-contract-standard/latest/
+S-DTR-5 | Andrew Jones | Driving Data Quality with Data Contracts | 2023 | https://openlibrary.org/search?q=driving+data+quality+with+data+contracts
+S-DTR-6 | Varun Chandola, Arindam Banerjee, Vipin Kumar | Anomaly detection: A survey | 2009 | https://doi.org/10.1145/1541880.1541882

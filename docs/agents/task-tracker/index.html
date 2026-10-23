@@ -1,0 +1,129 @@
+<title>Agent Team Tracker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one work board. Summary strip, filter row, then phases as ruled sections of role rows (title + sub-roles, documentation state, build state). */
+:root {
+  --bg: #f4f5f3; --surface: #ffffff; --fg: #1d2421; --muted: #5f6b66; --line: #dcE1de; --accent: #1d5f7a;
+  --s-none: #6b7570; --s-none-bg: #eceeed;
+  --s-doc: #7a4fb5; --s-doc-bg: #efe8f8;
+  --s-prog: #a35a00; --s-prog-bg: #fbeed7;
+  --s-built: #1d5f7a; --s-built-bg: #dfeef4;
+  --s-test: #2f7d4f; --s-test-bg: #e1f1e7;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121715; --surface: #1a211e; --fg: #e4ebe7; --muted: #95a39c; --line: #2b3531; --accent: #6cb8d6;
+  --s-none: #95a39c; --s-none-bg: #252d2a;
+  --s-doc: #b99be6; --s-doc-bg: #2a2238;
+  --s-prog: #e9b45c; --s-prog-bg: #352a17;
+  --s-built: #6cb8d6; --s-built-bg: #17303b;
+  --s-test: #6fcf97; --s-test-bg: #1c3326; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121715; --surface: #1a211e; --fg: #e4ebe7; --muted: #95a39c; --line: #2b3531; --accent: #6cb8d6;
+  --s-none: #95a39c; --s-none-bg: #252d2a;
+  --s-doc: #b99be6; --s-doc-bg: #2a2238;
+  --s-prog: #e9b45c; --s-prog-bg: #352a17;
+  --s-built: #6cb8d6; --s-built-bg: #17303b;
+  --s-test: #6fcf97; --s-test-bg: #1c3326; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14px; line-height: 1.45;
+  padding-block: 20px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 2px; text-wrap: balance; }
+#meta { color: var(--muted); margin: 0 0 16px; font-size: 13px; }
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-bottom: 16px; }
+.strip button { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; color: var(--fg); font: inherit; cursor: pointer; }
+.strip button[aria-pressed="true"] { border-color: var(--accent); outline: 1px solid var(--accent); }
+.strip b { display: block; font-family: var(--font-mono); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.strip span { color: var(--muted); font-size: 12px; }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.tools input { flex: 1 1 200px; min-width: 0; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+.tools input:focus-visible, .strip button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.phase { margin-top: 20px; }
+.phase h2 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 4px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 244px; gap: 4px 12px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.num { font-family: var(--font-mono); color: var(--muted); font-size: 12px; padding-top: 2px; }
+.title { font-weight: 600; }
+.sub { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.pills { display: grid; grid-template-columns: 118px 118px; gap: 12px; }
+.note { grid-column: 2 / -1; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.note code { font-family: var(--font-mono); font-size: 12px; }
+.pill { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.col-h { display: grid; grid-template-columns: 34px minmax(0, 1fr) 118px 118px; gap: 12px; padding-right: 0; font-size: 11px; color: var(--muted); padding: 8px 0 0; text-transform: uppercase; letter-spacing: .06em; }
+.empty { color: var(--muted); padding: 24px 0; }
+@media (max-width: 560px) {
+  .row { grid-template-columns: 30px minmax(0, 1fr); }
+  .row .pills { grid-column: 2; display: flex; gap: 6px; flex-wrap: wrap; }
+  .col-h { display: none; }
+}
+</style>
+<div class="wrap">
+  <h1 id="title">Agent Team Tracker</h1>
+  <p id="meta">Loading roles…</p>
+  <div class="strip" id="strip"></div>
+  <div class="tools"><input id="q" type="search" placeholder="Find a role or sub-role" aria-label="Find a role or sub-role"></div>
+  <div class="col-h"><span>#</span><span>Role and sub-roles</span><span>Documentation</span><span>Build</span></div>
+  <div id="list"></div>
+</div>
+<script>
+/* Template. One doc per role in collection "tasks": num, title, subroles, phase, phaseOrder, doc, build, note, updated.
+   doc:   Not written | Parts only | Documenting | Documented
+   build: Not started | In progress | Built | Tested | Done
+   Header line: doc "meta/summary" {title, note, updated}. Claude updates rows with the ArtifactData tool. */
+const DOC = { "Not written": "none", "Parts only": "none", "Documenting": "prog", "Documented": "doc" };
+const BUILD = { "Not started": "none", "In progress": "prog", "Built": "built", "Tested": "test", "Done": "test" };
+let rows = [], meta = null, filter = "", query = "";
+const $ = id => document.getElementById(id);
+function pill(text, map) { const k = map[text] || "none"; const s = document.createElement("span"); s.className = "pill"; s.textContent = text || "—"; s.style.color = "var(--s-" + k + ")"; s.style.background = "var(--s-" + k + "-bg)"; return s; }
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function buildKey(r) { return String(r.build || "").replace(/\s*\(.*\)$/, ""); }
+function render() {
+  $("title").textContent = (meta && meta.title) || "Agent Team Tracker";
+  $("meta").textContent = meta ? [meta.note, meta.updated && ("Updated " + meta.updated)].filter(Boolean).join(" · ") : (rows.length ? "" : "No roles yet. Claude adds them here as the team is planned.");
+  const counts = { all: rows.length, tested: 0, built: 0, doc: 0, none: 0 };
+  rows.forEach(r => {
+    const b = buildKey(r);
+    if (b === "Tested" || b === "Done") counts.tested++; else if (b === "Built" || b === "In progress") counts.built++;
+    if (r.doc === "Documented") counts.doc++;
+    if (b === "Not started" || !b) counts.none++;
+  });
+  const tiles = [["all", "All roles", counts.all], ["tested", "Tested or done", counts.tested], ["built", "Built or in progress", counts.built], ["doc", "Documented", counts.doc], ["none", "Not started", counts.none]];
+  const strip = $("strip"); strip.replaceChildren();
+  tiles.forEach(([k, label, n]) => {
+    const b = el("button"); b.type = "button"; b.setAttribute("aria-pressed", String(filter === k || (k === "all" && !filter)));
+    b.append(el("b", null, n), el("span", null, label)); b.onclick = () => { filter = (k === "all" || filter === k) ? "" : k; render(); }; strip.append(b);
+  });
+  const q = query.trim().toLowerCase();
+  const shown = rows.filter(r => {
+    const b = buildKey(r);
+    if (filter === "tested" && !(b === "Tested" || b === "Done")) return false;
+    if (filter === "built" && !(b === "Built" || b === "In progress")) return false;
+    if (filter === "doc" && !(r.doc === "Documented")) return false;
+    if (filter === "none" && !(b === "Not started" || !b)) return false;
+    return !q || (String(r.title) + " " + String(r.subroles)).toLowerCase().includes(q);
+  }).sort((a, b) => (a.phaseOrder - b.phaseOrder) || (a.order - b.order) || String(a.num).localeCompare(String(b.num), undefined, { numeric: true }));
+  const list = $("list"); list.replaceChildren();
+  if (!shown.length) { list.append(el("p", "empty", rows.length ? "No role matches this filter." : "")); return; }
+  let phase = null, sec = null;
+  shown.forEach(r => {
+    if (r.phase !== phase) { phase = r.phase; sec = el("section", "phase"); sec.append(el("h2", null, phase || "Other")); list.append(sec); }
+    const row = el("div", "row");
+    const main = el("div"); main.append(el("div", "title", r.title), el("div", "sub", r.subroles || ""));
+    const pills = el("div", "pills"); pills.append(pill(r.doc, DOC), pill(r.build, BUILD));
+    row.append(el("div", "num", r.num), main, pills);
+    if (r.note) row.append(el("div", "note", r.note));
+    sec.append(row);
+  });
+}
+$("q").addEventListener("input", e => { query = e.target.value; render(); });
+(async () => {
+  const db = await window.claude?.use?.("db");
+  if (!db) { $("meta").textContent = "The role list is not available in this view."; return; }
+  db.collection("tasks").onSnapshot(snap => { rows = snap.docs.map(d => ({ id: d.id, ...d.data() })); render(); },
+    () => { $("meta").textContent = "The role list stopped responding. Reload the page."; });
+  db.doc("meta/summary").onSnapshot(s => { meta = s.exists ? s.data() : null; render(); }, () => {});
+})();
+render();
+</script>

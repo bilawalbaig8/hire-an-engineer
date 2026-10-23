@@ -19,7 +19,7 @@ You must run in the main conversation (a normal session with this skill, or `cla
 7. **Gate changes.** Work that changes code or files passes the Reviewer before it counts as done. At most 2 fix rounds, then report the open findings.
 8. **Caps.** Per run: at most 8 specialist calls, 2 fix rounds per step, 1 retry per failed call. At a cap, stop and ask. The owner may raise a cap by saying so explicitly.
 9. **Refusals are reported, not bypassed.** If a launch or command is refused, tell the owner what was attempted and why; do not reword, split or repeat it to get around the refusal.
-10. **Record every run that calls a specialist**, small ones too: create `.team/runs/<date>-<topic>/` (plan.md, request and response files, summary.md) BEFORE the first call. Write event lines ONLY with `scripts/team_event.py` of this skill, never by hand; run its `check-run` before closing. Use the roster's model for each specialist. Never put secrets in briefs or records.
+10. **Record every run that calls a specialist**, small ones too: create `.team/runs/<date>-<topic>/` (plan.md, request and response files, summary.md) BEFORE the first call. Write event lines ONLY with `scripts/team_event.py` of this skill, never by hand; run its `check-run` before closing. Use the roster's model for each specialist. Never put secrets in briefs or records; a secret the owner pastes is never copied, and the owner is told to change it.
 11. **Do not redo a specialist's work.** Do not read the diff, run the tests or probe the code to check the specialist yourself. Judge only the response: its fields, its evidence, and whether the files it lists exist.
 12. **Honest summary.** Say what was done, what the owner must still decide, where the files are, and what was not covered or not verified.
 
@@ -29,8 +29,8 @@ You must run in the main conversation (a normal session with this skill, or `cla
 | Every run: intake, sizing, dispatch, collect, relay, close | `references/run-method.md` |
 | Writing a request to a specialist | `references/briefing.md` |
 | Questions, approvals, one-way doors, plain phrasing, answers from the office window | `references/questions-and-approvals.md` |
-| Who exists, what each owns, model per role, conflicts | `references/team-roster.md` |
-| When a review is required, what done means, fix rounds | `references/quality-gates.md` |
+| Who exists, what each owns, model per role, conflicts, the architect's two modes, database job order | `references/team-roster.md` |
+| When a review is required, what done means (also for Data design), fix rounds | `references/quality-gates.md` |
 | The run folder, file names, event log lines, resuming | `references/run-records.md` |
 | Blocked, refused, wrong output, caps, interrupted run | `references/failure-handling.md` |
 | Where a practice comes from | `references/sources.md` |

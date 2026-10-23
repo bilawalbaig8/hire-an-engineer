@@ -4,7 +4,7 @@ Plain-language guide to `permissions-snippet.json`. It is optional, and it is no
 
 ## Why
 
-1. **The event log must stay honest.** `.agents/events.jsonl` is what the visual office displays and trusts. The specialists (architect, code-reviewer, ai-engineer, data-scientist) have the Write tool. If one of them were prompt-injected by text in a reviewed repository, it could write fake lines into that file. Only the hook script (`scripts/log_event.py`) and the boss (through its helper script, run with Bash) should write there.
+1. **The event log must stay honest.** `.agents/events.jsonl` is what the visual office displays and trusts. The specialists (architect, code-reviewer, ai-engineer, data-scientist, backend-engineer) have the Write tool. If one of them were prompt-injected by text in a reviewed repository, it could write fake lines into that file. Only the hook script (`scripts/log_event.py`) and the boss (through its helper script, run with Bash) should write there.
 2. **Running someone else's tests runs someone else's code.** The Code Reviewer has Bash. Tests of a reviewed repository can do anything on your machine, so test running must be an explicit choice and never a default.
 
 ## How to use it

@@ -813,13 +813,12 @@ body[data-theme=pixel] .banner{font-size:18px}
 
 var AGENTS=[
  {id:'conductor',name:'Boss',short:'Boss',role:'Boss. Talks to the owner and hands out work.',ac:'#5f4331'},
- {id:'architect',name:'Solution Architect',short:'Architect',role:'Designs the whole system.',ac:'#4f6f9f'},
- {id:'dbarch',name:'Database Architect',short:'DB Architect',role:'Designs how data is stored.',ac:'#3f7d58'},
+ {id:'architect',name:'Solution Architect',short:'Architect',role:'Designs the whole system and where its data lives.',ac:'#4f6f9f'},
  {id:'pm',name:'Product Manager',short:'PM',role:'Decides what to build and why.',ac:'#d9792b'},
  {id:'ba',name:'Business Analyst',short:'BA',role:'Turns the idea into scenarios and rules.',ac:'#6a8f6a'},
  {id:'ux',name:'UX/UI Designer',short:'UX',role:'Designs screens and flows.',ac:'#d9648e'},
  {id:'fe',name:'Frontend Engineer',short:'Frontend',role:'Builds what people see.',ac:'#4ba3d8'},
- {id:'be',name:'Backend Engineer',short:'Backend',role:'Builds the server and payments.',ac:'#a5533a'},
+ {id:'be',name:'Backend & Integration Engineer',short:'Backend',role:'Builds the server and its connections to outside services.',ac:'#a5533a'},
  {id:'qa',name:'QA / Test Engineer',short:'QA',role:'Tests that it really works.',ac:'#86a83a'},
  {id:'reviewer',name:'Code Reviewer',short:'Reviewer',role:'Reads the code for mistakes.',ac:'#8f7fb3'},
  {id:'security',name:'Security Engineer',short:'Security',role:'Looks for ways it could be attacked.',ac:'#34436e'},
@@ -828,7 +827,7 @@ var AGENTS=[
  {id:'datasci',name:'Data Scientist',short:'Data Sci',role:'Finds honest answers in the data.',ac:'#d1495b'}
 ];
 var OWNER={id:'owner',name:'You, the owner',short:'Owner',role:'The human. Answers questions and approves decisions.',ac:'#6e1b2e'};
-var PROPS={conductor:['tie, phone and coffee','baton and podium'],architect:['blueprint roll and hard hat','cello and rolled blueprint'],dbarch:['stack of drives','double bass'],pm:['clipboard and sticky notes','clipboard and keyboard'],ba:['notebook and glasses','viola and notebook'],ux:['beret and colour tablet','harp and paint palette'],fe:['headphones and laptop','flute and headphones'],be:['wrench and server badge','trombone'],qa:['magnifying glass and bug net','triangle and magnifying glass'],reviewer:['round glasses and red pen','oboe and round glasses'],security:['cap, shield and padlock','timpani drum and shield'],devops:['hard hat, hi-vis vest and cable','french horn and wrench'],aieng:['circuit-board badge, neural-net poster and robot arm','theremin and circuit-board badge'],datasci:['chart clipboard and square glasses','xylophone and square glasses'],owner:['visitor armchair and folder','box seat and concert programme']};
+var PROPS={conductor:['tie, phone and coffee','baton and podium'],architect:['blueprint roll and hard hat','cello and rolled blueprint'],pm:['clipboard and sticky notes','clipboard and keyboard'],ba:['notebook and glasses','viola and notebook'],ux:['beret and colour tablet','harp and paint palette'],fe:['headphones and laptop','flute and headphones'],be:['wrench and server badge','trombone'],qa:['magnifying glass and bug net','triangle and magnifying glass'],reviewer:['round glasses and red pen','oboe and round glasses'],security:['cap, shield and padlock','timpani drum and shield'],devops:['hard hat, hi-vis vest and cable','french horn and wrench'],aieng:['circuit-board badge, neural-net poster and robot arm','theremin and circuit-board badge'],datasci:['chart clipboard and square glasses','xylophone and square glasses'],owner:['visitor armchair and folder','box seat and concert programme']};
 var BY=Object.create(null);AGENTS.concat([OWNER]).forEach(function(a){BY[a.id]=a});
 
 var TOTAL=48;
@@ -869,17 +868,14 @@ var EVENTS=[
    {id:'doc',label:'Document database',note:'Flexible shapes. Weaker for payments and reports.'}],
   askReply:'The Architect recommends PostgreSQL: a booking and its payment must succeed or fail together. MySQL would also work, but you would write more code to get the same safety.'},
  {t:26.4,type:'approval_given',id:'a1',auto:true,by:'demo',decision:'approved',option:'pg'},
- {t:26.7,type:'handoff',from:'conductor',to:'dbarch',task:'Design the PostgreSQL schema'},
+ {t:26.7,type:'handoff',from:'conductor',to:'architect',task:'Design the PostgreSQL schema (data design)'},
  {t:26.9,type:'handoff',from:'conductor',to:'ux',task:'Design the booking flow'},
- {t:27.0,type:'agent_start',agent:'architect',task:'Marking the decision as accepted'},
- {t:27.7,type:'agent_start',agent:'dbarch',task:'Designing the schema'},
+ {t:27.0,type:'agent_start',agent:'architect',task:'Data design: PostgreSQL schema'},
  {t:27.9,type:'agent_start',agent:'ux',task:'Sketching booking screens'},
- {t:28.4,type:'agent_stop',agent:'architect',result:'done',note:'Architecture signed off'},
- {t:29.4,type:'file_written',agent:'dbarch',path:'docs/data/schema.md'},
+ {t:29.4,type:'file_written',agent:'architect',path:'docs/data/schema.md'},
  {t:30.2,type:'file_written',agent:'ux',path:'docs/design/booking-flow.md'},
- {t:31.0,type:'file_written',agent:'dbarch',path:'db/migrations/001_create_bookings.sql'},
  {t:31.8,type:'file_written',agent:'ux',path:'docs/design/style-guide.md'},
- {t:32.4,type:'agent_stop',agent:'dbarch',result:'done',note:'Schema ready'},
+ {t:32.4,type:'agent_stop',agent:'architect',result:'done',note:'Architecture signed off, schema ready'},
  {t:32.6,type:'handoff',from:'conductor',to:'be',task:'Build the booking and payment API'},
  {t:32.8,type:'handoff',from:'conductor',to:'fe',task:'Build the booking pages'},
  {t:33.0,type:'agent_stop',agent:'ux',result:'done',note:'Screens ready'},
@@ -992,12 +988,6 @@ architect:{fur:'#c08a52',col:'#4f6f9f',tc:'#7a4a22',
     top:'<path d="M70 30l9-10" stroke="#2a1a12" stroke-width="5.6" stroke-linecap="round"/><path d="M70 30l9-10" stroke="#e69b2e" stroke-width="3" stroke-linecap="round"/><path d="M80 19l3-3.4" stroke="#2a1a12" stroke-width="3.4" stroke-linecap="round"/>',
     prop:'<g class="inst"><rect class="o" x="47.5" y="68" width="5.4" height="14" fill="#5b3a24"/><circle class="o" cx="50.2" cy="66.5" r="3.6" fill="#5b3a24"/><ellipse class="o" cx="50" cy="86" rx="13" ry="11" fill="#c47a45"/><ellipse class="o" cx="50" cy="103" rx="17.5" ry="13" fill="#c47a45"/><path class="ln" d="M43 92q-1 5 1.5 8M57 92q1 5-1.5 8M43 108h14" stroke-width="1.8"/><path d="M50 72v34" stroke="#e8d8a8" stroke-width="1"/><path d="M82 70L30 112" stroke="#2a1a12" stroke-width="4.6" stroke-linecap="round"/><path d="M82 70L30 112" stroke="#e8d8a8" stroke-width="2.2" stroke-linecap="round"/></g>',
     hl:[51,72],hr:[66,94]}},
-dbarch:{fur:'#2f241f',col:'#3f7d58',tc:'#150f0c',
- ctor:'<g class="o"><ellipse cx="39" cy="80" rx="6.5" ry="2.8" fill="#d9a93f"/><path d="M32.5 80v9c0 3.4 13 3.4 13 0v-9" fill="#d9a93f"/><path d="M32.5 85c0 3.4 13 3.4 13 0" fill="none"/></g>',
- o:{prop:'<g><rect class="o" x="56" y="64" width="38" height="12" rx="3" fill="#cfd6dd"/><rect class="o" x="56" y="76" width="38" height="12" rx="3" fill="#b8c1ca"/><rect class="o" x="56" y="88" width="38" height="12" rx="3" fill="#cfd6dd"/><circle cx="62" cy="70" r="2" fill="#37d67a"/><circle cx="62" cy="82" r="2" fill="#37d67a"/><circle cx="62" cy="94" r="2" fill="#f2c230"/><path d="M70 70h18M70 82h18M70 94h18" stroke="#6b7782" stroke-width="2" stroke-linecap="round"/></g>',
-    hl:[57,88],hr:[90,64]},
- r:{prop:'<g class="inst"><rect class="o" x="81" y="44" width="5.4" height="34" fill="#4a2e1c"/><circle class="o" cx="83.7" cy="42" r="4.6" fill="#4a2e1c"/><ellipse class="o" cx="84" cy="86" rx="12" ry="10" fill="#9b5a2e"/><ellipse class="o" cx="84" cy="103" rx="17" ry="13" fill="#9b5a2e"/><path class="ln" d="M77 97q-1 5 2 8M91 97q1 5-2 8M76 109h16" stroke-width="1.8"/><path d="M83.7 48v56" stroke="#e8d8a8" stroke-width="1.1"/></g>',
-    hl:[68,96],hr:[83,62]}},
 pm:{fur:'#d9792b',col:'#3e8e7e',tc:'#8a3b1f',
  ctor:'<path d="M40 66L50 84L60 66" stroke="#0f4c4a" stroke-width="2.4" fill="none"/><rect class="o" x="45" y="83" width="10" height="12" rx="2" fill="#fff"/>',
  o:{prop:'<g transform="rotate(-8 14 80)"><rect class="o" x="3" y="60" width="25" height="34" rx="3" fill="#a9763f"/><rect x="6.5" y="66" width="18" height="25" fill="#f6ebd2"/><rect class="o" x="10" y="57" width="11" height="7" rx="2" fill="#9aa3ad"/><path d="M12 72h10M12 77h10M12 82h8M12 87h10" stroke="#6b5a47" stroke-width="1.5"/><path d="M8.5 72l1.2 1.3 2-2.5" stroke="#2f7d4a" stroke-width="1.3" fill="none"/></g><rect class="o" x="68" y="70" width="14" height="14" fill="#ffe27a" transform="rotate(8 75 77)"/><rect class="o" x="76" y="80" width="13" height="13" fill="#ff9db8" transform="rotate(-10 82 86)"/>',
@@ -1136,9 +1126,6 @@ conductor:{fur:'5',cl:'1',mask:'f',
 architect:{fur:'4',cl:'c',mask:'f',
  hat:function(l){pell(l,14,6,6.5,3,'7');prect(l,7,8,14,1,'6');prect(l,13,3,2,5,'c');},
  prop:function(l){ptxt(l,7,25,['.cccccccccccc.','c7cccccccccc7c','c7cc7cc7cc7c7c','.cccccccccccc.']);prect(l,5,26,2,2,'4');prect(l,21,26,2,2,'4');}},
-dbarch:{fur:'2',cl:'b',mask:'f',
- hat:function(l){ptxt(l,11,3,['..00..','.0000.','000000','000000']);},
- prop:function(l){ptxt(l,14,22,['66666666','6b666a66','........','66666666','6b666b66','........','66666666','6a666b66']);}},
 pm:{fur:'9',cl:'3',mask:'f',
  hat:function(l){ptxt(l,12,4,['.44.','4444','.44.']);},
  det:function(l){ptxt(l,11,22,['c.....c','.c...c.','..c.c..','...c...']);prect(l,13,25,2,3,'7');},
@@ -1296,8 +1283,8 @@ function roleText(id){return id==='conductor'?bossName()+'. Talks to the owner a
 function passVerb(){var t=theme();return t==='orchestra'?'hands a sheet to':t==='pixel'?'sends a note to':'sends a sticky note to'}
 
 /* ---------- role registry: core 12 by alias, roster rows and unknown names become generic monkeys ---------- */
-var ALIAS={conductor:['orchestrator','boss','main'],architect:['solution-architect'],dbarch:['database-architect','data-architect'],pm:['product-manager'],ba:['business-analyst'],
-  ux:['ux-designer','ux-ui-designer'],fe:['frontend','frontend-engineer'],be:['backend','backend-engineer','backend-api'],qa:['qa-test','qa-test-engineer'],
+var ALIAS={conductor:['orchestrator','boss','main'],architect:['solution-architect','database-architect','data-architect','dbarch'],pm:['product-manager'],ba:['business-analyst'],
+  ux:['ux-designer','ux-ui-designer'],fe:['frontend','frontend-engineer'],be:['backend','backend-engineer','backend-api','integration-engineer'],qa:['qa-test','qa-test-engineer'],
   reviewer:['code-reviewer'],security:['security-engineer'],devops:['devops-platform','devops-engineer'],aieng:['ai-engineer'],datasci:['data-scientist']};
 var NAMEMAP=Object.create(null);
 Object.keys(ALIAS).forEach(function(id){ALIAS[id].forEach(function(n){NAMEMAP[n]=id})});
@@ -1749,7 +1736,7 @@ function demoAnswer(req,c,payload){
 /* ============================================================
    SEATS, DESKS AND VIEWS
    ============================================================ */
-var DESK={conductor:['plate:c','phone:l','mug:r'],architect:['mon:l','mug:r'],dbarch:['cab:l','mon:r'],pm:['stick:l','mug:r'],ba:['lap:l','mug:r'],ux:['plant:l','mon:r'],fe:['mon:l','mug:r'],be:['mon:l','plant:r'],qa:['ban:l','mon:r'],reviewer:['mon:l','mug:r'],security:['mon:l','plant:r'],devops:['mon:l','ban:r'],aieng:['mon:l','lap:r'],datasci:['lap:l','mon:r'],owner:['mug:r']};
+var DESK={conductor:['plate:c','phone:l','mug:r'],architect:['mon:l','mug:r'],pm:['stick:l','mug:r'],ba:['lap:l','mug:r'],ux:['plant:l','mon:r'],fe:['mon:l','mug:r'],be:['mon:l','plant:r'],qa:['ban:l','mon:r'],reviewer:['mon:l','mug:r'],security:['mon:l','plant:r'],devops:['mon:l','ban:r'],aieng:['mon:l','lap:r'],datasci:['lap:l','mon:r'],owner:['mug:r']};
 function deskHTML(id){
   var it=(DESK[id]||[]).map(function(s){var p=s.split(':');return '<i class="it '+p[0]+' '+p[1]+'">'+(p[0]==='plate'?'Boss':'')+'</i>'}).join('');
   return '<div class="desk" aria-hidden="true"><i class="kbd"></i>'+it+'<i class="it flag"></i><i class="it spill"></i></div>';
@@ -1775,7 +1762,7 @@ function buildHall(){
   h.innerHTML='<div class="valance"></div><div class="curtain l"></div><div class="curtain r"></div><div class="spots"><i></i><i></i><i></i></div><div class="kwall"></div><div class="tiers"></div><div class="front"></div>';
   var rows=[
    [['Percussion','Quality and Security',['qa','security']],['Brass','Build and Run',['be','devops']],['Winds','Frontend and Review',['fe','reviewer']]],
-   [['Keys and harp','Product and Design',['pm','ux']],['Strings','Architecture and Analysis',['architect','dbarch','ba']],['Electronic and mallets','Data & AI',['aieng','datasci']]]
+   [['Keys and harp','Product and Design',['pm','ux']],['Strings','Architecture and Analysis',['architect','ba']],['Electronic and mallets','Data & AI',['aieng','datasci']]]
   ];
   var tiers=$('.tiers',h);
   rows.forEach(function(groups){
@@ -1797,7 +1784,7 @@ function buildOffice(){
   var o=scene('viewB','office');
   o.innerHTML='<div class="glass"><span class="zl"><span class="t-o">Boss\'s glass office</span><span class="t-r">Conductor\'s glass office</span></span><div class="slot-c"></div><div class="board"><b>Today\'s job</b><span class="bgoal">No job yet</span></div></div>'+
    '<div class="rehearsal" id="rehearsal"><span class="zl"><span class="t-o">Meeting room</span><span class="t-r">Rehearsal corner</span></span><div class="table" aria-hidden="true"></div><p class="hand-now" id="handNow">No handoff yet</p><ol id="handList" aria-label="Recent handoffs"></ol></div>'+
-   zone('z-product','Product','Product',['pm','ba'])+zone('z-design','Design','Design',['ux'])+zone('z-eng','Engineering','Engineering',['architect','dbarch','fe','be'])+
+   zone('z-product','Product','Product',['pm','ba'])+zone('z-design','Design','Design',['ux'])+zone('z-eng','Engineering','Engineering',['architect','fe','be'])+
    zone('z-qs','Quality and Security','Quality and Security',['qa','reviewer','security'])+zone('z-ops','Ops','Ops',['devops'])+zone('z-data','Data &amp; AI','Data &amp; AI',['aieng','datasci'])+zone('z-owner','Visitor seat','Owner\'s chair',['owner'])+
    '<div class="kwall"></div><div class="kitchen"><span class="zl">Kitchen</span><i class="cooler"></i><i class="bowl"></i><i class="plant big"></i><span class="klab">Water cooler and banana bowl</span></div>'+
    '<div class="zone z-team" data-x="team" hidden><span class="zl"><span class="t-o">More team</span><span class="t-r">More players</span></span></div>'+

@@ -4,12 +4,31 @@ The machine-checked list is `docs/agents/roster.md` in the team repo. The table 
 
 | Name | Skill | Model | Owns |
 |---|---|---|---|
-| architect | software-architect | opus | Architecture designs and recovered architectures, decision records (`docs/decisions/`), diagrams, risks |
+| architect | software-architect | opus | Solution Architect, two modes. System design: architecture designs and recovered architectures (`docs/architecture/`), decision records (`docs/decisions/`), diagrams, risks. Data design (`docs/data/`): store choice, data model, data dictionary and ERD as design before build, access plan, backup and restore plan, migration plans |
 | code-reviewer | code-reviewer | opus | Review reports (`docs/reviews/`): spec compliance and quality verdicts on a change |
 | ai-engineer | ai-engineer | opus | AI design notes, eval sets, failure plans and model cards (`docs/ai/`), AI-Ops records (`docs/ai/ops/`: prompt register, release checks, monitor and investigation notes), plus prompt files and AI code in folders the request names. Modes: Design/Build, Train/Evaluate, Release check, Monitor, Investigate |
 | data-scientist | data-scientist | opus | Analysis plans and reports (`docs/analysis/`), plus analysis scripts in folders the request names |
+| backend-engineer | backend-engineer | opus | Backend & Integration Engineer, four modes. Backend design notes, API contracts, data dictionaries and backup notes (`docs/backend/`), integration records (`docs/backend/integrations/`: register, service notes, change watch, check reports), migration files (the migrations folder the brief names, else the project's existing one, else `migrations/`), plus server and adapter code in folders the request names. Modes: Build, Review/Fix, Connect, Check |
 
 To see which agents are really installed, list `agents/` of the project and `~/.claude/agents/`. Trust that list over this table.
+
+## The architect: two modes
+`architect` is the Solution Architect (the Architect and the Database Architect are one role). Put the mode in every request to it: `mode: "system design"` or `mode: "data design"`.
+- **System design:** structure, technology, trade-offs, scale, recover and review existing code, diagrams.
+- **Data design:** store choice, data model, data dictionary, ERD, access plan, backup and restore plan, migration plans, deletion plans, review of an existing database.
+- **Data design brief:** name the input files in `context_files` (sheets, schema, CSV exports) and the folders it may write in `constraints`: `docs/data/`, `docs/architecture/`, `docs/decisions/`.
+- **Not the architect's:** migration files, access tests and server code go to the `backend-engineer` (Backend & Integration Engineer), never to the architect; pipelines to the Data Engineer; metrics and analysis to `data-scientist`; the AI feature to `ai-engineer`. A role not installed or not in your Agent list follows the Missing role rule below.
+- **Database job order:** 1. `architect` (data design) writes `docs/data/`. 2. The owner approves each one-way door. 3. `backend-engineer` builds the migrations and access tests from `docs/data/`. 4. `code-reviewer` reads them.
+
+## The backend-engineer: four modes
+`backend-engineer` is the Backend & Integration Engineer (the Backend Engineer and the Integration Engineer are one role). It picks the mode itself; name it in the goal when you know it.
+- **Build / Review/Fix:** your own server: APIs, database, login and permissions, jobs, migrations, slow spots, duplicates, backups, a first API safety pass.
+- **Connect:** a new or changed connection to an outside service (payments, messaging, maps, ad libraries, store APIs, webhooks), including the provider comparison.
+- **Check:** looks at existing connections and reports (keys, limits, failures, provider changes). It never fixes; relay the next step as a Connect or Review/Fix job.
+- **Brief:** name the folders it may write in `constraints` (`docs/backend/`, the migrations folder, the server or adapter folders). Never paste a real key into a brief; if the owner pastes one, tell the owner it is leaked and must be revoked.
+- **Owner approvals it returns:** the choice of a provider (for example which payment service), accepting a provider's terms, a sandbox call with a test key, a live key or call, a bulk collection, a live migration, money, real messages, a deploy, an auth or permission design, data or API formats other code depends on. Relay each one; never approve for the owner.
+- **Check never wakes itself:** it runs on the owner's request or a schedule the owner sets up. Never tell the owner connections are watched without one.
+- **Review:** every change goes to the `code-reviewer` before it counts as done.
 
 ## Rules
 - **No specialist fits and a general helper would be needed** (for example building code): ask the owner once, label the helper in the plan and summary, require the 7-field reply, send an invalid reply back once, and gate its output through the Reviewer. Never use one silently.

@@ -34,7 +34,7 @@ Reads a change and tells the truth about it, with evidence: is it what was asked
 ## Reads first
 
 1. The request from the boss: what to review (range, branch, paths), what was asked (requirement or spec), constraints, how deep.
-2. `AGENTS.md` and `PROJECT_STATE.md` of the project, if they exist, and any requirement file the boss named.
+2. `AGENTS.md` and `PROJECT_STATE.md` of the project, if they exist, and any requirement file the boss named. It also reviews the Solution Architect's `docs/data/` plans (migration plans, access plan) when the boss sends them, checking they match the code and say what was and was not run.
 3. The skill `code-reviewer`: its `SKILL.md`, then always `references/review-method.md`, then only the lenses this change needs (correctness, security, performance and data, tests, simplicity, AI-written code, language notes), and `references/report-templates.md` when writing the report.
 
 ## How it works

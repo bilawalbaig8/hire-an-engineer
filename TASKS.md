@@ -115,31 +115,33 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 7.9 Review round (thinking skills): window answers off by default (server and installer), Your move strip, labels say who needs what and why, quiet-run warning, parked runs, /truth disk check, specialist calls N of 8 (done)
 - [x] 7.10 Polish from the owner's tests: owner label Your OK needed, cards say what to answer (a1 haan), boss keeps handed-back one-way doors open, full brief text on hover, boss default agent per project
 
-## Roles (22): the merged list of 22 (owner decision 2026-10-24)
+## Roles (22): the merged list (owner decisions 2026-10-24)
 
-Small roles are merged into bigger ones with modes. The old 70-role list is replaced; order follows the Ads Factory build order.
+Small roles are merged into bigger ones with modes; Backend and Integration were split for a short time and are merged again (role 6, four modes). Order follows the Ads Factory build order. Details and next steps for each role are in `docs/superpowers/specs/` and `docs/agents/roles/`.
 
-| # | Role | Wave | Status | Document | Next step | Includes |
-|---|---|---|---|---|---|---|
-| 1 | Orchestrator | 0 Built or in build | Tested | Not written | Write the role document from its skill (58 sources); already built | The boss |
-| 2 | Solution Architect | 0 Built or in build | In progress | Merged | Being finalised in the architect session (system design + data design); then commit | Architect + Database Architect |
-| 3 | Code Reviewer | 0 Built or in build | Tested | Not written | Write the role document from its skill (87 sources); already built | Code Reviewer |
-| 4 | AI Engineer | 0 Built or in build | Tested (2 of 5 modes) | Merged | Plan and spec are written (docs/superpowers/specs/2026-10-24-ai-engineer-ai-ops-merge.md); build of the AI-Ops modes waits for your go | AI Engineer + Prompt / AI-Ops |
-| 5 | Data Scientist & Analyst | 0 Built or in build | Tested | Parts, not merged yet | Research and write the BI / Analytics mode, then add it to the skill, agent and evals | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst |
-| 6 | Backend & Integration Engineer | 0 Built or in build | In progress | Merged | Add the Connect and Check modes (integrations) to the backend skill, agent and evals | Backend Engineer + Integration Engineer |
-| 7 | DevOps Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | DevOps + SRE / Monitoring + Release Manager |
-| 8 | Security & Privacy Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance |
-| 9 | QA / Test Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | QA + Playtest QA + Art QA + Performance + Accessibility |
-| 10 | Security Reviewer | 1 Foundation (Ads Factory steps 1-2) | Not started | Merged | Build the skill, the agent file and the evals | AppSec Reviewer + Penetration Tester |
-| 11 | Data Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Merged | Build the skill, the agent file and the evals | Data Engineer |
-| 12 | Creative & Art Director | 2 Creative lanes (steps 4-6) | Not started | Merged | Build the skill, the agent file and the evals | Creative Director + Art Director |
-| 13 | Artist | 2 Creative lanes (steps 4-6) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist |
-| 14 | Video & Sound Editor | 2 Creative lanes (steps 4-6) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | Video Editor + Sound Designer |
-| 15 | Game & Technical Engineer | 2 Creative lanes (steps 4-6) | Not started | Merged | Build the skill, the agent file and the evals | Game / Unity Engineer + Technical Artist |
-| 16 | Writer | 2 Creative lanes (steps 4-6) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | Content Writer + Storyboard / Scriptwriter + Localisation + Technical Writer + Support Analyst |
-| 17 | Designer | 2 Creative lanes (steps 4-6) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher |
-| 18 | Frontend & Mobile Engineer | 3 Approval and launch (step 9) | Not started | Not written | Write the role document (needs research), then build | Frontend + Mobile + Web Developer |
-| 19 | UA & Growth Marketer | 3 Approval and launch (step 9) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | Performance / UA + Ad Marketer + ASO / SEO + Social + Influencer / PR + Email / CRM |
-| 20 | Game Designer | 4 Not needed for Ads Factory | Not started | Not written | Write the role document (needs research), then build | Game Designer + Level + Systems / Economy + Live-Ops |
-| 21 | Product & Business Analyst | 4 Not needed for Ads Factory | Not started | Not written | Write the role document (needs research), then build | Product Manager + Business Analyst + Market Researcher + Delivery Manager |
-| 22 | Business Operations | 4 Not needed for Ads Factory | Not started | Not written | Write the role document (needs research), then build | Finance + Operations / Procurement + Sales / Account + HR + Legal (draft only) |
+Documentation: Not written / Parts only / Documenting (role document written, spec still needed) / Documented (role document and spec done). Build: Not started / Built, not tested / Tested.
+
+| # | Role | Sub-roles | Documentation | Build |
+|---|---|---|---|---|
+| 1 | Orchestrator | The boss | Documented | Tested |
+| 2 | Solution Architect | Architect + Database Architect | Documented | Tested |
+| 3 | Code Reviewer | Code Reviewer | Documented | Tested |
+| 4 | AI Engineer | AI Engineer + Prompt / AI-Ops | Documented | Tested |
+| 5 | Data Scientist & Analyst | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst | Documented | Tested (5 of 5 modes; BI / Analytics 10 of 10 runs, older cases 15 of 15) |
+| 6 | Backend & Integration Engineer | Backend Engineer + Integration Engineer (modes: Build, Review/Fix, Connect, Check) | Documented | Tested (4 of 4 modes; 13 of 13 local evals after 1 fix, one run each) |
+| 7 | DevOps Engineer | DevOps + SRE / Monitoring + Release Manager | Documented | Not started |
+| 8 | Security & Privacy Engineer | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance | Parts only | Not started |
+| 9 | QA / Test Engineer | QA + Playtest QA + Art QA + Performance + Accessibility | Documented | Not started |
+| 10 | Security Reviewer | AppSec Reviewer + Penetration Tester | Documenting | Not started |
+| 11 | Data Engineer | Data Engineer | Documenting | Not started |
+| 12 | Creative & Art Director | Creative Director + Art Director | Documented | Not started |
+| 13 | Artist | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Parts only | Not started |
+| 14 | Video & Sound Editor | Video Editor + Sound Designer | Parts only | Not started |
+| 15 | Game & Technical Engineer | Game / Unity Engineer + Technical Artist | Documenting | Not started |
+| 16 | Writer | Content Writer + Storyboard / Scriptwriter + Technical Writer + Support Analyst (Localisation parked) | Documented | Not started |
+| 17 | Designer | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher | Parts only | Not started |
+| 18 | Frontend & Mobile Engineer | Frontend + Mobile + Web Developer | Not written | Not started |
+| 19 | UA & Growth Marketer | Performance / UA + Ad Marketer + ASO / SEO + Social + Influencer / PR + Email / CRM | Documented | Not started |
+| 20 | Game Designer | Game Designer + Level + Systems / Economy + Live-Ops | Not written | Not started |
+| 21 | Product & Business Analyst | Product Manager + Business Analyst + Market Researcher + Delivery Manager | Documented | Not started |
+| 22 | Business Operations | Finance + Operations / Procurement + Sales / Account + HR + Legal (draft only) | Not written | Not started |

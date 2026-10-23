@@ -47,7 +47,7 @@ Owner  ⇄  Orchestrator (boss)  ⇄  Specialist agents (one per role)
 | Boss | Orchestrator/Tech Lead ★ |
 | Product | Product Manager ★, Business Analyst ★, Market/Competitor Researcher, Project/Delivery Manager |
 | Design | UX Researcher, UX/UI Designer ★, Motion/Graphic Designer, Content/UX Writer |
-| Architecture | Solution Architect ★ (first to build), Data/Database Architect ★ |
+| Architecture | Solution Architect ★ (first to build; data design is a mode of it, merged 2026-10-24) |
 | Engineering | Frontend ★, Mobile, Backend/API ★, Game/Unity, Integration, AI/ML, Data Engineer |
 | Quality | QA/Test ★, Code Reviewer ★, Performance, Accessibility |
 | Security | Security Engineer ★, Privacy/Compliance |

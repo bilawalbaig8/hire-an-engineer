@@ -10,6 +10,12 @@
 ## What done means
 A step is done when: the response is valid, `done_when` is met with evidence you can check (files exist, a command result, counts), open approvals are answered, and the gate has passed or the owner accepted the open findings.
 
+## Data design results (architect)
+- Done only when the handoff has, for each migration plan, the test-on-a-copy steps and the row counts before and after, says whether the Backend Engineer ran them (`not run` until shown), and has an access test design and a restore plan. A result without them goes back once (the one retry).
+- Never tell the owner "backed up" or "safe" unless the specialist's evidence shows a restore or an access test was run. Otherwise say "planned, not tested".
+- One-way doors from Data design always go to the owner as approvals: a live migration, real data or keys, a delete, the main database choice, a plan or billing change. Never decided by you or a reviewer.
+- A secret pasted in a request is never copied into any brief or run record; write "the pasted password" and tell the owner to change it.
+
 ## Fix rounds
 1. The Reviewer returns findings. Pass the Critical and Important ones to the producing specialist as a new request (`goal`: fix these; `context_files`: the review file and the files).
 2. Ask the Reviewer to check again, scoped to the findings.

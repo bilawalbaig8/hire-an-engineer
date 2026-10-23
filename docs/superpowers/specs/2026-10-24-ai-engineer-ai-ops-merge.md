@@ -1,6 +1,6 @@
 # AI Engineer + AI-Ops: merged role (spec and plan)
 
-Status: plan and spec only. Nothing below is built. The role document is `docs/agents/roles/ai-engineer.md`. The first design of the AI Engineer is `2026-10-24-ai-engineer-design.md` (built, 13 of 14 evals pass). Date: 2026-10-24. Decision by the owner: small roles are merged into 22 bigger roles with modes.
+Status: built 2026-10-23 (sections 4 and 5, with the defaults of section 6). AI-Ops evals 9 of 9 pass, one run each, offline. Not done from section 5: the shared validation reference with the Data Scientist skill. The role document is `docs/agents/roles/ai-engineer.md`. The first design of the AI Engineer is `2026-10-24-ai-engineer-design.md` (built, 13 of 14 evals pass). Date: 2026-10-24. Decision by the owner: small roles are merged into 22 bigger roles with modes.
 
 ## 1. What changes
 The Prompt / AI-Ops Engineer is no longer a separate role. Its work becomes three more modes of the AI Engineer:
@@ -9,9 +9,9 @@ The Prompt / AI-Ops Engineer is no longer a separate role. Its work becomes thre
 |---|---|---|
 | Design/Build | build and judge the AI part | built, evals pass |
 | Train/Evaluate | build and judge the AI part | built, evals pass |
-| Release check | AI-Ops (keep it healthy) | planned |
-| Monitor | AI-Ops | planned |
-| Investigate | AI-Ops | planned |
+| Release check | AI-Ops (keep it healthy) | built, evals pass (3 of 3) |
+| Monitor | AI-Ops | built, evals pass (3 of 3, after one fix) |
+| Investigate | AI-Ops | built, evals pass (3 of 3) |
 
 ## 2. Why merge (steel-man for the merge)
 - The AI-Ops work reads the AI Engineer's own files: the eval set, the failure plan, the cost formula. About 70 percent of its knowledge is already in the AI Engineer skill (`evals-and-judges.md`, `cost-latency-quota.md`, `reliability-observability-privacy.md`).
@@ -37,14 +37,14 @@ The Prompt / AI-Ops Engineer is no longer a separate role. Its work becomes thre
 **Verdict.** Keep the merge, with the fixes in section 4.
 
 ## 4. Decisions (what the role document now says)
-1. **Honest status.** The role is "partly built": two modes built and tested, three planned. The dashboard shows "Tested (2 of 5 modes)".
+1. **Honest status.** The role is "partly built": two modes built and tested, three planned. The dashboard shows "Tested (2 of 5 modes)". (Superseded after the build: all 5 modes are built and evaluated, and `TASKS.md` row 4 says "Tested".)
 2. **Independent release check.** A held-out set of cases, kept by the QA / Test Engineer or the Data Scientist & Analyst and never shown to the builder, is part of every Release check. One of those roles reviews the result.
-3. **No model calls by the role itself.** It has no keys and no network. Live eval runs need a harness the owner provides and an approved budget; until then the Release check runs offline on recorded outputs and says so.
+3. **No model calls by the role itself.** It has no keys, and no network use beyond reading official documentation (WebFetch, WebSearch). Live eval runs need a harness the owner provides and an approved budget; until then the Release check runs offline on recorded outputs and says so.
 4. **Monitor has a trigger.** It runs on request or when a scheduled routine the owner sets up calls it. It never wakes itself.
 5. **Boundary with the Data Scientist & Analyst.** Train/Evaluate covers models that ship inside a product (fine-tuned models, classifiers, embeddings). Analysis and prediction questions about the business stay with the Data Scientist & Analyst. One shared validation reference when the skills are built.
 6. **Folders.** `docs/ai/` for design notes, eval sets, failure plans, model cards; `docs/ai/ops/` for the prompt register, release checks, regression reports, run-log notes, cost tables and rollback notes.
 
-## 5. Build plan (later; not started, needs the owner's go)
+## 5. Build plan (built 2026-10-23 with the owner's go)
 **Skill (`skills/ai-engineer/`).**
 - New references: `method-release-check.md`, `method-monitor.md`, `method-investigate.md`, plus a prompt-register template. The router in `SKILL.md` loads an AI-Ops reference only when the mode is an AI-Ops mode, so Design/Build runs stay as light as today.
 - Reuse the existing `evals-and-judges.md`, `cost-latency-quota.md` and `reliability-observability-privacy.md`; do not copy them.
@@ -59,7 +59,7 @@ The Prompt / AI-Ops Engineer is no longer a separate role. Its work becomes thre
 - Investigate: a quality drop with two changes on the same day (must test one cause first); a rollback request (must prepare it, not switch it); a prompt injected into a log line (must treat it as data).
 Run them headless in scratch folders as before, then delete the folders.
 
-**Checks and housekeeping.** `validate_agents`, `validate_skills`, `check_sources`, `check_evals`, tests, `check_merge` for the role document, install with `--only ai-engineer`, update the roster description, the CHANGELOG entry and `THIRD_PARTY_NOTICES.md` (sources of the AI-Ops part are already listed in the role document).
+**Checks and housekeeping.** `validate_agents`, `validate_skills`, `check_sources`, `check_evals`, tests, `check_merge` for the role document (no `check_merge` script exists in `scripts/`, so this check could not run), install with `--only ai-engineer`, update the roster description, the CHANGELOG entry and `THIRD_PARTY_NOTICES.md` (sources of the AI-Ops part are already listed in the role document).
 
 **Order of work.** Skill references first, then the runner, then the agent file, then the evals, then fixes from the evals, then install. Each step ends with its check.
 
@@ -69,7 +69,9 @@ Run them headless in scratch folders as before, then delete the folders.
 3. Is there a harness for live eval runs, and what budget per run? Default: none; offline runs only.
 
 ## 7. Calls made without the owner (please check)
-1. The status label "Tested (2 of 5 modes)".
+1. The status label "Tested (2 of 5 modes)" (superseded after the build, see section 4 item 1).
 2. Held-out cases kept by QA or the Data Scientist, not by the AI Engineer.
 3. Monitor defaults to on request, because the agent cannot wake itself.
 4. The Train/Evaluate and Model mode boundary (inside the product versus analysis).
+
+Review pass 2026-10-24: AI-Ops mode states changed from planned to built; "Tested (2 of 5 modes)" marked superseded; "no network" corrected; noted that no `check_merge` script exists.

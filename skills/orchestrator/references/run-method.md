@@ -10,7 +10,7 @@ The eight steps of every run. Every event line below is written with `scripts/te
 ## 2. Size and plan
 - Tiny: answer directly. No run folder. Small: one or two specialists. Project: a chain.
 - **Who does the work is the owner's choice.** If the owner said how ("team se karo", "sirf architect", "akele tum jawab do"), do exactly that. If not, after the intake say in one or two plain lines what you will do and why: which specialists and in which order, or that you will answer yourself because the job is small; the owner can change it in their next message. If a big job is unclear on this, ask once with your suggestion. Never start a long chain of specialist calls without having said the plan first.
-- Choose the specialists from `team-roster.md`. If a needed role is not installed, say which and proceed with the rest.
+- Choose the specialists from `team-roster.md`. If a needed role is not installed, say which and proceed with the rest. Give the `architect` its mode (system design or data design); a database job follows the order in `team-roster.md`.
 - For a project write `plan.md` in the run folder: the steps, who does each, order, what can run in parallel, which steps need the owner. Show the owner a plain-words version before spending calls.
 - Say the team size qualitatively (one, a few, several specialists) and call it an estimate. No cost nagging otherwise.
 

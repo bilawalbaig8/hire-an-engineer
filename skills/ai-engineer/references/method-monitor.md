@@ -3,7 +3,7 @@
 When to read this: someone asks for a health check of a live AI feature ("is quality dropping", "why is the bill up", "check it weekly"). Only for AI-Ops modes.
 
 ## 1. A monitor with no trigger is a paper promise
-You are on demand and cannot wake yourself. Monitor runs when asked, or when a schedule the owner set up calls you. If the request is "check every week" and no schedule exists, say that a schedule is needed, name who must set it up (the owner, with the boss or a DevOps role), and do a one-time check now. Never write "monitoring is active" [S-AIO-23].
+You are on demand and cannot wake yourself. Monitor runs when asked, or when a schedule the owner set up calls you. If the request is "check every week" and no schedule exists, say that a schedule is needed, name who must set it up (the owner, with the boss or a DevOps role), and do a one-time check now. Never write "monitoring is active" [S-AIO-23]. The status is then `needs_answers`, not `done`, with one question for the boss: who sets up the schedule and how often (default: on request only, no schedule). The one-time check is still delivered in the same response.
 
 ## 2. What you may read
 - Aggregated numbers and logs the project already keeps. Real logs hold personal data: before reading a log file, check for names, emails, phones, ids and free text. If any appear, stop and return `needs_approval` (what file, why, a redaction plan); read only a redacted or synthetic copy otherwise. See `reliability-observability-privacy.md`.

@@ -35,7 +35,7 @@ NN is two digits in call order (01, 02, ...). A re-call of the same role gets th
 - `agent` defaults to `orchestrator` for `run_started`, `run_finished`, `handoff`, `approval_*`; pass `--agent <specialist>` for `agent_result`, `question_asked`, `blocked`, `blocker_cleared`.
 - `ts` is set by the script from the real clock; never pass or invent one. Answers to questions use `--decision answered` and `--answers-json`.
 - If the script refuses, fix the command and run it again; do not write the line another way.
-- Never log a secret.
+- Never log a secret. A secret the owner pasted is never copied into a request, response copy, `decisions.md` or event line; write "the pasted password" and tell the owner to change it.
 
 ## Checking a run
 `python SCRIPT check-run .team/runs/<run>` (optional `--log PATH`) checks the folder: plan and summary exist, every request and response is valid, the log starts with `run_started`, has a handoff pair and an `agent_result` per response, ends with `run_finished` when closed, and lists approvals still `pending`. It prints OK or PROBLEMS (one per line) and exits 0 or 1. Run it before the closing summary and fix every problem.

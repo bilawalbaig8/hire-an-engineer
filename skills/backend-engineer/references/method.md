@@ -1,4 +1,4 @@
-# Method: Build and Review/Fix
+# Method: Build and Review/Fix (your own server)
 
 ## 1. When to read this
 Every backend job, before writing a file.
@@ -20,7 +20,7 @@ Every backend job, before writing a file.
 8. Data changes: a numbered migration, run on a test copy, backup first, restore and rollback steps written.
 9. A README that gets the project running locally in about 15 minutes.
 
-When asked to "take payments / send messages / use maps": compare 2 or 3 services from their live documentation, build the adapter against test keys, handle duplicate and out-of-order events, and list what the owner must do (create the account, pass the business check). Choosing the provider and going live are owner approvals.
+A new or changed connection to an outside service ("take payments / send messages / use maps", a webhook, a collector) is the Connect mode: follow `method-connect.md`. Looking at existing connections (keys, limits, failures, provider changes) is the Check mode: follow `method-check.md`. Choosing the provider and going live are owner approvals.
 
 ## 4. Review/Fix
 1. Reproduce first: find the cause (a retry, a double click, a race, a missing index) before changing code. Write a test that fails because of it.
@@ -35,7 +35,7 @@ All under `docs/backend/` unless the brief says otherwise:
 - Design note: data model, routes, error handling, who may do what, what happens when an outside service fails, the trade-off.
 - API contract, when other code depends on the routes.
 - Data dictionary: every table and column, its meaning, and whether it holds personal data.
-- Integrations register: service, what it is for, who owns the account, key name (never the value), test or live.
+- Integrations register `docs/backend/integrations/register.md`: service, what it is for, who owns the account, key name (never the value), test or live. Service notes, the change watch and check reports sit next to it (see `method-connect.md` and `method-check.md`).
 - Backup and restore note.
 - Measured and not measured: what ran and with what result, and what did not.
 - Risk list for anything one-way: live data, money, messages, deploys.
@@ -43,7 +43,9 @@ All under `docs/backend/` unless the brief says otherwise:
 Migrations go in the folder the brief names; if it names none, in the project's existing migrations folder (for example `alembic/versions/` or `prisma/migrations/`); only when the project has none, in `migrations/`. They are numbered, continuing any existing series and its format; never rewrite an applied migration. Server code and tests go only in the folders the brief names.
 
 ## 6. Stop for approval
-Return `needs_approval` with options, a recommendation, what each option gives up and `one_way_door` for: a new or changed auth or permission design; a saved-data format or API format other code depends on (a new table shape, a public route shape); a money flow (charging, refunds, payouts); a live key or real data, a live migration or permanent delete, a real message or email, moving money, a paid plan or new account, a deploy, choosing a provider the owner will be tied to. Live data, money, messages, deploys and data formats other code depends on are one-way doors. You may write and test the code against test keys and fake data; the design stays `proposed` until the boss relays the owner's OK.
+Return `needs_approval` with options, a recommendation, what each option gives up and `one_way_door` for: a new or changed auth or permission design; a saved-data format or API format other code depends on (a new table shape, a public route shape); a money flow (charging, refunds, payouts); a live key or real data, a live migration or permanent delete, a real message or email, moving money, a paid plan or new account, a deploy, choosing a provider the owner will be tied to, a call to a provider's test system (sandbox) with a test key, a bulk collection, accepting a provider's terms. Live data, money, messages, deploys and data formats other code depends on are one-way doors. You may write and test the code against test keys and fake data; the design stays `proposed` until the boss relays the owner's OK.
+
+Access fixes count too. When you add or change who may see or change a record (even a fix the owner asked for, such as "users see only their own orders"), the code may be finished and tested, but the access rule you chose (who may read what, whether staff or admins get more, what a refused caller gets back) goes back as an approval and the design note marks it `proposed`. Do not leave these choices only in `assumptions`.
 
 ## 7. Review before done
 Every change goes to the Code Reviewer, through the boss, before it counts as done. Your `done` says "Code Reviewer review pending"; never write that your own work was reviewed or approved. A deep security audit goes to the Security Engineer once that role exists.
