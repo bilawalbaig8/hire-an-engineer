@@ -701,6 +701,7 @@ body[data-theme=pixel] .banner{font-size:18px}
   .tab.pulse .count{box-shadow:0 0 0 4px rgba(var(--cue-rgb),.7)}
   body[data-theme=pixel] .seat:is([data-state=waiting],[data-state=approval],[data-state=needed]) .figwrap{outline-color:#ff77a8}
 }
+.yourmove{display:inline-block;margin-left:10px;padding:2px 9px;border-radius:4px;background:#e0a800;color:#1a1200;font-weight:700;white-space:normal}
 </style>
 </head>
 <body data-theme="office" data-layout="A" data-drawer="open" data-sheet="off">
@@ -1854,6 +1855,9 @@ function paintJob(){
   }else if(!S.job){j.appendChild(document.createTextNode('No job yet. Waiting for the team to start.'))}
   else if(S.goal){j.appendChild(document.createTextNode('Owner asked for '));var b2=document.createElement('b');b2.textContent=S.goal;j.appendChild(b2)}
   else j.appendChild(document.createTextNode('Job in progress'));
+  var np=MODE==='live'?pendingCount():0;
+  if(np>0){var ym=document.createElement('span');ym.className='yourmove';ym.setAttribute('role','status');
+    ym.textContent='Your move: '+np+' decision'+(np>1?'s':'')+' waiting. Answer in your Claude session (terminal).';j.appendChild(ym)}
   j.title=S.goal||'';
   $$('.bgoal').forEach(function(n){n.textContent=S.goal||(MODE==='demo'?'A booking website with online payment':'No job yet')});
 }
