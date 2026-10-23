@@ -1,6 +1,6 @@
 # Backend Engineer
 
-This role is not built yet; this page describes what it will be.
+This role is built: the agent is `agents/backend-engineer.md` and its skill is `skills/backend-engineer/`.
 
 ## 1. What this role is
 The Backend Engineer is the team's specialist for the **part of your product that runs out of sight**: the server code, the database, the login, the connections to outside services (payments, email, maps) and the scheduled jobs. Its job is to make that part correct, safe, testable and easy to take over later, in the smallest shape that does the work.
@@ -57,7 +57,7 @@ It is **not** responsible for the final decision. You decide. It recommends.
 
 ## 7. Where its work goes
 - **To the boss**, as the 7-field answer: status, summary, files, questions, approvals, assumptions, evidence. The boss then tells you in plain words.
-- **Files it owns:** `docs/backend/` (design note, API contract, data dictionary, integrations register, backup and restore note), `migrations/`, and server code in the folder the brief names. It writes nowhere else.
+- **Files it owns:** `docs/backend/` (design note, API contract, data dictionary, integrations register, backup and restore note), the project's existing migrations folder (else `migrations/`), and server code in the folder the brief names. It writes nowhere else.
 - **Review:** the Code Reviewer reads its changes before they count as done. A deep security audit goes to the Security Engineer once that role exists.
 - **Related questions** go through the boss: structure and technology to the Architect, AI features to the AI Engineer, metrics to the Data Scientist.
 
