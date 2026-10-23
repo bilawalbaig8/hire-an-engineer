@@ -34,6 +34,27 @@ State lives in `<project>/.agents/office.json`: `{pid, port, started, opened}`. 
 - That the detached server survives the end of the Claude session on every Windows setup (tested only with the unit tests, which use a real subprocess).
 - Whether a `SessionStart` hook may print `hookSpecificOutput`: not needed, so the script prints nothing.
 
+## Answering in the window (MCP server `office`)
+
+The owner can answer the boss's questions and approvals in the chat or in the office window; the first answer wins. The window's answer button appends a line to `<project>/.team/inbox.jsonl`; `scripts/office_mcp.py` (a local MCP server over stdio, Python stdlib only) gives the boss two tools:
+
+- `mcp__office__wait_for_owner_answer` `{id, timeout_seconds}` (default 600, max 3500): waits for the window's answer to that question or approval id and returns it as JSON (`status` `answered`, `id`, `answer`, `kind`, `decision`, `option`, `answers`, `text`, `source`), or `status` `no_answer` when the time runs out. An answer typed in the chat interrupts the wait.
+- `mcp__office__pending_window_answers`: lists window answers not handed out yet (does not mark them read).
+
+Handed-out answers are recorded in `.team/inbox.consumed`, so each is returned once; a newer answer with the same id is returned again.
+
+Enable, per project:
+1. Put `scripts/office_mcp.py` next to `office_launch.py` and `office_server.py`.
+2. Copy `mcp-config.example.json` to the project root as `.mcp.json` (merge into `mcpServers` if the file exists). The server name must stay `office`: tool names are `mcp__<server>__<tool>`. `timeout` is milliseconds per tool call; `${CLAUDE_PROJECT_DIR:-.}` needs the `:-.` default in a project `.mcp.json` (Claude Code sets `CLAUDE_PROJECT_DIR` in the server's environment, not in its own).
+3. The first interactive session asks once to approve the new project MCP server. To skip the per-call prompt, add an allow rule to the project's `.claude/settings.json`: `"permissions": {"allow": ["mcp__office__wait_for_owner_answer", "mcp__office__pending_window_answers"]}`.
+4. The boss's agent file already lists both tools; when the server is not set up they are simply missing and the boss asks in the chat.
+
+Headless (`claude -p`): pass the rule as `--allowedTools "mcp__office__wait_for_owner_answer"`; without it the call is denied (tested). A project `.mcp.json` was loaded in `-p` mode without an approval prompt (tested); `--mcp-config <file>` also works, and `--strict-mcp-config` ignores every other MCP server.
+
+Tested on 2026-10-23 with Claude Code 2.1.308 on Windows, headless, in a throwaway project: answer already in the inbox (returned at once), no answer (`no_answer` after 20 s, not an error), answer appended 12 s into a 60 s wait (returned when written), the call without the allow rule (denied), and `claude -p --agent orchestrator` with the agent file's tools line (the tool resolved and returned the answer). The client asked for protocol `2025-11-25`.
+
+Not verified: an interactive session (the approval dialog, Esc or typing during a wait, the 2-minute move to the background), the Claude Desktop app, and the boss following the skill's window steps in a full team run.
+
 ## Starting the boss and installing the team
 - Start the boss in the project folder with `claude --agent orchestrator`.
 - Install per project for headless runs, evals and automation: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer`. Global install (`--only NAME`, copies to `~/.claude`) is for interactive sessions.

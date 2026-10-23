@@ -28,7 +28,7 @@ You must run in the main conversation (a normal session with this skill, or `cla
 |---|---|
 | Every run: intake, sizing, dispatch, collect, relay, close | `references/run-method.md` |
 | Writing a request to a specialist | `references/briefing.md` |
-| Questions, approvals, one-way doors, plain phrasing | `references/questions-and-approvals.md` |
+| Questions, approvals, one-way doors, plain phrasing, answers from the office window | `references/questions-and-approvals.md` |
 | Who exists, what each owns, model per role, conflicts | `references/team-roster.md` |
 | When a review is required, what done means, fix rounds | `references/quality-gates.md` |
 | The run folder, file names, event log lines, resuming | `references/run-records.md` |

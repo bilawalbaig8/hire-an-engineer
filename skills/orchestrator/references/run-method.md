@@ -28,11 +28,12 @@ The eight steps of every run. Every event line below is written with `scripts/te
 ## 5. Relay
 - Merge the `questions` of the step, drop duplicates, answer from files or earlier answers when possible. The rest go to the owner in one message (see `questions-and-approvals.md`).
 - When you send the questions to the owner, append `question_asked` (`id` such as `q-01`, `agent` = the asker, `questions`). When the answers arrive, append `approval_given` with the same `id`, `decision` `answered`, `by` `terminal`.
+- If the office window is running (`.agents/office.json` exists) and `mcp__office__wait_for_owner_answer` is available, call it with that `id` after asking; a chat answer interrupts it. A window answer is logged with `by` `window` (rules in `questions-and-approvals.md`, "Answers from the office window"). Same for approvals in step 6.
 - Save the answers in `decisions.md` and pass them back in a new request file (`answers`), resuming the same specialist when possible.
 
 ## 6. Decide or approve
 - Decisions the specialists made that are two-way doors stay made.
-- Every `approvals` entry goes to the owner. Nothing is applied before a clear yes in the owner's own message. Append `approval_requested` when asked (`id`, `kind` `decision`, `title`, `options`, `one_way_door`, `asked_agent`) and `approval_given` with the same `id` (`decision` `approved` or `rejected`, `option`, `by` `terminal`) when the answer arrives.
+- Every `approvals` entry goes to the owner. Nothing is applied before a clear yes in the owner's own message. Append `approval_requested` when asked (`id`, `kind` `decision`, `title`, `options`, `one_way_door`, `asked_agent`) and `approval_given` with the same `id` (`decision` `approved` or `rejected`, `option`, `by` `terminal`, or `window` for an office window answer) when the answer arrives.
 - If two specialists disagree, give the owner both positions with a recommendation (see `quality-gates.md`).
 
 ## 7. Gate

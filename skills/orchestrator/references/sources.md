@@ -106,3 +106,9 @@ How to use these sources
 | S-ORC-56 | Semantic conventions for generative AI (OpenTelemetry) | OpenTelemetry project | current | https://opentelemetry.io/docs/specs/semconv/gen-ai/ | run-records: standard names for agent and model spans (page now says moved) | Free; licence unverified here | verified |
 | S-ORC-57 | LangSmith observability | LangChain | current | https://docs.langchain.com/langsmith/observability | run-records: traces, runs and feedback for agent apps | Free to read; product paid | verified |
 | S-ORC-58 | Postmortem culture: learning from failure (SRE book) | Google SRE | 2016 | https://sre.google/sre-book/postmortem-culture/ | run-records: blameless write-up after a failed run | Free to read online; copyright | verified |
+
+## Office window
+
+| ID | Title | Author | Year | URL | Use | Cost/licence | Status |
+|---|---|---|---|---|---|---|---|
+| S-ORC-59 | Connect Claude Code to tools via MCP | Anthropic | current | https://code.claude.com/docs/en/mcp | questions-and-approvals: MCP tool waits, per-server timeout, calls over 2 minutes moved to the background, CLAUDE_PROJECT_DIR for stdio servers | Free to read; copyright | verified |

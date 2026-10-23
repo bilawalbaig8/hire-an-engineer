@@ -12,6 +12,10 @@
       "Bash(python -m unittest *)",
       "Bash(dotnet test *)",
       "Bash(go test *)"
+    ],
+    "allow": [
+      "Bash(python .claude/skills/orchestrator/scripts/team_event.py:*)",
+      "Bash(python ~/.claude/skills/orchestrator/scripts/team_event.py:*)"
     ]
   },
   "_opt_in_allow_examples": {
