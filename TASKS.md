@@ -77,6 +77,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [?] 6.3 End-to-end test building a small real app with the whole team: needs engineer roles (not built yet); an analysis, design and review run on real code passed several times
 - [?] 6.3a FIRST finish the roles the owner names for the real trial (owner will say which), THEN real-project trial: run the team on one of the owner's real projects (game or app), 3 real jobs, log every miss, fix the skills
 - [?] 6.4 Docs (INSTALL, PERMISSIONS, LAUNCH, INSTALL-OFFICE) and CHANGELOG done; release of the agents (0.1.0 each) and hire-an-engineer 0.4.0 only when the owner says
+- [x] 6.5 Automatic team start in any folder: team-start global skill asks one question (team or solo), setup_team.py one command, global rule in CLAUDE.md and guarded global hooks (both reversible); tested in new empty folders
 
 ## Phase 7 Visual office
 
@@ -89,12 +90,13 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 7.7 Truth check: replayed a real log against a reference timeline (25 cut points, 9 theme/layout combinations): see docs/agents/visual-office/truth-check-report.md
 - [x] 7.8 Package and install: scripts/install_office.py (office into any project) + INSTALL-OFFICE.md; verified on a fresh project: install, boss run (one run_id, check-run OK), hook launch
 - [x] 7.9 Review round (thinking skills): window answers off by default (server and installer), Your move strip, labels say who needs what and why, quiet-run warning, parked runs, /truth disk check, specialist calls N of 8 (done)
+- [x] 7.10 Polish from the owner's tests: owner label Your OK needed, cards say what to answer (a1 haan), boss keeps handed-back one-way doors open, full brief text on hover, boss default agent per project
 
 ## Roles (66)
 
 | Role | Group | Priority | Status |
 |---|---|---|---|
-| Orchestrator | Boss | core 12 | Built |
+| Orchestrator | Boss | core 12 | Tested |
 | Product Manager | Product | core 12 | Not started |
 | Business Analyst | Product | core 12 | Not started |
 | Market Researcher | Product | later | Not started |
@@ -103,7 +105,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 | UX/UI Designer | Design | core 12 | Not started |
 | Motion/Graphic Designer | Design | later | Not started |
 | Content Writer | Design | later | Not started |
-| Solution Architect | Architecture | core 12 | Built |
+| Solution Architect | Architecture | core 12 | Tested |
 | Database Architect | Architecture | core 12 | Not started |
 | Frontend Engineer | Engineering | core 12 | Not started |
 | Mobile Engineer | Engineering | later | Not started |
@@ -113,7 +115,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 | AI/ML Engineer | Engineering | later | Not started |
 | Data Engineer | Engineering | later | Not started |
 | QA/Test Engineer | Quality | core 12 | Not started |
-| Code Reviewer | Quality | core 12 | Built |
+| Code Reviewer | Quality | core 12 | Tested |
 | Performance Engineer | Quality | later | Not started |
 | Accessibility Specialist | Quality | later | Not started |
 | Security Engineer | Security | core 12 | Not started |
