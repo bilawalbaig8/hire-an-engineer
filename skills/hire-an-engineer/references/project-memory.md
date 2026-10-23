@@ -21,7 +21,7 @@ Other tools' rule files (Cursor rules, `GEMINI.md`) just point to `AGENTS.md`: e
 | File | Holds | Updated |
 |---|---|---|
 | `AGENTS.md` | Purpose, stack, run/test, folder map, conventions, rules, where docs live, the protocols below | When conventions change |
-| `PROJECT_STATE.md` | Version and milestone, active branch, in progress, next 3 tasks, blockers, open questions, last session summary, known issues, language and tone, cost mode and budget, accounts (owner, created or not), pending approvals, last environment used | Every checkpoint |
+| `PROJECT_STATE.md` | Version and milestone, active branch, in progress, next 3 tasks, blockers, open questions, last session summary, known issues, language and tone, cost mode and budget, accounts (owner, created or not), pending approvals, Authorization (never trimmed), last environment used | Every checkpoint |
 | `docs/decisions/` | One short record per significant decision | When decided |
 | `docs/plans/roadmap.md` + board link | Versions, milestones, priorities | Each milestone |
 | `CHANGELOG.md` | What changed per version | Each release |
@@ -46,7 +46,7 @@ Sessions end unexpectedly (context runs out, crash, closed window). Don't wait f
 
 **Trigger: every completed task or commit.** About every 20 minutes is a backstop where a clock is available (`date`, or the `Last updated` line in `PROJECT_STATE.md`). No clock: also checkpoint every 10–15 significant actions and when the conversation gets long.
 
-**Also checkpoint immediately:** before anything risky (migrations, big refactors, deploys, deletes); after any decision the person makes; when switching tasks or getting stuck; when they step away.
+**Also checkpoint immediately:** before anything risky (migrations, big refactors, deploys, deletes); after any decision the person makes; when switching tasks or getting stuck; when they step away. Also checkpoint at the end of every reply that ends a session turn during `delivery-loop.md` §2 (questions asked, assumptions, next step).
 
 **A checkpoint is small:**
 1. **Commit** work in progress on its branch with a clear message. Never stash: stashes are invisible to other tools. Tiny projects working on `main`: checkpoint on a `wip/` branch; only passing work reaches `main`.
@@ -54,7 +54,7 @@ Sessions end unexpectedly (context runs out, crash, closed window). Don't wait f
 3. Append one line to the session log in `PROJECT_STATE.md` (trimmed at session end).
 4. A decision record only if a decision was made.
 
-Every timestamp comes from the `date` command; never write a time you did not read. A checkpoint is a commit plus a one-line Done/Next edit; the full rewrite is for session end.
+Every timestamp comes from the `date` command; never write a time you did not read. A checkpoint is a commit plus a one-line Done/Next edit; the full rewrite is for session end. `PROJECT_STATE.md` 'Done recently' and 'Next up' are rewritten at every checkpoint; stale state at delivery is a defect.
 
 Never interrupt the person to announce one; at most a short line at the end of a message.
 
@@ -62,7 +62,7 @@ Never interrupt the person to announce one; at most a short line at the end of a
 
 1. Commit work in progress on its branch; note test status.
 2. Update `PROJECT_STATE.md`; re-check "In progress" against git (branch, last commit).
-3. Trim it: move the session log and done items to `CHANGELOG.md` or `docs/history.md`; keep each section ≤ ~5 lines.
+3. Trim it: move the session log and done items to `CHANGELOG.md` or `docs/history.md`; keep each section ≤ ~5 lines. Never trim Authorization.
 4. Record decisions; update affected docs, board, changelog.
 5. Tell the person in one line what's saved and what's next.
 

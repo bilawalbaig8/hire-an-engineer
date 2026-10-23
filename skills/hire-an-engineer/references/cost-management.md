@@ -122,3 +122,4 @@ Only where the tool lets you choose the model or sub-agent.
 
 - Give each delegated sub-agent a short brief and a fresh context: most cost is re-reading the conversation.
 - A mid-tier job that fails twice reruns on the strongest tier; a cheap-tier job that meets something it can't read hands up one tier.
+- Which step of a delivery run uses which tier: `delivery-loop.md` §5.

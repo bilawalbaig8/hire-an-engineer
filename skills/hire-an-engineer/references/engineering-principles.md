@@ -32,7 +32,7 @@ Size tiers (Tiny / Small / Medium / Large) are defined in `project-cases.md`. "â
 - [ ] UI: all states, mobile checked; accessibility checklist (Small+)
 - [ ] Docs updated; data dictionary and changelog (Small+); `PROJECT_STATE.md` reflects the change
 - [ ] (Small+) Merged to `main`, CI green; board updated
-- [ ] (Milestone) person has seen it working
+- [ ] (Milestone) the person has seen it working, or under Authorization it was in the milestone note
 
 ## 3. Design and code principles
 

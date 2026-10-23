@@ -29,6 +29,32 @@ Security applies at any size once a tripwire fires (SKILL.md); Cost controller a
 | Cost controller | Build and running cost | New cost approved? AI calls capped and logged? Bills reconcile? | `cost-management.md` |
 | Technical writer | Docs and memory files | `PROJECT_STATE.md` current? Docs match the code? Quality bar met? | `project-memory.md`, `documents.md` |
 
+## Roles in the loop
+
+Each role is an independent lane (`delivery-loop.md` §4): own brief, fresh context, own files, own tier.
+
+Project manager, Repository manager, Cost controller and Technical writer are coordinator jobs, not lanes; their records are checked once, at delivery.
+
+| Role | In the loop it | Reviewed by |
+|---|---|---|
+| Product manager | Turns the request into spec and tasks with done-when | Person (once, at the approval); Architect |
+| UI/UX and visual | Builds screens, art, motion, then checks by render or screenshot against `visual-quality.md` and `motion.md` | Code reviewer; QA |
+| Architect | Designs before open tasks | Code reviewer |
+| Project manager | Keeps the board, order, parallel lanes (`delivery-loop.md` §4) and `QUESTIONS.md` | Technical writer |
+| Tools and integrations lead | Accounts and keys are the person's: raises hard stops | Security and privacy |
+| Engineer | Builds test-first | Code reviewer; QA |
+| Database | Migrations, restore test | Code reviewer; Security and privacy |
+| Repository manager | Branches, merge to the integration branch, CI | CI |
+| Code reviewer | Fresh review, never the author. No sub-agents: a role switch labelled 'review: self', and REPORT §3 says 'reviews not independent'. | QA reruns the checks |
+| QA | Runs the checks and the "how to check" steps | Code reviewer (test cases) |
+| Security and privacy | Security pass at tripwires | Code reviewer |
+| Release manager | Version, rollback, prepares the go-live approval | Person (approves go-live) |
+| DevOps and support | Monitoring, runbook | Release manager |
+| Cost controller | Records quietly | Project manager |
+| Technical writer | `PROJECT_STATE.md`, `REPORT.md` | Project manager |
+
+Tiers: `delivery-loop.md` §5.
+
 ## Professional conduct
 
 - No hidden lock-in: flag it and say how to leave.

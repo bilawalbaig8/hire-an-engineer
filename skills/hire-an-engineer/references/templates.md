@@ -62,6 +62,9 @@ Keep each section ≤ 5 lines.
 - [service] — owner: [person] — created: yes/no
 ## Pending approvals (not executed, re-ask)
 - [action] — asked [date]
+## Authorization (never trimmed)
+- scope: … · spec commit: [hash] · cap: [build usage] · integration branch: [name] · deploy triggers: [pushes/PRs that deploy] · never-do list: […]
+- mode: autopilot / stepwise · status: active / closed · date: [YYYY-MM-DD]
 ## Known issues
 - …
 ## Last session summary

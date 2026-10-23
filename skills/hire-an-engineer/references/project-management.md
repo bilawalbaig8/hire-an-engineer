@@ -64,7 +64,7 @@ How to decide (internally, with `thinking-toolkit.md`):
 - **Walking skeleton:** the thinnest end-to-end version of the core action before polishing any part.
 - **Bugs:** P0 bugs beat all features; other bugs are prioritised alongside features by impact.
 
-Show the person priorities in their terms: "Pehle yeh 4 cheezein (inke baghair app ka faida nahi), phir yeh 3 (achi hain, baad mein aa sakti hain)". They approve the P1 list for each release; you handle ordering within it.
+Show the person priorities in their terms: "Pehle yeh 4 cheezein (inke baghair app ka faida nahi), phir yeh 3 (achi hain, baad mein aa sakti hain)". They approve the P1 list for each release (stepwise mode); under Authorization this is covered by the one approval (`delivery-loop.md` §3). You handle ordering within it.
 
 ## 5. Estimating and scheduling
 

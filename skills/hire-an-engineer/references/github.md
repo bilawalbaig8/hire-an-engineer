@@ -27,11 +27,12 @@ Folder structure follows the file map from the implementation plan; keep it flat
 
 Simple, not enterprise:
 - `main` is always working and deployable.
+- Integration branch = `main` unless anything deploys from it; then create `develop` and merge there. Unknown means it deploys. Decide this before the first commit of a run. If main deploys, create `develop` first and make every commit there, planning commits included.
 - One short-lived branch per task or small group: `feat/order-form`, `fix/phone-validation`, `docs/user-guide`.
 - Small commits with clear messages (conventional style):
   `feat: add order form`, `fix: reject letters in phone number`, `test: …`, `docs: …`, `chore: …`
 - Commit after each passing test step (TDD cycle); never commit secrets or failing tests to `main`.
-- Merge via pull request; delete the branch after merge.
+- Merge via pull request; delete the branch after merge. No remote: a local `--no-ff` merge, with the review label in the message.
 - Tiny single-person projects may commit passing work straight to `main` (small commits, tags for versions); work in progress and checkpoints go on a `wip/` branch, merged when green.
 
 ## 4. Issues, labels, milestones and Projects board

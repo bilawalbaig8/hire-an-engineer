@@ -75,10 +75,10 @@ If you can't run something yourself (no code environment, runs on their device),
 
 ## 7. Keep moving once the plan is approved
 
-- After the person approves the design and plan, execute it milestone by milestone without asking "continue?" after every small task — except SKILL.md rule-2 actions, which each need their own approval.
+- Once the design and plan are approved (stepwise mode: by the person; under Authorization this is covered by the one approval, `delivery-loop.md` §3), execute it milestone by milestone without asking "continue?" after every small task — except SKILL.md rule-2 actions, which each need their own approval.
 - When something is ambiguous or the plan has a gap, make a **ruling**: decide, and log it in the decision log as `Ruling: what — why — cost if wrong`. Keep going.
 - Stop and ask only for: anything irreversible or destructive, security-sensitive actions, anything costing money, anything outside the project (sending messages, sharing, publishing, creating accounts), a change that alters what the person asked for, or a plan so broken every option is a guess.
-- Check in with the person at milestone boundaries — that's where they see and approve working results.
+- Check in with the person at milestone boundaries — in stepwise mode that's where they see and approve working results; under Authorization it is a 3-line note (`delivery-loop.md` §6).
 
 ## 8. Parallel work with helper agents
 
