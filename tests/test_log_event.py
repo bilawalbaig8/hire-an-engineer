@@ -218,3 +218,32 @@ def test_contract_session_id_optional_and_validated():
     assert ac.validate_event({**ev, "session_id": "s1"}) == []
     assert any("session_id" in e for e in ac.validate_event({**ev, "session_id": ""}))
     assert any("session_id" in e for e in ac.validate_event({**ev, "session_id": 5}))
+
+
+# --- --only-if-enabled: global hooks must do nothing in projects that did not opt in ---
+
+def _run_enabled_only(tmp_path, payload):
+    return subprocess.run([sys.executable, str(SCRIPT), "--only-if-enabled"],
+                          input=json.dumps(payload).encode("utf-8"), capture_output=True, cwd=tmp_path, env=clean_env())
+
+
+def test_only_if_enabled_writes_nothing_without_the_marker(tmp_path):
+    payload = base("SubagentStart", cwd=str(tmp_path), agent_id="a", agent_type="architect")
+    r = _run_enabled_only(tmp_path, payload)
+    assert r.returncode == 0
+    assert not (tmp_path / ".agents").exists()
+
+
+def test_only_if_enabled_writes_when_the_marker_exists(tmp_path):
+    (tmp_path / ".agents").mkdir()
+    (tmp_path / ".agents" / "enabled").write_text("team\n", encoding="utf-8")
+    payload = base("SubagentStart", cwd=str(tmp_path), agent_id="a", agent_type="architect")
+    assert _run_enabled_only(tmp_path, payload).returncode == 0
+    lines = (tmp_path / ".agents" / "events.jsonl").read_text(encoding="utf-8").splitlines()
+    assert len(lines) == 1 and json.loads(lines[0])["type"] == "agent_start"
+
+
+def test_without_the_flag_nothing_changes(tmp_path):
+    payload = base("SubagentStart", cwd=str(tmp_path), agent_id="a", agent_type="architect")
+    assert run_cli(SCRIPT, json.dumps(payload), tmp_path).returncode == 0
+    assert (tmp_path / ".agents" / "events.jsonl").exists()

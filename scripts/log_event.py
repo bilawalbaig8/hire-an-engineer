@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 LOG_PATH = Path(".agents") / "events.jsonl"
+ENABLED_MARKER = Path(".agents") / "enabled"  # a project opts in by having this file (the team-start skill creates it)
 CURRENT_RUN = Path(".agents") / "current_run"
 CURRENT_RUN_MAX_AGE = 12 * 3600  # seconds; an older file is a run that never finished
 
@@ -104,6 +105,8 @@ def main() -> int:
         import agent_contract  # inside try: a missing module must not break the host
 
         payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
+        if "--only-if-enabled" in sys.argv[1:] and not (project_dir_for(payload) / ENABLED_MARKER).is_file():
+            return 0  # global hook: do nothing in a project that did not opt in
         event = event_from_hook(payload)
         if event is not None:
             agent_contract.append_event(_safe_log_path(project_dir_for(payload)), event)
