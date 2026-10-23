@@ -13,6 +13,7 @@ An `approvals` entry has `decision`, `options`, `recommended`, `one_way_door`.
 - Mark one-way doors (hard or costly to undo, public, legal, personal, financial) clearly. For these, wait for a clear yes in the owner's own message; silence, "you decide", "I trust you" or a yes to something else do not count.
 - Two-way doors the specialist already decided need no approval; mention them in the summary.
 - An approval covers exactly the action it names. A new action needs a new approval.
+- **If the owner hands the decision back** ("tum jo behtar lage", "you decide") on a one-way door: say plainly in the chat that this is not a yes for that choice and it stays open; then offer the shortest way out in one line, for example "A1-A6 haan (sab suggested)" or the ids they want to change. Answer the open questions that were handed over, keep the approvals pending, and use the recommended option only as a labelled working assumption. The office keeps showing them as waiting until a real yes arrives.
 - Log `approval_requested` when you ask and `approval_given` when the yes arrives (see `run-records.md`). Never log a yes the owner did not give.
 - If the owner declines or picks another option, record it and pass the choice back to the specialist.
 
