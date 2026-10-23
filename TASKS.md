@@ -115,79 +115,31 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 7.9 Review round (thinking skills): window answers off by default (server and installer), Your move strip, labels say who needs what and why, quiet-run warning, parked runs, /truth disk check, specialist calls N of 8 (done)
 - [x] 7.10 Polish from the owner's tests: owner label Your OK needed, cards say what to answer (a1 haan), boss keeps handed-back one-way doors open, full brief text on hover, boss default agent per project
 
-## Roles (70), in the order I recommend building them
+## Roles (22): the merged list of 22 (owner decision 2026-10-24)
 
-Order follows the Ads Factory build order (owner request 2026-10-24); the owner still names which roles to build.
+Small roles are merged into bigger ones with modes. The old 70-role list is replaced; order follows the Ads Factory build order.
 
-| # | Role | Wave | Group | Priority | Status | Why |
-|---|---|---|---|---|---|---|
-| 1 | Orchestrator | 0 Ban chuke / ban rahe | Boss | core 12 | Tested | Boss, ban chuka (Ads Factory ka Master agent isi par bana hoga) |
-| 2 | Solution Architect | 0 Ban chuke / ban rahe | Architecture | core 12 | Tested | Design aur structure, ban chuka |
-| 3 | Code Reviewer | 0 Ban chuke / ban rahe | Quality | core 12 | Tested | Code ka review, ban chuka |
-| 4 | Data Scientist | 0 Ban chuke / ban rahe | Data & AI | wave 2 core | In progress | Ban raha hai; Ads Factory ka Analyst (step 3) aur Learner (step 10) isse madad lete hain |
-| 5 | AI Engineer (mode) | 0 Ban chuke / ban rahe | Data & AI | mode of another role | In progress | Ban raha hai; agents ke AI hisse (step 3 se 10) |
-| 6 | Backend Engineer | 1 Buniyaad (Ads Factory step 1) | Engineering | core 12 | Not started | Step 1 foundation aur sab services ka code |
-| 7 | Database Architect | 1 Buniyaad (Ads Factory step 1) | Architecture | core 12 | Not started | Step 1: schemas aur lineage IDs |
-| 8 | DevOps Engineer | 1 Buniyaad (Ads Factory step 1) | Infra & release | core 12 | Not started | Step 1: cloud workers aur GPU servers par chalana (sab kuch server par) |
-| 9 | Security Engineer | 1 Buniyaad (Ads Factory step 1) | Security | core 12 | Not started | Step 1: keys, accounts aur access; spend ka haq insaan ke paas hi rahega |
-| 10 | QA/Test Engineer | 1 Buniyaad (Ads Factory step 1) | Quality | core 12 | Not started | Services ke code ki testing, pehle se hi chahiye |
-| 11 | AppSec Reviewer | 1 Buniyaad (Ads Factory step 1) | Security | later | Not started | Services ke code me security ki ghalti |
-| 12 | Integration Engineer | 2 Collector aur data (step 2) | Engineering | later | Not started | Step 2 Collector: Pubforce Ad Library, Looker, Sensor Tower, Meta Ad Library ke APIs |
-| 13 | Data Engineer | 2 Collector aur data (step 2) | Engineering | later | Not started | Step 2: collector ka data kahan aur kaise rakhna |
-| 14 | Prompt / AI-Ops Engineer | 3 Analyst, Learner aur dashboards (step 3, 10) | Data & AI | later | Not started | Agents ke prompts aur unki quality, step 3 ke baad har agent ke liye |
-| 15 | BI Developer | 3 Analyst, Learner aur dashboards (step 3, 10) | Data & AI | later | Not started | Looker aur dashboards se data parhna aur dikhana |
-| 16 | Art Director | 4 Creative lanes (step 4 se 6) | Art & creative | wave 2 core | Not started | Step 5: creative ki disha, pehla creative agent |
-| 17 | Creative Director | 4 Creative lanes (step 4 se 6) | Art & creative | wave 2 core | Not started | Concepts aur creative ka faisla (step 4) |
-| 18 | Concept Artist | 4 Creative lanes (step 4 se 6) | Art & creative | later | Not started | Step 4 Visualizer: concept images |
-| 19 | 2D Artist / Illustrator | 4 Creative lanes (step 4 se 6) | Art & creative | wave 2 core | Not started | Static ads aur art |
-| 20 | Storyboard / Scriptwriter | 4 Creative lanes (step 4 se 6) | Art & creative | wave 2 core | Not started | Video lane (step 6): script aur storyboard |
-| 21 | Video Editor | 4 Creative lanes (step 4 se 6) | Art & creative | wave 2 core | Not started | Video lane (step 6): Remotion aur FFmpeg |
-| 22 | Technical Artist | 4 Creative lanes (step 4 se 6) | Art & creative | later | Not started | Playables, APK aur capture scenes (aap ke Tech Artists ka kaam) |
-| 23 | Game/Unity Engineer | 4 Creative lanes (step 4 se 6) | Engineering | later | Not started | Unity capture aur playables ka code |
-| 24 | Animator | 4 Creative lanes (step 4 se 6) | Art & creative | later | Not started | Video lane me motion |
-| 25 | 3D Artist | 4 Creative lanes (step 4 se 6) | Art & creative | later | Not started | 3D assets (Meshy ya Tripo) |
-| 26 | Sound Designer | 4 Creative lanes (step 4 se 6) | Art & creative | later | Not started | Video ads ki awaz aur music |
-| 27 | Motion/Graphic Designer | 4 Creative lanes (step 4 se 6) | Design | later | Not started | Graphics aur motion pieces |
-| 28 | Art QA | 5 QA gate (step 7) | Art & creative | later | Not started | Step 7 QA gate: art ki quality check |
-| 29 | Frontend Engineer | 6 Approval aur launch handoff (step 9) | Engineering | core 12 | Not started | Step 9 checkpoint: insaan ke approve karne ki screens |
-| 30 | UX/UI Designer | 6 Approval aur launch handoff (step 9) | Design | core 12 | Not started | Approval aur review screens ka design |
-| 31 | Performance / UA Marketer | 6 Approval aur launch handoff (step 9) | Marketing | wave 2 core | Not started | Launch aur monitoring UA team ka kaam hai; Ads Factory sirf handoff deta hai |
-| 32 | Ad Marketer | 6 Approval aur launch handoff (step 9) | Marketing | wave 2 core | Not started | Ads Factory ke output ko market me le jana |
-| 33 | Analytics/Growth Analyst | 6 Approval aur launch handoff (step 9) | Growth | later | Not started | Live ads ke results parhna (step 10 ki khuraak) |
-| 34 | Threat Modeler | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Security | later | Not started | Pehle se soch lena ke hamla kahan se aa sakta hai |
-| 35 | Penetration Tester / Red Team | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Security | later | Not started | Sirf aap ke apne system par, aap ki ijazat se hamla karke kamzori dikhata hai |
-| 36 | SRE/Monitoring | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Infra & release | later | Not started | Chalne ke baad nigrani |
-| 37 | Incident Responder | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Security | later | Not started | Keys leak ya breach ho to kya karna hai: plan aur steps, insaan amal karta hai |
-| 38 | Privacy/Compliance | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Security | later | Not started | Personal data aur qaide |
-| 39 | Release Manager | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Infra & release | later | Not started | Release ka intezam |
-| 40 | Technical Writer | 7 Hifazat aur chalte rehna (Ads Factory ke baad) | Docs & support | later | Not started | Docs aur playbook |
-| 41 | Product Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Product | core 12 | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 42 | Business Analyst | 8 Ads Factory ke liye zaroori nahi (baad me) | Product | core 12 | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 43 | Market Researcher | 8 Ads Factory ke liye zaroori nahi (baad me) | Product | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 44 | Delivery Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Product | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 45 | UX Researcher | 8 Ads Factory ke liye zaroori nahi (baad me) | Design | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 46 | Content Writer | 8 Ads Factory ke liye zaroori nahi (baad me) | Design | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 47 | Mobile Engineer | 8 Ads Factory ke liye zaroori nahi (baad me) | Engineering | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 48 | AI/ML Engineer | 8 Ads Factory ke liye zaroori nahi (baad me) | Engineering | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 49 | Performance Engineer | 8 Ads Factory ke liye zaroori nahi (baad me) | Quality | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 50 | Accessibility Specialist | 8 Ads Factory ke liye zaroori nahi (baad me) | Quality | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 51 | Support Analyst | 8 Ads Factory ke liye zaroori nahi (baad me) | Docs & support | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 52 | ASO/SEO/Marketing | 8 Ads Factory ke liye zaroori nahi (baad me) | Growth | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 53 | VFX Artist | 8 Ads Factory ke liye zaroori nahi (baad me) | Art & creative | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 54 | Game Designer | 8 Ads Factory ke liye zaroori nahi (baad me) | Game design | wave 2 core | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 55 | Level Designer | 8 Ads Factory ke liye zaroori nahi (baad me) | Game design | wave 2 core | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 56 | Systems / Economy Designer | 8 Ads Factory ke liye zaroori nahi (baad me) | Game design | wave 2 core | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 57 | Live-Ops Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Game design | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 58 | Playtest QA | 8 Ads Factory ke liye zaroori nahi (baad me) | Game design | wave 2 core | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 59 | Data Analyst (mode) | 8 Ads Factory ke liye zaroori nahi (baad me) | Data & AI | mode of another role | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 60 | Social / Community Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Marketing | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 61 | Influencer / PR Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Marketing | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 62 | Email / CRM Marketer | 8 Ads Factory ke liye zaroori nahi (baad me) | Marketing | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 63 | HR / Recruiter | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 64 | Finance / FP&A | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 65 | Legal / Contracts | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 66 | Sales / Account Manager | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 67 | Operations / Procurement | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 68 | Localisation | 8 Ads Factory ke liye zaroori nahi (baad me) | Business | later | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 69 | Web Designer (mode) | 8 Ads Factory ke liye zaroori nahi (baad me) | Web | mode of another role | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
-| 70 | Web Developer (mode) | 8 Ads Factory ke liye zaroori nahi (baad me) | Web | mode of another role | Not started | Ads Factory ko iski zaroorat nahi; baad me, jab zaroorat ho |
+| # | Role | Wave | Status | Includes | Why |
+|---|---|---|---|---|---|
+| 1 | Orchestrator | 0 Built or in build | Tested | The boss | Talks to you, hands out work, keeps the run record |
+| 2 | Solution Architect | 0 Built or in build | Tested | Architect + Database Architect | System design and data design |
+| 3 | Code Reviewer | 0 Built or in build | Tested | Code Reviewer | Reads changes for mistakes; stays apart from the builders |
+| 4 | AI Engineer | 0 Built or in build | Tested | AI Engineer + Prompt / AI-Ops | The AI part of products and agent teams (evals 13 of 14 pass) |
+| 5 | Data Scientist & Analyst | 0 Built or in build | Tested | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst | Honest answers from data, tests, forecasts, dashboards (evals 13 of 14 pass) |
+| 6 | Backend & Integration Engineer | 0 Built or in build | In progress | Backend Engineer + Integration Engineer | Server code and outside services; the backend part is built |
+| 7 | DevOps Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | DevOps + SRE / Monitoring + Release Manager | Build, deploy, run, watch and release |
+| 8 | Security & Privacy Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance | Builds the safeguards, thinks like an attacker at design time, plans for incidents, guards personal data |
+| 9 | QA / Test Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | QA + Playtest QA + Art QA + Performance + Accessibility | Checks that the whole thing really works; stays apart from the builders |
+| 10 | Security Reviewer | 1 Foundation (Ads Factory steps 1-2) | Not started | AppSec Reviewer + Penetration Tester | Reads code for security mistakes and tests your own systems with permission; never builds |
+| 11 | Data Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Data Engineer | Moves and shapes data so others can trust it |
+| 12 | Creative & Art Director | 2 Creative lanes (steps 4-6) | Not started | Creative Director + Art Director + Concept Artist | The idea, the look and the first visual explorations |
+| 13 | Artist | 2 Creative lanes (steps 4-6) | Not started | 2D Artist + 3D Artist + Animator + VFX Artist | Final art and motion for games and ads |
+| 14 | Video & Sound Editor | 2 Creative lanes (steps 4-6) | Not started | Video Editor + Sound Designer | Cuts, captions, exports and audio for ads |
+| 15 | Game & Technical Engineer | 2 Creative lanes (steps 4-6) | Not started | Game / Unity Engineer + Technical Artist | Gameplay code and the bridge between art and engine |
+| 16 | Writer | 2 Creative lanes (steps 4-6) | Not started | Content Writer + Storyboard / Scriptwriter + Localisation + Technical Writer + Support Analyst | Words: scripts, copy, translations, docs and support answers |
+| 17 | Designer | 2 Creative lanes (steps 4-6) | Not started | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher | Screens, flows, graphics and brand pieces |
+| 18 | Frontend & Mobile Engineer | 3 Approval and launch (step 9) | Not started | Frontend + Mobile + Web Developer | What people see and touch, including approval screens |
+| 19 | UA & Growth Marketer | 3 Approval and launch (step 9) | Not started | Performance / UA + Ad Marketer + ASO / SEO + Social + Influencer / PR + Email / CRM | Advises and prepares launches and growth; a human spends and publishes |
+| 20 | Game Designer | 4 Not needed for Ads Factory | Not started | Game Designer + Level + Systems / Economy + Live-Ops | Game rules, levels, economy and live content |
+| 21 | Product & Business Analyst | 4 Not needed for Ads Factory | Not started | Product Manager + Business Analyst + Market Researcher + Delivery Manager | What to build and why, requirements, market and delivery tracking |
+| 22 | Business Operations | 4 Not needed for Ads Factory | Not started | Finance + Operations / Procurement + Sales / Account + HR + Legal (draft only) | Drafts for business paperwork; a human signs and decides |
