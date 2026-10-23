@@ -1,3 +1,5 @@
+Superseded by the merged role on 2026-10-24: see `qa-test-engineer.md (Art QA mode)`. This page stays until the merged role is built, then it moves to an `archive/` folder (owner decision Q37).
+
 # Art QA
 
 This role is not built yet; this page describes what it will be.

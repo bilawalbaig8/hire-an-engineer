@@ -132,12 +132,12 @@ Documentation: Not written / Parts only / Documenting (role document written, sp
 | 7 | DevOps Engineer | DevOps + SRE / Monitoring + Release Manager | Documented | Not started |
 | 8 | Security & Privacy Engineer | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance | Parts only | Not started |
 | 9 | QA / Test Engineer | QA + Playtest QA + Art QA + Performance + Accessibility | Documented | Not started |
-| 10 | Security Reviewer | AppSec Reviewer + Penetration Tester | Documenting | Not started |
-| 11 | Data Engineer | Data Engineer | Documenting | Not started |
+| 10 | Security Reviewer | AppSec Reviewer + Penetration Tester | Documented | Not started |
+| 11 | Data Engineer | Data Engineer | Documented | Not started |
 | 12 | Creative & Art Director | Creative Director + Art Director | Documented | Not started |
 | 13 | Artist | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Parts only | Not started |
 | 14 | Video & Sound Editor | Video Editor + Sound Designer | Parts only | Not started |
-| 15 | Game & Technical Engineer | Game / Unity Engineer + Technical Artist | Documenting | Not started |
+| 15 | Game & Technical Engineer | Game / Unity Engineer + Technical Artist | Documented | Not started |
 | 16 | Writer | Content Writer + Storyboard / Scriptwriter + Technical Writer + Support Analyst (Localisation parked) | Documented | Not started |
 | 17 | Designer | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher | Parts only | Not started |
 | 18 | Frontend & Mobile Engineer | Frontend + Mobile + Web Developer | Not written | Not started |

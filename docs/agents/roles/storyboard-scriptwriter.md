@@ -1,3 +1,5 @@
+Superseded by the merged role on 2026-10-24: see `writer.md (Script and storyboard mode)`. This page stays until the merged role is built, then it moves to an `archive/` folder (owner decision Q37).
+
 # Storyboard / Scriptwriter
 
 This role is not built yet; this page describes what it will be.
