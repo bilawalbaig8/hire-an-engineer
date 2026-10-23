@@ -58,3 +58,6 @@ python scripts/install_agents.py
 - Start the boss in the project folder with `claude --agent orchestrator`.
 - After installing, run the installer again with `--dry-run`; it should report `0 new, N same, 0 differ`.
 - Never use `--force` on hire-an-engineer files; use `--only`.
+
+## Virtual office (optional)
+To watch the agent team in a window, run `python scripts/install_office.py --project <project>`; see `docs/agents/visual-office/INSTALL-OFFICE.md`.

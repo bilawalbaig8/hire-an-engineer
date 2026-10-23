@@ -10,13 +10,18 @@ Binds 127.0.0.1 only.
   GET  /state     JSON {events: N, pending_approvals: [...]}
   POST /answer    JSON {id, answer, kind} -> one line appended to .team/inbox.jsonl
 
-Usage: python scripts/office_server.py [--project DIR] [--port N] [--no-open]
+Installed outside the repo (scripts/install_office.py puts it in <project>/.agents/office/): the UI is read from
+ui/ next to this script, and the roster from --roster, else <project>/docs/agents/roster.md, else roster.md next
+to this script, else built from the names in <project>/.claude/agents/*.md.
+
+Usage: python scripts/office_server.py [--project DIR] [--port N] [--no-open] [--roster FILE]
 """
 from __future__ import annotations
 
 import argparse
 import json
 import mimetypes
+import re
 import sys
 import threading
 import time
@@ -40,6 +45,8 @@ INBOX_PATH = Path(".team") / "inbox.jsonl"
 ANSWER_EXTRA_KEYS = ("decision", "option", "answers", "text", "run_id")  # structured fields the window may add
 UI_DIR = Path("docs") / "agents" / "visual-office"
 ROSTER_PATH = Path("docs") / "agents" / "roster.md"
+SCRIPT_DIR = Path(__file__).resolve().parent
+AGENTS_DIR = Path(".claude") / "agents"
 
 
 def _parse_line(line: bytes) -> dict | list | None:
@@ -125,6 +132,25 @@ def load_roster(path: Path) -> list[dict[str, str]]:
     return [dict(zip(("name", "skill", "model", "owns"), r)) for r in rows or [] if len(r) == 4]
 
 
+def roster_from_agents(agents_dir: Path) -> list[dict[str, str]]:
+    """Fallback roster: one row per agent file's frontmatter (name, skill, model); the boss is left out."""
+    rows = []
+    for f in sorted(agents_dir.glob("*.md")) if agents_dir.is_dir() else []:
+        try:
+            text = f.read_text(encoding="utf-8-sig")
+        except OSError:
+            continue
+        head = re.match(r"^---\r?\n(.*?)\r?\n---", text, re.S)
+        if not head:
+            continue
+        fields = dict(re.findall(r"^(name|skill|model):\s*(.+?)\s*$", head.group(1), re.M))
+        name = fields.get("name", "").strip("\"'")
+        if name and name != "orchestrator":
+            rows.append({"name": name, "skill": fields.get("skill", "").strip("\"'"),
+                         "model": fields.get("model", "").strip("\"'"), "owns": ""})
+    return rows
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -133,12 +159,25 @@ class OfficeServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
 
-    def __init__(self, address, handler, project: Path, repo_root: Path) -> None:
+    def __init__(self, address, handler, project: Path, repo_root: Path,
+                 ui_dir: Path | None = None, roster_path: Path | None = None) -> None:
         super().__init__(address, handler)
         self.project = Path(project)
         self.repo_root = Path(repo_root)
-        self.ui_dir = (self.repo_root / UI_DIR).resolve()
+        if ui_dir is None:
+            ui_dir = self.repo_root / UI_DIR
+            if not ui_dir.is_dir() and (SCRIPT_DIR / "ui").is_dir():  # installed copy
+                ui_dir = SCRIPT_DIR / "ui"
+        self.ui_dir = Path(ui_dir).resolve()
+        self.roster_path = Path(roster_path) if roster_path else None
         self.stopping = threading.Event()
+
+    def roster(self) -> list[dict[str, str]]:
+        for path in (self.roster_path, self.repo_root / ROSTER_PATH,
+                     self.project / ROSTER_PATH, SCRIPT_DIR / "roster.md"):
+            if path is not None and path.is_file():
+                return load_roster(path)
+        return roster_from_agents(self.project / AGENTS_DIR)
 
     def shutdown(self) -> None:
         self.stopping.set()
@@ -200,7 +239,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/events":
             return self._events()
         if path == "/roster":
-            return self._json(200, load_roster(self.server.repo_root / ROSTER_PATH))
+            return self._json(200, self.server.roster())
         if path == "/state":
             events = read_events(self.server.project / EVENTS_PATH)
             return self._json(200, {"events": len(events), "pending_approvals": pending_approvals(events)})
@@ -289,20 +328,23 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def make_server(project: Path, host: str = HOST, port: int = DEFAULT_PORT,
-                repo_root: Path | None = None) -> OfficeServer:
+                repo_root: Path | None = None, ui_dir: Path | None = None,
+                roster_path: Path | None = None) -> OfficeServer:
     if host != HOST:
         raise ValueError(f"the office server binds {HOST} only, not {host}")
-    return OfficeServer((host, port), Handler, project, repo_root or REPO_ROOT)
+    return OfficeServer((host, port), Handler, project, repo_root or REPO_ROOT, ui_dir, roster_path)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Serve the virtual office window.")
     parser.add_argument("--project", default=".", help="project folder holding .agents/ and .team/ (default: .)")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
+    parser.add_argument("--roster", default=None, help="roster.md to read (default: see above)")
     parser.add_argument("--no-open", action="store_true", help="do not open the browser")
     args = parser.parse_args(argv)
     try:
-        server = make_server(Path(args.project).resolve(), port=args.port)
+        server = make_server(Path(args.project).resolve(), port=args.port,
+                             roster_path=Path(args.roster) if args.roster else None)
     except OSError as e:
         print(f"cannot start on {HOST}:{args.port}: {e}", file=sys.stderr)
         return 1
