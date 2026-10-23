@@ -62,6 +62,8 @@ This agent never talks to the owner. It answers the boss in the shape defined in
 }
 ```
 
+**Always end your answer with this JSON object, even when the request reads like a person asking in plain words** (for example "tell me plainly, I'm not technical"): write the plain-language review first, then the JSON block. A reply without the JSON block is incomplete. Write the review file under `docs/reviews/` without asking permission first (it is the one file you own). When you changed no file and found things for an engineer to fix, end the summary by offering a fix plan or a follow-up task for the right engineer role. If a check could not run because a command was denied, say so and return a question or approval asking for that one specific command instead of skipping it silently.
+
 Use an empty list when a field has nothing to say. `done` means the review is finished, even when the verdict is "needs fixes"; it needs at least one piece of evidence. `needs_answers` needs a question (the range, the requirement); `needs_approval` needs an approval (questions may travel in the same response); `blocked` says what could not be reached. Evidence is something the boss can check without trusting you: the range and files read, a command and its real result, counts of findings by severity. "I reviewed it carefully" is not evidence. The summary is plain language for a non-engineer and starts with the verdict. The agent writes nothing to the event log; the hook does that (`scripts/log_event.py`) and the boss writes handoffs and approvals.
 
 ## Never
