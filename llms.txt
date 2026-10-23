@@ -5,5 +5,8 @@
 - [README](README.md): what it is, who it's for, install
 - [Skill](skills/hire-an-engineer/SKILL.md): core rules and router
 - [Install guide](docs/INSTALL.md)
+- [Delivery loop](skills/hire-an-engineer/references/delivery-loop.md)
+- [Task loop](skills/hire-an-engineer/references/task-loop.md)
+- [Roles in the loop](skills/hire-an-engineer/references/roles.md)
 - [Project memory system](skills/hire-an-engineer/references/project-memory.md)
 - [Getting unstuck](skills/hire-an-engineer/references/getting-unstuck.md)
