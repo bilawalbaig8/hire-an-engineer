@@ -23,7 +23,7 @@ When to read this: the system is a game, a game engine or tool, or a live servic
 | Simulation timing | **A fixed step for the simulation**, with rendering following it. [S-GAME-1] [S-GAME-12] | A variable step for simple, non-physical games. | A fixed step needs interpolation and can add a frame of latency; a variable step makes physics and replays unreliable. |
 | Who owns the truth | **Decide first whether the server or the client owns the game state.** Single-player: the client. Competitive or money-linked: the server. [S-GAME-14] | Client-owned for co-op or casual games where cheating costs little. | Server authority gives up some responsiveness and costs servers; client authority gives up cheat resistance. |
 | Shared data | **Data kept apart from behaviour** (tables, data assets, ScriptableObjects). [S-GAME-7] [S-GAME-36] | Hard-coded values only in prototypes. | Needs validation and a data pipeline. |
-| Loading assets | **Load by reference and release**, so memory stays bounded and downloads small (Unity Addressables). [S-GAME-8] [S-GAME-41] | Load everything at start for tiny games. | Adds async waiting and lifetime bugs if careless. |
+| Loading assets | **Load by reference and release**, so memory stays bounded and downloads small (Unity Addressables: asynchronous load and release, reference counting, groups, download size). [S-GAME-8] [S-GAME-41] | Load everything at start for tiny games. | Adds async waiting and lifetime bugs if careless. |
 | Budgets | **Set frame, memory, download and battery budgets early** for the weakest supported device and measure there. | "Optimise later" only for jam-sized projects. | Budgets give up features and effects. |
 | Communication | **A few typed events or messages with clear owners.** [S-GAME-6] [S-GAME-60] | Direct calls inside one system. | Events give up easy tracing. |
 | Engine | **Unity** for most mobile and cross-platform 2D and 3D games with small teams; **Unreal** for high-end 3D and large teams; **Godot** for small, lightweight projects. [S-GAME-9] [S-GAME-10] [S-GAME-11] (judgement; the vendor pages describe each engine, they do not rank them) | A custom engine only when the core of the game is the engine itself. | Each engine gives up control (licence terms differ); a custom engine gives up years of tools. This is a one-way door: return it as an approval. |
@@ -38,7 +38,7 @@ When to read this: the system is a game, a game engine or tool, or a live servic
 ## Questions that change the design
 
 - Single-player, co-op or competitive multiplayer? How many players per match?
-- Which platforms and which weakest device must run it well?
+- Which platforms, which weakest (floor) device, what target frame rate, typical session length and install or download size limit?
 - Is there real-money purchase, advertising, or user data? Which regions and age groups?
 - How much content, and does it update after release?
 - Who changes content: programmers or designers? How often?
@@ -55,6 +55,7 @@ Frame hitches from garbage or loading; memory growth from unreleased assets; eve
 - [ ] Budgets exist for frame time, memory, download size and battery on the weakest supported device (`game-performance-budgets`).
 - [ ] Saved data has a version number, a migration path and safe writes (`game-save-systems`).
 - [ ] Content and balance values live in validated data with stable IDs (`game-architecture-patterns`).
+- [ ] Unity asset loading uses Addressables with planned groups and releases (`game-performance-budgets`).
 - [ ] Anything worth money is validated on a server (`game-live-ops-and-content`).
 - [ ] Store rules, age rating and data collection were checked before the monetisation design was fixed.
 - [ ] One-way doors (engine, save format and IDs, economy ownership, account system) are returned as approvals, not finalised.

@@ -62,7 +62,7 @@ For games with real-money purchases, random rewards or shared state, the client 
 How:
 - **Idempotent operations:** every purchase or spend carries a unique request ID; the server applies each ID once, so retries and crashes never charge or grant twice.
 - **Ledger, not just a balance:** record events; a balance is the sum, which makes disputes, refunds and fraud review possible.
-- **Odds disclosure:** both major stores require telling players the odds of randomised paid items before purchase. [S-MOB-7] [S-GAME-77] Keep the odds in the same versioned data the server uses to roll, so the shown and real odds cannot drift apart, and keep a history of past versions.
+- **Odds disclosure:** both major stores require telling players the odds of randomised paid items before purchase. [S-MOB-7] [S-GAME-77] Keep the odds in the same versioned data the server uses to roll, so the shown and real odds cannot drift apart, and keep a history of past versions. The legal wording of odds and random rewards must be reviewed by a qualified legal adviser; list that review in the ADR on odds and in the risk list.
 - **Attestation** (Play Integrity, App Attest) lets the server reject requests from modified apps or fake devices; it is a layer, not a guarantee. [S-GAME-75] [S-GAME-83] [S-GAME-86]
 - **Refunds, chargebacks and bans:** design reversal of a grant from day one.
 - **Offline play with a server economy:** either block the economy offline, or queue events and let the server accept or reject them later; decide per feature.

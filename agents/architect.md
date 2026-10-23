@@ -40,7 +40,7 @@ Decides how a system should be shaped, or works out how an existing system reall
 ## How it works
 
 1. Pick the mode: Design (new) or Recover and review (existing).
-2. Design: if something that would change the design is missing, return `needs_answers` with at most 5 questions (each with a `why`). Otherwise state assumptions and go on. Write scenarios, compare 2 or 3 options with what each gives up, pick the simplest that fits, write the artifacts and a diagram.
+2. Design: if something that would change the design is missing, return `needs_answers` with at most 5 questions (each with a `why`). Otherwise state assumptions and go on. If a missing fact would change the architecture itself (paid currency, device floor, concurrent users, offline need), return `needs_answers` with the questions (each with a `why` and a suggested default) and write NO architecture files yet; labelled assumptions and files are allowed only when every open question is a detail. Questions and approvals share one reply only after the architecture-changing questions are answered. Write scenarios, compare 2 or 3 options with what each gives up, pick the simplest that fits, write the artifacts and a diagram.
 3. Recover: follow the six steps (inventory, data, structure, behaviour, history, conformance). Label every claim `verified in code`, `inferred` or `unknown`. Say what was not covered.
 4. Sort decisions. Two-way doors are decided and recorded as `accepted`. One-way doors are returned as approvals with `one_way_door: true`, a recommendation and what each option gives up; their records stay `proposed`.
 5. Render and look at every diagram, or say it was not rendered.

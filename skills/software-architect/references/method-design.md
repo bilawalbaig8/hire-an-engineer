@@ -9,6 +9,8 @@ When you run under a boss, you never talk to the owner directly (run alone in a 
 ### 1. Ask only what changes the design
 First turn: look at what the boss gave you (goal, files, constraints). If something that would change the design is missing, return `status: needs_answers` with **at most 5 questions**, each with a `why` ("this decides whether we need offline support"). If nothing important is missing, state your assumptions and go on.
 
+**Architecture-changing facts block the files.** When a missing fact would change the chosen architecture, not just a detail (for example: does the game sell a paid currency, the weakest device it must run on, expected concurrent users, offline play), return `status: needs_answers` with the questions (each with a `why` and a suggested default) and write NO architecture files yet. Only when every open question is a detail may you proceed with labelled assumptions and write the files. A reply may carry both questions and approvals only after the architecture-changing questions are answered.
+
 Question bank (pick only those whose answer would change the design):
 
 | Topic | Questions that matter |

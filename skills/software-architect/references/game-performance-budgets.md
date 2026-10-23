@@ -41,7 +41,7 @@ Also write a budget for: **cold start** (to first interaction), **level load tim
 - **Textures and audio dominate.** Choose compressed texture formats per platform, limit texture size by quality tier, and strip unused code to cut build size. [S-GAME-34] [S-GAME-35]
 - **Garbage collection:** in Unity the collector is incremental by default, spreading work across frames, but a collection still adds cost to frame time and can cause visible spikes. [S-GAME-25] The fix is to produce less garbage: avoid building strings, creating lists or capturing closures in the per-frame code, and reuse buffers. [S-GAME-26]
 - **Pooling** (reuse bullets, effects, UI rows, enemies) removes both allocation and collection cost. Use Unity's built-in pool type or your own. [S-GAME-27] [S-GAME-62] What it gives up: you must reset state on reuse, and pools hold memory when idle; size them from measurements.
-- **Addressables memory:** every load needs a matching release, and memory comes back only when the whole bundle can unload, so group assets that live and die together. [S-GAME-41]
+- **Addressables (Unity):** asynchronous load and release of assets by reference; reference counting decides when memory comes back; groups set what unloads together and what size each download is. Every load needs a matching release, and memory comes back only when the whole bundle can unload, so group assets that live and die together. [S-GAME-41]
 - **Unreal and Godot:** Unreal has its own object garbage collection and a stat system to see costs; Godot frees most things through reference counting and its performance guide lists the common fixes. Use their tools in the next section. [S-GAME-45] [S-GAME-52]
 
 ## Streaming and loading
@@ -93,6 +93,8 @@ Also write a budget for: **cold start** (to first interaction), **level load tim
 
 ## Questions that change the design
 
+Ask before budgeting: the real reference (floor) device, the target frame rate, the typical session length, and the install and download size limits.
+
 - Which exact devices are the floor, and what share of the target market do they hold?
 - What is the genre's real need for smoothness: puzzle, action, competitive?
 - How big may the install be, and how much may download later?
@@ -105,7 +107,7 @@ Also write a budget for: **cold start** (to first interaction), **level load tim
 - [ ] Budgets for memory, cold start, level load, download size and battery, each with a measurement method.
 - [ ] Measurements were taken on the real device in a development build, over a long session.
 - [ ] No allocation in the per-frame code; frequently spawned objects are pooled; every load has a release.
-- [ ] Loading is asynchronous and scenes free their memory.
+- [ ] Loading is asynchronous and scenes free their memory; in Unity, Addressables groups, reference counts and releases are planned and checked for leaks.
 - [ ] Heat behaviour is designed (adaptive quality or a fixed cap) and tested for 20 minutes or more.
 - [ ] Field telemetry for frame time, memory and crashes by device model is planned.
 - [ ] Any heavy optimisation is justified by a profile.

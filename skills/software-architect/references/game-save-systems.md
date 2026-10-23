@@ -4,6 +4,8 @@ When to read this: the game keeps anything between sessions (progress, settings,
 
 ## Decisions that matter most
 
+**First, ask: does the game have a paid currency or purchases?** If yes, balances and purchases are verified server-side (receipt validation, a server ledger); local anti-tamper is only for non-monetised data. If unknown, it is an architecture-changing question: return `needs_answers` before writing files (`method-design.md`, step 1).
+
 | Decision | Choose X when | Otherwise Y | What you give up |
 |---|---|---|---|
 | What to store | **State only**: the facts you cannot recompute (what the player owns, chose, finished, and when). Derive everything else on load. | Cache derived values only when recomputing is measured to be slow, and mark them as rebuildable. | Storing less gives up a little load time; storing derived data makes saves bigger and lets two copies of a fact disagree. |
