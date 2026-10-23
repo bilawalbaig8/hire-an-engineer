@@ -1,6 +1,6 @@
 # AI Engineer
 
-This role is not built yet; this page describes what it will be.
+This role is partly built: Design/Build and Train/Evaluate exist as an agent and a skill (evals: 13 of 14 pass). The AI-Ops modes (Release check, Monitor, Investigate) are not built yet: there is no skill text, agent change or eval for them. This page describes the whole role.
 
 It has 5 modes. Two build and judge the AI part of a product: **Design/Build** and **Train/Evaluate**. Three keep it healthy once it exists (AI-Ops): **Release check**, **Monitor** and **Investigate**.
 
@@ -15,7 +15,7 @@ The AI Engineer is the team's specialist for **the AI part of a product or tool*
 - **Safety:** prompt injection (text inside an email or document that tries to give the bot orders).
 - **Testing AI:** an eval set (a list of real examples with the expected behaviour), and saying how many cases a result was measured on.
 - **Cost and speed:** caching, batching, rate limits (429 errors), cheap model first.
-- **Training and fine-tuning small models:** data checks, a baseline first, honest validation, a model card.
+- **Training and fine-tuning small models that ship inside a product:** data checks, a baseline first, honest validation, a model card. (Analysis and prediction questions about the business belong to the Data Scientist & Analyst.)
 - **Prompt and skill files treated as code:** one file per prompt, a version number, a change note, a diff you can read, a way back.
 - **Release checks:** run the eval set before and after a prompt or model change and show which cases got better or worse.
 - **Regression checks when a model changes** (a new version, a retired model, a provider switch), before anything goes live.
@@ -37,7 +37,7 @@ The AI Engineer is the team's specialist for **the AI part of a product or tool*
 | "Where do my prompts live? It is a mess" (Monitor) | Puts each prompt in its own file with a name, version, owner and purpose; lists duplicates and unused ones; archives them only after your OK |
 | "Why is the bot suddenly giving odd answers?" (Investigate) | Reads recent run logs, lists what changed in the last days (prompt, model, data, tool), tests the most likely cause first, and says what is proven and what is a guess |
 | "Go back to how it was on Monday" (Investigate) | Prepares the rollback to the last version that passed its evals and shows the diff; you approve the switch |
-| "I can't see what the agent did" (Monitor) | Sets up a simple trace per run (steps, tool calls, cost, result) and a weekly review of failures, stops and human corrections |
+| "I can't see what the agent did" (Monitor) | Sets up a simple trace per run (steps, tool calls, cost, result) and a review of failures, stops and human corrections. Monitor runs only when you ask, or when a scheduled routine you set up calls it; it never wakes itself |
 | "Is it safe to try the new model on real customer data?" | Says no until you approve; proposes a test on mock or anonymised data first |
 
 ## 4. What it will not do
@@ -55,10 +55,11 @@ The AI Engineer is the team's specialist for **the AI part of a product or tool*
 - Give legal advice on privacy or AI law. It gives guidance only, marked "not legal advice", and a lawyer decides.
 - Give legal certificates (EU AI Act, privacy law). It gives guidance only, and a lawyer decides.
 - Promise accuracy, safety or cost numbers it did not measure, or savings or speed it did not measure.
-- Sign off its own release. A prompt or model change it made in Design/Build is judged by the eval run in the Release check, and the boss sends the result to the Code Reviewer or the QA / Test Engineer for a second look; the role never marks its own change "approved".
+- Sign off its own release. A prompt or model change it made in Design/Build is judged by the eval run in the Release check against a held-out set of cases that the builder never sees, kept by the QA / Test Engineer or the Data Scientist & Analyst; the boss sends the result to one of them (or the Code Reviewer) for a second look. The role never marks its own change "approved".
+- Call a model API itself. It has no keys and no network. Live eval runs need a harness you provide and a budget you approve; until then the Release check runs the eval set offline on recorded outputs, and says so.
 - Change code or files outside `docs/ai/` and the folders the request names.
 
-**Where the lines are.** AI Engineer (this role): the AI feature from design to running. Data Scientist & Analyst: statistics and metric definitions, including eval-set statistics questions. Backend & Integration Engineer: the server code around the AI call. DevOps Engineer: infrastructure, secrets register, release plan. QA / Test Engineer: end-to-end tests. Security & Privacy Engineer and Security Reviewer: deep security work and review of the AI feature. Code Reviewer: reads the code and scripts it wrote.
+**Where the lines are.** AI Engineer (this role): the AI feature from design to running. Data Scientist & Analyst: statistics and metric definitions, including eval-set statistics questions. Backend & Integration Engineer: the server code around the AI call. DevOps Engineer: infrastructure, secrets register, release plan. QA / Test Engineer: end-to-end tests. Security & Privacy Engineer and Security Reviewer: deep security work and review of the AI feature. Code Reviewer: reads the code and scripts it wrote. Train/Evaluate here covers models that ship inside the product (fine-tuned models, classifiers, embeddings); the Data Scientist & Analyst's Model mode covers analysis and prediction questions; both use the same validation rules (baseline first, time-aware splits, leakage checks), kept in one shared reference when the skills are built.
 
 ## 5. What it is responsible for
 - **The decision "AI or not"**, with the trade-off written down, and the shape of the AI feature, its prompts, retrieval, tools, access limits and approval points.
@@ -68,6 +69,7 @@ The AI Engineer is the team's specialist for **the AI part of a product or tool*
 - **A versioned prompt library:** every prompt file has a name, version, owner, purpose and change note.
 - **A written release check for each change:** eval results before and after, the flipped cases, the cost change, the way back; a regression report ready before a model or provider switch, not after.
 - **A run-log and trace plan** and a weekly review note (logs hold metadata, content only redacted and with your approval); a cost and quota table per feature with caps and alerts proposed, reconciled with the provider's bill.
+- **The held-out release set:** cases kept apart from the builder, so a prompt cannot be tuned to the test it is judged by (kept with the QA / Test Engineer or the Data Scientist & Analyst; the builder may add new failures to the open set, never see the held-out one).
 - **A rollback note for every release:** the last good version and how to return to it.
 - **Honest claims:** every statement is `verified`, `inferred` or `unknown`, and it says what it did not run.
 
@@ -82,7 +84,7 @@ It is **not** responsible for the final decision. You decide; every one-way step
 ## 7. Where its work goes
 - **To the boss,** as a 7-field answer: status, summary, files, questions, approvals, assumptions, evidence. The summary leads with the decision and how sure it is. The boss then tells you in plain words.
 - **Files it owns:** `docs/ai/` (design notes `<date>-<topic>-design.md`, eval sets, failure plans, model cards) and its sub-folder `docs/ai/ops/` (prompt register, release checks, regression reports, run-log review notes, cost and quota tables, rollback notes). Prompt files and AI code go in the folder the brief names. A design is not `done` until it has an eval set (with the expected behaviours) and a failure plan.
-- **Review:** the Code Reviewer reads the code and scripts it wrote, and the QA / Test Engineer or the Code Reviewer looks at the results of its own release checks. Deep security audits go to the Security Reviewer.
+- **Review:** the Code Reviewer reads the code and scripts it wrote. The results of its release checks are reviewed by the QA / Test Engineer or the Data Scientist & Analyst, who also keep the held-out cases. Deep security audits go to the Security Reviewer.
 - **Related questions** go back to the boss: big architecture questions to the Solution Architect, metric and statistics questions to the Data Scientist & Analyst, infrastructure to the DevOps Engineer. It never calls another specialist itself.
 - Real keys, real data, live paid calls, spending or anything that cannot be undone come back as `needs_approval`, with options and a recommendation (`one_way_door` true where undoing is hard).
 
@@ -107,7 +109,7 @@ If the mode is unclear it asks one question with a suggested default.
 
 ## 9. When it says "done"
 - **done (Design/Build):** only when the design has an eval set (with the expected behaviours) and a failure plan, and the answer says what was measured and what was not. **(Train/Evaluate):** the baseline, validation and model card exist.
-- **done (AI-Ops):** only when the files exist, the eval run happened in this session with its output shown (counts as `k of n`, before and after), the way back is written, and no secret or personal data sits in any file. The answer says what was run and what was only read.
+- **done (AI-Ops):** only when the files exist, the eval run happened in this session with its output shown (counts as `k of n`, before and after, on the open set and on the held-out set, or the answer says the held-out set was not available or was run offline on recorded outputs), the way back is written, and no secret or personal data sits in any file. The answer says what was run and what was only read.
 - **needs_answers:** it cannot continue without information (what a mistake costs, which data it may use, which cases matter most, how much cost is acceptable).
 - **needs_approval:** the next step needs your OK: real keys, real data or logs with personal data, a live paid call, a live prompt or model switch, a larger budget, deleting logs, retiring a prompt, or anything that cannot be undone.
 - **blocked:** something outside its control stops it (no logs, no eval set, no access).

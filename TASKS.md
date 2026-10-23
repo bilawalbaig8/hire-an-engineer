@@ -124,7 +124,7 @@ Small roles are merged into bigger ones with modes. The old 70-role list is repl
 | 1 | Orchestrator | 0 Built or in build | Tested | Not written | Write the role document from its skill (58 sources); already built | The boss |
 | 2 | Solution Architect | 0 Built or in build | In progress | Merged | Being finalised in the architect session (system design + data design); then commit | Architect + Database Architect |
 | 3 | Code Reviewer | 0 Built or in build | Tested | Not written | Write the role document from its skill (87 sources); already built | Code Reviewer |
-| 4 | AI Engineer | 0 Built or in build | Tested | Merged | Add the AI-Ops modes (Release check, Monitor, Investigate) to the skill, agent and evals | AI Engineer + Prompt / AI-Ops |
+| 4 | AI Engineer | 0 Built or in build | Tested (2 of 5 modes) | Merged | Plan and spec are written (docs/superpowers/specs/2026-10-24-ai-engineer-ai-ops-merge.md); build of the AI-Ops modes waits for your go | AI Engineer + Prompt / AI-Ops |
 | 5 | Data Scientist & Analyst | 0 Built or in build | Tested | Parts, not merged yet | Research and write the BI / Analytics mode, then add it to the skill, agent and evals | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst |
 | 6 | Backend & Integration Engineer | 0 Built or in build | In progress | Merged | Add the Connect and Check modes (integrations) to the backend skill, agent and evals | Backend Engineer + Integration Engineer |
 | 7 | DevOps Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Parts, not merged yet | Merge the existing documents and write the missing modes (needs research), then build | DevOps + SRE / Monitoring + Release Manager |
