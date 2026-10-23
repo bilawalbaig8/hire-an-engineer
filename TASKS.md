@@ -132,8 +132,8 @@ Small roles are merged into bigger ones with modes. The old 70-role list is repl
 | 9 | QA / Test Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | QA + Playtest QA + Art QA + Performance + Accessibility | Checks that the whole thing really works; stays apart from the builders |
 | 10 | Security Reviewer | 1 Foundation (Ads Factory steps 1-2) | Not started | AppSec Reviewer + Penetration Tester | Reads code for security mistakes and tests your own systems with permission; never builds |
 | 11 | Data Engineer | 1 Foundation (Ads Factory steps 1-2) | Not started | Data Engineer | Moves and shapes data so others can trust it |
-| 12 | Creative & Art Director | 2 Creative lanes (steps 4-6) | Not started | Creative Director + Art Director + Concept Artist | The idea, the look and the first visual explorations |
-| 13 | Artist | 2 Creative lanes (steps 4-6) | Not started | 2D Artist + 3D Artist + Animator + VFX Artist | Final art and motion for games and ads |
+| 12 | Creative & Art Director | 2 Creative lanes (steps 4-6) | Not started | Creative Director + Art Director | The big idea and the visual direction; judges the art, never makes it |
+| 13 | Artist | 2 Creative lanes (steps 4-6) | Not started | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Concepts, final art and motion for games and ads |
 | 14 | Video & Sound Editor | 2 Creative lanes (steps 4-6) | Not started | Video Editor + Sound Designer | Cuts, captions, exports and audio for ads |
 | 15 | Game & Technical Engineer | 2 Creative lanes (steps 4-6) | Not started | Game / Unity Engineer + Technical Artist | Gameplay code and the bridge between art and engine |
 | 16 | Writer | 2 Creative lanes (steps 4-6) | Not started | Content Writer + Storyboard / Scriptwriter + Localisation + Technical Writer + Support Analyst | Words: scripts, copy, translations, docs and support answers |
