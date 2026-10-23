@@ -171,12 +171,12 @@ Estimated size (estimate, not measured): about 6 reference files of 60 to 110 li
 
 ## 12. Open questions for the owner (each with a default)
 1. ~~Folder?~~ Decided 2026-10-24 (Q34): `docs/product/`, continuing existing layout files when the request names them.
-2. Live board: should it ever sync to Trello, Linear, Jira or GitHub Projects? Default: no; Markdown backlog; the owner or a later role syncs.
+2. ~~Live board sync?~~ Decided 2026-10-24 (X3): no; Markdown backlog; the owner or a later role syncs.
 3. ~~Who runs interviews?~~ Decided 2026-10-24 (Q35): the owner or their team; the role writes the guide and consent script and reads the notes with names removed.
-4. Model: `sonnet` or `opus`? Default: `sonnet` with the step-up rule.
+4. ~~Model: `sonnet` or `opus`?~~ Decided 2026-10-24 (Q8): `sonnet` with the step-up rule.
 5. ~~Office: one character for the merged role?~~ Decided 2026-10-24 (Q38): yes, one character per merged role, id `product-business-analyst`, added when the role is built.
 6. ~~Paid research sources (store analytics, market reports)?~~ Decided 2026-10-24 (Q36): public pages by default. The owner has some paid sources and will give access when needed; the role then uses them read-only (Q15). The role never buys or subscribes to anything.
-7. Status reports on a schedule? Default: on request only.
+7. ~~Status reports on a schedule?~~ Decided 2026-10-24 (X3): on request only.
 
 ## 13. Calls made without the owner (please check)
 1. Four modes in one role, with Delivery tracking kept thin (reads the boss's records, owns only the product plan).

@@ -130,16 +130,16 @@ Documentation: Not written / Parts only / Documenting (role document written, sp
 | 5 | Data Scientist & Analyst | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst | Documented | Tested (5 of 5 modes; BI / Analytics 10 of 10 runs, older cases 15 of 15) |
 | 6 | Backend & Integration Engineer | Backend Engineer + Integration Engineer (modes: Build, Review/Fix, Connect, Check) | Documented | Tested (4 of 4 modes; 13 of 13 local evals after 1 fix, one run each) |
 | 7 | DevOps Engineer | DevOps + SRE / Monitoring + Release Manager | Documented | Not started |
-| 8 | Security & Privacy Engineer | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance | Parts only | Not started |
+| 8 | Security & Privacy Engineer | Security Engineer + Threat Modeler + Incident Responder + Privacy / Compliance | Documented | Not started |
 | 9 | QA / Test Engineer | QA + Playtest QA + Art QA + Performance + Accessibility | Documented | Not started |
 | 10 | Security Reviewer | AppSec Reviewer + Penetration Tester | Documented | Not started |
 | 11 | Data Engineer | Data Engineer | Documented | Not started |
 | 12 | Creative & Art Director | Creative Director + Art Director | Documented | Not started |
-| 13 | Artist | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Parts only | Not started |
-| 14 | Video & Sound Editor | Video Editor + Sound Designer | Parts only | Not started |
+| 13 | Artist | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Documented | Not started |
+| 14 | Video & Sound Editor | Video Editor + Sound Designer | Documented | Not started |
 | 15 | Game & Technical Engineer | Game / Unity Engineer + Technical Artist | Documented | Not started |
 | 16 | Writer | Content Writer + Storyboard / Scriptwriter + Technical Writer + Support Analyst (Localisation parked) | Documented | Not started |
-| 17 | Designer | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher | Parts only | Not started |
+| 17 | Designer | UX/UI Designer + Graphic & Motion Designer + Web Designer + UX Researcher | Documented | Not started |
 | 18 | Frontend & Mobile Engineer | Frontend + Mobile + Web Developer | Not written | Not started |
 | 19 | UA & Growth Marketer | Performance / UA + Ad Marketer + ASO / SEO + Social + Influencer / PR + Email / CRM | Documented | Not started |
 | 20 | Game Designer | Game Designer + Level + Systems / Economy + Live-Ops | Not written | Not started |

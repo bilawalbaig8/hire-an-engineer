@@ -311,3 +311,7 @@ Goal (plan Phase 7 step 7): prove the office shows what really happened.
 Assumptions marked above: extra event fields allowed by the validator; alias names for non-built roles; `roles.json` location and the check script; 3 s hold for `agent_stop`; banner for logs without results; run splitting by `run_started`; compression gap of 4 s and the 4x / 8x speeds; 50 000-line limit; localhost token scheme; boss writes `approval_given` for window answers; `boss_reply` event for follow-up questions; extra confirm for one-way doors; unknown-agent cap of 24; `office-core.js` split; performance targets; SSE for live push.
 
 Open (needs the owner or a test): window-to-session channel (docs check and small test, per plan); whether Pixel is redone or dropped; whether the boss may log `task` text (plain language, no secrets).
+
+## Role seats and tags
+
+Every role document in `docs/agents/roles/` that is not marked Superseded has its own seat and character in the window. Ids stay stable (`architect`, `be`, `ux`, `security`, and so on); the alias table in the script maps agent file names (for example `integration-engineer` to `be`, `security-privacy-engineer` to `security`). Each seat and card shows a small role tag, separate from the live state chip: `Tested`, `Built` or `Planned`. The tags come from one map, `TAGS`, in `index.html` (source: TASKS.md). Seats with no entry are `Planned`.

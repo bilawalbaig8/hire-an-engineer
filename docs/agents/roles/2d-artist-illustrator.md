@@ -1,3 +1,5 @@
+Superseded by the merged role on 2026-10-24: see `artist.md`. This page stays until the merged role is built, then moves to an `archive/` folder (owner decision Q37).
+
 # 2D Artist / Illustrator
 
 This role is not built yet; this page describes what it will be.
