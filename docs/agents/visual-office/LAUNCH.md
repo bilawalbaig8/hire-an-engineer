@@ -60,3 +60,10 @@ Not verified: an interactive session (the approval dialog, Esc or typing during 
 - Install per project for headless runs, evals and automation: `python scripts/install_agents.py --dest <project>/.claude --only orchestrator --only software-architect --only code-reviewer`. Global install (`--only NAME`, copies to `~/.claude`) is for interactive sessions.
 - Headless runs (`claude -p ...`) refuse to read `~/.claude/skills/`, so a global install is not enough there (see PERMISSIONS.md).
 - After installing, run again with `--dry-run` and expect `0 new, N same, 0 differ`. Never use `--force` on hire-an-engineer files.
+
+## How to open the office window (every time)
+1. Start the team in the project folder: `claude --agent orchestrator`. The SessionStart hook starts the local server by itself and opens the window in your default browser (once per session). The boss also tells you the address in its first message.
+2. If the window did not open, or you closed it: run `python .agents/office/office_launch.py --status`. It prints the address, normally `http://127.0.0.1:8765/`. Paste it into Chrome.
+3. If it says `not running`: start it with `python .agents/office/office_launch.py` (add `--no-browser` to only start the server), then open the address.
+4. Stop it with `python .agents/office/office_launch.py --stop`.
+The window only reads this project's `.agents/events.jsonl`; reload the page if it ever looks cropped.
