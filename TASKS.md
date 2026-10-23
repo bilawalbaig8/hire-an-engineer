@@ -91,7 +91,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 ## Role documents
 
 - [ ] DOC-1 Gemini CLI installed (done); you log in once: run gemini in a terminal, then /auth
-- [ ] DOC-2 Wave 1 role documents with Gemini research: Backend, Database Architect, DevOps, Security Engineer, QA/Test, AppSec Reviewer
+- [ ] DOC-2 Wave 1 role documents with Gemini research: Backend, Solution Architect (data design mode), DevOps, Security Engineer, QA/Test, AppSec Reviewer
 
 ## Phase 6 Integration
 
@@ -122,7 +122,7 @@ Small roles are merged into bigger ones with modes. The old 70-role list is repl
 | # | Role | Wave | Status | Includes | Why |
 |---|---|---|---|---|---|
 | 1 | Orchestrator | 0 Built or in build | Tested | The boss | Talks to you, hands out work, keeps the run record |
-| 2 | Solution Architect | 0 Built or in build | Tested | Architect + Database Architect | System design and data design |
+| 2 | Solution Architect | 0 Built or in build | Tested | Architect + Database Architect | System design and data design (data design mode documented 2026-10-24: `references/data-design.md`, role doc `solution-architect.md`; evals for data design not written yet) |
 | 3 | Code Reviewer | 0 Built or in build | Tested | Code Reviewer | Reads changes for mistakes; stays apart from the builders |
 | 4 | AI Engineer | 0 Built or in build | Tested | AI Engineer + Prompt / AI-Ops | The AI part of products and agent teams (evals 13 of 14 pass) |
 | 5 | Data Scientist & Analyst | 0 Built or in build | Tested | Data Scientist + Data Analyst + BI Developer + Analytics / Growth Analyst | Honest answers from data, tests, forecasts, dashboards (evals 13 of 14 pass) |
