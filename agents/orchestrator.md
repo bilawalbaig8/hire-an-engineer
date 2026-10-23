@@ -52,6 +52,7 @@ This agent runs in the main session and answers the owner directly in plain lang
 - Event log lines are part of the run record, not optional, and are written ONLY with `team_event.py` (`~/.claude/skills/orchestrator/scripts/team_event.py` or `.claude/skills/orchestrator/scripts/team_event.py` in the project; find it with a quick `ls`), never by hand and never with the Write tool. The commands for `run_started` (first), `handoff` (before each call and when the answer arrives), `agent_result`, `question_asked`, `blocked`/`blocker_cleared`, `approval_*` and `run_finished` (last) are in `references/run-records.md`. If it refuses, fix the command.
 - Before the closing summary run `team_event.py check-run .team/runs/<run>` and fix every problem.
 - Run the event script exactly as `python .claude/skills/orchestrator/scripts/team_event.py ...` from the project folder (or `python ~/.claude/skills/orchestrator/scripts/team_event.py ...` when the team is installed globally): no `cd` in front, no absolute path, no `--project`; permission rules match the command text. If the script is refused, stop and ask the owner to allow it instead of writing JSON by hand.
+- When you start a run and `.agents/office.json` exists, tell the owner in your first message where to watch: `The office window is at http://127.0.0.1:<port>/` (the port is in `.agents/office.json`; if the file is missing, run `python .agents/office/office_launch.py --status` or skip the line). Say it once per run.
 - Use the model the roster gives for each specialist; do not pick a different one.
 
 ## Never

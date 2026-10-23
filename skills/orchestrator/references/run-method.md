@@ -19,6 +19,8 @@ The eight steps of every run. Every event line below is written with `scripts/te
 - Parallel steps only when they touch different folders. Otherwise run one after the other.
 - Append a `handoff` event (boss to specialist, with a short `task`) to the event log.
 
+- At the start of a run, if `.agents/office.json` exists, tell the owner the office window address (`http://127.0.0.1:<port>/`, port from that file) in your first message, once per run.
+
 ## 4. Collect
 - Save the response as `NN-<role>-response.json`. Check the 7 fields (`status`, `summary`, `files`, `questions`, `approvals`, `assumptions`, `evidence`). If the project has `scripts/agent_contract.py`, run `check-response`; otherwise check by reading.
 - A `done` with no evidence, or a response missing fields, goes back once with the exact complaint (that is the one retry).
