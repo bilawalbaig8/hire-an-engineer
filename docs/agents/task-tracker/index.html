@@ -46,6 +46,9 @@ h1 { font-size: 22px; font-weight: 600; margin: 0 0 2px; text-wrap: balance; }
 .row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 244px; gap: 4px 12px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .num { font-family: var(--font-mono); color: var(--muted); font-size: 12px; padding-top: 2px; }
 .title { font-weight: 600; }
+.lnks { font-size: 12px; margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+.lnks a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.lnks a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sub { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
 .pills { display: grid; grid-template-columns: 118px 118px; gap: 12px; }
 .note { grid-column: 2 / -1; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
@@ -72,6 +75,15 @@ h1 { font-size: 22px; font-weight: 600; margin: 0 0 2px; text-wrap: balance; }
    doc:   Not written | Parts only | Documenting | Documented
    build: Not started | In progress | Built | Tested | Done
    Header line: doc "meta/summary" {title, note, updated}. Claude updates rows with the ArtifactData tool. */
+const BASE = "https://github.com/bilawalbaig8/hire-an-engineer/blob/feat/specialized-agents/";
+function links(r) {
+  const box = document.createElement("div"); box.className = "lnks";
+  [[r.roleDoc, "docs/agents/roles/", "Role document"], [r.specDoc, "docs/superpowers/specs/", "Spec"]].forEach(function (x) {
+    if (!x[0]) return;
+    const a = document.createElement("a"); a.href = BASE + x[1] + x[0]; a.target = "_blank"; a.rel = "noopener"; a.textContent = x[2]; box.append(a);
+  });
+  return box;
+}
 const DOC = { "Not written": "none", "Parts only": "none", "Documenting": "prog", "Documented": "doc" };
 const BUILD = { "Not started": "none", "In progress": "prog", "Built": "built", "Tested": "test", "Done": "test" };
 let rows = [], meta = null, filter = "", query = "";
@@ -110,7 +122,7 @@ function render() {
   shown.forEach(r => {
     if (r.phase !== phase) { phase = r.phase; sec = el("section", "phase"); sec.append(el("h2", null, phase || "Other")); list.append(sec); }
     const row = el("div", "row");
-    const main = el("div"); main.append(el("div", "title", r.title), el("div", "sub", r.subroles || ""));
+    const main = el("div"); main.append(el("div", "title", r.title), el("div", "sub", r.subroles || ""), links(r));
     const pills = el("div", "pills"); pills.append(pill(r.doc, DOC), pill(r.build, BUILD));
     row.append(el("div", "num", r.num), main, pills);
     if (r.note) row.append(el("div", "note", r.note));

@@ -4,6 +4,8 @@ Status: built (system design) / data design mode added. The agent is `agents/arc
 
 The owner decided that the Architect and the Database Architect are one role, the Solution Architect, with two modes. **System design** is how the whole system is shaped. **Data design** is where the data lives and how it is shaped. Each mode has its own sub-modes (below).
 
+A third mode, **Project structure**, is planned, not built (owner decision 2026-10-24). At design level it will plan the project's folder tree, how files are organised, the naming rules, the data structure and algorithm choices (as decision records) and the end-to-end flow, and plan a restructure of an existing tree in small steps. It never moves files: the Software Engineer applies the tree and writes and measures the code. Spec: `docs/superpowers/specs/2026-10-24-architect-project-structure.md`.
+
 ## 1. What this role is
 The Solution Architect is the team's specialist for **how a system is shaped, and how its data is shaped**. In System design mode it decides the structure, the technology and the trade-offs of a new system, or works out how an existing system really is built, and says how sure it is. In Data design mode it decides **where your data lives and how it is shaped**: which store (a file, SQLite, a Google Sheet, Supabase/Postgres, Firebase), which tables and fields, how changes are made safely, who may see which rows, and how you get your data back after a mistake. It designs and reviews; it does not write product code or screens. It designs for an owner who only knows "my data", and it makes the system and the data safe to change later.
 
@@ -42,6 +44,10 @@ The Solution Architect is the team's specialist for **how a system is shaped, an
 | "The app is slow when the list grows" | Data design | Looks at the actual queries, proposes indexes and paging, and says what was measured and what was not |
 | "A customer asked me to delete their data" | Data design | Maps where that person's data sits, proposes a delete that also covers copies and backups, and sends the real deletion to you for approval |
 | "Which database will cost me less?" | Data design | Gives a table of options with limits and plan terms read from the live pricing page, and says "unknown" for anything it could not read |
+| "How should I lay out the folders of my new project?" | Project structure (planned, not built) | Plans a shallow folder tree for your stack, with one purpose and one owner per folder, where tests, docs, assets, config and scripts go, and the naming rules |
+| "My project is a mess, clean up the folders" | Project structure (planned, not built) | Counts what is there, shows the tree before and after, and writes a restructure plan in small safe steps; it moves no file itself (the Software Engineer does, and the Code Reviewer reads each step) |
+| "Which data structure should hold my leaderboard / enemies / jobs?" | Project structure (planned, not built) | Writes a decision record with the sizes, the simplest choice that fits, what it gives up and what the Software Engineer must measure; it promises no speed |
+| "Show how a request goes through my app end to end" | Project structure (planned, not built) | Draws the flow with each step mapped to a folder, from the real code, with each step labelled verified or not |
 
 ## 4. What it will not do
 - Write product code, tests (including the access test: it writes only the test design) or the screens (Backend Engineer, Frontend & Mobile Engineer, Designer). After a review it describes the smallest safe changes and names the role that should make them.
@@ -193,3 +199,5 @@ Some sources are paid books and some Apple pages return only their title to the 
 **Limit of this backing:** the checks covered that the page opened and that its title or author matched, plus a few passages read for the claims named in this section. They did not cover every claim inside each source. Provider documentation (Supabase, Firebase, Postgres, Unity, Unreal) changes quickly, so the role reads the live page when a limit, price or behaviour matters. Law and privacy rules differ by country and need a lawyer.
 
 Review pass 2026-10-24: data design source count corrected to 40 (38 verified, 2 unverified) to match the table; "Backend & Integration Engineer" renamed "Backend Engineer" after the 2026-10-24 split (agent `backend-engineer`).
+
+Review pass 2026-10-24: Project structure mode planned.

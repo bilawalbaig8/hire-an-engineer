@@ -31,6 +31,7 @@ These are not separate tasks. A role is not done until each line below is done i
 - **Office window.** Add the seat id and aliases for the agent name, and set its tag in the `TAGS` map in `docs/agents/visual-office/index.html` (Built, then Tested), then run `python scripts/sync_team_start.py`.
 - **Tracking.** Update the row in `TASKS.md` and in the tracker artifact (Documentation and Build columns), and the role document's status line.
 - **Install and push.** Install with `python scripts/install_agents.py --only <skill-name>`, run `check_installed.py`, commit, and push only when the owner says.
+- **Found a problem later?** Whenever a check, a review, an eval or a real job shows something to fix or add in any agent (built or planned), write it at once as a task in `TASKS.md`: List B for a built role (an update or a new skill or mode), List C for a documented role (include when it is built), List A for a new role, List D for a small check. Add it to the tracker artifact too. Nothing found stays only in the chat (owner decision X6).
 
 Who writes the event log (`.agents/events.jsonl`): the hook (`scripts/log_event.py`) writes `agent_start`, `agent_stop` and `file_written`; the boss writes `handoff`, `approval_requested` and `approval_given` with `append_event`; a specialist writes nothing. See the contract.
 

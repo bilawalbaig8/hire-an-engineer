@@ -2,17 +2,17 @@
 
 This role is not built yet. There is no skill, no agent file and no eval for it. This page describes what it will be. The first design and the build plan are in `docs/superpowers/specs/2026-10-24-product-business-analyst-design.md`.
 
-The owner decided that four small roles become one: **Product Manager**, **Business Analyst**, **Market Researcher** and **Delivery Manager** (role 21 in `TASKS.md`). The role has 4 modes:
+The owner decided that four small roles become one: **Product Manager**, **Business Analyst**, **Market Researcher** and **Delivery Manager** (role 21 in `TASKS.md`). On 2026-10-24 the owner added a separate **Project Manager** role (`project-manager.md`); the Delivery Manager part (Delivery tracking) moved there. This role now has 3 modes:
 
 | Mode | What it answers | Comes from |
 |---|---|---|
 | **Requirements** | What exactly are we building, for whom, and what is out? | Business Analyst, Product Manager |
 | **Prioritise** | What first, what later, what not at all? (it recommends; you decide) | Product Manager |
 | **Market and users** | Who has this problem, what do they use today, who else sells a fix, how big could it be? | Market Researcher |
-| **Delivery tracking** | Are we on track? What is late, what is risky, what is waiting on you? | Delivery Manager |
+| ~~Delivery tracking~~ | Moved to the Project Manager (plan, status, risks, decision log, release readiness) | Delivery Manager |
 
 ## 1. What this role is
-The Product & Business Analyst is the team's specialist for **what to build, why, and in which order, and whether the work is on track**. It turns your idea and your words into clear requirements that engineers can build and testers can check. It lays out the options for what comes first, with what each one gives up, and recommends one. It finds out, with sources, who has the problem, what they use today and who else offers a fix. It keeps the product plan, the risk list and the decision log current across many team runs. It never decides scope or priority for you: you decide, it writes your decision down.
+The Product & Business Analyst is the team's specialist for **what to build, why, and in which order**. Whether the work is on track belongs to the Project Manager. It turns your idea and your words into clear requirements that engineers can build and testers can check. It lays out the options for what comes first, with what each one gives up, and recommends one. It finds out, with sources, who has the problem, what they use today and who else offers a fix. It keeps the backlog and the roadmap current across many team runs; the delivery plan, the risk register and the decision log belong to the Project Manager. It never decides scope or priority for you: you decide, it writes your decision down.
 
 ## 2. What it is a specialist in
 **Requirements**
@@ -34,12 +34,7 @@ The Product & Business Analyst is the team's specialist for **what to build, why
 - Interview guides about past behaviour, not opinions about the future (The Mom Test), and a consent script.
 - Turning interview notes you give it into themes, with counts ("4 of 6 people") and anonymised quotes.
 
-**Delivery tracking**
-- The product plan: releases, milestones, the tasks you own (content, approvals, payments) with dates.
-- The risk register (risk, likelihood, impact, what we do about it, owner), seeded from a pre-mortem.
-- Status reports in your skill's format (On track / At risk / Blocked, done, next, needed from you, risks), built only from evidence: run summaries, review reports and test reports.
-- Change requests: what a new request costs in time and what moves, with the options laid out for you.
-- Estimates as ranges with a buffer (about 30 percent, from your skill), never a single promised date.
+**Delivery tracking: moved to the Project Manager** (`project-manager.md`): the delivery plan, milestones, your tasks with dates, the risk register, status reports, release readiness and schedule estimates. For a change request this role still says what the new item is worth and where it fits in the priority order; the Project Manager says what it costs in time and what moves.
 
 ## 3. What it will do for you
 | You say | Mode | It does |
@@ -52,14 +47,14 @@ The Product & Business Analyst is the team's specialist for **what to build, why
 | "How big is the market for my game in Pakistan?" | Market and users | Writes a sizing formula, fills each input from a named source or marks it unknown, gives a range, and never puts in a number it cannot trace |
 | "I did 6 interviews, what did people say?" | Market and users | Sorts the notes into themes with counts, separates what people did from what they said they would do, and anonymises every quote |
 | "Help me interview customers" | Market and users | Writes an interview guide with questions about past behaviour and a consent script; you or your team run the interviews |
-| "Are we on track?" | Delivery tracking | Reads the run summaries, review and test reports, and writes a status report: what is done (with proof), what is late, the top risks and what is waiting on you |
-| "The client wants one more feature this release" | Delivery tracking | Shows what it costs in time and what would move, gives the options (add it and move the date, drop something, or next release) and logs your decision |
-| "Promise the client launch on 1 December" | Delivery tracking | Gives a date range with the buffer and the risks behind it, and returns the public date to you as a decision; it never promises a date |
+| "The client wants one more feature this release" | Prioritise | Says what the feature is worth and where it would rank; the time cost and what moves come from the Project Manager; you decide |
+| "Are we on track?" / "Promise the client launch on 1 December" | (Project Manager) | Not this role: the boss sends it to the Project Manager |
 | "Write the contract with the client" | Requirements | Writes only the scope part (what is in, what is out, how "done" is checked), marked "draft, not legal advice"; the contract goes to Business Operations and a lawyer |
 
 ## 4. What it will not do
 - Decide scope, priority, a release date or a price for you. It recommends with the trade-off; you decide; it records your decision.
-- Plan or run a team run, call specialists, or write the boss's run record (`.team/runs/`). That is the boss's job. It may read the run summaries to report status.
+- Plan or run a team run, call specialists, or write the boss's run record (`.team/runs/`). That is the boss's job.
+- Keep the delivery plan, status reports, the risk register, the decision log or release readiness (Project Manager).
 - Design screens or run usability tests (Designer). Design the system or judge technical feasibility (Solution Architect). Size engineering work itself: effort comes from the engineers or is marked as your guess.
 - Define metrics, analyse your product data or run A/B tests (Data Scientist & Analyst). It uses their results and says which parts are verified.
 - Decide ad spend, bids or campaigns (UA & Growth Marketer), or the creative idea (Creative & Art Director).
@@ -72,14 +67,13 @@ The Product & Business Analyst is the team's specialist for **what to build, why
 - Promise a date, a market size or a result it cannot back with evidence.
 - Change files outside its own folder and the folders the request names.
 
-**Where the lines are.** Product & Business Analyst (this role): what to build, why, in which order, and whether the plan is on track. **Orchestrator (the boss):** who does which step in this run, the run plan, briefs, approvals and the run record in `.team/runs/`. The boss plans one run; this role keeps the product plan that lasts across runs, and the boss reads it to choose the next job. **Designer:** how it looks and works, and usability research with real people. **Solution Architect:** how the system is shaped, and what is technically possible. **Data Scientist & Analyst:** numbers from your own data, metric definitions, experiments. **UA & Growth Marketer:** spend and campaigns. **Creative & Art Director:** what the audience and competitor findings mean for the creative idea. **Business Operations:** money, contracts and legal drafts. **QA / Test Engineer:** turns acceptance criteria into tests.
+**Where the lines are.** Product & Business Analyst (this role): what to build, why, and in which value order. **Project Manager:** how and when the approved scope is delivered, the work order by dependencies, status, risks, the decision log and release readiness, across runs. **Orchestrator (the boss):** who does which step in this run, the run plan, briefs, approvals and the run record in `.team/runs/`. The boss reads this role's backlog and the Project Manager's plan to choose the next job. **Designer:** how it looks and works, and usability research with real people. **Solution Architect:** how the system is shaped, and what is technically possible. **Data Scientist & Analyst:** numbers from your own data, metric definitions, experiments. **UA & Growth Marketer:** spend and campaigns. **Creative & Art Director:** what the audience and competitor findings mean for the creative idea. **Business Operations:** money, contracts and legal drafts. **QA / Test Engineer:** turns acceptance criteria into tests.
 
 ## 5. What it is responsible for
 - **The brief and requirements:** problem, users, the job, first-version must-haves, later, not doing, done-when, and user stories with acceptance criteria. Each must-have traces back to your words.
 - **The backlog and roadmap:** every item with a priority, the reason, and `draft` or `approved` with the date you approved it.
 - **Research files:** competitor and market notes and user-research summaries, each claim with a source and a date, each number with its formula, each statement labelled `verified`, `inferred` or `unknown`.
-- **The delivery plan, risk register and product decision log:** milestones, your tasks with dates, risks with owners, and every decision you made with the date and where you made it.
-- **Status reports** built only from evidence, saying what it could not check.
+- **The `draft` / `approved` mark** on every backlog line, with the date you approved it. The delivery plan, the risk register, the decision log and status reports are the Project Manager's.
 - **Privacy in research:** anonymised notes and quotes only; the consent script; no personal details in its files.
 - **Honest claims:** it says what it read, what it guessed and what it did not check.
 
@@ -95,7 +89,7 @@ It is **not** responsible for the final decision. You decide scope, priority, da
 
 ## 7. Where its work goes
 - **To the boss,** as the 7-field answer: status, summary, files, questions, approvals, assumptions, evidence. The summary leads with the recommendation and how sure it is. The boss then tells you in plain words.
-- **Files it owns:** `docs/product/`: `brief.md`, `requirements/<feature>.md`, `backlog.md`, `roadmap.md`, `research/<date>-<topic>.md`, and `delivery/` (`plan.md`, `risks.md`, `decisions.md`, `status/<date>.md`). If your project already has `docs/brief.md` or `docs/plans/roadmap.md` from the `hire-an-engineer` layout, it continues those files when the brief names them, and never makes a second copy.
+- **Files it owns:** `docs/product/`: `brief.md`, `requirements/<feature>.md`, `backlog.md`, `roadmap.md`, `research/<date>-<topic>.md`. (The planned `delivery/` folder is dropped; that work lives in the Project Manager's `docs/project/`.) If your project already has `docs/brief.md` or `docs/plans/roadmap.md` from the `hire-an-engineer` layout, it continues those files when the brief names them, and never makes a second copy.
 - **To other roles, through the boss:** requirements and acceptance criteria to the Designer, the engineers and QA; audience and competitor findings to the Creative & Art Director and the UA & Growth Marketer; questions about data to the Data Scientist & Analyst; feasibility questions to the Solution Architect. It never calls another specialist itself.
 - **Review:** the Code Reviewer reads changes to its files when the boss sends them. Its research is checked by its own source table: a reader can open every link.
 - **Approvals** go back as `needs_approval` with options, a recommendation and what each option gives up: the first-version scope, a priority change that drops something you promised, a public date, anything that goes to a client, spending on research, contacting people. `one_way_door` is true for a public date, a client commitment and anything contractual.
@@ -107,14 +101,12 @@ It is **not** responsible for the final decision. You decide scope, priority, da
 4. **Requirements:** find the job and the do-nothing answer; write the brief; write stories with Given / When / Then; check each against INVEST; list hidden requirements and contradictions; write the "not doing" list.
 5. **Prioritise:** state the goal the order serves; pick the lightest method the data supports (P-scale with impact and effort by default; RICE only with real inputs); mark each input as sourced or guessed; show how the order moves if a guess is wrong; recommend; return the decision to you.
 6. **Market and users:** write the question and what decision it feeds; search; open every page it cites; note the date and the place; build sizing as a formula; keep what people did apart from what they say they will do; anonymise; list what it could not find.
-7. **Delivery tracking:** read the evidence (run summaries, review and test reports, the board); mark each task done only with proof; update the plan, the risk register and the decision log; write the status report; put your open tasks and decisions at the top.
-8. **Answer the boss** in the 7-field shape, with every decision that is yours in `approvals`.
+7. **Answer the boss** in the 7-field shape, with every decision that is yours in `approvals`.
 
 ## 9. When it says "done"
 - **done (Requirements):** the brief and the stories exist; every story has acceptance criteria; the "not doing" list exists; every contradiction found is listed as a question or resolved by your earlier words.
 - **done (Prioritise):** the ranked list exists with the method named, every input marked sourced or guessed, and the recommendation returned as your decision.
 - **done (Market and users):** the research file exists; every number and fact has a source that was opened in this job, or is marked `unknown`; no personal details are in it; what it could not check is listed.
-- **done (Delivery tracking):** the status report exists; every "done" item points to its proof; risks and your open tasks are listed with dates.
 - **needs_answers:** it cannot continue without information (who the users are, what the first version must do, which market).
 - **needs_approval:** the next step is your decision: scope, priority, a date, anything for a client, spending, contacting people.
 - **blocked:** something outside its control stops it (no files, no web access, a page that cannot be opened).
@@ -141,3 +133,5 @@ It never says "the market is worth X" without a traceable formula, "users want X
 | Risks, estimates and delivery | Klein, *Performing a Project Premortem* (HBR 2007); HM Treasury, *The Orange Book* (risk); Flyvbjerg, *From Nobel Prize to Project Management: Getting Risks Right* (2006); Kanban Guide (2025); Singer, *Shape Up* (Basecamp 2019); Nygard, *Documenting Architecture Decisions* (2011) | verified |
 
 **Limit of this backing.** The checks covered that each page opened and its title matched, not every claim inside each source. Some sources are paid books or paywalled articles; the role cites them for the idea, not for detail. Market numbers change every year, so the role reads the live source for any number and writes the date. Privacy rules differ by country; the role gives guidance, not legal advice, and a lawyer decides.
+
+Review pass 2026-10-24: Project Manager role added. The Delivery tracking mode, the `delivery/` folder and the delivery work in sections 2 to 9 moved to `project-manager.md`; this role keeps 3 modes. The delivery sources in section 10 stay as background.

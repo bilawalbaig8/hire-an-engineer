@@ -145,3 +145,59 @@ Documentation: Not written / Parts only / Documenting (role document written, sp
 | 20 | Game Designer | Game Designer + Level + Systems / Economy + Live-Ops | Not written | Not started |
 | 21 | Product & Business Analyst | Product Manager + Business Analyst + Market Researcher + Delivery Manager | Documented | Not started |
 | 22 | Business Operations | Finance + Operations / Procurement + Sales / Account + HR + Legal (draft only) | Not written | Not started |
+| 27 | Project Manager | Plan + Track (drift check) + Release readiness + Retro | Documented | Not started |
+| 28 | Software Engineer | Structure applied + Algorithms and data structures + Performance and resources | Documented | Not started |
+
+## Backlog: one place for all later work (owner request 2026-10-24, X5)
+
+Do not build everything at once. Phase 1: make the current system solid with the 6 built roles on a real job. Phase 2: build the documented roles one at a time (order: QA / Test Engineer, DevOps, Security & Privacy with Security Reviewer, Data Engineer, the creative group (Creative & Art Director with Artist, Designer, Writer, Video & Sound Editor), UA & Growth, Product & Business Analyst, Game & Technical Engineer, then Project Manager and Software Engineer). Phase 3: grow roles with the lists below. Every build follows the 'Also part of every build' list in `docs/agents/agent-template/README.md`. Nothing below is started.
+
+### List A: new roles (kept apart from the rest)
+- [ ] A1 Project Manager: documented (role document and spec written)
+- [ ] A2 Software Engineer: documented (role document and spec written)
+- [ ] A3 Game Designer (game design, level, systems and economy, live-ops and monetisation, narrative): document not written
+- [ ] A4 Frontend & Mobile Engineer (frontend, mobile, web, UI code from the Designer's screens): document not written
+- [ ] A5 The 4 team helpers (Personal Assistant, Automation Engineer, Learning Agent, R&D Agent): documents drafted, builds later in their own order
+- [ ] A6 Later, only if needed: IT / helpdesk
+
+### List B: updates and new skills for roles that are already built (6 roles)
+**Orchestrator**
+- [ ] B1 Add each new role to its allowlist, `team-roster.md` and the roster when that role is built (part of every build).
+- [ ] B2 Add the step-up rule (a sonnet role goes to opus after two failed runs) and the effort column.
+- [ ] B3 Write a lesson to `docs/lessons/<role>.md` when the owner reports an issue (decision X2).
+- [ ] B4 Save the eval results file (12 of 12, one run each) if it is missing.
+**Solution Architect**
+- [ ] B5 Add the Project structure mode (spec written, 27 evals planned; description fits: 904 and 946 of 1,024).
+- [ ] B6 Move the 40 data design sources from the role document into the skill, so an installed copy can find them.
+- [ ] B7 Back the "Tested" label: save results for the 15 system design cases; rerun the 3 relaxed data design cases.
+**Code Reviewer**
+- [ ] B8 Run the case `review-tests` that was never run, and save a results file with the pass rate of the 14 evals.
+**AI Engineer**
+- [ ] B9 Held-out cases: run the release check on two files (open set for the AI Engineer, held-out set kept by QA outside the project), opaque case ids like `h01`; fix `agents/ai-engineer.md` lines 50 and 83 and `eval_compare.py` (decision Q1).
+- [ ] B10 Save the AI-Ops results file (9 of 9, offline, one run each) if it is missing.
+**Data Scientist & Analyst**
+- [ ] B11 Make room in the descriptions (skill 978, agent 1,016 of 1,024) before any new mode.
+- [ ] B12 Add the read-only live access tool when it exists (decision Q15) and test that it cannot edit or save.
+- [ ] B13 Fix the `pii-read-preview` fixture quirk (login day and sessions are independent) and rerun that case.
+**Backend & Integration Engineer** (one role, 4 modes: Build, Review/Fix, Connect, Check)
+- [ ] B14 Make room in the descriptions: agent 1,019 and skill 1,017 of 1,024.
+- [ ] B15 Rerun the evals twice per case and report "k of n runs"; rerun the 12 cases that were not rerun after the fix.
+- [ ] B16 Trial through the boss on one real job.
+- [ ] B17 Add the PreToolUse guard for live and network commands (decision Q9) and test it.
+- [ ] B18 Live providers stay uncalled (mocks and test keys only) until the owner approves a test-system run.
+**All built roles**
+- [ ] B19 Add `docs/lessons/<role>.md` to each role's reading list.
+- [ ] B20 Decide whether to split Backend and Integration again later (kept as one role for now).
+
+### List C: wider responsibilities planned for documented roles (include when each role is built)
+- [ ] C1 DevOps: FinOps (AI and cloud cost) and platform and store submission
+- [ ] C2 Security & Privacy: AI safety and responsible AI
+- [ ] C3 UA & Growth Marketer: community (answering players, reviews)
+- [ ] C4 Data Engineer: dataset curation and labelling
+- [ ] C5 Writer: Localise mode (parked, English only for now)
+- [ ] C6 Architect, Software Engineer and Project Manager: align the lines between them (the Architect spec was written before the other two existed)
+- [ ] C7 Product & Business Analyst: now 3 modes; drop the Delivery tracking part when it is built
+
+### List D: checks and small items
+- [ ] D1 Verify the 3 sources that now open and mark them verified in the skill `sources.md` files.
+- [ ] D2 Owner: look at the office window once (seats, tags, Waiting state) and report anything wrong.
