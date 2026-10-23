@@ -124,6 +124,34 @@ def pending_approvals(events: list[dict]) -> list[dict]:
     return list(pending.values())
 
 
+TRUTH_LIMIT = 1000
+
+
+def written_files_truth(project: Path, events: list[dict]) -> dict:
+    """Which files the log says were written no longer exist on disk? Only project-relative paths are checked."""
+    root = Path(project).resolve()
+    seen: list[str] = []
+    for ev in events:
+        if ev.get("type") != "file_written":
+            continue
+        rel = ev.get("path")
+        if not isinstance(rel, str) or not rel or rel.startswith(("/", "\\")) or (len(rel) > 1 and rel[1] == ":") or ".." in Path(rel).parts:
+            continue
+        if rel not in seen:
+            seen.append(rel)
+    seen = seen[-TRUTH_LIMIT:]
+    missing = []
+    for rel in seen:
+        try:
+            target = (root / rel).resolve()
+            inside = root == target or root in target.parents
+            if inside and not target.exists():
+                missing.append(rel)
+        except OSError:
+            missing.append(rel)
+    return {"checked": len(seen), "missing": missing, "events": len(events)}
+
+
 def load_roster(path: Path) -> list[dict[str, str]]:
     try:
         rows = _rows(path.read_text(encoding="utf-8-sig"))
@@ -245,6 +273,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/state":
             events = read_events(self.server.project / EVENTS_PATH)
             return self._json(200, {"events": len(events), "pending_approvals": pending_approvals(events)})
+        if path == "/truth":
+            return self._json(200, written_files_truth(self.server.project, read_events(self.server.project / EVENTS_PATH)))
         self._static(path)
 
     def _static(self, path: str) -> None:

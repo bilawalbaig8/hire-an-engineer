@@ -329,3 +329,32 @@ def test_answers_can_be_switched_on(tmp_path):
 
 def test_cli_has_the_enable_answers_flag():
     assert "--enable-answers" in os_.build_parser().format_help()
+
+
+# --- /truth: do the files the log says were written exist on disk? ----------------------
+
+def test_truth_reports_missing_written_files(office):
+    (office.project / "docs").mkdir()
+    (office.project / "docs" / "here.md").write_text("x", encoding="utf-8")
+    office.write_events(
+        '{"type": "file_written", "agent": "architect", "path": "docs/here.md"}\n',
+        '{"type": "file_written", "agent": "architect", "path": "docs/gone.md"}\n',
+        '{"type": "file_written", "agent": "architect", "path": "docs/here.md"}\n',
+    )
+    status, body = office.get("/truth")
+    data = json.loads(body)
+    assert status == 200 and data["checked"] == 2 and data["missing"] == ["docs/gone.md"]
+
+
+def test_truth_ignores_paths_outside_the_project(office):
+    office.write_events(
+        '{"type": "file_written", "path": "../secret.txt"}\n',
+        '{"type": "file_written", "path": "/etc/passwd"}\n',
+        '{"type": "file_written", "path": "C:/Windows/win.ini"}\n',
+    )
+    data = json.loads(office.get("/truth")[1])
+    assert data["checked"] == 0 and data["missing"] == []
+
+
+def test_truth_without_a_log_is_empty(office):
+    assert json.loads(office.get("/truth")[1]) == {"checked": 0, "missing": [], "events": 0}

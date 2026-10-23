@@ -702,6 +702,9 @@ body[data-theme=pixel] .banner{font-size:18px}
   body[data-theme=pixel] .seat:is([data-state=waiting],[data-state=approval],[data-state=needed]) .figwrap{outline-color:#ff77a8}
 }
 .yourmove{display:inline-block;margin-left:10px;padding:2px 9px;border-radius:4px;background:#e0a800;color:#1a1200;font-weight:700;white-space:normal}
+.flist .ftag.gone{background:#b3362b;color:#fff}
+.flist li.gone code{text-decoration:line-through}
+.calls{margin-left:10px;font:600 12px ui-monospace,Consolas,monospace;opacity:.8;white-space:nowrap}
 </style>
 </head>
 <body data-theme="office" data-layout="A" data-drawer="open" data-sheet="off">
@@ -1237,6 +1240,7 @@ var S={clock:0,t0ms:0,running:false,started:false,finished:false,ended:false,idl
   agents:Object.create(null),files:[],log:[],inbox:Object.create(null),inboxOrder:[],handoffs:[],blocks:0,
   goal:'',size:'',summary:'',status:'',job:null,hasStop:false,hasResult:false,pathSeen:Object.create(null),lastT:0,
   skipped:0,seen:0,stale30:false,last:performance.now(),conn:'connecting',rosterSig:null,answerRO:false,sumT:0};
+S.missing=[];S.quietMin=0;
 var REG=Object.create(null);   // agent id -> [{root,fig,chip,task,...}]
 var CARDS=Object.create(null); // request id -> card element
 var LOG=[],JOBS=Object.create(null),JOBORDER=[],CUR=Object.create(null),RAW=[],WIN=[],follow=true,viewsBuilt=false,LISTCAP=500,cardN=0;
@@ -1868,6 +1872,8 @@ function paintJob(){
   var np=MODE==='live'?pendingCount():0;
   if(np>0){var ym=document.createElement('span');ym.className='yourmove';ym.setAttribute('role','status');
     ym.textContent='Your move: '+np+' decision'+(np>1?'s':'')+' waiting. Answer in your Claude session (terminal).';j.appendChild(ym)}
+  if(MODE==='live'&&S.job&&S.started){var calls=S.handoffs.filter(function(h){return h.from==='conductor'&&h.to!=='conductor'}).length;
+    if(calls){var cs=document.createElement('span');cs.className='calls';cs.title='The boss may make at most 8 specialist calls per run unless the owner raises the cap';cs.textContent='Specialist calls: '+calls+' of 8';j.appendChild(cs)}}
   j.title=S.goal||'';
   $$('.bgoal').forEach(function(n){n.textContent=S.goal||(MODE==='demo'?'A booking website with online payment':'No job yet')});
 }
@@ -1898,6 +1904,8 @@ function paintControls(){
 function paintBanner(){
   var b=$('#banner'),msg='',k='',off=false;
   if(MODE==='live'&&S.conn==='offline'){msg='Offline, showing last known state. Trying to reconnect.';k='bad';off=true}
+  else if(MODE==='live'&&S.missing.length){msg=S.missing.length+' file'+(S.missing.length>1?'s':'')+' the log says were written are missing on disk (for example '+S.missing[0]+').';k='bad'}
+  else if(MODE==='live'&&S.job&&S.started&&!S.finished&&S.quietMin>=5){var pc=pendingCount();msg=(pc>0?'Waiting for you for ':'No new events for ')+S.quietMin+' min. '+(pc>0?'Answer in your Claude session (terminal).':'The session may be waiting in the terminal, or it has stopped.');k='info'}
   else if(MODE==='live'&&S.hasStop&&!S.hasResult){msg='Log has no result events; blocked states may be missing.';k='info'}
   b.hidden=!msg;b.dataset.k=k;$('#bannerTxt').textContent=msg;$('#bannerDemo').hidden=!off;
 }
@@ -2452,6 +2460,27 @@ function loadRoster(){
   }).catch(function(){});
 }
 setInterval(loadRoster,5000);
+function applyMissing(){
+  var set={};S.missing.forEach(function(p){set[p]=1});
+  $$('#flist li').forEach(function(li){var c=$('code',li);if(!c)return;var gone=!!set[c.textContent];li.classList.toggle('gone',gone);
+    var tg=li.querySelector('.ftag.gone');
+    if(gone&&!tg){var s=document.createElement('span');s.className='ftag gone';s.textContent='missing on disk';c.insertAdjacentElement('afterend',s)}
+    else if(!gone&&tg)tg.remove()});
+}
+function loadTruth(){
+  if(MODE!=='live')return;
+  fetch('truth',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){
+    if(!d)return;S.missing=Array.isArray(d.missing)?d.missing:[];applyMissing();paintBanner()}).catch(function(){});
+}
+function quietTick(){
+  if(MODE!=='live'||!S.job||S.finished||S.batch)return;
+  var J=JOBS[S.job];if(!J||!J.last)return;
+  var m=Math.floor((Date.now()-J.last)/60000);S.quietMin=m;
+  if(m>=30){var c=S.agents.conductor;if(c&&c.state!=='done'){c.state='idle';c.text='Parked: no activity for '+m+' min';paintAgent('conductor')}}
+  paintBanner();
+}
+setInterval(loadTruth,30000);setTimeout(loadTruth,2500);
+setInterval(function(){applyMissing();quietTick()},5000);
 
 /* ---------- live / demo switch ---------- */
 function urlDemo(on){try{var u=new URL(location.href);if(on)u.searchParams.set('demo','1');else u.searchParams.delete('demo');history.replaceState(null,'',u.pathname+u.search+u.hash)}catch(e){}}
