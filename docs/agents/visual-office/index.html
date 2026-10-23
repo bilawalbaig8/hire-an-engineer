@@ -907,7 +907,7 @@ var EVENTS=[
  {t:47.8,type:'agent_stop',agent:'conductor',result:'done',note:'Booking site delivered'}
 ];
 
-var LABEL={idle:'Idle',working:'Working',waiting:'Waiting for you',approval:'Needs approval',done:'Done',blocked:'Blocked',watching:'Watching',needed:'Needed now'};
+var LABEL={idle:'Idle',working:'Working',waiting:'Waiting for you',approval:'Needs your OK',done:'Done',blocked:'Blocked',watching:'Watching',needed:'Needed now'};
 var RESSTATE={done:'done',needs_answers:'waiting',needs_approval:'approval',blocked:'blocked'};
 /* ============================================================
    CHARACTERS: chibi monkeys in three skins (office, orchestra = vector, pixel = sprites).
@@ -1407,7 +1407,9 @@ function engaged(id){var c=CARDS[id];if(!c)return false;return c.matches(':focus
 function clearHold(a){if(a&&a.hold){clearTimeout(a.hold);a.hold=null}}
 function clearTimers(){Object.keys(S.agents).forEach(function(k){clearHold(S.agents[k])});clearTimeout(S.sumT)}
 function holdOn(){return MODE==='live'&&!S.batch&&!S.replay&&!S.quiet}
-function setOwner(){var n=pendingCount(),o=S.agents.owner;o.state=n>0?'needed':'watching';o.text=n>0?n+' item'+(n>1?'s':'')+' waiting for you':'Watching the work'}
+function setOwner(){var n=pendingCount(),o=S.agents.owner,first=null,i,x;o.state=n>0?'needed':'watching';
+  for(i=0;i<S.inboxOrder.length&&!first;i++){x=S.inbox[S.inboxOrder[i]];if(x.status==='pending')first=x.req}
+  o.text=n>0?(n+' for you'+(first?': '+cardTitle(first)+(n>1?' +'+(n-1)+' more':''):'')):'Watching the work'}
 
 function buildReq(e,src){
   var qs=Array.isArray(src.questions)?src.questions:[];
@@ -1452,7 +1454,7 @@ function openRequest(e,t){
   var asker=S.agents[req.asker];
   if(asker&&req.asker!=='conductor'){
     clearHold(asker);asker.state=req.kind==='questions'?'waiting':'approval';
-    asker.text=(req.kind==='questions'?'Has '+req.questions.length+' question'+(req.questions.length===1?'':'s')+' for you':'Needs your decision'+(req.title?': '+req.title:'')).slice(0,120);
+    asker.text=reqLine(req).slice(0,170);
     asker.since=t;asker.touched=true;
   }
   addCard(req);sortCards();notifyPending();
@@ -1473,7 +1475,7 @@ function closeRequest(e,t){
     /* the asker may still have another open request: then it keeps waiting for that one */
     var more=null;S.inboxOrder.forEach(function(k){var o=S.inbox[k];if(k!==id&&o.status==='pending'&&o.req.asker===req.asker)more=o.req});
     if(more){ag.state=more.kind==='questions'?'waiting':'approval';
-      ag.text=(more.kind==='questions'?'Has '+more.questions.length+' question'+(more.questions.length===1?'':'s')+' for you':'Needs your decision'+(more.title?': '+more.title:'')).slice(0,120)}
+      ag.text=reqLine(more).slice(0,170)}
     else{ag.state='idle';ag.text=dec==='rejected'?'Rework requested':'Answer received'}
     ag.since=t}
   resolveCard(id);sortCards();
@@ -1770,7 +1772,7 @@ function buildOffice(){
   $('.slot-c',o).replaceWith(makeSeat('conductor'));
   $$('[data-slot]',o).forEach(function(s){s.replaceWith(makeSeat(s.dataset.slot))});
 }
-var FILTERS=[['all','All'],['working','Working'],['waiting','Waiting'],['approval','Needs approval'],['blocked','Blocked'],['done','Done'],['idle','Idle']];
+var FILTERS=[['all','All'],['working','Working'],['waiting','Waiting'],['approval','Needs you'],['blocked','Blocked'],['done','Done'],['idle','Idle']];
 var filter='all';
 function buildChart(){
   var c=scene('viewC','cscene');
@@ -1788,17 +1790,25 @@ function applyFilter(){
 /* ============================================================
    PAINTING
    ============================================================ */
+function askerReq(id){var i,o;for(i=0;i<S.inboxOrder.length;i++){o=S.inbox[S.inboxOrder[i]];if(o.status==='pending'&&o.req.asker===id)return o.req}return null}
+function stLabel(id,st){
+  if(st.state==='approval'||st.state==='waiting'){var r=askerReq(id);
+    if(r)return r.kind==='questions'?'Needs your answers':(r.oneWay?'Needs your OK, hard to undo':'Needs your OK')}
+  return LABEL[st.state]}
+function reqLine(r){
+  if(r.kind==='questions'){var n=r.questions.length;return n+' question'+(n===1?'':'s')+' for you: '+(r.questions[0]&&r.questions[0].q||'')}
+  return 'Asks your OK: '+cardTitle(r)+(r.why?' ('+r.why+')':'')}
 function paintAgent(id){
   var st=S.agents[id];if(!REG[id]||!st)return;
   var since=Math.max(0,S.clock-st.since);
   REG[id].forEach(function(r){
     r.root.dataset.state=st.state;
-    r.chip.textContent=LABEL[st.state];
+    r.chip.textContent=stLabel(id,st);
     if(r.task){r.task.textContent=st.text;r.task.title=st.text}
     if(r.nm)r.nm.textContent=an(id);
     if(r.role)r.role.textContent=roleText(id);
-    r.fig.setAttribute('aria-label',an(id)+', '+propText(id)+'. Status: '+LABEL[st.state]+'. '+st.text);
-    if(r.mt)r.mt.textContent=(S.started?LABEL[st.state]+' '+fmt(since):'Not started');
+    r.fig.setAttribute('aria-label',an(id)+', '+propText(id)+'. Status: '+stLabel(id,st)+'. '+st.text);
+    if(r.mt)r.mt.textContent=(S.started?stLabel(id,st)+' '+fmt(since):'Not started');
     if(r.mf)r.mf.textContent=id==='owner'?(pendingCount()+' open'):(st.files+' files, '+st.hand+' handoffs');
   });
 }
@@ -1836,9 +1846,9 @@ function renderKanban(){
 }
 function renderSummary(){
   var g={working:[],waiting:[],approval:[],blocked:[],done:[]};
-  AGENTS.forEach(function(a){var s=S.agents[a.id].state;if(g[s])g[s].push(sn(a.id))});
+  AGENTS.forEach(function(a){var s=S.agents[a.id].state;var ar=(s==='approval'||s==='waiting')?askerReq(a.id):null;if(g[s])g[s].push(sn(a.id)+(ar?' → '+cardTitle(ar):''))});
   var h='';
-  var names={working:'Working',waiting:'Waiting for you',approval:'Needs approval',blocked:'Blocked',done:'Done'};
+  var names={working:'Working',waiting:'Waiting for you',approval:'Needs your OK',blocked:'Blocked',done:'Done'};
   ['working','waiting','approval','blocked','done'].forEach(function(k){
     if(!g[k].length)return;
     var txt=k==='done'&&g[k].length>4?g[k].length+' finished':g[k].join(', ');
@@ -1869,7 +1879,7 @@ function paintClock(){
   else{post.textContent=S.job?(S.finished?' total':((S.ended||S.stale30)?' (idle)':' since start')):'';prog.hidden=true}
   bar.style.width=p+'%';prog.setAttribute('aria-valuenow',Math.round(p));
   if(S.started&&!S.quiet){
-    AGENTS.concat([OWNER]).forEach(function(a){var st=S.agents[a.id];if(!st)return;(REG[a.id]||[]).forEach(function(r){if(r.mt)r.mt.textContent=LABEL[st.state]+' '+fmt(Math.max(0,S.clock-st.since))})});
+    AGENTS.concat([OWNER]).forEach(function(a){var st=S.agents[a.id];if(!st)return;(REG[a.id]||[]).forEach(function(r){if(r.mt)r.mt.textContent=stLabel(a.id,st)+' '+fmt(Math.max(0,S.clock-st.since))})});
   }
 }
 function paintControls(){
