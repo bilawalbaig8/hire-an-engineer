@@ -30,7 +30,7 @@ class Office:
             "<html>mock</html>", encoding="utf-8")
         (self.repo / "secret.txt").write_text("secret", encoding="utf-8")
         self.events = self.project / ".agents" / "events.jsonl"
-        self.server = os_.make_server(self.project, port=0, repo_root=self.repo)
+        self.server = os_.make_server(self.project, port=0, repo_root=self.repo, answers_enabled=True)
         self.port = self.server.server_address[1]
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
@@ -287,3 +287,45 @@ def test_answer_keeps_structured_fields_and_drops_unknown_ones(office):
     assert line["decision"] == "approved" and line["option"] == "o1" and line["run_id"] == "r1"
     assert line["answers"] == [{"id": "q1", "answer": "x"}] and line["text"] == "ok"
     assert "evil" not in line
+
+
+# --- answers are off unless the server is started with --enable-answers ---------------
+
+def _post_to(server, body):
+    import http.client
+    conn = http.client.HTTPConnection("127.0.0.1", server.server_address[1], timeout=5)
+    conn.request("POST", "/answer", body=json.dumps(body), headers={"Content-Type": "application/json"})
+    resp = conn.getresponse()
+    data = resp.read()
+    conn.close()
+    return resp.status, data
+
+
+def test_answers_are_off_by_default(tmp_path):
+    srv = os_.make_server(tmp_path, port=0, repo_root=tmp_path)
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        status, body = _post_to(srv, {"id": "a1", "answer": "yes", "kind": "approval"})
+        assert status == 404 and b"enable-answers" in body
+        assert not (tmp_path / ".team" / "inbox.jsonl").exists()
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+
+def test_answers_can_be_switched_on(tmp_path):
+    srv = os_.make_server(tmp_path, port=0, repo_root=tmp_path, answers_enabled=True)
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        status, _ = _post_to(srv, {"id": "a1", "answer": "yes", "kind": "approval"})
+        assert status == 200
+        assert (tmp_path / ".team" / "inbox.jsonl").exists()
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+
+def test_cli_has_the_enable_answers_flag():
+    assert "--enable-answers" in os_.build_parser().format_help()

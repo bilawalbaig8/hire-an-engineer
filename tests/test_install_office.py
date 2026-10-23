@@ -46,9 +46,15 @@ def test_install_creates_everything(tmp_path):
     assert "allow" not in s["permissions"] and "ask" not in s["permissions"]
     assert s["hooks"]["SessionStart"][0]["hooks"][0]["async"] is True
     assert "${CLAUDE_PROJECT_DIR}/.agents/office/log_event.py" in s["hooks"]["SubagentStart"][0]["hooks"][0]["command"]
+    assert not (tmp_path / ".mcp.json").exists()  # window answers are off: no MCP server by default
+    assert "office_launch.py --stop" in r.stdout and "--allowedTools" in r.stdout and "claude --agent orchestrator" in r.stdout
+
+
+def test_with_mcp_adds_the_office_server(tmp_path):
+    r = run(tmp_path, "--with-mcp")
+    assert r.returncode == 0, r.stderr
     m = read(tmp_path / ".mcp.json")
     assert m["mcpServers"]["office"]["args"][0].endswith(".agents/office/office_mcp.py")
-    assert "office_launch.py --stop" in r.stdout and "--allowedTools" in r.stdout and "claude --agent orchestrator" in r.stdout
 
 
 def test_idempotent(tmp_path):
@@ -56,7 +62,7 @@ def test_idempotent(tmp_path):
     before = (tmp_path / ".claude" / "settings.json").read_bytes()
     r = run(tmp_path)
     assert r.returncode == 0 and "all same" in r.stdout
-    assert "0 new, 11 same, 0 differs, 0 merged, 0 conflict" in r.stdout
+    assert "0 new, 10 same, 0 differs, 0 merged, 0 conflict" in r.stdout
     assert (tmp_path / ".claude" / "settings.json").read_bytes() == before
 
 
@@ -64,7 +70,7 @@ def test_merge_keeps_existing(tmp_path):
     (tmp_path / ".claude").mkdir()
     (tmp_path / ".claude" / "settings.json").write_text(json.dumps(PRE), encoding="utf-8")
     (tmp_path / ".mcp.json").write_text(json.dumps({"mcpServers": {"other": {"command": "x"}}, "keep": 1}), encoding="utf-8")
-    r = run(tmp_path)
+    r = run(tmp_path, "--with-mcp")
     assert r.returncode == 0 and "merged" in r.stdout
     s = read(tmp_path / ".claude" / "settings.json")
     assert s["model"] == "opus" and s["permissions"]["allow"] == ["Bash(ls)"]
@@ -73,13 +79,13 @@ def test_merge_keeps_existing(tmp_path):
     assert len(s["hooks"]["PostToolUse"]) == 2
     m = read(tmp_path / ".mcp.json")
     assert m["keep"] == 1 and "other" in m["mcpServers"] and "office" in m["mcpServers"]
-    assert "all same" in run(tmp_path).stdout
+    assert "all same" in run(tmp_path, "--with-mcp").stdout
 
 
 def test_conflicting_office_entry_is_left(tmp_path):
     mine = {"mcpServers": {"office": {"command": "mine"}}}
     (tmp_path / ".mcp.json").write_text(json.dumps(mine), encoding="utf-8")
-    r = run(tmp_path)
+    r = run(tmp_path, "--with-mcp")
     assert r.returncode == 0 and "conflict" in r.stdout
     assert read(tmp_path / ".mcp.json") == mine
 

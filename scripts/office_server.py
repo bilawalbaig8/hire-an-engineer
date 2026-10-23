@@ -160,8 +160,10 @@ class OfficeServer(ThreadingHTTPServer):
     allow_reuse_address = True
 
     def __init__(self, address, handler, project: Path, repo_root: Path,
-                 ui_dir: Path | None = None, roster_path: Path | None = None) -> None:
+                 ui_dir: Path | None = None, roster_path: Path | None = None,
+                 answers_enabled: bool = False) -> None:
         super().__init__(address, handler)
+        self.answers_enabled = answers_enabled
         self.project = Path(project)
         self.repo_root = Path(repo_root)
         if ui_dir is None:
@@ -297,6 +299,9 @@ class Handler(BaseHTTPRequestHandler):
         if urlsplit(self.path).path != "/answer":
             self._drain()
             return self._send(404, b'{"error": "not found"}', close=True)
+        if not self.server.answers_enabled:
+            self._drain()
+            return self._send(404, b'{"error": "answers are switched off; start the server with --enable-answers"}', close=True)
         try:
             length = int(self.headers.get("Content-Length", ""))
         except ValueError:
@@ -329,22 +334,30 @@ class Handler(BaseHTTPRequestHandler):
 
 def make_server(project: Path, host: str = HOST, port: int = DEFAULT_PORT,
                 repo_root: Path | None = None, ui_dir: Path | None = None,
-                roster_path: Path | None = None) -> OfficeServer:
+                roster_path: Path | None = None, answers_enabled: bool = False) -> OfficeServer:
     if host != HOST:
         raise ValueError(f"the office server binds {HOST} only, not {host}")
-    return OfficeServer((host, port), Handler, project, repo_root or REPO_ROOT, ui_dir, roster_path)
+    return OfficeServer((host, port), Handler, project, repo_root or REPO_ROOT, ui_dir, roster_path, answers_enabled)
 
 
-def main(argv: list[str] | None = None) -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Serve the virtual office window.")
     parser.add_argument("--project", default=".", help="project folder holding .agents/ and .team/ (default: .)")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument("--roster", default=None, help="roster.md to read (default: see above)")
     parser.add_argument("--no-open", action="store_true", help="do not open the browser")
+    parser.add_argument("--enable-answers", action="store_true",
+                        help="accept POST /answer from the window (off by default: the window is a viewer)")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
     args = parser.parse_args(argv)
     try:
         server = make_server(Path(args.project).resolve(), port=args.port,
-                             roster_path=Path(args.roster) if args.roster else None)
+                             roster_path=Path(args.roster) if args.roster else None,
+                             answers_enabled=args.enable_answers)
     except OSError as e:
         print(f"cannot start on {HOST}:{args.port}: {e}", file=sys.stderr)
         return 1

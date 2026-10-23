@@ -1,10 +1,10 @@
 """Put the virtual office into any project folder (next to the team from install_agents.py).
 
 Copies the office runtime into <DIR>/.agents/office/ (stdlib only), merges the hooks and the deny rule into
-<DIR>/.claude/settings.json and adds an `office` entry to <DIR>/.mcp.json. Never touches anything outside DIR,
+<DIR>/.claude/settings.json (and, only with --with-mcp, adds an `office` entry to <DIR>/.mcp.json). Never touches anything outside DIR,
 never deletes or overwrites existing settings keys, never adds allow or ask rules (it prints them as optional lines).
 A file that differs from the shipped copy is not overwritten unless --force is given.
-Usage: python scripts/install_office.py --project DIR [--dry-run] [--force]
+Usage: python scripts/install_office.py --project DIR [--dry-run] [--force] [--with-mcp]
 """
 from __future__ import annotations
 
@@ -120,7 +120,7 @@ def merge_settings(data: dict, deny: list[str]) -> tuple[dict, list[str]]:
     return data, added
 
 
-def plan(src_root: Path, project: Path) -> list[Item]:
+def plan(src_root: Path, project: Path, with_mcp: bool = False) -> list[Item]:
     items: list[Item] = []
     office = project / OFFICE_REL
     for rel_src, rel_dst in FILES:
@@ -141,6 +141,8 @@ def plan(src_root: Path, project: Path) -> list[Item]:
         items.append(Item("merged", f".claude/settings.json: added {', '.join(added)}", dst=sp, text=_dump(data)))
     else:
         items.append(Item("same", ".claude/settings.json", dst=sp))
+    if not with_mcp:  # window answers are off: no MCP server unless asked for
+        return items
     # .mcp.json
     mp = project / ".mcp.json"
     mdata = _load_json(mp)
@@ -159,10 +161,10 @@ def plan(src_root: Path, project: Path) -> list[Item]:
     return items
 
 
-def install(src_root: Path, project: Path, force: bool = False, dry_run: bool = False) -> int:
+def install(src_root: Path, project: Path, force: bool = False, dry_run: bool = False, with_mcp: bool = False) -> int:
     if not project.is_dir():
         raise NotADirectoryError(f"project folder not found: {project}")
-    items = plan(src_root, project)
+    items = plan(src_root, project, with_mcp=with_mcp)
     for it in items:
         if it.kind != "same":
             print(f"{it.kind} {it.label}")
@@ -196,7 +198,7 @@ def next_steps(src_root: Path) -> str:
         "  Start the team:   claude --agent orchestrator   (the office window opens by itself)",
         "  Open the window:  python .agents/office/office_launch.py --status   (prints http://127.0.0.1:<port>/)",
         "  Stop it:          python .agents/office/office_launch.py --stop",
-        "  Headless runs (claude -p) need: --allowedTools \"Bash(python .claude/skills/orchestrator/scripts/team_event.py:*)\" mcp__office",
+        "  Headless runs (claude -p) need: --allowedTools \"Bash(python .claude/skills/orchestrator/scripts/team_event.py:*)\"",
         "  Optional permission lines (not added for you; add them to .claude/settings.json yourself if you want them):",
     ]
     lines += [f"    {x}" for x in _optional_lines(src_root)]
@@ -208,9 +210,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--project", type=Path, required=True)
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--force", action="store_true")
+    p.add_argument("--with-mcp", action="store_true",
+                   help="also add the office MCP server to .mcp.json (only needed when window answers are switched on)")
     args = p.parse_args(argv)
     try:
-        install(REPO_ROOT, args.project.resolve(), force=args.force, dry_run=args.dry_run)
+        install(REPO_ROOT, args.project.resolve(), force=args.force, dry_run=args.dry_run, with_mcp=args.with_mcp)
     except FileExistsError as e:
         print(e, file=sys.stderr)
         return 1

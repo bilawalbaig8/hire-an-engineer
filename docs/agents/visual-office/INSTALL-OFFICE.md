@@ -36,3 +36,6 @@ The team list comes from `<project>/docs/agents/roster.md` if you have one, else
 
 Pull the repo, run `install_office.py` again; changed files are listed as "differs", add `--force` to take the new ones.
 To remove: delete `.agents/office/`, the office hooks in `.claude/settings.json`, and the `office` entry in `.mcp.json`.
+
+## Window answers are off by default
+The office is a viewer. `install_office.py` no longer adds the office MCP server to `.mcp.json` (use `--with-mcp` if you switch window answers on), and `office_server.py` rejects `POST /answer` unless it is started with `--enable-answers`.
