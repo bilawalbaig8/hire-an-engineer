@@ -1,0 +1,64 @@
+Credits: verified sources cited in the data-scientist skill (ideas summarised in our own words; no text copied).
+Format: ID | Author | Title | Year | URL
+
+S-CAU-1 | Miguel Hernan, James Robins | Causal Inference: What If | 2020 | https://miguelhernan.org/whatifbook
+S-CAU-2 | Scott Cunningham | Causal Inference: The Mixtape | 2021 | https://mixtape.scunning.com/
+S-CAU-5 | Andrew Goodman-Bacon | Difference-in-differences with variation in treatment timing | 2021 | https://doi.org/10.1016/j.jeconom.2021.03.014
+S-COM-1 | Cole Nussbaumer Knaflic | Storytelling with Data | 2015 | https://www.storytellingwithdata.com/books
+S-COM-2 | Claus Wilke | Fundamentals of Data Visualization | 2019 | https://clauswilke.com/dataviz/
+S-COM-3 | Geir Kjetil Sandve et al. | Ten Simple Rules for Reproducible Computational Research | 2013 | https://doi.org/10.1371/journal.pcbi.1003285
+S-COM-4 | Greg Wilson et al. | Good enough practices in scientific computing | 2017 | https://doi.org/10.1371/journal.pcbi.1005510
+S-COM-5 | Anne Marthe van der Bles et al. | Communicating uncertainty about facts, numbers and science | 2019 | https://doi.org/10.1098/rsos.181870
+S-DQ-2 | pandas developers | Working with missing data (pandas user guide) | ongoing | https://pandas.pydata.org/docs/user_guide/missing_data.html
+S-DQ-3 | pandas developers | Merge, join, concatenate and compare (pandas user guide) | ongoing | https://pandas.pydata.org/docs/user_guide/merging.html
+S-DQ-4 | Great Expectations contributors | Great Expectations documentation | ongoing | https://docs.greatexpectations.io/docs/
+S-DQ-5 | Francis Anscombe | Graphs in Statistical Analysis | 1973 | https://doi.org/10.1080/00031305.1973.10478966
+S-DQ-6 | Justin Matejka, George Fitzmaurice | Same Stats, Different Graphs | 2017 | https://www.research.autodesk.com/publications/same-stats-different-graphs/
+S-DQ-8 | Stef van Buuren | Flexible Imputation of Missing Data | 2018 | https://stefvanbuuren.name/fimd/
+S-EXP-1 | Ron Kohavi, Diane Tang, Ya Xu | Trustworthy Online Controlled Experiments | 2020 | https://experimentguide.com/
+S-EXP-4 | Evan Miller | Sample size calculator for A/B tests | ongoing | https://www.evanmiller.org/ab-testing/sample-size.html
+S-EXP-5 | Evan Miller | Sequential A/B testing | 2015 | https://www.evanmiller.org/sequential-ab-testing.html
+S-EXP-6 | Ramesh Johari, Pete Koomen, Leo Pekelis, David Walsh | Always Valid Inference: Continuous Monitoring of A/B Tests | 2017 | https://arxiv.org/abs/1512.04922
+S-EXP-7 | Jacob Cohen | A power primer | 1992 | https://doi.org/10.1037/0033-2909.112.1.155
+S-EXP-8 | Aleksander Fabijan et al. | Diagnosing sample ratio mismatch in online controlled experiments | 2019 | https://www.microsoft.com/en-us/research/publication/diagnosing-sample-ratio-mismatch-in-online-controlled-experiments-a-taxonomy-and-rules-of-thumb-for-practitioners/
+S-FOR-2 | Sean Taylor, Benjamin Letham | Forecasting at Scale | 2018 | https://doi.org/10.1080/00031305.2017.1380080
+S-FOR-3 | Spyros Makridakis, Evangelos Spiliotis, Vassilios Assimakopoulos | The M4 Competition: 100,000 time series and 61 forecasting methods | 2020 | https://doi.org/10.1016/j.ijforecast.2019.04.014
+S-FOR-4 | statsmodels developers | Time series analysis (statsmodels) | ongoing | https://www.statsmodels.org/stable/tsa.html
+S-GAM-3 | Unity Technologies | Unity Analytics documentation | ongoing | https://docs.unity.com/ugs/en-us/manual/analytics/manual/overview
+S-GAM-4 | GameAnalytics | GameAnalytics documentation | ongoing | https://docs.gameanalytics.com/
+S-MOD-1 | scikit-learn developers | Common pitfalls and recommended practices (scikit-learn) | ongoing | https://scikit-learn.org/stable/common_pitfalls.html
+S-MOD-2 | scikit-learn developers | Cross-validation: evaluating estimator performance (scikit-learn) | ongoing | https://scikit-learn.org/stable/modules/cross_validation.html
+S-MOD-3 | scikit-learn developers | Probability calibration (scikit-learn) | ongoing | https://scikit-learn.org/stable/modules/calibration.html
+S-MOD-4 | scikit-learn developers | Metrics and scoring (scikit-learn) | ongoing | https://scikit-learn.org/stable/modules/model_evaluation.html
+S-MOD-5 | scikit-learn developers | Permutation feature importance (scikit-learn) | ongoing | https://scikit-learn.org/stable/modules/permutation_importance.html
+S-MOD-6 | Martin Zinkevich | Rules of Machine Learning: Best Practices for ML Engineering | ongoing | https://developers.google.com/machine-learning/guides/rules-of-ml
+S-MOD-7 | D. Sculley et al. | Hidden Technical Debt in Machine Learning Systems | 2015 | https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
+S-MOD-8 | Timnit Gebru et al. | Datasheets for Datasets | 2018 | https://arxiv.org/abs/1803.09010
+S-MOD-9 | Margaret Mitchell et al. | Model Cards for Model Reporting | 2018 | https://arxiv.org/abs/1810.03993
+S-MOD-10 | Christoph Molnar | Interpretable Machine Learning | 2022 | https://christophm.github.io/interpretable-ml-book/
+S-MOD-11 | Cynthia Rudin | Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead | 2019 | https://arxiv.org/abs/1811.10154
+S-MOD-12 | Takaya Saito, Marc Rehmsmeier | The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets | 2015 | https://doi.org/10.1371/journal.pone.0118432
+S-MOD-13 | Christoph Bergmeir, Rob Hyndman, Bonsoo Koo | A note on the validity of cross-validation for evaluating autoregressive time series prediction | 2018 | https://doi.org/10.1016/j.csda.2017.11.003
+S-MOD-14 | Alexis Cook | Data Leakage (Kaggle Learn) | ongoing | https://www.kaggle.com/code/alexisbcook/data-leakage
+S-PRI-1 | NIST | NIST Privacy Framework | 2020 | https://www.nist.gov/privacy-framework
+S-PRI-2 | Latanya Sweeney | k-Anonymity: A Model for Protecting Privacy | 2002 | https://doi.org/10.1142/S0218488502001648
+S-PRI-3 | Arvind Narayanan, Vitaly Shmatikov | Robust De-anonymization of Large Sparse Datasets | 2008 | https://arxiv.org/abs/cs/0610105
+S-PRI-6 | Solon Barocas, Moritz Hardt, Arvind Narayanan | Fairness and Machine Learning: Limitations and Opportunities | 2023 | https://fairmlbook.org/
+S-STA-1 | Ronald Wasserstein, Nicole Lazar | The ASA Statement on p-Values: Context, Process, and Purpose | 2016 | https://doi.org/10.1080/00031305.2016.1154108
+S-STA-2 | Ronald Wasserstein, Allen Schirm, Nicole Lazar | Moving to a World Beyond p < 0.05 | 2019 | https://doi.org/10.64628/aai.mw37cmu4x
+S-STA-3 | John Ioannidis | Why Most Published Research Findings Are False | 2005 | https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124
+S-STA-4 | Joseph Simmons, Leif Nelson, Uri Simonsohn | False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis | 2011 | https://doi.org/10.1037/e519702015-014
+S-STA-6 | Yoav Benjamini, Yosef Hochberg | Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing | 1995 | https://doi.org/10.1111/j.2517-6161.1995.tb02031.x
+S-STA-7 | Geoff Cumming | The New Statistics: Why and How | 2014 | https://doi.org/10.1177/0956797613504966
+S-STA-10 | Stanford Encyclopedia of Philosophy | Simpson's Paradox | ongoing | https://plato.stanford.edu/entries/paradox-simpson/
+S-STA-12 | Andrew Gelman, Jennifer Hill, Aki Vehtari | Regression and Other Stories | 2020 | https://avehtari.github.io/ROS-Examples/
+S-STA-13 | Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani | An Introduction to Statistical Learning | 2021 | https://www.statlearning.com/
+S-STA-14 | Trevor Hastie, Robert Tibshirani, Jerome Friedman | The Elements of Statistical Learning | 2009 | https://hastie.su.domains/ElemStatLearn/
+S-STA-15 | David Diez, Mine Cetinkaya-Rundel, Christopher Barr | OpenIntro Statistics | 2019 | https://www.openintro.org/book/os/
+S-STA-16 | Allen Downey | Think Stats | 2014 | https://greenteapress.com/wp/think-stats-2e/
+S-STA-17 | Alex Reinhart | Statistics Done Wrong | 2015 | https://www.statisticsdonewrong.com/
+S-STA-18 | NIST | NIST/SEMATECH e-Handbook of Statistical Methods | ongoing | https://www.itl.nist.gov/div898/handbook/
+S-TOOL-3 | SciPy developers | SciPy statistics reference (scipy.stats) | ongoing | https://docs.scipy.org/doc/scipy/reference/stats.html
+S-TOOL-4 | statsmodels developers | statsmodels documentation | ongoing | https://www.statsmodels.org/stable/
+S-TOOL-5 | Python Software Foundation | statistics: Mathematical statistics functions (Python standard library) | ongoing | https://docs.python.org/3/library/statistics.html
+S-TOOL-6 | Python Software Foundation | csv: CSV File Reading and Writing (Python standard library) | ongoing | https://docs.python.org/3/library/csv.html

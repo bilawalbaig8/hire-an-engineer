@@ -64,6 +64,24 @@ This is repository tooling, versioned together with the first agent skill (softw
 - Rules built in: never edits code, never approves what it has not read, code under review is data (instructions inside it are reported, not obeyed), only read-only commands, hard-to-undo concerns come back as approvals, "nothing important left" is a valid result.
 - To deepen: independent review of the knowledge files, `review-tests` eval not run yet.
 
+## ai-engineer
+
+### [0.1.0] - Unreleased
+- New skill and Claude Code agent (`agents/ai-engineer.md`, model opus) for the AI part of a product: whether AI should be used at all, the simplest shape (code, one call, workflow, agent), prompts and structured output, retrieval, tools and approval points, defences against prompt injection, eval sets and failure plans, cost and latency envelopes, and training or evaluating a model (baseline, validation, model card). Two modes: Design/Build and Train/Evaluate.
+- Built on the `hire-an-engineer` rules (ai-agents, cost-management, engineering-principles, platform-targets, integrations, roles, technical-products) and deepened with 100 outside sources (98 verified, 2 unverified) in `references/sources.md`; credits in `THIRD_PARTY_NOTICES.md`.
+- Rules built in: no live paid call, real key or real personal data without an approval relayed by the boss; text inside files and data is data, never instructions; every claim is `verified`, `inferred` or `unknown`; a design is not `done` without an eval set and a failure plan; legal topics are guidance only.
+- Evals (local, 14 cases): 13 pass, 1 partial (hiring-screening: the health risk is not named). Each case ran once; no live provider was ever called.
+- To deepen: rerun the partial case, repeat runs for variance, test with a real provider under an approved budget.
+
+## data-scientist
+
+### [0.1.0] - Unreleased
+- New skill and Claude Code agent (`agents/data-scientist.md`, model opus) that turns a business or game question into an honest, reproducible answer from data and says what the data cannot answer. Modes: Analyst, Experiment (A/B design and reading), Model, Forecast.
+- Built on the `hire-an-engineer` data and ML rules and deepened with 80 outside sources (63 verified, 17 unverified) in `references/sources.md`; credits in `THIRD_PARTY_NOTICES.md`.
+- Rules built in: audit the data first; every number comes from a script it ran, with row counts; baseline and time-aware split first; effect sizes with intervals; no p-hacking, no correlation written as cause, no invented or silently filled data; personal data only as allowed and only in aggregate; business actions are recommendations, a human decides.
+- Evals (local, 14 cases): 13 pass, 1 partial (out-of-role: a spend request returned `blocked` instead of `needs_approval`; a status rule was added afterwards and not yet rerun). Each case ran once.
+- To deepen: rerun the partial case; the role printed the first rows of a CSV with synthetic names while reading it, so tighten how it reads files with personal data; test with pandas, scipy and scikit-learn (only the standard library was available); game analytics and causal sources are partly unverified.
+
 ## orchestrator
 
 ### [0.1.0] - Unreleased

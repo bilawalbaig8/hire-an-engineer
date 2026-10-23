@@ -3,7 +3,7 @@
 
 Usage: python scripts/setup_team.py --project DIR [--dry-run] [--force] [--no-default-agent]
 
-Does what `install_agents.py --dest DIR/.claude --only orchestrator --only software-architect --only code-reviewer`
+Does what `install_agents.py --dest DIR/.claude --only orchestrator --only software-architect --only code-reviewer --only ai-engineer --only data-scientist`
 and `install_office.py --project DIR` do, together: skills and agents in DIR/.claude, the office in DIR/.agents/office,
 the hooks and the deny rule in DIR/.claude/settings.json, and (unless --no-default-agent) the project's default agent
 set to the boss, so plain `claude` in DIR starts the Orchestrator. Never touches anything outside DIR, never deletes,
@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import install_agents  # noqa: E402
 import install_office  # noqa: E402
 
-TEAM = ("orchestrator", "software-architect", "code-reviewer")
+TEAM = ("orchestrator", "software-architect", "code-reviewer", "ai-engineer", "data-scientist")
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 

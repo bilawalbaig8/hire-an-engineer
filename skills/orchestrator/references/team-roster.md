@@ -6,6 +6,8 @@ The machine-checked list is `docs/agents/roster.md` in the team repo. The table 
 |---|---|---|---|
 | architect | software-architect | opus | Architecture designs and recovered architectures, decision records (`docs/decisions/`), diagrams, risks |
 | code-reviewer | code-reviewer | opus | Review reports (`docs/reviews/`): spec compliance and quality verdicts on a change |
+| ai-engineer | ai-engineer | opus | AI design notes, eval sets, failure plans and model cards (`docs/ai/`), plus prompt files and AI code in folders the request names |
+| data-scientist | data-scientist | opus | Analysis plans and reports (`docs/analysis/`), plus analysis scripts in folders the request names |
 
 To see which agents are really installed, list `agents/` of the project and `~/.claude/agents/`. Trust that list over this table.
 

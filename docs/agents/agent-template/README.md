@@ -2,6 +2,8 @@
 
 A specialist is two things: a knowledge folder (`skills/<skill-name>/`) and a thin agent file (`agents/<role-name>.md`). The boss (Orchestrator) talks to the owner; the specialist only answers the boss in the shape of [handoff-contract.md](handoff-contract.md).
 
+**Before step 1 (the role's own file):** write the role's own file first: `docs/agents/roles/<role-name>.md`, one file per role (never one shared file): what it is, which problems it solves, what it does not do, modes, outputs, method, safety rules, tools and model, the knowledge plan, the research material (source counts, verified or not, the main sources), the eval plan, the place in the team, the calls made without the owner, and what is left. Start from the matching parts of the owner's own skill `skills/hire-an-engineer/` (its references and roles table): say in the file what was taken as it is, what was deepened and what was changed, and never contradict it silently. Give it to the owner in their language and wait for the approval before building further (look at `docs/agents/roles/data-scientist.md`).
+
 Follow these ten steps. They match the Definition of Done in `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md` (section 6).
 
 1. Copy this folder: `skill/` to `skills/<skill-name>/`, `agent.md` to `agents/<role-name>.md`. Fill the names; keep `name` equal to the file name and `skill` equal to the skill folder.

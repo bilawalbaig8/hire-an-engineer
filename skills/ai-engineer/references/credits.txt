@@ -1,0 +1,106 @@
+Credits for the AI Engineer skill: verified sources cited in its references (ID | author | title | year | URL).
+Ideas are summarised in our own words; no passages are copied. Full list with status: references/sources.md.
+
+S-AGT-1 | Jason Wei et al. | Chain-of-Thought Prompting Elicits Reasoning in Large Language Models | 2022 | https://arxiv.org/abs/2201.11903
+S-AGT-2 | Shunyu Yao et al. | ReAct: Synergizing Reasoning and Acting in Language Models | 2022 | https://arxiv.org/abs/2210.03629
+S-AGT-3 | Timo Schick et al. | Toolformer: Language Models Can Teach Themselves to Use Tools | 2023 | https://arxiv.org/abs/2302.04761
+S-AGT-4 | Chip Huyen | Agents | 2025 | https://huyenchip.com/2025/01/07/agents.html
+S-AGT-5 | Lingjiao Chen, Matei Zaharia, James Zou | FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance | 2023 | https://arxiv.org/abs/2305.05176
+S-AGT-6 | Shunyu Yao et al. | tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains | 2024 | https://arxiv.org/abs/2406.12045
+S-BOK-1 | Chip Huyen | AI Engineering: Building Applications with Foundation Models | 2025 | https://www.oreilly.com/library/view/ai-engineering/9781098166298/
+S-BOK-2 | Chip Huyen | Designing Machine Learning Systems | 2022 | https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/
+S-BOK-3 | Chip Huyen | Building A Generative AI Platform | 2024 | https://huyenchip.com/2024/07/25/genai-platform.html
+S-BOK-4 | Eugene Yan | Patterns for Building LLM-based Systems & Products | 2023 | https://eugeneyan.com/writing/llm-patterns/
+S-BOK-5 | Eugene Yan, Bryan Bischof, Charles Frye, Hamel Husain, Jason Liu, Shreya Shankar | What We Learned from a Year of Building with LLMs (Part I) | 2024 | https://www.oreilly.com/radar/what-we-learned-from-a-year-of-building-with-llms-part-i/
+S-BOK-6 | OpenAI | Why Language Models Hallucinate | 2025 | https://openai.com/index/why-language-models-hallucinate/
+S-BOK-7 | Anthropic | Demystifying evals for AI agents | 2026 | https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+S-BOK-8 | Eugene Yan | Don't Mock Machine Learning Models In Unit Tests | 2020 | https://eugeneyan.com/writing/unit-testing-ml/
+S-BOK-9 | Chip Huyen | Common pitfalls when building generative AI applications | 2025 | https://huyenchip.com/2025/01/16/ai-engineering-pitfalls.html
+S-EVL-1 | Hamel Husain | Your AI Product Needs Evals | 2024 | https://hamel.dev/blog/posts/evals/
+S-EVL-2 | Hamel Husain | Using LLM-as-a-Judge For Evaluation: A Complete Guide | 2024 | https://hamel.dev/blog/posts/llm-judge/
+S-EVL-3 | Hamel Husain | A Field Guide to Rapidly Improving AI Products | 2025 | https://hamel.dev/blog/posts/field-guide/
+S-EVL-4 | Eugene Yan | Task-Specific LLM Evals that Do & Don't Work | 2024 | https://eugeneyan.com/writing/evals/
+S-EVL-5 | Eugene Yan | Evaluating the Effectiveness of LLM-Evaluators (aka LLM-as-Judge) | 2024 | https://eugeneyan.com/writing/llm-evaluators/
+S-EVL-6 | Lianmin Zheng et al. | Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena | 2023 | https://arxiv.org/abs/2306.05685
+S-EVL-7 | Peiyi Wang et al. | Large Language Models are not Fair Evaluators | 2023 | https://arxiv.org/abs/2305.17926
+S-EVL-8 | Percy Liang et al. | Holistic Evaluation of Language Models | 2022 | https://arxiv.org/abs/2211.09110
+S-EVL-9 | Shahul Es et al. | Ragas: Automated Evaluation of Retrieval Augmented Generation | 2023 | https://arxiv.org/abs/2309.15217
+S-EVL-10 | Ziwei Ji et al. | A Survey of Hallucination in Natural Language Generation | 2022 | https://arxiv.org/abs/2202.03629
+S-EVL-11 | Nelson F. Liu et al. | Lost in the Middle: How Language Models Use Long Contexts | 2023 | https://arxiv.org/abs/2307.03172
+S-EVL-12 | Curtis G. Northcutt et al. | Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks | 2021 | https://arxiv.org/abs/2103.14749
+S-EVL-13 | Shreya Shankar et al. | Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences | 2024 | https://arxiv.org/abs/2404.12272
+S-GOV-1 | NIST | Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1 | 2023 | https://www.nist.gov/itl/ai-risk-management-framework
+S-GOV-2 | NIST | Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (NIST AI 600-1) | 2024 | https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+S-GOV-3 | Margaret Mitchell et al. | Model Cards for Model Reporting | 2018 | https://arxiv.org/abs/1810.03993
+S-GOV-4 | Timnit Gebru et al. | Datasheets for Datasets | 2018 | https://arxiv.org/abs/1803.09010
+S-GOV-5 | European Commission | AI Act: regulatory framework (European Commission) | current | https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+S-GOV-6 | Future of Life Institute | EU Artificial Intelligence Act explorer and summaries | current | https://artificialintelligenceact.eu/
+S-GOV-8 | UK Information Commissioner's Office | Guidance on AI and data protection | current | https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/
+S-GOV-9 | Microsoft | Microsoft Responsible AI principles and approach | current | https://www.microsoft.com/en-us/ai/principles-and-approach
+S-GOV-10 | Hugging Face | Model Cards (Hugging Face Hub documentation) | current | https://huggingface.co/docs/hub/model-cards
+S-LLM-1 | Anthropic | Prompt engineering overview (Claude docs) | current | https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+S-LLM-2 | Anthropic | Tool use with Claude (overview) | current | https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
+S-LLM-3 | Anthropic | Prompt caching (Claude docs) | current | https://platform.claude.com/docs/en/build-with-claude/prompt-caching
+S-LLM-4 | Anthropic | Define success criteria and build evaluations (Claude docs) | current | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
+S-LLM-5 | Anthropic (Erik S., Barry Zhang) | Building effective agents | 2024 | https://www.anthropic.com/engineering/building-effective-agents
+S-LLM-6 | Anthropic | Reduce hallucinations (Claude docs) | current | https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations
+S-LLM-7 | Anthropic | Mitigate jailbreaks and prompt injections (Claude docs) | current | https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+S-LLM-8 | Anthropic | Reduce latency (Claude docs) | current | https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency
+S-LLM-9 | Anthropic | Message Batches (Claude docs) | current | https://platform.claude.com/docs/en/build-with-claude/batch-processing
+S-LLM-10 | Anthropic | Writing effective tools for agents | 2025 | https://www.anthropic.com/engineering/writing-tools-for-agents
+S-LLM-11 | Model Context Protocol project | Model Context Protocol specification | current | https://modelcontextprotocol.io/specification/latest
+S-LLM-12 | OpenAI | Structured Outputs (OpenAI docs) | current | https://developers.openai.com/api/docs/guides/structured-outputs
+S-LLM-13 | OpenAI | Function calling (OpenAI docs) | current | https://developers.openai.com/api/docs/guides/function-calling
+S-LLM-14 | OpenAI | Working with evals (OpenAI docs) | current | https://developers.openai.com/api/docs/guides/evals
+S-LLM-17 | OpenAI | Safety best practices (OpenAI docs) | current | https://developers.openai.com/api/docs/guides/safety-best-practices
+S-LLM-18 | OpenAI | Prompt engineering (OpenAI docs) | current | https://developers.openai.com/api/docs/guides/prompt-engineering
+S-LLM-19 | Google | Structured output (Gemini API docs) | current | https://ai.google.dev/gemini-api/docs/structured-output
+S-LLM-20 | Anthropic | Rate limits (Claude API docs) | current | https://docs.anthropic.com/en/api/rate-limits
+S-OPS-1 | OpenTelemetry project | Semantic conventions for generative AI (OpenTelemetry semantic-conventions repository) | current | https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
+S-OPS-2 | Python Software Foundation | unittest.mock: mock object library | current | https://docs.python.org/3/library/unittest.mock.html
+S-OPS-3 | VCR.py contributors | VCR.py: record and replay HTTP interactions | current | https://vcrpy.readthedocs.io/
+S-OWN-1 | Bilawal Baig (owner) | hire-an-engineer: AI Features and Agents (skills/hire-an-engineer/references/ai-agents.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-OWN-2 | Bilawal Baig (owner) | hire-an-engineer: Cost Management and AI Usage Audit (skills/hire-an-engineer/references/cost-management.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-OWN-3 | Bilawal Baig (owner) | hire-an-engineer: Engineering principles, section 6 Security (skills/hire-an-engineer/references/engineering-principles.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-OWN-4 | Bilawal Baig (owner) | hire-an-engineer: Platform targets, section 3 Data analysis and ML projects (skills/hire-an-engineer/references/platform-targets.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-OWN-5 | Bilawal Baig (owner) | hire-an-engineer: Integrations, section 11 Real customer data sent to an AI tool (skills/hire-an-engineer/references/integrations.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-OWN-7 | Bilawal Baig (owner) | hire-an-engineer: Technical products, scale plan (skills/hire-an-engineer/references/technical-products.md) | 2026 | https://github.com/bilawalbaig8/hire-an-engineer
+S-RAG-1 | Patrick Lewis et al. | Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks | 2020 | https://arxiv.org/abs/2005.11401
+S-RAG-2 | Yunfan Gao et al. | Retrieval-Augmented Generation for Large Language Models: A Survey | 2023 | https://arxiv.org/abs/2312.10997
+S-RAG-3 | Vladimir Karpukhin et al. | Dense Passage Retrieval for Open-Domain Question Answering | 2020 | https://arxiv.org/abs/2004.04906
+S-RAG-4 | Nandan Thakur et al. | BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models | 2021 | https://arxiv.org/abs/2104.08663
+S-RAG-5 | Niklas Muennighoff et al. | MTEB: Massive Text Embedding Benchmark | 2022 | https://arxiv.org/abs/2210.07316
+S-RAG-6 | Anthropic | Introducing Contextual Retrieval | 2024 | https://www.anthropic.com/news/contextual-retrieval
+S-RAG-7 | Gordon V. Cormack, Charles L. A. Clarke, Stefan Buettcher | Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods | 2009 | https://doi.org/10.1145/1571941.1572114
+S-RAG-8 | Meta AI Research | Faiss documentation and wiki | current | https://github.com/facebookresearch/faiss/wiki
+S-RAG-9 | Andrew Kane and contributors | pgvector: open-source vector similarity search for Postgres | current | https://github.com/pgvector/pgvector
+S-RAG-10 | SQLite project | SQLite FTS5 extension | current | https://www.sqlite.org/fts5.html
+S-SEC-1 | OWASP | OWASP Top 10 for LLM Applications (project page) | 2025 | https://owasp.org/www-project-top-10-for-large-language-model-applications/
+S-SEC-2 | OWASP Cheat Sheet Series | LLM Prompt Injection Prevention Cheat Sheet | current | https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html
+S-SEC-3 | Kai Greshake et al. | Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection | 2023 | https://arxiv.org/abs/2302.12173
+S-SEC-4 | Keegan Hines et al. | Defending Against Indirect Prompt Injection Attacks With Spotlighting | 2024 | https://arxiv.org/abs/2403.14720
+S-SEC-5 | Luca Beurer-Kellner et al. | Design Patterns for Securing LLM Agents against Prompt Injections | 2025 | https://arxiv.org/abs/2506.08837
+S-SEC-6 | Simon Willison | The lethal trifecta for AI agents | 2025 | https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+S-SEC-7 | Nicholas Carlini et al. | Extracting Training Data from Large Language Models | 2020 | https://arxiv.org/abs/2012.07805
+S-SEC-8 | MITRE | MITRE ATLAS (Adversarial Threat Landscape for AI Systems) | current | https://atlas.mitre.org/
+S-SEC-9 | Google | Secure AI Framework (SAIF) | current | https://saif.google/secure-ai-framework
+S-SEC-10 | Edoardo Debenedetti et al. | Defeating Prompt Injections by Design (CaMeL) | 2025 | https://arxiv.org/abs/2503.18813
+S-SEC-11 | Edoardo Debenedetti et al. | AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents | 2024 | https://arxiv.org/abs/2406.13352
+S-TRN-1 | Martin Zinkevich (Google) | Rules of Machine Learning: Best Practices for ML Engineering | 2017 | https://developers.google.com/machine-learning/guides/rules-of-ml
+S-TRN-2 | D. Sculley et al. | Hidden Technical Debt in Machine Learning Systems | 2015 | https://papers.nips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
+S-TRN-3 | Eric Breck et al. | The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction | 2017 | https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/
+S-TRN-4 | scikit-learn developers | Cross-validation: evaluating estimator performance (scikit-learn user guide) | current | https://scikit-learn.org/stable/modules/cross_validation.html
+S-TRN-5 | scikit-learn developers | Common pitfalls and recommended practices (scikit-learn) | current | https://scikit-learn.org/stable/common_pitfalls.html
+S-TRN-6 | scikit-learn developers | Metrics and scoring: quantifying the quality of predictions (scikit-learn) | current | https://scikit-learn.org/stable/modules/model_evaluation.html
+S-TRN-7 | scikit-learn developers | Dummy estimators (scikit-learn) | current | https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html
+S-TRN-8 | scikit-learn developers | Probability calibration (scikit-learn) | current | https://scikit-learn.org/stable/modules/calibration.html
+S-TRN-9 | Gael Varoquaux | Cross-validation failure: small sample sizes lead to large error bars | 2017 | https://arxiv.org/abs/1706.07581
+S-TRN-10 | Sayash Kapoor, Arvind Narayanan | Leakage and the Reproducibility Crisis in ML-based Science | 2022 | https://arxiv.org/abs/2207.07048
+S-TRN-11 | Gavin C. Cawley, Nicola L. C. Talbot | On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation | 2010 | https://jmlr.org/papers/v11/cawley10a.html
+S-TRN-12 | Alexander D'Amour et al. | Underspecification Presents Challenges for Credibility in Modern Machine Learning | 2020 | https://arxiv.org/abs/2011.03395
+S-TRN-13 | Robert Geirhos et al. | Shortcut Learning in Deep Neural Networks | 2020 | https://arxiv.org/abs/2004.07780
+S-TRN-14 | Hugging Face | Transformers: fine-tune a pretrained model (Hugging Face docs) | current | https://huggingface.co/docs/transformers/training
+S-TRN-15 | Hugging Face | PEFT (parameter-efficient fine-tuning) documentation | current | https://huggingface.co/docs/peft/index
+S-TRN-16 | Hugging Face | Evaluate library documentation | current | https://huggingface.co/docs/evaluate/index
+S-TRN-17 | Edward J. Hu et al. | LoRA: Low-Rank Adaptation of Large Language Models | 2021 | https://arxiv.org/abs/2106.09685
+S-TRN-18 | Curtis G. Northcutt, Lu Jiang, Isaac L. Chuang | Confident Learning: Estimating Uncertainty in Dataset Labels | 2019 | https://arxiv.org/abs/1911.00068
