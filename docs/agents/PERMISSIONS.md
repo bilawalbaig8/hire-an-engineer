@@ -54,3 +54,6 @@ In a headless run, `python .claude/skills/orchestrator/scripts/team_event.py ...
 
 ## Headless runs: use the command-line flag (tested 2026-10-23)
 In `claude -p` (headless) the `allow` rules of a project `settings.json` were NOT applied (even a minimal file with only `Bash(python:*)`), but the flag worked: `claude -p "..." --agent orchestrator --allowedTools "Bash(python .claude/skills/orchestrator/scripts/team_event.py:*)"` (put the prompt first). The `deny` rules did apply. Interactive sessions: you are asked and can choose to always allow (unverified whether settings `allow` is honoured there).
+
+## Letting the Code Reviewer run tests (safe runner)
+The reviewer's only way to run a branch's tests is `skills/code-reviewer/scripts/run_tests_safe.py --ref <branch>`: it copies the committed files of that ref to a scratch folder, runs one known test command with a stripped environment (no tokens or keys) and a timeout, prints JSON and deletes the copy. It never touches your working tree. It is **not a sandbox**: the tests are the author's code and run with your user's rights, so the owner's yes comes first (the boss asks). To allow it without a prompt each time, add `Bash(python .claude/skills/code-reviewer/scripts/run_tests_safe.py:*)` (first lines of `_opt_in_allow_examples` in the snippet); headless runs use `--allowedTools` with the same rule.

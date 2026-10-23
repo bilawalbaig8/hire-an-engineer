@@ -21,10 +21,13 @@
   "_opt_in_allow_examples": {
     "_comment": "OPT-IN ONLY. Running a reviewed repository's tests executes that repository's code. Move a line into permissions.allow only for a repository you trust. Never add npm/yarn/pnpm test, make, or anything with a bare wildcard.",
     "allow": [
+      "Bash(python .claude/skills/code-reviewer/scripts/run_tests_safe.py:*)",
+      "Bash(python ~/.claude/skills/code-reviewer/scripts/run_tests_safe.py:*)",
       "Bash(python -m pytest -p no:cacheprovider tests/)",
       "Bash(python -m unittest discover -s tests)",
       "Bash(dotnet test --no-restore)",
       "Bash(GOFLAGS=-mod=vendor GOPROXY=off go test ./...)"
-    ]
+    ],
+    "_preferred": "The first two lines (the reviewer's run_tests_safe.py) are the preferred way to let the reviewer run a branch's tests: scratch copy, stripped environment, timeout. They are still not a sandbox."
   }
 }

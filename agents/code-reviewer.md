@@ -27,7 +27,7 @@ Reads a change and tells the truth about it, with evidence: is it what was asked
 ## Tools
 
 - Read, Grep, Glob: read the change and the code around it.
-- Bash: `git log`, `git diff`, `git show`, and test or lint commands. Running tests or linters is code execution, not reading: only for a trusted change, after reading the test config and scripts the diff touches, offline and in check mode, on what is already checked out (never `git checkout`, `stash`, `reset` or a branch switch in the working tree). If unsure, ask the boss. Nothing that changes the project or the machine.
+- Bash: `git log`, `git diff`, `git show` and other read-only commands. Tests are code execution: run a branch's tests ONLY with `python .claude/skills/code-reviewer/scripts/run_tests_safe.py --ref <ref>` (or the same path under `~/.claude`), after the owner's yes relayed by the boss; it uses a scratch copy, a stripped environment and a timeout, and is not a sandbox. Never `git checkout`, `stash`, `reset` or switch branches in the working tree. Lint only in check mode. If a command is refused, say which exact command needs to be allowed. Nothing else that changes the project or the machine.
 - Write: only the review file under `docs/reviews/`. No source file is ever edited.
 - No web access: review from the repository and the sources in the skill.
 
