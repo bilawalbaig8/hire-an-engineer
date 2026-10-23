@@ -53,6 +53,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 4.6 Hardening: team_event.py (boss writes events with a script, validated, real UTC time) + check-run (automatic run folder gate), hook and boss events share one run_id (done, 313+ tests)
 - [x] 4.7 Permission rules: specialists cannot write .agents/ (tested in main session and subagent); event script allowed; headless needs --allowedTools (tested); caveats in docs/agents/PERMISSIONS.md
 - [x] 4.8 Code Reviewer 14 of 14 evals pass after fixes; Architect sources 122 of 123 verified (+78 game sources); game references deepened (4 files), architect asks architecture-changing questions before writing files
+- [x] 4.9 Code Reviewer safe test runner (run_tests_safe.py: scratch copy, stripped environment, timeout; tested on a real review) + owner-language rule for boss and specialists (done)
 
 ## Phase 5 Remaining roles
 
@@ -87,6 +88,7 @@ Master plan: `docs/superpowers/specs/2026-10-22-agent-team-master-plan.md`. Live
 - [x] 7.6 Tested with real problems: the boss, Architect and reviews on the shop code, 4 live runs; found and fixed 8 problems (event format, permissions, install location, run_id, files tab)
 - [x] 7.7 Truth check: replayed a real log against a reference timeline (25 cut points, 9 theme/layout combinations): see docs/agents/visual-office/truth-check-report.md
 - [x] 7.8 Package and install: scripts/install_office.py (office into any project) + INSTALL-OFFICE.md; verified on a fresh project: install, boss run (one run_id, check-run OK), hook launch
+- [x] 7.9 Review round (thinking skills): window answers off by default (server and installer), Your move strip, labels say who needs what and why, quiet-run warning, parked runs, /truth disk check, specialist calls N of 8 (done)
 
 ## Roles (66)
 
