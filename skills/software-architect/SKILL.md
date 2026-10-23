@@ -43,7 +43,7 @@ If you run as a specialist under a boss (an Orchestrator), you never talk to the
 | Threats, identity, secrets, data protection | `references/security-architecture.md` |
 | Phone and tablet apps | `references/mobile.md` |
 | Desktop programs, plugins, editors | `references/desktop-plugins.md` |
-| Games, game engines, Unity | `references/game-engine.md` |
+| Games, game engines, Unity (router first, then by topic: saves, performance budgets, code patterns, live-ops and economy) | `references/game-engine.md`, then `game-save-systems.md`, `game-performance-budgets.md`, `game-architecture-patterns.md`, `game-live-ops-and-content.md` |
 | Multiplayer, latency, state machines, messaging | `references/realtime-netcode-state.md` |
 | AI features, agents, evals | `references/ai-systems.md` |
 | Data collection, warehouses, streaming, dashboards | `references/data-pipelines.md` |
