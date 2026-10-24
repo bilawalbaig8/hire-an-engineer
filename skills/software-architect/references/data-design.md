@@ -38,7 +38,7 @@ If it is unclear, ask one question with a suggested default.
 ## Evidence rules
 - Label every claim `verified`, `inferred` or `unknown`, and say what was not run.
 - Never say "backed up" without a restore that was tried. Never say "safe" for access you did not test. Never say "migrated" for a live database you did not touch. Never promise speed, uptime or cost you did not measure.
-- Cite only `verified` sources from `references/sources.md` and the data design list in `docs/agents/roles/solution-architect.md`; mark the rest "unverified".
+- Cite only `verified` sources from `references/sources.md` (the data design list is the S-DB group at its end); mark the rest "unverified".
 - Use fake data in tests. Never write a key, connection string or real personal data into a file or chat.
 - A secret or connection string pasted in the request is never written, searched for, quoted or named in any field, file or command, even to say it was not found. Write "the pasted password", tell the owner to change it, and say where secrets belong (server environment or the provider's secret store).
 

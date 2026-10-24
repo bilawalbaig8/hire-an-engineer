@@ -110,3 +110,11 @@ This is repository tooling, versioned together with the first agent skill (softw
 - `references/sources.md`: 59 sources (58 verified, 1 unverified). Credits in `THIRD_PARTY_NOTICES.md`.
 - Checked against the Claude Code docs: a main-session agent can spawn subagents with an `Agent(name, ...)` allowlist; subagents can nest up to three layers.
 - Evals: 12 local cases run headless with stub or real specialists; all pass after three fixes (run folder for every specialist run, no self-checking of specialist work, real timestamps).
+
+## software-engineer
+
+### [0.1.0] - Unreleased
+- Software Engineer: new role with three modes. Structure (Scaffold a tree from the Architect's plan files, naming check by hand, Conform with a rename list as an approval), Algorithms (built-in first, cost stated, no-change answer, algorithm notes for other roles only on request) and Speed & Resources (Profile, Fix, Limits; measure before and after with the same method). Skill `skills/software-engineer` with 8 references (methods, measurement rules, resource limits, boundaries, templates, honest done, sources), 35 sources (33 verified, 2 unverified); credits in `THIRD_PARTY_NOTICES.md`.
+- `agents/software-engineer.md`: model `sonnet`, effort medium, step-ups to `opus` for concurrency, unknown-cause speed or memory problems and saved-format changes; no guard hook (no keys, no deploy).
+- 17 eval cases written first in `evals/software-engineer/evals.json` (4 Structure, 4 Algorithms, 5 Speed & Resources, 4 shared). Not run yet; fixtures, ground truth and the helper scripts are not built.
+- Wired into the team: boss Agent allowlist, roster and team-roster rows (routing by who owns the code), office seat and tag Built.

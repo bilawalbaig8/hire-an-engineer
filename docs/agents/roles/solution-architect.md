@@ -1,10 +1,10 @@
 # Solution Architect
 
-Status: built (system design) / data design mode added. The agent is `agents/architect.md` and its skill is `skills/software-architect/`; the data design method is in `skills/software-architect/references/data-design.md`.
+Status: built (system design) / data design mode added / project structure mode built, not tested (2026-10-24: references written, no evals run, not installed). The agent is `agents/architect.md` and its skill is `skills/software-architect/`; the data design method is in `skills/software-architect/references/data-design.md`; the project structure method is in `skills/software-architect/references/method-structure.md`.
 
 The owner decided that the Architect and the Database Architect are one role, the Solution Architect, with two modes. **System design** is how the whole system is shaped. **Data design** is where the data lives and how it is shaped. Each mode has its own sub-modes (below).
 
-A third mode, **Project structure**, is planned, not built (owner decision 2026-10-24). At design level it will plan the project's folder tree, how files are organised, the naming rules, the data structure and algorithm choices (as decision records) and the end-to-end flow, and plan a restructure of an existing tree in small steps. It never moves files: the Software Engineer applies the tree and writes and measures the code. Spec: `docs/superpowers/specs/2026-10-24-architect-project-structure.md`.
+A third mode, **Project structure**, is built, not tested (owner decision 2026-10-24; built 2026-10-24 from the spec's build plan; the 27 evals are not built or run yet). At design level it plans the project's folder tree, how files are organised, the naming rules, the data structure and algorithm choices (as decision records) and the end-to-end flow, and plans a restructure of an existing tree in small steps. It never moves files: the Software Engineer (not built yet) applies the tree and writes and measures the code; in engine projects the Game & Technical Engineer (not built yet) applies it; the boss routes these hand-offs. Spec: `docs/superpowers/specs/2026-10-24-architect-project-structure.md`.
 
 ## 1. What this role is
 The Solution Architect is the team's specialist for **how a system is shaped, and how its data is shaped**. In System design mode it decides the structure, the technology and the trade-offs of a new system, or works out how an existing system really is built, and says how sure it is. In Data design mode it decides **where your data lives and how it is shaped**: which store (a file, SQLite, a Google Sheet, Supabase/Postgres, Firebase), which tables and fields, how changes are made safely, who may see which rows, and how you get your data back after a mistake. It designs and reviews; it does not write product code or screens. It designs for an owner who only knows "my data", and it makes the system and the data safe to change later.
@@ -44,10 +44,10 @@ The Solution Architect is the team's specialist for **how a system is shaped, an
 | "The app is slow when the list grows" | Data design | Looks at the actual queries, proposes indexes and paging, and says what was measured and what was not |
 | "A customer asked me to delete their data" | Data design | Maps where that person's data sits, proposes a delete that also covers copies and backups, and sends the real deletion to you for approval |
 | "Which database will cost me less?" | Data design | Gives a table of options with limits and plan terms read from the live pricing page, and says "unknown" for anything it could not read |
-| "How should I lay out the folders of my new project?" | Project structure (planned, not built) | Plans a shallow folder tree for your stack, with one purpose and one owner per folder, where tests, docs, assets, config and scripts go, and the naming rules |
-| "My project is a mess, clean up the folders" | Project structure (planned, not built) | Counts what is there, shows the tree before and after, and writes a restructure plan in small safe steps; it moves no file itself (the Software Engineer does, and the Code Reviewer reads each step) |
-| "Which data structure should hold my leaderboard / enemies / jobs?" | Project structure (planned, not built) | Writes a decision record with the sizes, the simplest choice that fits, what it gives up and what the Software Engineer must measure; it promises no speed |
-| "Show how a request goes through my app end to end" | Project structure (planned, not built) | Draws the flow with each step mapped to a folder, from the real code, with each step labelled verified or not |
+| "How should I lay out the folders of my new project?" | Project structure (built, not tested) | Plans a shallow folder tree for your stack, with one purpose and one owner per folder, where tests, docs, assets, config and scripts go, and the naming rules |
+| "My project is a mess, clean up the folders" | Project structure (built, not tested) | Counts what is there, shows the tree before and after, and writes a restructure plan in small safe steps; it moves no file itself (the Software Engineer does, and the Code Reviewer reads each step) |
+| "Which data structure should hold my leaderboard / enemies / jobs?" | Project structure (built, not tested) | Writes a decision record with the sizes, the simplest choice that fits, what it gives up and what the Software Engineer must measure; it promises no speed |
+| "Show how a request goes through my app end to end" | Project structure (built, not tested) | Draws the flow with each step mapped to a folder, from the real code, with each step labelled verified or not |
 
 ## 4. What it will not do
 - Write product code, tests (including the access test: it writes only the test design) or the screens (Backend Engineer, Frontend & Mobile Engineer, Designer). After a review it describes the smallest safe changes and names the role that should make them.
@@ -149,55 +149,14 @@ Where research disagrees with the skill: `database.md` section 2 suggests a soft
 
 Some sources are paid books and some Apple pages return only their title to the checker; the role cites those for existence, not detail.
 
-**Data design backing: outside research (checked 2026-10-23).** 40 sources, 38 verified, 2 unverified. "Verified" means a script opened the page (or the Open Library or Crossref record) and the title or author matched. "Unverified" ones are well known but could not be opened by the script; the role uses them only with that word. Prices, plan limits and versions are read from live documentation, never from memory.
+**Data design backing: outside research (checked 2026-10-23).** 40 sources, 38 verified, 2 unverified. Moved on 2026-10-24 (TASKS B6) into `skills/software-architect/references/sources.md` as **S-DB-1 to S-DB-40**, with the same titles, URLs and statuses, so an installed copy of the skill can find them. Areas: foundations, schema design, choosing a store, migrations and change, access and security, backups and reliability, speed and correctness, personal data. Prices, plan limits and versions are read from live documentation, never from memory.
 
-| Area | Source (author, title, year, URL) | Status |
-|---|---|---|
-| Foundations | Kleppmann, Designing Data-Intensive Applications, 2017, https://dataintensive.net/ | verified |
-| | Codd, A Relational Model of Data for Large Shared Data Banks, 1970, https://doi.org/10.1145/362384.362685 | verified |
-| | Date, Database Design and Relational Theory, 2012, https://openlibrary.org/search?q=database+design+and+relational+theory+date | verified |
-| | Fowler, Patterns of Enterprise Application Architecture, 2002, https://openlibrary.org/search?q=patterns+of+enterprise+application+architecture | verified |
-| | Berenson et al., A Critique of ANSI SQL Isolation Levels, 1995, https://arxiv.org/abs/cs/0701157 | verified |
-| Schema design | Karwin, SQL Antipatterns, 2010, https://openlibrary.org/search?q=sql+antipatterns+karwin | verified |
-| | PostgreSQL docs, Constraints, current, https://www.postgresql.org/docs/current/ddl-constraints.html | verified |
-| | PostgreSQL wiki, Don't Do This, current, https://wiki.postgresql.org/wiki/Don%27t_Do_This | verified |
-| | Fowler, Money (pattern), 2002, https://martinfowler.com/eaaCatalog/money.html | verified |
-| | Sussman, Falsehoods programmers believe about time, 2012, https://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time | unverified |
-| | SQLite docs, STRICT Tables, current, https://www.sqlite.org/stricttables.html | verified |
-| | SQLite docs, SQLite Foreign Key Support, current, https://www.sqlite.org/foreignkeys.html | verified |
-| Choosing a store | SQLite docs, Appropriate Uses For SQLite, current, https://www.sqlite.org/whentouse.html | verified |
-| | SQLite docs, SQLite As An Application File Format, current, https://www.sqlite.org/appfileformat.html | verified |
-| | SQLite docs, Write-Ahead Logging, current, https://www.sqlite.org/wal.html | verified |
-| | Firebase docs, Cloud Firestore data model, current, https://firebase.google.com/docs/firestore/data-model | verified |
-| | Supabase docs, Row Level Security, current, https://supabase.com/docs/guides/database/postgres/row-level-security | verified |
-| Migrations and change | Sadalage and Fowler, Evolutionary Database Design, 2016, https://martinfowler.com/articles/evodb.html | verified |
-| | Ambler and Sadalage, Refactoring Databases, 2006, https://openlibrary.org/search?q=refactoring+databases+ambler | verified |
-| | Stripe engineering, Online migrations at scale, 2017, https://stripe.com/blog/online-migrations | verified |
-| | Kane, strong_migrations (unsafe-migration checks), current, https://github.com/ankane/strong_migrations | verified |
-| | Supabase docs, Database Migrations, current, https://supabase.com/docs/guides/deployment/database-migrations | verified |
-| Access and security | PostgreSQL docs, Row Security Policies, current, https://www.postgresql.org/docs/current/ddl-rowsecurity.html | verified |
-| | OWASP, Top 10:2021 A01 Broken Access Control, 2021, https://owasp.org/Top10/2021/A01_2021-Broken_Access_Control/ | verified |
-| | OWASP, SQL Injection Prevention Cheat Sheet, current, https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html | verified |
-| | OWASP, Database Security Cheat Sheet, current, https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html | verified |
-| | Firebase docs, Cloud Firestore Security Rules, current, https://firebase.google.com/docs/firestore/security/get-started | verified |
-| Backups and reliability | Supabase docs, Database Backups, current, https://supabase.com/docs/guides/platform/backups | verified |
-| | PostgreSQL docs, Backup and Restore, current, https://www.postgresql.org/docs/current/backup.html | verified |
-| | SQLite docs, Online Backup API, current, https://www.sqlite.org/backup.html | verified |
-| | GitLab, Postmortem of database outage of January 31, 2017, https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/ | verified |
-| | Google SRE book, Data Integrity: What You Read Is What You Wrote, 2016, https://sre.google/sre-book/data-integrity/ | verified |
-| | Campbell and Majors, Database Reliability Engineering, 2017, https://openlibrary.org/search?q=database+reliability+engineering | verified |
-| Speed and correctness | Winand, Use The Index, Luke, 2012, https://use-the-index-luke.com/ | verified |
-| | PostgreSQL docs, Indexes, current, https://www.postgresql.org/docs/current/indexes.html | verified |
-| | PostgreSQL docs, Transaction Isolation, current, https://www.postgresql.org/docs/current/transaction-iso.html | verified |
-| | Leach (Brandur), Implementing Stripe-like Idempotency Keys in Postgres, 2017, https://brandur.org/idempotency-keys | verified |
-| Personal data | Leach (Brandur), Soft deletion probably isn't worth it, 2022, https://brandur.org/soft-deletion | verified |
-| | ICO, Data minimisation (UK GDPR guidance), current, https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/ | verified |
-| | European Union, General Data Protection Regulation 2016/679, 2016, https://eur-lex.europa.eu/eli/reg/2016/679/oj | unverified |
-
-40 data design sources, 38 verified, 2 unverified.
+**Project structure backing (checked 2026-10-24).** 30 sources, **S-STR-1 to S-STR-30** in the same `sources.md`: 26 verified, 4 unverified (Brown on package by component: the link redirects to the author's home page; Parnas and Knuth: the ACM pages refused the request; Conway: a bot-check screen). The count of 201 sources above is from 2026-10-23 and does not include the S-STR and S-DB groups.
 
 **Limit of this backing:** the checks covered that the page opened and that its title or author matched, plus a few passages read for the claims named in this section. They did not cover every claim inside each source. Provider documentation (Supabase, Firebase, Postgres, Unity, Unreal) changes quickly, so the role reads the live page when a limit, price or behaviour matters. Law and privacy rules differ by country and need a lawyer.
 
 Review pass 2026-10-24: data design source count corrected to 40 (38 verified, 2 unverified) to match the table; "Backend & Integration Engineer" renamed "Backend Engineer" after the 2026-10-24 split (agent `backend-engineer`).
 
 Review pass 2026-10-24: Project structure mode planned.
+
+Build pass 2026-10-24: Project structure mode built (4 references, router, agent file; not tested, not installed); the 40 data design sources moved into the skill's `sources.md`.

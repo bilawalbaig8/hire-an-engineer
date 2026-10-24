@@ -848,6 +848,7 @@ var AGENTS=[
  {id:'vsed',name:'Video & Sound Editor',short:'Video/Sound',role:'Cuts video and mixes sound.',ac:'#34495e'},
  {id:'architect',name:'Solution Architect',short:'Architect',role:'Designs the whole system and where its data lives.',ac:'#4f6f9f'},
  {id:'fe',name:'Frontend Engineer',short:'Frontend',role:'Builds what people see.',ac:'#4ba3d8'},
+ {id:'se',name:'Software Engineer',short:'Software',role:'Applies the plan to the code, and makes it fast and light by measuring.',ac:'#6b8f5e'},
  {id:'be',name:'Backend & Integration Engineer',short:'Backend',role:'Builds the server and its connections to outside services.',ac:'#a5533a'},
  {id:'game',name:'Game & Technical Engineer',short:'Game/Tech',role:'Builds game systems and the technical parts around them.',ac:'#2fbf71'},
  {id:'dataeng',name:'Data Engineer',short:'Data Eng',role:'Builds the pipes that move and clean data.',ac:'#b8742a'},
@@ -866,12 +867,12 @@ var AGENTS=[
 ];
 /* Role tags shown on every seat and card. Source is TASKS.md (build and test status of each role).
    Update only this map: tested = built and tested, built = built but not tested, anything else = planned. */
-var TAGS={conductor:'tested',architect:'tested',reviewer:'tested',aieng:'tested',datasci:'tested',be:'built',qa:'built',writer:'built',uag:'built'};
+var TAGS={conductor:'tested',architect:'tested',reviewer:'tested',aieng:'tested',datasci:'tested',be:'built',se:'built',qa:'built',writer:'built',uag:'built',creative:'built',pba:'built'};
 var TAGTXT={tested:'Tested',built:'Built',planned:'Planned'};
 function tagOf(id){return (id==='owner'||(BY[id]&&BY[id].dyn))?'':(TAGS[id]||'planned')}
 function tagHTML(id){var t=tagOf(id);return t?'<span class="rtag t-'+t+'" title="Role status: '+TAGTXT[t]+'">'+TAGTXT[t]+'</span>':''}
 var OWNER={id:'owner',name:'You, the owner',short:'Owner',role:'The human. Answers questions and approves decisions.',ac:'#6e1b2e'};
-var PROPS={conductor:['tie, phone and coffee','baton and podium'],architect:['blueprint roll and hard hat','cello and rolled blueprint'],pba:['clipboard, sticky notes and glasses','keyboard, clipboard and glasses'],ux:['pencil behind the ear and colour tablet','harp'],creative:['red beret and paint palette','violin and bow'],artist:['drawing tablet and paintbrush','tambourine and paintbrush'],writer:['quill, typewriter and notebook','clarinet and notebook'],vsed:['beanie, neck headphones and film clapper','cymbals and neck headphones'],fe:['headphones and laptop','flute and headphones'],be:['wrench and server badge','trombone'],game:['cap, game controller and cog','electric guitar and cog'],dataeng:['goggles, database drum and pipes','bongos and pipes'],qa:['magnifying glass and bug net','triangle and magnifying glass'],reviewer:['round glasses and red pen','oboe and round glasses'],secrev:['flat cap, monocle, padlock and magnifier','snare drum, monocle and padlock'],security:['cap, shield and privacy-eye badge','timpani drum and shield'],devops:['hard hat, hi-vis vest and cable','french horn and wrench'],aieng:['circuit-board badge, neural-net poster and robot arm','theremin and circuit-board badge'],datasci:['chart clipboard and square glasses','xylophone and square glasses'],uag:['shades, megaphone and growth chart','trumpet and growth chart'],pa:['headset, calendar and phone','handbell and calendar'],auto:['gear on the head, flow chart and cog','metronome and cog'],learn:['graduation cap and open book','maracas and open book'],rd:['white wild hair, flask and atom','gong and flask'],owner:['visitor armchair and folder','box seat and concert programme']};
+var PROPS={conductor:['tie, phone and coffee','baton and podium'],architect:['blueprint roll and hard hat','cello and rolled blueprint'],pba:['clipboard, sticky notes and glasses','keyboard, clipboard and glasses'],ux:['pencil behind the ear and colour tablet','harp'],creative:['red beret and paint palette','violin and bow'],artist:['drawing tablet and paintbrush','tambourine and paintbrush'],writer:['quill, typewriter and notebook','clarinet and notebook'],vsed:['beanie, neck headphones and film clapper','cymbals and neck headphones'],fe:['headphones and laptop','flute and headphones'],be:['wrench and server badge','trombone'],se:['stopwatch, folder tree and laptop','bassoon and stopwatch'],game:['cap, game controller and cog','electric guitar and cog'],dataeng:['goggles, database drum and pipes','bongos and pipes'],qa:['magnifying glass and bug net','triangle and magnifying glass'],reviewer:['round glasses and red pen','oboe and round glasses'],secrev:['flat cap, monocle, padlock and magnifier','snare drum, monocle and padlock'],security:['cap, shield and privacy-eye badge','timpani drum and shield'],devops:['hard hat, hi-vis vest and cable','french horn and wrench'],aieng:['circuit-board badge, neural-net poster and robot arm','theremin and circuit-board badge'],datasci:['chart clipboard and square glasses','xylophone and square glasses'],uag:['shades, megaphone and growth chart','trumpet and growth chart'],pa:['headset, calendar and phone','handbell and calendar'],auto:['gear on the head, flow chart and cog','metronome and cog'],learn:['graduation cap and open book','maracas and open book'],rd:['white wild hair, flask and atom','gong and flask'],owner:['visitor armchair and folder','box seat and concert programme']};
 var BY=Object.create(null);AGENTS.concat([OWNER]).forEach(function(a){BY[a.id]=a});
 
 var TOTAL=48;
@@ -1045,6 +1046,13 @@ ux:{fur:'#e3bc82',col:'#d9648e',tc:'#a97b40',
  r:{prop:'<g class="inst"><path class="o" d="M88 114V50Q88 34 70 38Q58 41 60 56L78 114Z" fill="#d9a93f"/><path d="M66 47L72 112M72 44L76 112M78 41L80 112M84 40L84 112" stroke="#f6ebd2" stroke-width="1.2"/></g>',
     hl:[66,66],hr:[70,96]}},
 fe:{fur:'#7b5a44',col:'#4ba3d8',tc:'#4a3426',
+ ctor:'<path class="ln" d="M42 80l-6 5 6 5M58 80l6 5-6 5M53 78l-6 14" stroke="#fff" stroke-width="2.4"/>',
+ top:'<path class="ln" d="M24 46Q24 12 50 12Q76 12 76 46" stroke="#2a1a12" stroke-width="4.4"/><rect class="o" x="14" y="39" width="10" height="16" rx="4.5" fill="#ef7d3c"/><rect class="o" x="76" y="39" width="10" height="16" rx="4.5" fill="#ef7d3c"/>',
+ o:{prop:'<g><path class="o" d="M22 102L27 74H73L78 102z" fill="#b8c1ca"/><path class="ln" d="M42 84l-5 4 5 4M58 84l5 4-5 4M53 82l-6 14" stroke="#2a3a44" stroke-width="2.4"/></g>',
+    hl:[30,80],hr:[70,80]},
+ r:{prop:'<g class="inst"><path d="M8 74L98 57" stroke="#2a1a12" stroke-width="7.6" stroke-linecap="round"/><path d="M8 74L98 57" stroke="#d7dde4" stroke-width="4.4" stroke-linecap="round"/><circle cx="42" cy="67.6" r="1.7" fill="#2a1a12"/><circle cx="54" cy="65.3" r="1.7" fill="#2a1a12"/><circle cx="66" cy="63" r="1.7" fill="#2a1a12"/><circle cx="78" cy="60.8" r="1.7" fill="#2a1a12"/></g>',
+    hl:[34,72],hr:[72,62]}},
+se:{fur:'#8a6a4c',col:'#6b8f5e',tc:'#4a3426',
  ctor:'<path class="ln" d="M42 80l-6 5 6 5M58 80l6 5-6 5M53 78l-6 14" stroke="#fff" stroke-width="2.4"/>',
  top:'<path class="ln" d="M24 46Q24 12 50 12Q76 12 76 46" stroke="#2a1a12" stroke-width="4.4"/><rect class="o" x="14" y="39" width="10" height="16" rx="4.5" fill="#ef7d3c"/><rect class="o" x="76" y="39" width="10" height="16" rx="4.5" fill="#ef7d3c"/>',
  o:{prop:'<g><path class="o" d="M22 102L27 74H73L78 102z" fill="#b8c1ca"/><path class="ln" d="M42 84l-5 4 5 4M58 84l5 4-5 4M53 82l-6 14" stroke="#2a3a44" stroke-width="2.4"/></g>',
@@ -1258,6 +1266,9 @@ ux:{fur:'f',cl:'e',mask:'7',
 fe:{fur:'d',cl:'8',mask:'f',
  hat:function(l){prect(l,9,5,10,1,'0');prect(l,7,6,2,1,'0');prect(l,19,6,2,1,'0');prect(l,6,7,1,5,'0');prect(l,21,7,1,5,'0');prect(l,3,12,3,5,'9');prect(l,22,12,3,5,'9');},
  prop:function(l){ptxt(l,8,23,['666666666666','666666666666','666666666666','666666666666','666666666666','666666666666']);pp(l,11,25,'0');pp(l,10,26,'0');pp(l,11,27,'0');pp(l,16,25,'0');pp(l,17,26,'0');pp(l,16,27,'0');pp(l,14,25,'0');pp(l,13,27,'0');}},
+se:{fur:'d',cl:'3',mask:'f',
+ hat:function(l){prect(l,9,5,10,1,'0');prect(l,7,6,2,1,'0');prect(l,19,6,2,1,'0');prect(l,6,7,1,5,'0');prect(l,21,7,1,5,'0');prect(l,3,12,3,5,'9');prect(l,22,12,3,5,'9');},
+ prop:function(l){ptxt(l,8,23,['666666666666','666666666666','666666666666','666666666666','666666666666','666666666666']);pp(l,11,25,'0');pp(l,10,26,'0');pp(l,11,27,'0');pp(l,16,25,'0');pp(l,17,26,'0');pp(l,16,27,'0');pp(l,14,25,'0');pp(l,13,27,'0');}},
 be:{fur:'3',cl:'5',mask:'f',
  hat:function(l){pell(l,14,6.4,7,3.2,'a');prect(l,7,8,14,2,'9');prect(l,13,2,2,2,'9');},
  det:function(l){ptxt(l,11,24,['0000','0b60','0000','0b60','0000']);},
@@ -1455,6 +1466,7 @@ var ALIAS={conductor:['orchestrator','boss','main'],architect:['solution-archite
   artist:['2d-artist-illustrator','concept-artist','illustrator'],writer:['storyboard-scriptwriter','scriptwriter'],
   vsed:['video-sound-editor','video-and-sound-editor','video-editor','sound-editor'],
   fe:['frontend','frontend-engineer'],be:['backend','backend-engineer','backend-api','backend-integration-engineer','integration-engineer'],
+  se:['software-engineer','swe','software-developer'],
   game:['game-technical-engineer','game-and-technical-engineer','game-engineer'],dataeng:['data-engineer'],
   qa:['qa-test','qa-test-engineer','art-qa'],reviewer:['code-reviewer'],secrev:['security-reviewer'],
   security:['security-engineer','security-privacy-engineer','security-and-privacy-engineer','privacy-engineer','threat-modeler'],
@@ -1936,7 +1948,7 @@ function demoAnswer(req,c,payload){
 /* ============================================================
    SEATS, DESKS AND VIEWS
    ============================================================ */
-var DESK={conductor:['plate:c','phone:l','mug:r'],architect:['mon:l','mug:r'],pba:['stick:l','mug:r'],ux:['plant:l','mon:r'],creative:['pal:l','plant:r'],artist:['tab:l','mug:r'],writer:['tw:l','mug:r'],vsed:['clap:l','mon:r'],fe:['mon:l','mug:r'],be:['mon:l','plant:r'],game:['pad:l','mon:r'],dataeng:['db:l','mon:r'],qa:['ban:l','mon:r'],reviewer:['mon:l','mug:r'],secrev:['lock:l','mug:r'],security:['mon:l','plant:r'],devops:['mon:l','ban:r'],aieng:['mon:l','lap:r'],datasci:['lap:l','mon:r'],uag:['chart:l','phone:r'],pa:['cal:l','phone:r'],auto:['gear:l','lap:r'],learn:['book:l','plant:r'],rd:['flask:l','lap:r'],owner:['mug:r']};
+var DESK={conductor:['plate:c','phone:l','mug:r'],architect:['mon:l','mug:r'],pba:['stick:l','mug:r'],ux:['plant:l','mon:r'],creative:['pal:l','plant:r'],artist:['tab:l','mug:r'],writer:['tw:l','mug:r'],vsed:['clap:l','mon:r'],fe:['mon:l','mug:r'],be:['mon:l','plant:r'],se:['mon:l','lap:r'],game:['pad:l','mon:r'],dataeng:['db:l','mon:r'],qa:['ban:l','mon:r'],reviewer:['mon:l','mug:r'],secrev:['lock:l','mug:r'],security:['mon:l','plant:r'],devops:['mon:l','ban:r'],aieng:['mon:l','lap:r'],datasci:['lap:l','mon:r'],uag:['chart:l','phone:r'],pa:['cal:l','phone:r'],auto:['gear:l','lap:r'],learn:['book:l','plant:r'],rd:['flask:l','lap:r'],owner:['mug:r']};
 function deskHTML(id){
   var it=(DESK[id]||[]).map(function(s){var p=s.split(':');return '<i class="it '+p[0]+' '+p[1]+'">'+(p[0]==='plate'?'Boss':'')+'</i>'}).join('');
   return '<div class="desk" aria-hidden="true"><i class="kbd"></i>'+it+'<i class="it flag"></i><i class="it spill"></i></div>';
@@ -1962,7 +1974,7 @@ function buildHall(){
   h.innerHTML='<div class="valance"></div><div class="curtain l"></div><div class="curtain r"></div><div class="spots"><i></i><i></i><i></i></div><div class="kwall"></div><div class="tiers"></div><div class="front"></div>';
   var rows=[
    [['Keys','Product',['pba']],['Strings and soloists','Design and Creative',['ux','creative','artist','writer','vsed']],['Trumpets','Growth',['uag']]],
-   [['Strings, brass and drums','Engineering',['architect','be','game','dataeng','fe']],['Brass','Ops',['devops']]],
+   [['Strings, brass and drums','Engineering',['architect','be','se','game','dataeng','fe']],['Brass','Ops',['devops']]],
    [['Percussion','Quality and Security',['qa','reviewer','secrev','security']],['Electronic and mallets','Data & AI',['aieng','datasci']]],
    [['Chamber helpers','Team helpers',['pa','auto','learn','rd']]]
   ];
@@ -1986,7 +1998,7 @@ function buildOffice(){
   var o=scene('viewB','office');
   o.innerHTML='<div class="glass"><span class="zl"><span class="t-o">Boss\'s glass office</span><span class="t-r">Conductor\'s glass office</span></span><div class="slot-c"></div><div class="board"><b>Today\'s job</b><span class="bgoal">No job yet</span></div></div>'+
    '<div class="rehearsal" id="rehearsal"><span class="zl"><span class="t-o">Meeting room</span><span class="t-r">Rehearsal corner</span></span><div class="table" aria-hidden="true"></div><p class="hand-now" id="handNow">No handoff yet</p><ol id="handList" aria-label="Recent handoffs"></ol></div>'+
-   zone('z-product','Product','Product',['pba'])+zone('z-design','Design and Creative','Design and Creative',['ux','creative','artist','writer','vsed'])+zone('z-eng','Engineering','Engineering',['architect','be','game','dataeng','fe'])+zone('z-ops','Ops','Ops',['devops'])+zone('z-growth','Growth','Growth',['uag'])+
+   zone('z-product','Product','Product',['pba'])+zone('z-design','Design and Creative','Design and Creative',['ux','creative','artist','writer','vsed'])+zone('z-eng','Engineering','Engineering',['architect','be','se','game','dataeng','fe'])+zone('z-ops','Ops','Ops',['devops'])+zone('z-growth','Growth','Growth',['uag'])+
    zone('z-qs','Quality and Security','Quality and Security',['qa','reviewer','secrev','security'])+zone('z-data','Data &amp; AI','Data &amp; AI',['aieng','datasci'])+zone('z-help','Team helpers','Team helpers',['pa','auto','learn','rd'])+zone('z-owner','Visitor seat','Owner\'s chair',['owner'])+
    '<div class="kwall"></div><div class="kitchen"><span class="zl">Kitchen</span><i class="cooler"></i><i class="bowl"></i><i class="plant big"></i><span class="klab">Water cooler and banana bowl</span></div>'+
    '<div class="zone z-team" data-x="team" hidden><span class="zl"><span class="t-o">More team</span><span class="t-r">More players</span></span></div>'+

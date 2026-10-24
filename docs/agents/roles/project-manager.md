@@ -1,6 +1,6 @@
 # Project Manager
 
-Status: not built (0 of 4 modes). There is no skill, no agent file, no evals and no roster row. This page describes what the role will be. The first design and the build plan are in `docs/superpowers/specs/2026-10-24-project-manager-design.md`.
+Status: Built, not tested (4 of 4 modes built, no evals yet). The skill `skills/project-manager/` and the agent `agents/project-manager.md` exist (built 2026-10-24); the roster row and the boss's call list entry are done; the drift check and change check scripts, the evals and the office seat are not done yet. This page describes what the role is. The first design and the build plan are in `docs/superpowers/specs/2026-10-24-project-manager-design.md`.
 
 The owner decided on 2026-10-24 that the team needs a separate Project Manager. The reasons come from this repo's own work: sessions changed each other's work (the Backend and Integration roles were split and merged again on the same day), status counts drifted between `TASKS.md`, the role documents and the tracker, nobody said what comes next, and "is the release ready?" had no single answer. The Delivery tracking part of the Product & Business Analyst moves to this role. The role has 4 modes:
 

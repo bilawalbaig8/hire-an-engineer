@@ -1,6 +1,6 @@
 # Project Manager: first design and build plan
 
-Status: first design and plan only. **Nothing is built:** there is no skill `skills/project-manager/`, no agent `agents/project-manager.md`, no drift check script, no evals, no roster row and no row in `TASKS.md`. Written by the builder on 2026-10-24 after the owner decided that a Project Manager is needed and important; the owner may change any of it. The role document is `docs/agents/roles/project-manager.md`. The Delivery tracking part of the Product & Business Analyst moves here (both PBA files carry a review line saying so).
+Status: **Built, not tested** (4 of 4 modes built, no evals yet). The skill `skills/project-manager/` and the agent `agents/project-manager.md` exist (built 2026-10-24, build steps 3 and 4 of section 11). The roster row and the boss's call list entry are done. Not done yet: the drift check and change check scripts, the evals, the office seat (its character art and zone are not made; an earlier try crashed the office page and was undone), CHANGELOG, install. (History, at spec time: nothing was built.) Written by the builder on 2026-10-24 after the owner decided that a Project Manager is needed and important; the owner may change any of it. The role document is `docs/agents/roles/project-manager.md`. The Delivery tracking part of the Product & Business Analyst moves here (both PBA files carry a review line saying so).
 
 ## 1. Intent and why
 The team now has a boss that runs one job at a time and specialists that each own a folder. Nobody owns the project as a whole across jobs and sessions. This repo shows what goes wrong without that owner (all seen in the files on 2026-10-24):
@@ -42,12 +42,12 @@ Anti-goals (failure even if it "works")
 ## 3. Modes
 | Mode | Answers | Main output | State |
 |---|---|---|---|
-| Plan | What, by which role, in which order, what waits on what? | `docs/project/plan.md`, `risks.md` (seeded) | planned |
-| Track | Where do we stand, do the records agree, what changed, what is next? | `docs/project/status.md`, `snapshot.json` | planned |
-| Release readiness | Is this build ready? | `docs/project/releases/<version>.md` | planned |
-| Retro | What happened, why, what do we keep? | `docs/project/retros/<date>-<topic>.md` and proposed lesson lines | planned |
+| Plan | What, by which role, in which order, what waits on what? | `docs/project/plan.md`, `risks.md` (seeded) | built, not tested |
+| Track | Where do we stand, do the records agree, what changed, what is next? | `docs/project/status.md`, `snapshot.json` | built, not tested (checks by hand; scripts not built) |
+| Release readiness | Is this build ready? | `docs/project/releases/<version>.md` | built, not tested |
+| Retro | What happened, why, what do we keep? | `docs/project/retros/<date>-<topic>.md` and proposed lesson lines | built, not tested |
 
-The decision log (`docs/project/decisions.md`) is updated in every mode when an owner decision is found in the records. The mode comes from the request; when unclear the role asks one question with a default. Honest status label once built: "Tested (k of 4 modes)".
+The decision log (`docs/project/decisions.md`) is updated in every mode when an owner decision is found in the records. The mode comes from the request; when unclear the role asks one question with a default. Honest status label now: "Built, not tested (4 of 4 modes, no evals yet)"; after the evals: "Tested (k of 4 modes)".
 
 ## 4. What it owns and never does
 Owns: `docs/project/` only: `plan.md`, `status.md`, `risks.md`, `decisions.md`, `releases/<version>.md`, `retros/<date>-<topic>.md`, `snapshot.json`.
@@ -183,7 +183,7 @@ Generated fixtures only, made by `setup-fixtures.py` in scratch folders: a fake 
 11. **Medium size and up only.**
 12. **Office id `project-manager`,** not the old `pm`.
 
-## 11. Build plan and order (later; not started, needs the owner's go)
+## 11. Build plan and order (steps 3 and 4 done 2026-10-24, built, not tested; steps 1, 2, 5, 6 and 7 not done: scripts, evals, eval runs, registration with the boss, office seat, tracking, install, CHANGELOG)
 1. **Scripts first, tests first** (`skills/project-manager/scripts/drift_check.py`, `change_check.py`, standard-library Python, read only): tests with generated fixture repos in `tests/`, including a status line the parser cannot read. The boss may run them before the agent exists. Check: `python -m pytest -q`.
 2. **Evals** (`evals/project-manager/`): `setup-fixtures.py`, `evals.json` with the 19 cases (each with `id`, `prompt`, `kind`, `expect`), `GROUND-TRUTH.md`, `verify-ground-truth.py`. Check: `check_evals`.
 3. **Skill** (`skills/project-manager/`): lean `SKILL.md` router (description written as "role + one line per mode + not-for line", measured under 1,024 characters before review), references by mode: `method-plan.md`, `method-track.md` (drift and change checks, status format), `method-release.md`, `method-retro.md`, `boundaries.md` (boss, PBA, Architect, DevOps, QA, Assistant), `templates.md` (plan, status, risk line, decision line, release list, retro), `sources.md` (section 15, `S-PM-n` IDs). Reuse `hire-an-engineer` rules by reference. Check: `validate_skills`, `check_sources`.

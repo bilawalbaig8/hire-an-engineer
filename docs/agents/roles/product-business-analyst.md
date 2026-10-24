@@ -1,6 +1,6 @@
 # Product & Business Analyst
 
-This role is not built yet. There is no skill, no agent file and no eval for it. This page describes what it will be. The first design and the build plan are in `docs/superpowers/specs/2026-10-24-product-business-analyst-design.md`.
+Status: Built, not tested (0 of 3 modes tested). The agent `agents/product-business-analyst.md` and the skill `skills/product-business-analyst/` exist; there are no evals yet. The roster row and the boss list are added. This page describes the role. The first design and the build plan are in `docs/superpowers/specs/2026-10-24-product-business-analyst-design.md`.
 
 The owner decided that four small roles become one: **Product Manager**, **Business Analyst**, **Market Researcher** and **Delivery Manager** (role 21 in `TASKS.md`). On 2026-10-24 the owner added a separate **Project Manager** role (`project-manager.md`); the Delivery Manager part (Delivery tracking) moved there. This role now has 3 modes:
 

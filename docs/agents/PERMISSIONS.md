@@ -14,6 +14,25 @@ Plain-language guide to `permissions-snippet.json`. It is optional, and it is no
 3. Do not copy the keys that start with an underscore (they are notes). Claude Code loaded the whole snippet without complaint in a test, so leaving them in is harmless.
 4. Opt in to test running only if you want it: move single lines from `_opt_in_allow_examples.allow` into `permissions.allow`, and only for repositories you trust.
 
+## Stop the repeated prompts (one-time setup by the owner)
+
+Added 2026-10-24 on the owner's request. Auto mode does not let an agent change its own permission settings, so you do this once, yourself. Three ways, from easiest:
+
+1. **`/permissions`:** open it, choose Allow, then "Add a new rule" and type a line from the list below. It is saved, and Claude Code stops asking for that command.
+2. **`/fewer-permission-prompts`:** run this skill yourself. It reads your earlier sessions, finds the read-only commands you keep approving and adds them to the project's allow list.
+3. **Edit a settings file** (strict JSON, merge, never overwrite): `~/.claude/settings.json` for every project, `.claude/settings.json` for this project (goes into git), `.claude/settings.local.json` for this machine only. Use `permissions.allow` for commands and `autoMode.allow` for a plain sentence the auto mode classifier reads.
+
+**Suggested allow lines (read-only, safe for the specialists):**
+- `Bash(git log:*)`, `Bash(git diff:*)`, `Bash(git show:*)`, `Bash(git status:*)`, `Bash(git rev-parse:*)`
+- `Write(docs/reviews/**)` (the Code Reviewer writes only there)
+- Only for a repository you own: `Bash(python ~/.claude/skills/code-reviewer/scripts/run_tests_safe.py:*)`
+
+**Suggested `autoMode.allow` sentence** (it stops the "Launch a new agent" blocks, which are about retries after a denial, not about one role): "Launching this repository's documented specialist agents (agents/*.md: architect, code-reviewer, ai-engineer, data-scientist, backend-engineer and the roles added later) with the Agent tool is allowed; they work on documents and code inside the project folder only." Keep your trusted-repo line too. Back up `settings.json` before you edit it.
+
+**Do not allow:** a bare `Bash(*)`, `npm test`, `make`, `curl`, `git push`, deploy or install commands, or running the tests of a repository you do not trust. Those stay as questions on purpose.
+
+The rule for builders: when a new agent is built, add its safe commands and its write folder to this list in the same build (checklist item 'Install and push').
+
 ## What the snippet does
 
 - **deny** `Edit`, `Write`, `NotebookEdit` on `/.agents/**`. A deny rule wins over every allow rule and over `acceptEdits`. The docs say deny rules apply to subagents too, and `Edit(...)` rules cover Write (so the extra `Write(...)` lines are belt and braces). The `/` prefix means "relative to the project folder", so the rule only covers the project's own `.agents` folder.

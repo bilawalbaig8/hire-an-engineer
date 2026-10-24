@@ -134,7 +134,7 @@ Documentation: Not written / Parts only / Documenting (role document written, sp
 | 9 | QA / Test Engineer | QA + Playtest QA + Art QA + Performance + Accessibility | Documented | Built, not tested |
 | 10 | Security Reviewer | AppSec Reviewer + Penetration Tester | Documented | Not started |
 | 11 | Data Engineer | Data Engineer | Documented | Not started |
-| 12 | Creative & Art Director | Creative Director + Art Director | Documented | Not started |
+| 12 | Creative & Art Director | Creative Director + Art Director | Documented | Built, not tested |
 | 13 | Artist | Concept Artist + 2D Artist + 3D Artist + Animator + VFX Artist | Documented | Not started |
 | 14 | Video & Sound Editor | Video Editor + Sound Designer | Documented | Not started |
 | 15 | Game & Technical Engineer | Game / Unity Engineer + Technical Artist | Documented | Not started |
@@ -143,10 +143,10 @@ Documentation: Not written / Parts only / Documenting (role document written, sp
 | 18 | Frontend & Mobile Engineer | Frontend + Mobile + Web Developer | Not written | Not started |
 | 19 | UA & Growth Marketer | Performance / UA + Ad Marketer + ASO / SEO + Social + Influencer / PR + Email / CRM | Documented | Built, not tested |
 | 20 | Game Designer | Game Designer + Level + Systems / Economy + Live-Ops | Not written | Not started |
-| 21 | Product & Business Analyst | Product Manager + Business Analyst + Market Researcher + Delivery Manager | Documented | Not started |
+| 21 | Product & Business Analyst | Product Manager + Business Analyst + Market Researcher (Delivery Manager moved to Project Manager, row 27) | Documented | Built, not tested |
 | 22 | Business Operations | Finance + Operations / Procurement + Sales / Account + HR + Legal (draft only) | Not written | Not started |
-| 27 | Project Manager | Plan + Track (drift check) + Release readiness + Retro | Documented | Not started |
-| 28 | Software Engineer | Structure applied + Algorithms and data structures + Performance and resources | Documented | Not started |
+| 27 | Project Manager | Plan + Track (drift check) + Release readiness + Retro | Documented | Built, not tested |
+| 28 | Software Engineer | Structure applied + Algorithms and data structures + Performance and resources | Documented | Built, not tested |
 
 ## Backlog: one place for all later work (owner request 2026-10-24, X5)
 
@@ -154,7 +154,7 @@ Do not build everything at once. Phase 1: make the current system solid with the
 
 ### List A: new roles (kept apart from the rest)
 - [ ] A1 Project Manager: documented (role document and spec written)
-- [ ] A2 Software Engineer: documented (role document and spec written)
+- [x] A2 Software Engineer: built 2026-10-24, not tested, not installed (skill with 8 references and 35 sources, agent file, 17 eval cases written but not run; boss list, rosters and office seat added). Left: eval fixtures and ground truth, the helper scripts (machine info, benchmark, compare, naming check, tree from plan), a lessons file, the live eval runs, install
 - [ ] A3 Game Designer (game design, level, systems and economy, live-ops and monetisation, narrative): document not written
 - [ ] A4 Frontend & Mobile Engineer (frontend, mobile, web, UI code from the Designer's screens): document not written
 - [ ] A5 The 4 team helpers (Personal Assistant, Automation Engineer, Learning Agent, R&D Agent): documents drafted, builds later in their own order
@@ -167,11 +167,12 @@ Do not build everything at once. Phase 1: make the current system solid with the
 - [ ] B3 Write a lesson to `docs/lessons/<role>.md` when the owner reports an issue (decision X2).
 - [ ] B4 Save the eval results file (12 of 12, one run each) if it is missing.
 **Solution Architect**
-- [ ] B5 Add the Project structure mode (spec written, 27 evals planned; description fits: 904 and 946 of 1,024).
-- [ ] B6 Move the 40 data design sources from the role document into the skill, so an installed copy can find them.
+- [x] B5 Add the Project structure mode (built 2026-10-24, not tested: 4 references, router, rules, agent file, roster; 27 evals not built, not installed).
+- [x] B6 Move the 40 data design sources from the role document into the skill, so an installed copy can find them (built 2026-10-24: S-DB-1 to S-DB-40 in `skills/software-architect/references/sources.md`).
 - [ ] B7 Back the "Tested" label: save results for the 15 system design cases; rerun the 3 relaxed data design cases.
 **Code Reviewer**
 - [ ] B8 Run the case `review-tests` that was never run, and save a results file with the pass rate of the 14 evals.
+- [ ] B21 Owner: add the safe allow lines and the autoMode sentence from `docs/agents/PERMISSIONS.md` ('Stop the repeated prompts') so the Code Reviewer and the other agents stop asking every time.
 **AI Engineer**
 - [ ] B9 Held-out cases: run the release check on two files (open set for the AI Engineer, held-out set kept by QA outside the project), opaque case ids like `h01`; fix `agents/ai-engineer.md` lines 50 and 83 and `eval_compare.py` (decision Q1).
 - [ ] B10 Save the AI-Ops results file (9 of 9, offline, one run each) if it is missing.
@@ -196,8 +197,21 @@ Do not build everything at once. Phase 1: make the current system solid with the
 - [ ] C4 Data Engineer: dataset curation and labelling
 - [ ] C5 Writer: Localise mode (parked, English only for now)
 - [ ] C6 Architect, Software Engineer and Project Manager: align the lines between them (the Architect spec was written before the other two existed)
-- [ ] C7 Product & Business Analyst: now 3 modes; drop the Delivery tracking part when it is built
+- [x] C7 Product & Business Analyst: now 3 modes; the Delivery tracking part is dropped (built 2026-10-24, built, not tested)
 
 ### List D: checks and small items
 - [ ] D1 Verify the 3 sources that now open and mark them verified in the skill `sources.md` files.
 - [ ] D2 Owner: look at the office window once (seats, tags, Waiting state) and report anything wrong.
+
+### List E: thinking skills for roles and the boss gate (owner request 2026-10-24, next update)
+Plan: `docs/superpowers/specs/2026-10-24-thinking-skills-for-roles.md`. Order (measure first, revised 2026-10-24 after a thinking-skills review of the plan): E1, E6a baseline, E5 gate, E6b rerun, E4 Challenge mode, E1b skill, E3 roles only where misses showed, E2, E7. Models: E1b, E4 and the E6 test design `opus`; E2, E3, E5 `sonnet`; E6 runs and E7 `haiku`.
+Owner rule (2026-10-24): no dependency on other repositories or plugins; everything shipped is our own and works from this repo alone.
+- [x] E1 Owner approved (2026-10-24): Challenge mode is a Code Reviewer mode; boss check sized by job (small / medium / large); own `skills/critical-thinking/`, 5 methods first, built by extending the existing `skills/hire-an-engineer/references/thinking-toolkit.md`; no call to outside skills.
+- [ ] E6a Baseline test FIRST: give today's boss a specialist report with one planted false claim (for example "all tests pass" while one fails), on a small job and a large job. Record whether the boss catches it. Save the results file.
+- [ ] E5 Boss acceptance check: new reference file in the orchestrator skill (small / medium / large), one log line in the run record. The boss verifies the riskiest claim (the one "done" depends on) itself on medium and large jobs, not the easiest one.
+- [ ] E6b Rerun the same planted-mistake cases with the gate. Pass = the boss catches it and says so in plain words. Compare with E6a.
+- [ ] E4 Code Reviewer Challenge mode (the reviewer has no modes today, so this is a new design): a brief template that forbids any conclusion of another agent, input is only the deliverable and the goal; evals first (typical, edge, refusal, plus one design with a hidden one-way door); used only at release, decision records, data formats and one-way doors.
+- [ ] E1b `skills/critical-thinking/`, 5 methods first (map-territory, pre-mortem, steel-manning, inversion, debiasing): SKILL.md router; each method has an output contract (one line that shows the method changed something); extend `thinking-toolkit.md` and make it available to installed specialists (it sits inside the `hire-an-engineer` skill now); settle its provenance (header says "drawn from cc-thinking-skills": rewrite in our own words or add a THIRD_PARTY_NOTICES entry); `sources.md` with checked links; validator passes; install script copies it.
+- [ ] E3 Agent files: add a "Thinking skills" section (body, not description; several descriptions are near 1,024 chars, check the real length first) only for roles where E6 showed a miss. Likely first: QA / Test Engineer (method-test.md has no thinking method), Code Reviewer, Architect. Max 4 per role.
+- [ ] E2 Roster: add a "Thinking skills" column to `docs/agents/roster.md`, `skills/team-start/runtime/roster.md` and `skills/orchestrator/references/team-roster.md`, matching E3.
+- [ ] E7 Checks and release notes: validate_agents, validate_skills, check_sources, check_evals, full pytest; CHANGELOG, THIRD_PARTY_NOTICES; install with `--only` only after the owner says OK.

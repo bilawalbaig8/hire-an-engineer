@@ -1,17 +1,17 @@
 # Creative & Art Director
 
-This role is not built yet. No skill, agent file or evals exist for it. This page describes what it will be. The plan and the build order are in `docs/superpowers/specs/2026-10-24-creative-art-director-design.md`.
+Status: Built, not tested. The agent `agents/creative-art-director.md` and the skill `skills/creative-art-director/` exist (built 2026-10-24); there are no evals yet, no `sources.md`, no templates, and the scripts `contrast.py` and `image_info.py` are not built. No image or video tool is connected yet. The plan and the build order are in `docs/superpowers/specs/2026-10-24-creative-art-director-design.md`.
 
 The owner decided that the Creative Director and the Art Director are one role (role 12 in `TASKS.md`), with four modes:
 
 | Mode | What it does | State |
 |---|---|---|
-| **Concept and brief** | The big idea: who it is for, the promise, the message, the tone, the references, and a one-page brief others can build from | planned |
-| **Style** | The look: visual direction, style guide, palette, visual rules, and fixing a set that has drifted apart | planned |
-| **Review** | Judges finished or draft work against the brief and the style guide, with a clear approve, fix or redo note per file | planned |
-| **Ad creative direction** | Concepts and test sets for mobile game ads, handed to the UA & Growth Marketer | planned |
+| **Concept and brief** | The big idea: who it is for, the promise, the message, the tone, the references, and a one-page brief others can build from | built, not tested |
+| **Style** | The look: visual direction, style guide, palette, visual rules, and fixing a set that has drifted apart | built, not tested |
+| **Review** | Judges finished or draft work against the brief and the style guide, with a clear approve, fix or redo note per file | built, not tested |
+| **Ad creative direction** | Concepts and test sets for mobile game ads, handed to the UA & Growth Marketer | built, not tested |
 
-Honest status label for the dashboard: "Not built (0 of 4 modes)".
+Honest status label for the dashboard: "Built, not tested (4 of 4 modes, no evals yet)".
 
 **What it can and cannot do in the base setup.** It works with text and files. It reads briefs, game descriptions, style guides, past ad results and notes. It can look at still images that are given to it as PNG or JPG files (the Read tool shows these files to the model; this will be confirmed by an eval before the role is called "tested"). It **cannot make images or videos**: it has no image or video generation tool. It cannot watch a video or listen to sound; for a video it reviews still frames that someone exported, plus the script. It cannot hold a phone; it asks for a small-size export and says "not checked on a real phone". Pictures are made by a human artist, by the Artist role when it is built, or by an image tool that a person runs after your approval. **Changed by owner decision 2026-10-24 (Q19):** the owner has image and video tools and will connect them; the role may run them itself, but only after the owner approves a credits budget for that job. Before each job it writes the tool, the number of images or videos and the estimated credits; it stays inside the budget, stops and asks when the budget is used up or unsure, and records the tool and the real cost of every result. Adding the connected tools to the agent is a build step still to do.
 
@@ -46,7 +46,9 @@ The Creative & Art Director is the team's specialist for **the big idea and how 
 | "Plan the next ad test for our puzzle game" (Ad creative direction) | Writes 3 to 5 concept families, a hypothesis per concept (what we would learn), formats and safe-zone notes, and hands it to the UA & Growth Marketer, who builds the test plan and the variant table |
 | "Make a fail ad with a puzzle that is not in the game" (Ad creative direction) | Refuses to show gameplay the game does not have; offers an honest version, or a clearly labelled dramatised scene as your decision |
 | "Concept B won, make 20 more like it" (Ad creative direction) | Asks how sure the result is (the Data Scientist & Analyst reads that), and plans the next set without calling a winner it cannot prove |
-| "Generate 50 variants in an AI image tool" | Writes the prompt pack, the number of tries and the cost formula (an estimate), and returns it as an approval; it has no tool to run it and never spends | **Changed by owner decision 2026-10-24 (Q19):** the owner has image and video tools and will connect them; the role may run them itself, but only after the owner approves a credits budget for that job. Before each job it writes the tool, the number of images or videos and the estimated credits; it stays inside the budget, stops and asks when the budget is used up or unsure, and records the tool and the real cost of every result. Adding the connected tools to the agent is a build step still to do.
+| "Generate 50 variants in an AI image tool" | Writes the prompt pack, the number of tries and the cost formula (an estimate), and returns it as an approval; it has no tool to run it and never spends (see the Q19 note below this table) |
+
+**Note on the last row, changed by owner decision 2026-10-24 (Q19):** the owner has image and video tools and will connect them; the role may run them itself, but only after the owner approves a credits budget for that job. Before each job it writes the tool, the number of images or videos and the estimated credits; it stays inside the budget, stops and asks when the budget is used up or unsure, and records the tool and the real cost of every result. Adding the connected tools to the agent is a build step still to do.
 
 ## 4. What it will not do
 - Draw, paint, model, animate or generate the art. The Artist (when built), a human artist, or an image tool run by a person makes it.
@@ -87,7 +89,7 @@ The final decision is not its own. You approve the idea, the look and anything t
 
 ## 7. Where its work goes
 - **To the boss,** as a 7-field answer: status, summary, files, questions, approvals, assumptions, evidence. The summary leads with the recommendation and how sure it is.
-- **Files it owns:** `docs/creative/` (concepts, briefs, risk and rights notes, `asset-register.md`), `docs/creative/art-direction/` (visual direction, style guide, style tiles as text and colour values, review notes, prompt packs) and `docs/creative/ads/` (ad concept sets, variant tables, hand-off notes). Image files stay in the project's art folder named in the brief; it does not write images. It is the only role that writes in these folders; others comment.
+- **Files it owns:** `docs/creative/` (concepts, briefs, risk and rights notes, `asset-register.md`), `docs/creative/art-direction/` (visual direction, style guide, style tiles as text and colour values, review notes, prompt packs) and `docs/creative/ads/` (ad concept sets and hand-off notes only: this role gives the concept and what stays fixed and what may change; the variant table is the UA & Growth Marketer's, owner decision Q3). Image files stay in the project's art folder named in the brief; it does not write images. It is the only role that writes in these folders; others comment.
 - **Hand-offs:** briefs to the Artist or a human artist and to the Writer; ad test sets to the UA & Growth Marketer; review results to the artist who made the work and to Art QA; rights doubts to you (and a lawyer you name).
 - **Review of its own work:** you approve the idea and the look. The Writer or the Artist checks that a brief can be used, when the boss sends it. Art QA checks the final files. The Code Reviewer reads its small scripts only if the boss asks.
 - **Related questions** go back to the boss. It never calls another specialist itself.
