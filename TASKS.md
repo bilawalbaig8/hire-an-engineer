@@ -215,3 +215,11 @@ Owner rule (2026-10-24): no dependency on other repositories or plugins; everyth
 - [ ] E3 Agent files: add a "Thinking skills" section (body, not description; several descriptions are near 1,024 chars, check the real length first) only for roles where E6 showed a miss. Likely first: QA / Test Engineer (method-test.md has no thinking method), Code Reviewer, Architect. Max 4 per role.
 - [ ] E2 Roster: add a "Thinking skills" column to `docs/agents/roster.md`, `skills/team-start/runtime/roster.md` and `skills/orchestrator/references/team-roster.md`, matching E3.
 - [ ] E7 Checks and release notes: validate_agents, validate_skills, check_sources, check_evals, full pytest; CHANGELOG, THIRD_PARTY_NOTICES; install with `--only` only after the owner says OK.
+
+### List F: save context on big reference files (owner request 2026-10-24)
+Idea: "RAG-lite", no vector database and no embeddings (owner rule: no outside dependency). Measure first, then the cheap steps; the search script only if the measure shows it is needed. Runs after the E measure-first test. Models: F1, F3, F4 `haiku`; F2 `sonnet`; F5 `opus`.
+- [ ] F1 Measure (read-only): list the 10 biggest reference files (lines and size) and how many are over 300 lines. Save the numbers in the list; decide if F2-F4 are enough.
+- [ ] F2 INDEX in every skill: one line per reference file, "read this when ...". Router points to the INDEX.
+- [ ] F3 Row IDs: files with many rows (for example `sources.md`) get a stable ID per row, and the agent file says to grep one row, not read the whole file.
+- [ ] F4 Validator warning when a reference file is over 300 lines (error only if the owner says); split the files that are too big.
+- [ ] F5 ONLY IF F1 shows agents still read whole big files after F2-F4: `scripts/search_refs.py` (standard library only, keyword search, top 3 sections with line numbers; tests first). Otherwise drop this task.
