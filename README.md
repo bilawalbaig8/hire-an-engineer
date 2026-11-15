@@ -33,9 +33,19 @@
 
 You have an idea. You ask an AI to build it. It works for a while — then it breaks, the files turn into a mess, and the next chat has forgotten everything.
 
-**Hire an Engineer fixes that.** It is a free add-on (called a *skill*) for your AI tool. Once it is installed, your AI stops acting like a chatbot and starts acting like a **senior engineer you hired**: it asks the right questions, makes a plan with you, builds and tests the work, and keeps notes so nothing is ever lost.
+**Hire an Engineer is a free, open-source skill for people who aren't software engineers.** It gives your AI coding tool a structured way to work: interview you about your idea, agree on a plan, build and test it, and save project notes for the next session.
 
-You don't need to learn to code. You just say what you want.
+Describe what you want in **English, Roman Urdu, or a mix of both**. You don't need technical terms or a detailed specification to get started.
+
+### What it handles for you
+
+- **A short interview before building.** It asks who the project is for, what problem it should solve, and what matters to you. Then it turns your answers into a plan you can review.
+- **Specialists for the work at hand.** Where your AI tool supports sub-agents, it launches the relevant roles: planning, engineering, UI/UX, databases, review or testing. Independent tasks can run in parallel.
+- **Model and effort choices per task.** Where supported, it assigns suitable models and reasoning effort to sub-agents: lighter ones for routine work, stronger ones for difficult or risky work and reviews. The main chat's model stays unchanged.
+- **Less unnecessary context.** Workers get focused briefs, and reference guides are loaded only when needed. This is designed to reduce wasted usage; it does not increase your plan's limits or guarantee a particular saving.
+- **Project memory in files.** Decisions, progress and next steps are saved inside your project, so a new session with access to those files can pick up the work.
+
+The skill is free; your AI tool and any services you use may cost money. Sub-agents and model selection depend on your tool. If they aren't available, it works in one session and explains the limitation.
 
 ## 😩 Sound familiar?
 
@@ -43,7 +53,7 @@ You don't need to learn to code. You just say what you want.
 |---|---|
 | 🔁 The same error, again and again | 🧭 It stops guessing, finds the real cause and fixes it step by step |
 | 🍝 Files everywhere, nobody knows what does what | 🗂️ A clean, simple structure from day one |
-| 🧠 Every new chat forgets your project | 📒 Notes are saved inside your project, so any chat or tool carries on where you stopped |
+| 🧠 Every new chat forgets your project | 📒 Saved project notes help the next chat resume when it can access those files |
 | 💥 "It worked yesterday" — broken launches | ✅ Tested before it says "done", with backups and an easy way back |
 | 🤷 You don't know which tools or services you need | 🧰 It picks them, explains them simply and keeps your keys and passwords out of the chat |
 | 💸 Surprise bills | 📉 It keeps costs visible and asks before anything that costs money |
@@ -58,7 +68,7 @@ A tiny job gets a quick, tested result. A big project gets a proper plan, a task
 
 ## 🚀 Get started
 
-Pick one. No downloading, unzipping or folders needed.
+You need an AI coding tool that can read and write project files. The easiest route is to ask it to install the skill for you.
 
 **Option 1 — Ask your AI to install it** (Claude Code, Cursor, Codex, Antigravity…). Copy this message into your AI tool:
 
@@ -68,7 +78,19 @@ Install the Hire an Engineer skill for me from https://github.com/bilawalbaig8/h
 
 **Option 2 — Fork it and make it yours.** Press **[Fork](https://github.com/bilawalbaig8/hire-an-engineer/fork)** to get your own copy on GitHub, then give your AI the link to *your* fork with the same message. Change anything you like; keep the [LICENSE](LICENSE).
 
-Then just tell it your idea, in your own words: *"I want to build a booking app for my salon"* or *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
+After installation, start a new chat or session and tell it your idea. For example:
+
+```text
+Use Hire an Engineer. I want to build a booking app for my salon.
+Interview me first, then help me plan and build it. Use plain English.
+```
+
+Or in Roman Urdu:
+
+```text
+Hire an Engineer use karo. Mujhe apni bakery ke orders ke liye ek simple app chahiye.
+Pehle mujh se sawal karo, phir plan bana kar build karo. Roman Urdu mein baat karo.
+```
 
 <sub>Using claude.ai in the browser, or prefer doing it by hand? See the [install guide](docs/INSTALL.md).</sub>
 
@@ -83,7 +105,7 @@ Then just tell it your idea, in your own words: *"I want to build a booking app 
 >
 > Here's a quick picture of what I have in mind: one order form, one list of today's orders, and a WhatsApp message when a new one comes in. Want me to go ahead with this plan?
 
-Then it gets on with it: sets everything up (asking you before creating any account), builds it piece by piece, tests each piece, puts it live with backups, and gives you a short guide. Next week, any chat picks up exactly where you left off.
+After you approve the plan, it builds piece by piece, tests the work, and prepares a short guide. Accounts, paid services and going live need your approval. Next week, a new session can read the saved project notes and continue.
 
 ## 🧩 What it can build
 
@@ -111,11 +133,25 @@ Open it any time with `/board`. It only reads your project notes; it never chang
 
 ## 🇵🇰 Roman Urdu mein
 
-**Hire an Engineer** ek free skill hai jo aapke AI tool ko ek senior software engineer bana deti hai. Aap apna idea apni zabaan mein batayein — sawal, plan, building, testing aur documents sab woh sambhalti hai, aur har zaroori kaam se pehle aap se poochti hai.
+**Hire an Engineer** un logon ke liye ek free, open-source skill hai jo software engineers nahi hain, lekin AI ki madad se apna idea build karna chahte hain.
 
-1. [Latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) se **`hire-an-engineer.zip`** download karein ("Source code" wali zip nahi).
-2. Apne AI tool ko repo ka link dein aur kahein: *"Ye skill install kar do"* — ya pehle **Fork** karke apni copy ka link dein.
-3. Bas likhein: *"Mujhe apni dukaan ke liye ek app chahiye."*
+Aap **Roman Urdu, English ya dono mix** karke baat kar sakte hain. Kaam shuru karne se pehle yeh aapka chhota sa interview leti hai, zaroorat samajhti hai, aur plan banati hai.
+
+- Kaam ke hisaab se **specialist sub-agents khud launch** karti hai, agar aapka AI tool support kare.
+- Sub-agents ke liye **model aur effort choose** karti hai: routine kaam ke liye halka model, mushkil ya risky kaam aur review ke liye strong model. Main chat ka model nahi badalti.
+- Sirf zaroori context aur guides load karti hai, taake usage be-wajah kharch na ho. Daily ya session limits khatam na hone ki guarantee nahi hai.
+- **Progress, decisions aur next steps project files mein save** karti hai. Nayi chat ko woh files mil jayein to kaam wahin se continue kar sakti hai.
+
+Shuru karne ke liye apne AI coding tool ko yeh message dein:
+
+```text
+https://github.com/bilawalbaig8/hire-an-engineer se Hire an Engineer skill install karo.
+Repo ki docs/INSTALL.md follow karo.
+```
+
+Phir nayi chat mein likhein: *"Hire an Engineer use karo. Mujhe apni dukaan ke liye ek app chahiye. Pehle mujh se sawal karo aur Roman Urdu mein baat karo."*
+
+Khud install karna ho to [install guide](docs/INSTALL.md) dekhein. Skill free hai; AI tool aur doosri services ke charges alag ho sakte hain.
 
 Paise, account, kuch live karna ya delete karna — in sab se pehle woh hamesha aap ki ijazat leti hai.
 
@@ -149,6 +185,18 @@ It does what a senior engineer would do inside your AI tool. For payments at sca
 <summary><b>Which AI tools does it work with?</b></summary>
 <br>
 Claude Code and claude.ai are tested by the author. Cursor, Codex, Antigravity, Gemini CLI and other tools that read <code>AGENTS.md</code> are best effort. Chat-only apps are good for planning, design and documents; coding tools do the full build.
+</details>
+
+<details>
+<summary><b>Will it switch models and save my daily limit?</b></summary>
+<br>
+It chooses models and reasoning effort for individual sub-agents where your tool allows this; it does not switch the main chat's model mid-run. Focused briefs and loading only relevant guides aim to avoid unnecessary usage. Actual usage depends on your tool, plan and task, and parallel agents also consume usage. There is no guaranteed saving or protection from hitting a limit. Without model controls, it uses the available model and says so.
+</details>
+
+<details>
+<summary><b>Does it remember everything across chats?</b></summary>
+<br>
+It saves project state, decisions and next steps in files such as <code>PROJECT_STATE.md</code>, with checkpoints after completed tasks. A new chat must have access to those files and read them to resume. This is project memory, not automatic account-wide memory or a backup of every chat message.
 </details>
 
 <details>
