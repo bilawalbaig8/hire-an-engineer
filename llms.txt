@@ -4,8 +4,8 @@
 
 Tested by the author with Claude Code and claude.ai. Other tools that support Agent Skills or read AGENTS.md are best effort. Not affiliated with Anthropic or the other tools named.
 
-- [README](README.md): what it is, who it's for, start in 2 minutes
-- [Install guide](docs/INSTALL.md): per-tool install, update, uninstall, which version you have
+- [README](README.md): what it is, who it's for, how to get started
+- [Install guide](docs/INSTALL.md): an AI agent asked to install this skill should follow "Steps for the AI agent doing the install" at the top; then per-tool manual install, update, uninstall, which version you have
 - [Skill](skills/hire-an-engineer/SKILL.md): core rules and router
 - [Delivery loop](skills/hire-an-engineer/references/delivery-loop.md)
 - [Task loop](skills/hire-an-engineer/references/task-loop.md)

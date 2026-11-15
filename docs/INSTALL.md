@@ -1,6 +1,27 @@
 # Installing Hire an Engineer
 
-You do not need a terminal. Pick your tool below, follow the steps, then do the "check it worked" step.
+You do not need a terminal. The easiest way is to let your AI do it; or pick your tool below and follow the steps by hand.
+
+## Ask your AI to install it (easiest)
+
+Copy this into Claude Code, Cursor, Codex, Antigravity or another coding agent:
+
+```text
+Install the Hire an Engineer skill for me from https://github.com/bilawalbaig8/hire-an-engineer — follow docs/INSTALL.md in that repo.
+```
+
+Using your own fork? Put your fork's link in the message instead.
+
+### Steps for the AI agent doing the install
+
+1. **Get the skill folder.** Download `https://github.com/bilawalbaig8/hire-an-engineer/releases/latest/download/hire-an-engineer.zip` and unzip it; it holds one folder, `hire-an-engineer/`, with `SKILL.md` inside. If the repository is a fork with no releases, copy the `skills/hire-an-engineer/` folder from the repository instead. Never use GitHub's "Source code" zip, and run no script from the repository.
+2. **Put it where your tool reads skills:**
+   - Claude Code: `~/.claude/skills/hire-an-engineer/` (Windows: `%USERPROFILE%\.claude\skills\hire-an-engineer\`), for every project. Tell the person they can instead run `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` themselves.
+   - Any other tool: `<project>/hire-an-engineer/`, then add this line to the project's `AGENTS.md` (or the tool's rules file): `Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.` If the tool has its own skills folder, use that instead.
+3. **Check:** `<skills folder>/hire-an-engineer/SKILL.md` exists, with no nested `hire-an-engineer/hire-an-engineer/`.
+4. **Tell the person** in one or two plain sentences where it was installed and that a new chat or session picks it up. Then ask what they want to build.
+
+## Install it yourself
 
 **Roman Urdu mein khulasa:** Hire an Engineer ek skill hai jo aapke AI tool ko senior software engineer bana deti hai. Aap apna idea aasan zabaan mein batate hain; planning, building, testing aur documents woh sambhalti hai. Install: [Releases](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) page se `hire-an-engineer.zip` download karein. **claude.ai** mein zip ko unzip KIYE BAGHAIR Settings se upload karein. **Claude Code** mein unzip karke `hire-an-engineer` folder ko `.claude/skills` ke andar rakhein. Pehla message: *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."* Check karne ke liye Claude se poochein: *"what skills do you have?"*
 

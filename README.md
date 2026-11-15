@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://github.com/bilawalbaig8/hire-an-engineer/releases/latest"><b>⬇️ Download</b></a>
   &nbsp;·&nbsp;
-  <a href="#-start-in-2-minutes"><b>🚀 Start in 2 minutes</b></a>
+  <a href="#-get-started"><b>🚀 Get started</b></a>
   &nbsp;·&nbsp;
   <a href="#-roman-urdu-mein"><b>🇵🇰 Roman Urdu</b></a>
   &nbsp;·&nbsp;
@@ -56,73 +56,21 @@ You don't need to learn to code. You just say what you want.
 
 A tiny job gets a quick, tested result. A big project gets a proper plan, a task board, releases and backups. And if a ready-made tool already does what you need, it will tell you instead of building something new.
 
-## 🚀 Start in 2 minutes
+## 🚀 Get started
 
-**1. Download** — open the [latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) and, under **Assets**, download **`hire-an-engineer.zip`**.
+Pick one. No downloading, unzipping or folders needed.
 
-> [!WARNING]
-> Don't use **"Source code (zip)"** or the green **Code → Download ZIP** button. Those are the wrong files.
-
-**2. Add it to your AI tool** — tap yours:
-
-<details>
-<summary><b>claude.ai</b> (website or desktop app)</summary>
-<br>
-
-1. Keep the zip **as it is — don't unzip it**.
-2. In claude.ai open **Settings → Capabilities** (sometimes called **Skills**) and upload the zip. Menu names can change a little.
-3. Make sure **code execution** is turned on.
-
-</details>
-
-<details>
-<summary><b>Claude Code</b> — one line, or no terminal at all</summary>
-<br>
-
-**Easiest:** in Claude Code, type this and answer `y`:
+**Option 1 — Ask your AI to install it** (Claude Code, Cursor, Codex, Antigravity…). Copy this message into your AI tool:
 
 ```text
-/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
+Install the Hire an Engineer skill for me from https://github.com/bilawalbaig8/hire-an-engineer — follow docs/INSTALL.md in that repo.
 ```
 
-**Or by hand, without a terminal:**
+**Option 2 — Fork it and make it yours.** Press **[Fork](https://github.com/bilawalbaig8/hire-an-engineer/fork)** to get your own copy on GitHub, then give your AI the link to *your* fork with the same message. Change anything you like; keep the [LICENSE](LICENSE).
 
-1. Unzip the file. You get a folder called `hire-an-engineer`.
-2. Open your hidden Claude folder:
-   - **Windows:** press <kbd>Win</kbd> + <kbd>R</kbd>, type `%USERPROFILE%\.claude` and press Enter.
-   - **Mac:** in Finder choose **Go → Go to Folder**, type `~/.claude` and press Enter.
-3. Make a folder called `skills` there (if it isn't there already) and drag the `hire-an-engineer` folder into it.
+Then just tell it your idea, in your own words: *"I want to build a booking app for my salon"* or *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
 
-✅ The end result must be `.claude/skills/hire-an-engineer/SKILL.md`. Windows sometimes makes a folder inside a folder (`hire-an-engineer/hire-an-engineer`) — if so, move the inner one up.
-
-Prefer the terminal? Commands are in [the install guide](docs/INSTALL.md#claude-code-with-a-terminal).
-
-</details>
-
-<details>
-<summary><b>Cursor, Codex, Antigravity, Gemini CLI and others</b></summary>
-<br>
-
-1. Unzip the file and put the `hire-an-engineer` folder inside your project.
-2. Add this one line to the project's `AGENTS.md` (or your tool's rules file):
-
-   ```text
-   Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.
-   ```
-
-The author tests on Claude Code and claude.ai. Other tools are best effort, because their settings change often.
-
-</details>
-
-**3. Say what you want** — in your own words. For example:
-
-- *"I want to build a booking app for my salon."*
-- *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
-- *"I'm stuck. My app broke after the last change."*
-
-**✅ Did it work?** Start a new chat and ask *"what skills do you have?"* — you should see `hire-an-engineer`.
-
-Updating, removing it, or checking your version: see the [full install guide](docs/INSTALL.md).
+<sub>Using claude.ai in the browser, or prefer doing it by hand? See the [install guide](docs/INSTALL.md).</sub>
 
 ## 💬 What it feels like
 
@@ -166,7 +114,7 @@ Open it any time with `/board`. It only reads your project notes; it never chang
 **Hire an Engineer** ek free skill hai jo aapke AI tool ko ek senior software engineer bana deti hai. Aap apna idea apni zabaan mein batayein — sawal, plan, building, testing aur documents sab woh sambhalti hai, aur har zaroori kaam se pehle aap se poochti hai.
 
 1. [Latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) se **`hire-an-engineer.zip`** download karein ("Source code" wali zip nahi).
-2. Upar diye gaye tareeqe se apne AI tool mein add karein.
+2. Apne AI tool ko repo ka link dein aur kahein: *"Ye skill install kar do"* — ya pehle **Fork** karke apni copy ka link dein.
 3. Bas likhein: *"Mujhe apni dukaan ke liye ek app chahiye."*
 
 Paise, account, kuch live karna ya delete karna — in sab se pehle woh hamesha aap ki ijazat leti hai.
