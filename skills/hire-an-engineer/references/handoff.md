@@ -28,6 +28,7 @@ Chat is good for discovery, plans, design, documents, prototypes. It usually can
    implementation plan first, then build test-first.
    Reply to me in [their language].
    ```
+   If the skill isn't installed in that tool, put a copy of the skill folder in the project (e.g. `.skills/hire-an-engineer/`), add to `AGENTS.md` "Follow .skills/hire-an-engineer/SKILL.md", and say "Follow the rules in AGENTS.md" in the prompt instead.
 4. **Tell them exactly where to put the folder** and how to open it in their tool (copy-paste steps).
 5. The coding agent's session start protocol picks up from `PROJECT_STATE.md`.
 

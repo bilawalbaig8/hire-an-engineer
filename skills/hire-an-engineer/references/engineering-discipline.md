@@ -26,7 +26,7 @@ The person sees only the milestone view of this (Project Plan & Tracker), not th
 For core logic (calculations, data handling, rules, anything where wrong = real damage):
 
 - Write one small test showing what should happen. Run it. **Watch it fail** for the right reason — if you never saw it fail, you don't know it tests anything.
-- On the task branch, commit the failing test (`test(red): …`) before the code, so history shows the order; one commit holding both is no evidence of test-first. Tiny work may skip the separate commit but still shows the failing run.
+- On the task branch, commit the failing test (`test(red): …`) before the code, so history shows the order; one commit holding both is no evidence of test-first. Tiny and Small work may skip the separate commit (one commit is fine) but still shows the failing run.
 - Write the minimal code to make it pass. Run it. Watch it pass, along with all earlier tests.
 - Clean up, keep everything passing, move on.
 - If you wrote new code before its test, throw that code away and redo it test-first. Promoted fast-lane prototype: add tests around current behaviour; don't throw working code away.

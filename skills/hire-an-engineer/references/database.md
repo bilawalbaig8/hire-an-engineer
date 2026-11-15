@@ -47,7 +47,7 @@ Keep it updated with every schema change.
 
 ## 4. Setting it up
 
-- Create the database/project (via connector or guided), separate **test** and **live** for medium/large projects.
+- Create the database/project (via connector or guided). Separate **test** and **live** for medium/large projects; once real data exists, at any size, tests, seeds and migrations never point at the live database. Test setup refuses to run if its database URL matches the live one.
 - Create schema with a migration script (never by clicking around in live), seed test data that looks realistic, and fake data only in test.
 - Store connection strings/keys as secrets in hosting/GitHub — never in code or docs.
 - Record in the Tools & Setup Guide: provider, project names, region, plan/cost, who owns the account, where backups go.
@@ -58,6 +58,8 @@ Keep it updated with every schema change.
 - Every change is a numbered migration file in the repo (`migrations/003_add_delivery_date.sql`) — up and, where possible, down.
 - Test on a copy/test database with realistic data first.
 - Backup live before applying; no live migration without a tested restore or down migration (`versioning-release.md` §6). Apply during a quiet time. Verify after (row counts, app still works).
+- A down migration restores the **schema, not the data**. Destructive migrations (drop, rename, narrowing a type, rewriting data) need a fresh backup **and** a tested restore; only additive changes may rely on a down migration.
+- **Database-wiping commands** AI tools run out of habit: `prisma migrate reset`, `prisma db push --accept-data-loss`, `supabase db reset`, `drizzle-kit push`, `DROP` / `TRUNCATE`, `DELETE` or `UPDATE` without `WHERE`. Never against live or any database holding real data, unless: backup first, then rule-2 approval (SKILL.md) with the consequence in plain words ("Is se saara order data mit jayega"). On test databases they are fine.
 - Prefer additive, backward-compatible changes (add column → backfill → switch code → remove old later).
 - Update the data dictionary, ERD and changelog.
 
@@ -71,7 +73,8 @@ Keep it updated with every schema change.
 ## 7. Access and security
 
 - Principle of least access: each user role sees/changes only what it needs; enforce in the database (e.g. Supabase row-level security policies), not only in the UI.
-- Never expose admin/service keys to the browser.
+- **The public (anon) key of Supabase or Firebase ships to every visitor's browser** — anyone can copy it and call the database directly. So every table needs row-level security **on, with an explicit policy** (Firebase: rules never left in test mode) before any public URL exists. Test with the public key from a logged-out browser: reading or writing another user's rows must fail.
+- Never expose admin/service keys to the browser. Never put a secret in a browser-exposed env var (`NEXT_PUBLIC_`, `VITE_`, `EXPO_PUBLIC_` and similar — they are copied into the built bundle). Before release, search the built bundle for key patterns.
 - Personal data: collect the minimum, protect it, decide retention ("orders 2 saal tak rakhein, phir delete?"), support delete/export requests.
 - Log important changes (who changed what, when) if the person needs history.
 - Security checks go into the Test Plan (try reading another user's data — must fail).
@@ -79,6 +82,7 @@ Keep it updated with every schema change.
 ## 8. Backups and restore
 
 - Automatic backups on **if the plan includes them** (check; free plans often don't) **plus** your own scheduled export (e.g. nightly GitHub Action → CSV/SQL dump to their Drive or storage) for anything important.
+- Dumps hold real personal data: never into the repo or CI artifacts; encrypt them; set a retention period (e.g. 30 days) and delete older ones. The privacy note says when a deleted user ages out of backups.
 - Backup before every release and every migration.
 - **Test a restore** once before launch and after major changes — an untested backup isn't a backup.
 - Write in the Handoff Guide: where backups are, how often, how to restore (step by step), who to contact.
@@ -100,4 +104,4 @@ Always include **export to Excel/CSV** — it's their data.
 
 ## 11. Ongoing management
 
-In the Handoff & Maintenance Guide, include a database section: provider and plan, ERD, data dictionary link, backup/restore steps, how to add a user/role, how to export, size and cost to watch, and the migration process for future developers. When the person comes back with "data galat dikh raha hai", treat it as an incident: root cause first, fix data on a copy, then apply with a backup.
+In the Handoff & Maintenance Guide, include a database section: provider and plan, ERD, data dictionary link, backup/restore steps, how to add a user/role, how to export, size and cost to watch, and the migration process for future developers. When the person comes back with "data galat dikh raha hai", treat it as an incident: root cause first, fix data on a copy, then apply to live only with a backup and the person's rule-2 approval (what changes, how many rows, whether it can be undone).

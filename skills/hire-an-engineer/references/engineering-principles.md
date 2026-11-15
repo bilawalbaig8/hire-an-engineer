@@ -31,7 +31,7 @@ Size tiers (Tiny / Small / Medium / Large) are defined in `project-cases.md`. "�
 - [ ] (Small+) Code reviewed; no debug leftovers or hardcoded secrets
 - [ ] UI: all states, mobile checked; accessibility checklist (Small+)
 - [ ] Docs updated; data dictionary and changelog (Small+); `PROJECT_STATE.md` reflects the change
-- [ ] (Small+) Merged to `main`, CI green; board updated
+- [ ] (Small+) Merged to the integration branch (`github.md` §3), CI green; board updated
 - [ ] (Milestone) the person has seen it working, or under Authorization it was in the milestone note
 
 ## 3. Design and code principles
@@ -87,10 +87,13 @@ Principles: test behaviour, not implementation; every bug fixed gets a regressio
 
 Apply **security by design** and **privacy by design** from Phase 4, scaled to size.
 
-**OWASP Top 10 checklist** (Small+ when anything is online):
-- Access control enforced on the server/database, not only the UI (test: user A cannot read user B's data)
-- No secrets in code; HTTPS everywhere; passwords never stored by you — use a proven auth provider
+**The security pass** (named in SKILL.md tripwires) = the checklist below + the AI-risk bullets (+ threat modelling at Medium/Large). It applies at **any size** when a tripwire fires: other people's personal data, money, login, a public URL or a deploy. Below that, Tiny and Small offline work needs only the basics (no secrets in code, `.env` ignored).
+
+**OWASP Top 10 checklist** (every size when a tripwire fires; otherwise Small+ when anything is online):
+- Access control enforced on the server/database, not only the UI (test: user A cannot read user B's data). With Supabase or Firebase, the public (anon) key ships to every visitor's browser, so every table needs row-level security with an explicit policy (Firebase: rules never left in test mode) before any public URL. Test with the public key from a logged-out browser: reading or writing another user's rows must fail (`database.md` §7).
+- No secrets in code; HTTPS everywhere; passwords never stored by you — use a proven auth provider. No secrets in browser-exposed env vars (`NEXT_PUBLIC_`, `VITE_`, `EXPO_PUBLIC_` and similar); check the built bundle for key patterns before release.
 - Injection safe: parameterised queries, no raw input in queries/commands
+- XSS safe: never render raw HTML from users or from AI output (`dangerouslySetInnerHTML`, `v-html`, `innerHTML`); escape by default, sanitise with a proven library where HTML is truly needed
 - Insecure design: threats considered in Phase 4 (below)
 - Secure config: no debug mode or default credentials in live; minimal open endpoints
 - Vulnerable components: Dependabot/updates on
@@ -101,12 +104,13 @@ Apply **security by design** and **privacy by design** from Phase 4, scaled to s
 
 **Threat modelling (STRIDE lite)** — Medium/Large, in Phase 4: for each data flow ask: can someone pretend to be someone else, tamper with data, deny an action, see data they shouldn't, take the service down, or gain more access? Write the top risks and safeguards in the design doc.
 
-**Privacy by design:** collect the minimum, explain it to users, set retention, allow export/delete, keep personal data out of logs and AI prompts unless needed.
+**Privacy by design:** collect the minimum, explain it to users, set retention, allow export/delete, keep personal data out of logs and AI prompts unless needed. A web product that collects personal data needs a privacy page; analytics or tracking cookies need consent before they load (check the rules for the users' country; for law-heavy cases, recommend professional review).
 
 **Risks specific to AI-built projects** (every size):
-- **Prompt injection in AI features.** Anything the AI reads that a user or outsider wrote (messages, emails, uploaded files, web pages, reviews) can contain instructions meant to hijack it. Keep your instructions and that content separate and label the content as data; give the AI feature only the access it needs (read-only where possible, no secrets in the prompt); never let model output run as code, a query or a command without validation; and an action that sends, pays, deletes or changes other people's data needs a code check or a human OK, never the model's say-so alone. Test it: put "ignore previous instructions and …" in a test input and confirm nothing happens.
+- **Prompt injection in AI features.** Anything the AI reads that a user or outsider wrote (messages, emails, uploaded files, web pages, reviews) can contain instructions meant to hijack it. Keep your instructions and that content separate and label the content as data; give the AI feature only the access it needs (read-only where possible, no secrets in the prompt); never let model output run as code, a query or a command without validation; and an action that sends, pays, deletes or changes other people's data needs a code check or a human OK, never the model's say-so alone. Test it with several injected inputs, not one canned string: instructions hidden in a file, a web page and an email, in different wordings. Assert: no tool call outside the allowed set, no send/pay/delete without the approval gate, no secret in the output. Say plainly: injection can be contained, not fully prevented, so the limits above are what protect the person.
 - **Check every new package before installing.** AI tools sometimes suggest package names that don't exist, and attackers publish malware under exactly those names (or near-copies of popular ones). Before adding a dependency: it exists on the official registry under that exact name, is widely used and recently maintained, and is really the one the docs mean. Prefer the standard library or a package already in the project; commit the lockfile; never run install scripts or `curl … | sh` from an unverified source.
-- **Stop secrets before they leave the machine.** Besides GitHub secret scanning (`github.md`), add a local pre-commit secret check (e.g. gitleaks) on Small+ projects and keep `.env` in `.gitignore` from the first commit. If a key was ever committed or pasted anywhere public, treat it as leaked: the person revokes and replaces it with the provider (their account, their action), then remove it from the code — deleting it from history alone is not enough.
+- **Stop secrets before they leave the machine.** Besides GitHub secret scanning (`github.md` §8; on private repos it depends on the plan, check), add a local pre-commit secret check (e.g. gitleaks) on Small+ projects and keep `.env` in `.gitignore` from the first commit. No terminal (chat-only)? Use a CI secret scan, or scan the diff yourself before each commit. On a free private repo, local scanner + CI scan are the main protection; branch protection is a cost decision for the person. When taking over or rescuing a repo, and before making one public, scan the **full git history**. If a key was ever committed or pasted anywhere public, or any history hit appears, treat it as leaked: the person revokes and replaces it with the provider (their account, their action), then remove it from the code — deleting it from history alone is not enough.
+- **"Never print" is not enough: the agent can read `.env` into its context**, which sends the keys to the model provider. Set the tool's ignore/deny rules for `.env*` (Cursor `.cursorignore`, Claude Code permission deny rules, or the tool's equivalent) and use the check-a-secret-exists approach.
 
 ## 7. Operations and reliability
 
@@ -129,7 +133,7 @@ Apply **security by design** and **privacy by design** from Phase 4, scaled to s
 
 ## 9. Retrospectives
 
-After each milestone (Small+), spend a few lines in the technical layer on: what went well, what went wrong, what we'll change. Apply the change in the next milestone (Kaizen — continuous improvement). Share with the person only items that affect them (e.g. "next time content pehle bhej dein to 2 din bachenge").
+After each milestone (Medium+; Small: one line or skip; Tiny: skip), spend a few lines in the technical layer on: what went well, what went wrong, what we'll change. Apply the change in the next milestone (Kaizen — continuous improvement). Share with the person only items that affect them (e.g. "next time content pehle bhej dein to 2 din bachenge").
 
 ## 10. Data and performance choices
 

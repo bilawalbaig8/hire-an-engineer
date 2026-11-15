@@ -3,6 +3,10 @@ description: Suggest a new skill for this repository.
 title: "[new skill] "
 labels: ["type: new-skill", "needs-triage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Issues are public. Please **don't include private code, keys, customer data or personal information**.
   - type: input
     id: name
     attributes:

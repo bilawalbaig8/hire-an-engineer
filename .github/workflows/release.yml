@@ -1,29 +1,63 @@
 name: Release skill
-# Push a tag like: hire-an-engineer-v0.2.0
+# Push a tag like: hire-an-engineer-v0.5.0   (<skill>-v<version>)
+# The tag's commit must be on main, skills/<skill>/SKILL.md must exist, and
+# CHANGELOG.md must have a "### [<version>]" heading for the tag's version.
 on:
   push:
     tags: ["*-v*"]
 permissions:
-  contents: write
+  contents: read
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
-      - run: pip install pyyaml
-      - run: python scripts/validate_skills.py
-      - name: Package
+      - run: pip install pyyaml==6.0.3
+      - name: Check the tag before releasing
         run: |
+          set -euo pipefail
           TAG="${GITHUB_REF_NAME}"
           SKILL="${TAG%-v*}"
-          python scripts/package_skill.py "skills/$SKILL" dist
+          VERSION="${TAG##*-v}"
+          if ! [[ "$SKILL" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo "::error::Tag '$TAG' does not look like <skill>-v<version>."; exit 1
+          fi
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Tag '$TAG' has no valid version (expected e.g. $SKILL-v1.2.3)."; exit 1
+          fi
+          git fetch --no-tags origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::The commit for tag '$TAG' is not on main. Merge it to main first, then tag."; exit 1
+          fi
+          if [ ! -f "skills/$SKILL/SKILL.md" ]; then
+            echo "::error::skills/$SKILL/SKILL.md does not exist."; exit 1
+          fi
+          if ! grep -qF "### [$VERSION]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no '### [$VERSION]' heading."; exit 1
+          fi
+          echo "SKILL=$SKILL" >> "$GITHUB_ENV"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - run: python scripts/validate_skills.py
+      - name: Package
+        run: python scripts/package_skill.py "skills/$SKILL" dist
+      - name: Write release notes
+        run: |
+          set -euo pipefail
+          awk -v h="### [$VERSION]" 'index($0, h) == 1 { f = 1; next } f && /^##/ { exit } f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          if [ -z "$(tr -d '[:space:]' < "$RUNNER_TEMP/notes.md")" ]; then
+            echo "See [CHANGELOG.md](https://github.com/${GITHUB_REPOSITORY}/blob/main/CHANGELOG.md) for what changed." > "$RUNNER_TEMP/notes.md"
+          fi
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${GITHUB_REF_NAME}" dist/* \
             --title "${GITHUB_REF_NAME}" \
-            --notes "See CHANGELOG.md for what changed."
+            --notes-file "$RUNNER_TEMP/notes.md"

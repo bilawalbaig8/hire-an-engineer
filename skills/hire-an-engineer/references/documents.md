@@ -79,9 +79,11 @@ Full tree for Medium/Large (adapt names to the stack; grow into it, no empty fol
 ```
 project/
 ├── AGENTS.md            ← rules for ANY AI agent (tool-agnostic)
-├── CLAUDE.md            ← one line: "Read AGENTS.md"
+├── CLAUDE.md            ← one line: "Read AGENTS.md" (Claude Code only)
 ├── PROJECT_STATE.md     ← where we are now; read first, update last
+├── TASKS.md             ← the board, if Markdown (`project-management.md` §2)
 ├── README.md  CHANGELOG.md  .gitignore  .env.example
+│   (QUESTIONS.md, REPORT.md, .slots/ only during a run: `project-memory.md` §1)
 ├── docs/
 │   ├── README.md        ← index of all docs
 │   ├── at-a-glance.md  brief.md  history.md

@@ -45,6 +45,7 @@ Decide per category: needed or not, which tool. List only what's needed.
 ## 4. Setting up
 
 - With available tools/connectors/terminal: do it yourself — repos, folders, sheets, boards, projects, config files.
+- **On the person's own computer** — installing runtimes, global packages, background services or scheduled tasks — needs a one-line OK naming what and from where (the official source). Packages inside the project folder, in a virtual environment or `node_modules`, are part of the build.
 - Approvals follow SKILL.md rule 2. Never type their passwords, payment or ID details — they do those steps, then you continue.
 - Otherwise give exact steps (click-by-click only for tools they don't know), say what they should see, and verify each tool works before the next.
 

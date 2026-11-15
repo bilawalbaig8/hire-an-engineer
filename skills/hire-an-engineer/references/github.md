@@ -19,7 +19,7 @@ The person owns the account and the repo (create it under their account or organ
 - **Private** unless the person wants it public.
 - Name: short, lowercase, hyphens (`bakery-orders`).
 - Files from day one: minimum files per project size are in `project-memory.md` §1. `.gitignore` always excludes secrets (`.env`), build output, OS junk.
-- Default branch `main`; enable branch protection on `main` for medium/large projects (no direct pushes, checks must pass).
+- Default branch `main`; for medium/large projects protect `main` (no direct pushes, checks must pass). Branch protection and rulesets on **private** repos depend on the GitHub plan (may need a paid plan): check. On a free private repo, a local secret scanner plus a CI secret scan (§8) are the main protection, and paid branch protection is a cost decision for the person (rule 2).
 
 Folder structure follows the file map from the implementation plan; keep it flat and obvious.
 
@@ -33,7 +33,7 @@ Simple, not enterprise:
   `feat: add order form`, `fix: reject letters in phone number`, `test: …`, `docs: …`, `chore: …`
 - Commit after each passing test step (TDD cycle); never commit secrets or failing tests to `main`.
 - Merge via pull request; delete the branch after merge. No remote: a local `--no-ff` merge, with the review label in the message.
-- Tiny single-person projects may commit passing work straight to `main` (small commits, tags for versions); work in progress and checkpoints go on a `wip/` branch, merged when green.
+- Tiny single-person projects may commit passing work straight to `main` only if `main` does not deploy (small commits, tags for versions); work in progress and checkpoints go on a `wip/` branch, merged when green.
 
 ## 4. Issues, labels, milestones and Projects board
 
@@ -57,7 +57,7 @@ Add as the project warrants:
 - **Preview deploys:** hosting integration (Vercel/Netlify) gives every PR a test link — share with the person for UI approval.
 - **Deploy on release:** tag `v*` → build → deploy to live. If hosting auto-deploys a branch, merging to it is a live release: release approval (SKILL.md rule 2).
 - **Scheduled jobs:** nightly database backup, data exports, dependency checks.
-- **Dependabot:** the person can't review these. You review and merge only after CI is green and a changelog check; major-version bumps need their OK.
+- **Dependabot / Renovate:** the person can't review these. Dependency PRs merge into the integration branch only (§3), never into a branch that auto-deploys without rule-2 approval. You review and merge only after CI is green and a changelog check. Add a cooldown of a few days before adopting brand-new versions (Dependabot `cooldown`, Renovate `minimumReleaseAge`); major-version bumps still need their OK.
 
 Keep workflows short and commented; record them in the Handoff Guide.
 
@@ -69,7 +69,8 @@ Keep workflows short and commented; record them in the Handoff Guide.
 ## 8. Security and access
 
 - Secrets only in GitHub Actions secrets / hosting env vars — never in code, issues, docs or commits. If one is committed, rotate it immediately (removing it from history isn't enough).
-- Enable secret scanning and Dependabot alerts.
+- Enable secret scanning and Dependabot alerts. Secret-scanning alerts on **private** repos depend on the plan (may need a paid one): check. If not available, run a local scanner (e.g. gitleaks) and a CI secret scan.
+- Taking over or rescuing a repo, and before making any repo public: scan the **full git history** for secrets, not just the current files. Any hit = treat as leaked; the person rotates the key.
 - Least access: collaborators only as needed; remove access when people leave.
 - The person enables 2-factor auth on their account (guide them; never handle their codes).
 - The repo is also a backup of the code; database backups are separate (`database.md`).
@@ -77,7 +78,7 @@ Keep workflows short and commented; record them in the Handoff Guide.
 ## 9. How you operate it
 
 In order of preference:
-1. Use available tools directly (git in a coding agent or terminal, a GitHub connector or CLI) — create repo, branches, commits, issues, board, PRs, releases. Approvals follow SKILL.md rule 2; also ask before making the repo public (it exposes all history and docs) or adding collaborators.
+1. Use available tools directly (git in a coding agent or terminal, a GitHub connector or CLI) — create repo, branches, commits, issues, board, PRs, releases. Approvals follow SKILL.md rule 2; also ask before making the repo public (it exposes all history and docs; scan the full history first, §8) or adding collaborators.
 2. If you can't access GitHub, prepare everything (files, issue list as CSV/markdown, workflow files) and guide the person click by click through repo creation and upload — or recommend continuing the build in a coding agent (CLI or IDE) for full automation.
 
 Always report in plain terms: "Version 1.1 GitHub pe save ho gaya, yeh raha link."

@@ -3,6 +3,12 @@ __pycache__/
 .DS_Store
 *.pyc
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+node_modules/
+.venv/
 
 # Owner-only / internal (kept locally, not published)
 /HANDOFF.md

@@ -72,7 +72,7 @@ Always include one option that **removes** something instead of adding, and one 
 
 **Tension hunting.** Look for goals that pull against each other — simple vs flexible, private vs shared, cheap vs reliable. Name the trade-off and pick deliberately; good designs often find a way to get most of both.
 
-**Attacker's view (security).** Before launching anything with logins, personal data, payments or an admin area: who would attack it (an outsider, a logged-in user, a staff member) and what would each try — reach another user's data, skip payment, become admin, read secrets? Report only a weakness you can show step by step against *this* project (entry point → steps → damage). "Best practice says…" without a real path is not a finding. Fix each real one, add a test for it, and run any scanner you can (`engineering-principles.md` §6).
+**Attacker's view (security).** Before launching anything with logins, personal data, payments or an admin area: who would attack it (an outsider, a logged-in user, a staff member) and what would each try — reach another user's data, skip payment, become admin, read secrets? Report only a weakness you can show step by step against *this* project (entry point → steps → damage). "Best practice says…" without a real path is not a finding. That filter removes speculative findings only; it never waives the `engineering-principles.md` §6 checklist, which runs regardless. Fix each real one, add a test for it, and run any scanner you can (`engineering-principles.md` §6).
 
 ## 5. Deciding
 

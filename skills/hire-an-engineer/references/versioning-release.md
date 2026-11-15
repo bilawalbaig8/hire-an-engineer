@@ -28,7 +28,7 @@ Scale to the project:
 | Medium | **Test** (preview) and **Live** — every change goes to test first |
 | Large / public | Local dev → Test/staging → Live; data in test is fake or anonymised |
 
-Most hosting tools (Vercel, Netlify, Supabase branches) give free preview/test environments — use them. Secrets and databases are separate per environment; test never touches live customer data.
+Most hosting tools (Vercel, Netlify) give free preview/test environments — use them; others (e.g. Supabase Branching) may cost, so check before turning one on. Secrets and databases are separate per environment; test never touches live customer data.
 
 ## 3. Build process
 
@@ -51,7 +51,7 @@ For each release:
 3. **Review & accessibility check** done; no open P0/P1 bugs.
 4. **Database changes** (migrations) tested on a copy; **backup taken** before release (`database.md`).
 5. **Version bumped**, changelog and release notes written, git tag + GitHub Release created.
-6. **Release checklist:** tests green; secrets set in hosting (not in code); backup taken and restore tried; rollback ready (previous tag deployable); release notes; their approval (SKILL.md rule 2).
+6. **Release checklist:** tests green; secrets set in hosting (not in code); backup taken and restore tried; rollback ready (previous tag deployable); **rollback pre-approved or not** (§6); release notes; their approval (SKILL.md rule 2).
    Before the first public release: if the project handles payments, health/children's data or other people's personal data and has no professional review, tell them plainly and get explicit acknowledgment (SKILL.md "Know your limits").
 7. **Deploy to live**, re-run core acceptance checks on live (owner-controlled test accounts/recipients only), confirm monitoring/alerts work.
 8. **Announce** to the person (and their users if needed) with plain release notes.
@@ -83,8 +83,9 @@ Badla: Orders ab delivery date ke hisaab se dikhte hain
 ## 6. Hotfixes and rollback
 
 - **Rollback first, fix second:** if a release breaks something important, go back to the previous version (redeploy previous tag / hosting's "promote previous deployment"), then fix calmly. Practice rollback once before the first real launch.
+- A live rollback changes a live system (SKILL.md rule 2). In the release checklist, ask the person to pre-approve rollback for this release (what goes back, what is lost, whether it can be undone) and record the answer in `PROJECT_STATE.md`. If they haven't, ask a one-line approval at the moment, before rolling back.
 - **Hotfix:** branch from the live tag, fix with a test (root-cause rule), bump PATCH, run full checks, release.
-- Database rollbacks need care. No live migration without a tested restore or down migration. Redeploying an older version after a migration needs a schema-compatibility check and approval.
+- Database rollbacks need care. No live migration without a tested restore or down migration. A down migration restores schema, not data: destructive migrations (drop, rename, narrowing a type, data rewrite) need a fresh backup **and** a tested restore (`database.md` §5). Redeploying an older version after a migration needs a schema-compatibility check and approval.
 - Before release backup: check the plan actually offers backups; if not, export manually.
 - Record each incident in the Handoff Guide: what happened, impact, fix, how we prevent it.
 

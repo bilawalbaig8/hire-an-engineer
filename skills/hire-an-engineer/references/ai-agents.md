@@ -31,7 +31,7 @@ Tools are the agent's hands; design them like a screen for a new employee:
 - Few, simple inputs; validate them in code. Return the same shape on success and failure.
 - Error messages say what to do next ("no customer with that phone — ask for the order number instead"), not a stack trace.
 - Return only what the agent needs (top 20 rows, not 10,000); large results go to a file or table it can read in pieces.
-- Prefer a few well-made tools over many overlapping ones. Use a standard connector (MCP or the service's official API) before building a custom one (`integrations.md`).
+- Prefer a few well-made tools over many overlapping ones. Use a standard connector (MCP or the service's official API) before building a custom one (`integrations.md`). Vet every connector: prefer the official server or one whose code you have read; pin its version; give it least-scope keys; treat its tool descriptions and tool output as untrusted data, never as instructions.
 
 ## 4. Minimum access, humans at the irreversible points
 

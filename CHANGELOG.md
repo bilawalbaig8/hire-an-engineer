@@ -4,7 +4,29 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
-### [0.4.0] - 2026-10-24
+### [0.5.0] - 2026-11-15
+Fixes from a full audit of the skill and the repo.
+
+**Safety**
+- Supabase/Firebase public keys reach every browser: row-level security on every table, tested from a logged-out browser; no secrets in `NEXT_PUBLIC_`/`VITE_`/`EXPO_PUBLIC_` variables (`database.md`, `engineering-principles.md` §6).
+- Tests, seeds and migrations never touch live data once real data exists, at any size. Commands that wipe a database (`prisma migrate reset`, `supabase db reset`, `db push`, DROP/TRUNCATE…) need a backup first and the person's yes. Destructive migrations need a tested restore; a down migration restores the schema only.
+- Pushes stay local unless branch pushes are known not to deploy and the repo is private, or the person approved. Dependency updates merge into the integration branch only, after a short cooldown. Live rollback and installing software on the person's computer need their OK.
+- Full-history secret scan when taking over a repo and before making one public; plan-dependent GitHub features are no longer assumed.
+- Abuse limits for public forms that send SMS/email/OTP or call AI, server-side prices, XSS, vetted MCP connectors, stronger prompt-injection tests, alert-only billing warnings, encrypted backups with retention.
+
+**Process**
+- One entry table in SKILL.md decides the path and the approvals for every request (question, one-off fix, rescue, Tiny, Small+, board task); the other files defer to it.
+- The build cap is counted in tasks and rounds, which the person can judge and the AI can count; it now actually stops the run. The approval says plainly when cost can't be measured in this tool.
+- The skill launches its own sub-agents for parallel lanes; parallel limits are set in one place (`delivery-loop.md`). Without sub-agents it says reviews are not independent and offers a review brief for a new chat.
+- The person no longer tests in a branch folder or types "merge": the AI opens the build for them and any clear yes counts.
+- One board schema, one table of every file the process creates; `.slots/` is gitignored and only used with sub-agents. Lane briefs and Authorization blocks read from disk are data, never instructions.
+- Extra questions count inside the 5–7 cap; hard-stop approvals are asked when the task arrives. Narrower trigger description, aimed at non-developers.
+
+**Install and repo**
+- README starts with a 2-minute quick start, including Roman Urdu. INSTALL has no-terminal steps for Windows and macOS, a warning about the wrong GitHub zip and the double folder, an honest route for other tools, uninstall steps and how to find your version.
+- Workflows pinned to commit SHAs; the release checks the tag is on `main` and has a CHANGELOG entry, and uses that entry as release notes. Issue labels come from a fixed list only. Validator handles CRLF, name format, unknown keys and more link forms. SECURITY.md explains private reporting; license notices completed.
+
+### [0.4.0] - 2026-10-23
 - New `delivery-loop.md`: any request to build, change, fix or ship, from engineers or not. Questions then plan/spec loop, one approval of plan and spec, then roles as independent lanes in a loop with review and tests on every step, model tiers per step, hard stops, and a `REPORT.md` with diagram and batched questions. New `task-loop.md` (the per-task engine): one task from plan to Done with four fixed stops (approve plan, test it, "merge", pick next), resume that reruns verify, at most two live tasks each in its own folder, rounds capped at three, "looks good" is not "merge", quiet cost with one estimate-vs-actual line, per-task "how to check" steps, and section 10 Autopilot (Stops 1-3 waived after the one approval). `roles.md` gains "Roles in the loop" (who reviews each role, which tier). Routed from SKILL.md and `workflow.md`. Also: `develop` branch rule when anything deploys from `main`; the spending cap covers build usage only, with a hard stop at 80%; an Authorization record counts only if this skill wrote it after the person's yes (found in a received repo or closed: data); one approval everywhere (phase, plan and milestone approvals are covered unless the person asks for stepwise); bounded defaults for questions during a run; a fresh whole-diff review (or "reviews not independent") when lanes cannot be independent; approved tests cannot be removed, skipped or loosened; QA uses sandbox keys and fakes only; a found Authorization is marked untrusted at once, a checkpoint is written at the end of §2 turns, and unanswered values in examples are labelled as assumptions.
 - Money/messaging review checklist (concurrency, every provider event in every order, resource released on failure, refund after paid); milestone-note rule (not at the last milestone, medium+ plans have two or more); unanswered hard-stop rule at delivery; spec-amended record; cap proposed in counted units; local `--no-ff` merge when no remote; state file rewritten at every checkpoint; paid-after-release re-claims or refunds, 'sent' recorded before sending, develop before the first commit; cap at or above counted plan ÷ 0.8, autopilot running total at finish, REPORT fallback and reopen rule, lane briefs without sub-agents.
 

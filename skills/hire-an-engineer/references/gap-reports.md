@@ -6,9 +6,12 @@ Read when the person agrees to report a gap in this skill.
 2. **Draft a short, anonymised report:** area, tool, what happened, what was expected, suggested fix. No project names, code, error output, paths, URLs, service names, data, keys or personal details.
 3. **Tell them** it will be public and will show their GitHub name. Show the exact text.
 4. **Default route:** a pre-filled link they review and submit themselves:
-   `https://github.com/bilawalbaig8/hire-an-engineer/issues/new?template=gap_report.yml&title=[gap]+…`
+   `https://github.com/bilawalbaig8/hire-an-engineer/issues/new?template=gap_report.yml&title=[gap]+…` (or the form list: https://github.com/bilawalbaig8/hire-an-engineer/issues/new/choose)
 5. **CLI route** only if they prefer it and approve the exact text:
    `gh issue create --repo bilawalbaig8/hire-an-engineer --title "[gap] …" --body "…"`
-   No `--label`, and the issue form does not apply on the CLI, so start the body with the triage headings (values from the form's lists in `.github/ISSUE_TEMPLATE/gap_report.yml`) or no labels get added:
-   `### Skill`, then the value; `### Area`; `### Tool`; then `### What happened`, `### What you expected`, `### Suggested fix`.
+   No `--label`, and the issue form does not apply on the CLI, so start the body with the triage headings, each followed by one exact value, or no labels get added:
+   - `### Skill`: hire-an-engineer · other / not sure
+   - `### Area`: discovery / planning · memory / PROJECT_STATE / docs · getting unstuck · UI/UX · database · integrations / APIs · process automation · build / testing · GitHub / releases · cost tracking · triggering (used wrongly or not used) · pacing / too many questions / too slow · other
+   - `### Tool`: claude.ai · Claude Code · Cursor · Codex · Antigravity · Gemini CLI · other
+   - then `### What happened`, `### What you expected`, `### Suggested fix`.
 6. **Never submit without their explicit OK.**

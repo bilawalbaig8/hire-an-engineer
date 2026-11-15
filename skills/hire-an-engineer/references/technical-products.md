@@ -104,7 +104,7 @@ The "users" are developers or designers, so their experience is the product:
 ## 7. Platforms (multi-tenant, real-time)
 
 For Slack-like tools, collaboration apps, marketplaces:
-- **Tenancy:** every row tagged with its workspace/tenant; isolation enforced in the database (row-level security) and tested.
+- **Tenancy:** every row tagged with its workspace/tenant; isolation enforced in the database (row-level security) and tested with the public key from another tenant's login and from a logged-out browser: nothing of another tenant's may be readable or writable (`database.md` §7).
 - **Real-time:** managed real-time services (e.g. Supabase Realtime, WebSocket services) before custom servers; handle reconnects, ordering, offline queues, presence.
 - **Roles and permissions** per workspace (owner, admin, member, guest).
 - **Scale plan:** what breaks first at 10×/100× users (connections, DB writes, storage, AI cost) and the planned fix.

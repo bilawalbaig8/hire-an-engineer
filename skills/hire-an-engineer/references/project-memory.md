@@ -6,13 +6,21 @@ The person switches between AI tools (chat, Claude Code, Cursor, Codex, Antigrav
 
 ## 1. Standard project scaffold
 
-Minimum by size:
+Every file this process can create besides the product's own code, and when. In a new or empty folder these are pre-approved; in an existing project say what you'll add and ask once. A pure question, a one-off fix or a one-bug rescue creates none.
 
-| Size | Create |
+| File | Created when |
 |---|---|
-| Tiny | git, AGENTS.md, CLAUDE.md (one line), PROJECT_STATE.md, README.md, .gitignore |
-| Small | Tiny + CHANGELOG.md + docs/project.md (brief, design, plan, tests in one file) + docs/decisions/ once the first decision exists |
-| Medium / Large | Full tree in `documents.md` §6; grow into it, don't create empty folders |
+| git, `AGENTS.md`, `PROJECT_STATE.md`, `README.md`, `.gitignore` | Tiny+ (the Tiny minimum) |
+| `CLAUDE.md` (one line: "Read AGENTS.md") | Only when the tool is Claude Code; `AGENTS.md` is the cross-tool file |
+| `CHANGELOG.md`, `docs/project.md` (brief, design, plan, tests in one file) | Small+ |
+| `docs/decisions/` | Small+, once the first decision exists |
+| `TASKS.md` (the Markdown board) | Small+, when the board is Markdown (`project-management.md` §2) |
+| `docs/at-a-glance.md` | Small+, from the first milestone (`documents.md` §5) |
+| `QUESTIONS.md` | An autopilot run (`delivery-loop.md` §6) |
+| `REPORT.md` | Delivery of an autopilot run (`delivery-loop.md` §8) |
+| `.slots/<task>/<role>.md` | Autopilot with sub-agents only; add `.slots/` to `.gitignore` first |
+| Task folders (git worktrees) | Two tasks live at once (`task-loop.md` §5); outside the project folder or gitignored |
+| Full tree | Medium / Large: `documents.md` §6; grow into it, don't create empty folders |
 
 Other tools' rule files (Cursor rules, `GEMINI.md`) just point to `AGENTS.md`: exactly one source of rules. Check the current conventions of the person's tools rather than assuming file names. Documents kept in an external tool (Google Docs, Notion): the repo keeps a link and short summary in `docs/README.md`; the repo stays the source of truth.
 
@@ -36,7 +44,7 @@ Templates: `templates.md`.
 4. Check tripwires (SKILL.md): personal data, money, login, public URL, deploy → normal lane + security pass.
 5. Tell the person in 2–3 lines: where we are, what you'll do now, what you need from them.
 
-No memory files yet (existing project, or started without this skill): **first create them** from the code and what the person remembers. Often the most useful first step for a stuck project.
+No memory files yet (existing project, or started without this skill): say which you'll add and ask once, then create them from the code and what the person remembers. Often the most useful first step for a stuck project (not for a one-bug rescue: §1).
 
 Chat-only: ask them to upload `PROJECT_STATE.md` at the start; at the end, hand back the whole updated file, never a diff.
 
@@ -46,15 +54,15 @@ Sessions end unexpectedly (context runs out, crash, closed window). Don't wait f
 
 **Trigger: every completed task or commit.** About every 20 minutes is a backstop where a clock is available (`date`, or the `Last updated` line in `PROJECT_STATE.md`). No clock: also checkpoint every 10–15 significant actions and when the conversation gets long.
 
-**Also checkpoint immediately:** before anything risky (migrations, big refactors, deploys, deletes); after any decision the person makes; when switching tasks or getting stuck; when they step away. Also checkpoint at the end of every reply that ends a session turn during `delivery-loop.md` §2 (questions asked, assumptions, next step).
+**Also checkpoint immediately:** before anything risky (migrations, big refactors, deploys, deletes); after any decision the person makes; when switching tasks or getting stuck; when they step away. Also checkpoint at the end of every reply that ends a session turn during `delivery-loop.md` §2 (questions asked, assumptions, next step) — in an existing project only once they agreed to the memory files.
 
 **A checkpoint is small:**
 1. **Commit** work in progress on its branch with a clear message. Never stash: stashes are invisible to other tools. Tiny projects working on `main`: checkpoint on a `wip/` branch; only passing work reaches `main`.
-2. Edit only the changed lines in `PROJECT_STATE.md`: active branch, in-progress task with the exact next step, blockers, questions, `Last updated`.
+2. Edit only the lines that changed in `PROJECT_STATE.md`, always including Done recently, Next up, active branch, in-progress task with the exact next step, blockers, questions and `Last updated`. The full rewrite is for session end; stale state at delivery is a defect.
 3. Append one line to the session log in `PROJECT_STATE.md` (trimmed at session end).
 4. A decision record only if a decision was made.
 
-Every timestamp comes from the `date` command; never write a time you did not read. A checkpoint is a commit plus a one-line Done/Next edit; the full rewrite is for session end. `PROJECT_STATE.md` 'Done recently' and 'Next up' are rewritten at every checkpoint; stale state at delivery is a defect.
+Every timestamp comes from the `date` command or the tool's clock; with no clock (chat-only tools) write "time unknown"; never write a time you did not read. Chat-only: a checkpoint means handing back the whole updated file.
 
 Never interrupt the person to announce one; at most a short line at the end of a message.
 

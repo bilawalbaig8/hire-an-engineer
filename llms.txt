@@ -1,12 +1,15 @@
 # Hire an Engineer
 
-> Open-source agent skill that turns an AI coding tool (Claude Code, claude.ai, Cursor, Codex, Antigravity) into a senior software engineer and full software team for non-technical builders and vibe coders: planning, project structure, persistent project memory, UI/UX, architecture, databases, API integrations, process automation, test-first development, getting unstuck, releases, documentation and cost tracking for your product.
+> Open-source agent skill that turns an AI coding tool (Claude Code, claude.ai, Cursor, Codex, Antigravity) into a senior software engineer and full software team for non-technical builders and vibe coders: planning, project structure, persistent project memory, UI/UX, architecture, databases, API integrations, process automation, test-first development, getting unstuck, releases, documentation and cost tracking for your product. Users can write in English, Urdu, Roman Urdu (for example "mujhe ek software banana hai") or any language; the skill triggers on those requests too.
 
-- [README](README.md): what it is, who it's for, install
+Tested by the author with Claude Code and claude.ai. Other tools that support Agent Skills or read AGENTS.md are best effort. Not affiliated with Anthropic or the other tools named.
+
+- [README](README.md): what it is, who it's for, start in 2 minutes
+- [Install guide](docs/INSTALL.md): per-tool install, update, uninstall, which version you have
 - [Skill](skills/hire-an-engineer/SKILL.md): core rules and router
-- [Install guide](docs/INSTALL.md)
 - [Delivery loop](skills/hire-an-engineer/references/delivery-loop.md)
 - [Task loop](skills/hire-an-engineer/references/task-loop.md)
 - [Roles in the loop](skills/hire-an-engineer/references/roles.md)
 - [Project memory system](skills/hire-an-engineer/references/project-memory.md)
 - [Getting unstuck](skills/hire-an-engineer/references/getting-unstuck.md)
+- [Security policy](SECURITY.md)

@@ -60,7 +60,7 @@ Pick the simplest that handles the volume, logic and apps involved (check curren
 | Built-in features of their apps (Gmail filters, Sheets formulas, calendar rules) | Very simple steps | Limited logic |
 | **No-code automation** (Zapier, Make, n8n, Power Automate) | Connecting common apps, simple–medium logic, low–medium volume | Per-task pricing, complex logic gets messy, vendor limits |
 | **Google Apps Script / Office Scripts** | Work inside Google Workspace / Microsoft 365 | Quotas, needs code maintenance |
-| **Python script** (scheduled locally or in the cloud, e.g. GitHub Actions schedule) | Files, data processing, reports, complex logic, high volume | Needs hosting/scheduling, maintenance |
+| **Python script** (scheduled locally or in the cloud, e.g. GitHub Actions schedule) | Files, data processing, reports, complex logic, high volume | Needs hosting/scheduling, maintenance; a local Windows task skips runs on laptops on battery (untick "start only on AC power") and "run whether logged on or not" needs the person to type their Windows password (`platform-targets.md` §4) |
 | **AI agent / AI steps** (LLM API in a flow, or an AI assistant with connectors and scheduled tasks) | Reading unstructured text/PDFs, classifying, drafting | Must be checked; cost per run; privacy — build per `ai-agents.md` |
 | **Browser automation / RPA** | Only when an app has no API or export | Fragile — breaks when the website changes; check the site's terms |
 | **Small custom app** | Process needs its own screens, approvals, records | Most effort — use the full workflow |
@@ -73,7 +73,9 @@ Prefer official APIs and connectors (`integrations.md`). Prefer tools the person
 - **Dry-run mode:** first version only logs/drafts what it *would* do; the person reviews; then turn on real actions.
 - **Idempotent:** running twice must not send twice, pay twice or duplicate rows (check "already processed" markers).
 - **Validate inputs:** missing or odd data goes to the exception path, not through.
-- **Run log:** every run records time, items processed, results, errors (a sheet/table the person can open).
+- **Run log:** every run records time, items processed, results, errors (a sheet/table the person can open). Rotate or trim log files so they can't fill the disk.
+- **Scheduled tasks on the person's computer** (Task Scheduler, cron): creating one needs a one-line OK naming what runs and when.
+- **Google sign-in (Gmail, Sheets, Drive):** an OAuth app left in "Testing" publishing status gets refresh tokens that expire after a short time (check the current rule), so the automation silently stops. Publish the app or plan a re-sign-in, and let the failure alert say so.
 - **Failure alerts:** if a run fails or finds exceptions, the owner gets a plain message with what to do.
 - **Secrets** in the platform's secure storage, never in the flow text or docs.
 - **Limits:** respect app rate limits and platform quotas; batch where possible.

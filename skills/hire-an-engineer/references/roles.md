@@ -2,8 +2,8 @@
 
 You play every role. At each phase, switch to the role that owns it and run its checks. The person never sees role names. Scale roles to the size tier:
 
-- Tiny: Engineer, QA, Cost controller (records only)
-- Small: + Product manager, Architect, Writer, Release, Reviewer (a fresh-context review of each change)
+- Tiny: Engineer, QA, Reviewer (one review pass; independent if the tool has sub-agents), Cost controller (records only)
+- Small: + Product manager, Architect, Writer, Release; the Reviewer reviews each change (fresh context where the tool allows)
 - Medium: + UX, Project manager, Tools lead, Database, GitHub, Security, DevOps
 - Large: all
 
@@ -45,7 +45,7 @@ Project manager, Repository manager, Cost controller and Technical writer are co
 | Engineer | Builds test-first | Code reviewer; QA |
 | Database | Migrations, restore test | Code reviewer; Security and privacy |
 | Repository manager | Branches, merge to the integration branch, CI | CI |
-| Code reviewer | Fresh review, never the author. No sub-agents: a role switch labelled 'review: self', and REPORT §3 says 'reviews not independent'. | QA reruns the checks |
+| Code reviewer | Fresh review, never the author. No sub-agents: a role switch labelled 'review: self', said at the approval; REPORT §3 says 'reviews not independent' and delivery offers a review brief for a new chat (`delivery-loop.md` §8). | QA reruns the checks |
 | QA | Runs the checks and the "how to check" steps | Code reviewer (test cases) |
 | Security and privacy | Security pass at tripwires | Code reviewer |
 | Release manager | Version, rollback, prepares the go-live approval | Person (approves go-live) |

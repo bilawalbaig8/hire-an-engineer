@@ -19,11 +19,11 @@ Vision (one line: what this is for)
 
 ## 2. The task board (artifact)
 
-Every project beyond tiny gets a **live task board** the person can open any time. One preference order (stated here only): the tool they already use (GitHub Projects, Trello, Asana, Linear, Notion, monday, Jira, via connector) → GitHub Issues for code projects → a simple Markdown board (checklist in the plan; also for tiny).
+Every project beyond tiny gets a **live task board** the person can open any time. One preference order (stated here only): the tool they already use (GitHub Projects, Trello, Asana, Linear, Notion, monday, Jira, via connector) → GitHub Issues for code projects → a simple Markdown board (`TASKS.md` in the project root; Tiny: a checklist in the plan).
 
 Medium+ only: interactive HTML board with filters and progress chart, burndown/Gantt charts, retrospectives.
 
-Board columns: **Backlog → To do (this milestone) → In progress → In review/testing → Done**, plus a **Blocked** flag.
+This section and §3 own the board's base schema; `task-loop.md` only adds technical columns (stage, round, branch, slot, needs, cost) to the same rows. Board columns: **Backlog → To do (this milestone) → In progress → In review/testing → Done**, plus **Dropped**. Blocked is not a column: it is the `needs: help` field (waiting on the person: `needs: plan / test / merge`), shown in "What do you need from me".
 
 Views the person cares about: "What's done", "What's next", "What do you need from me". Keep technical tasks visible but labelled so they can ignore them.
 

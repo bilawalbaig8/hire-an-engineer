@@ -24,7 +24,7 @@ During Phases 1–4, translate every requirement that touches the outside world 
 | "Report PDF bane" | Document generation | Library or PDF API |
 | "Ad network / analytics events" | Tracking | Analytics / attribution SDKs |
 
-Also ask: does it **receive** data from outside (webhooks: payment confirmed, message received)? List every integration in the System Design Doc with a sequence diagram.
+Also ask: does it **receive** data from outside (webhooks: payment confirmed, message received)? List every integration in the System Design Doc; Medium+ and webhook flows get a sequence diagram, Tiny/Small a one-line description of the flow.
 
 Prefer, in order: built-in features of tools already chosen (e.g. the database's auth) → a library that needs no external service → an official API → a reputable third-party aggregator → no-code automation (Zapier/Make) for simple, low-volume flows.
 
@@ -112,15 +112,19 @@ A table in the Tools & Setup Guide (and technical section), kept current:
 
 - Use the provider's **hosted checkout** so card data never touches our servers.
 - Decide the refund and hold policy up front, with the person, before launch.
+- The **server computes the price** from its own records; never trust an amount, currency or discount sent from the browser or app.
 - Test mode first; live only at release, with approval (§4, §6).
 - Payment state is derived from the provider's events in any order; zero-amount, free and refund paths get their own tests.
 - Check each payment event against the stored payment: same amount and currency, refunds added up. A mismatch or partial refund is recorded and flagged for the owner, never treated as fully paid or fully refunded. Test an underpaid event, a wrong-currency event and a partial refund.
 - A refund the system did not start, on a booking or order that is still active, is flagged for the owner in plain words. The booking result for the same set of events must not depend on arrival order.
+- A "paid" event that arrives after the booked resource was released re-claims it if it is still free; otherwise flag the owner and refund.
+- Sends and charges run once: mark the stored record "sent" (claimed) before sending, so two schedulers or a restart cannot send twice. A provider reply missing its id counts as a failure.
 
 ## 10. Messaging (SMS / WhatsApp)
 
 - **Consent** before the first message; every message has an **opt-out** that is honoured at once.
 - WhatsApp and many SMS routes need **template approval** and sender verification: board it as a person-owned task with a date (§3).
+- **Abuse protection** for any public form or endpoint that triggers an SMS, OTP, email or AI call (bots run up the bill; SMS toll fraud is common): rate limits per IP and per phone number/email, a bot check (CAPTCHA or similar), the provider's country allow-list limited to the countries you serve, and a daily send cap with an alert to the person when it is near.
 
 ## 11. Real customer data sent to an AI tool
 

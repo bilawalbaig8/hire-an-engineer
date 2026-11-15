@@ -2,6 +2,10 @@
 
 Parts of the skills in this repository adapt ideas and guidance from the following works. Content was rewritten and simplified for this project; the original licenses and copyright notices are reproduced or referenced below.
 
+**MIT-licensed works** are covered by the full MIT permission notice reproduced under Superpowers below; each MIT entry names its copyright holder where known.
+
+**Apache License 2.0 works** (Anthropic skills: frontend-design, Impeccable, agentmemory, Anthropic-Cybersecurity-Skills) are covered by the Apache License, Version 2.0, whose full text is at https://www.apache.org/licenses/LICENSE-2.0 and is incorporated here by reference. Each Apache-2.0 entry carries a "Changes:" line stating what was changed from the original.
+
 ## Superpowers
 - Source: https://github.com/obra/superpowers
 - Used in: `skills/hire-an-engineer/references/engineering-discipline.md` (brainstorming, writing-plans, test-driven-development, systematic-debugging, verification-before-completion, code review, executing-plans, subagent-driven development, finishing-a-development-branch)
@@ -32,12 +36,16 @@ SOFTWARE.
 ```
 
 ## Anthropic skills: frontend-design
+- Source: Anthropic skills repository (the `frontend-design` skill); exact commit not recorded
+- Copyright holder: as stated in that repository's license file (not copied here)
 - Used in: `references/ui-ux.md` (visual design guidance, adapted)
 - License: Apache License 2.0 — https://www.apache.org/licenses/LICENSE-2.0
+- Changes: guidance adapted, reworded and shortened for non-technical builders and merged with other guidance in `references/ui-ux.md`; it is not a verbatim copy.
 
 ## Creative Thinking for Research / Brainstorming Research Ideas (Orchestra Research)
+- Source: Orchestra Research (see entry; repository URL not recorded here)
 - Used in: `references/thinking-toolkit.md` (reframing, abstraction ladder, tension hunting, analogy — adapted)
-- License: MIT
+- License: MIT — copyright holder: Orchestra Research. The MIT permission notice above applies.
 
 ## taste-skill
 - Source: https://github.com/leonxlnx/taste-skill
@@ -63,7 +71,7 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 
 ## Anthropic product-management and design plugin skills
 - Used as inspiration for: `references/thinking-toolkit.md` (product-brainstorming), `references/ui-ux.md` (ux-copy, accessibility-review, design-critique, user-research, design-system, design-handoff)
-- Ideas were paraphrased and adapted, not copied. Check the current license of those plugins in their source repository if you redistribute closely derived material.
+- Concept only: ideas were paraphrased and adapted; no text or code from those plugins is copied, so no license text is reproduced here.
 
 ## cc-thinking-skills
 - Source: https://github.com/tjboudreaux/cc-thinking-skills
@@ -88,7 +96,7 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 ## agentmemory
 - Source: https://github.com/rohitg00/agentmemory
 - Used as inspiration for: `references/ai-agents.md` §5 (memory lifecycle: provenance, confidence, superseding, decay) — concept only, written fresh
-- License: Apache-2.0. No text or code is reproduced.
+- License: Apache-2.0. No text or code is reproduced. Changes: none to the original (concept only, written fresh).
 
 ## Scientific Agent Skills (K-Dense)
 - Source: https://github.com/K-Dense-AI/scientific-agent-skills
@@ -98,4 +106,4 @@ General motion principles (e.g. close faster than open, avoid `transition: all`)
 ## Anthropic-Cybersecurity-Skills
 - Source: https://github.com/mukul975/Anthropic-Cybersecurity-Skills (community project, not affiliated with Anthropic)
 - Used as inspiration for: `references/engineering-principles.md` §6, risks specific to AI-built projects (prompt injection, dependency confusion, secret scanning) — topics only, written fresh
-- License: Apache-2.0. No text or code is reproduced.
+- License: Apache-2.0. No text or code is reproduced. Changes: none to the original (topics only, written fresh).

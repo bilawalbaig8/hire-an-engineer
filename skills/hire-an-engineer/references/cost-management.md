@@ -48,9 +48,9 @@ Every AI call the product makes is logged (add this table to the database design
 Never log sensitive message content unless the person explicitly needs it; log sizes and IDs instead.
 
 From this log, provide:
-- **Dashboard / monthly report:** total cost, cost by feature, by user/workspace, by model, trend chart, cost per active user.
-- **Audit checks (at the first session of each month, or via provider alerts / a scheduled task if the tool supports one):** top 10 most expensive users/features, calls that failed but still cost, unusually long prompts, repeated identical calls (cache candidates), any model used outside its intended feature. Each finding becomes a task on the board with a priority.
-- **Reconciliation:** compare the log's total to the provider's billing dashboard; investigate gaps over ~5%.
+- **Dashboard / monthly report** (Medium+ and live AI features; Tiny/Small: the log plus a monthly total is enough): total cost, cost by feature, by user/workspace, by model, trend chart, cost per active user.
+- **Audit checks (at the first session of each month, or via provider alerts / a scheduled task if the tool supports one; Tiny/Small: a quick look at the top cost items, skip the rest):** top 10 most expensive users/features, calls that failed but still cost, unusually long prompts, repeated identical calls (cache candidates), any model used outside its intended feature. Each finding becomes a task on the board with a priority.
+- **Reconciliation** (Medium+, or whenever real money is at stake): compare the log's total to the provider's billing dashboard; investigate gaps over ~5%.
 
 ## 3. Running cost register
 
@@ -70,7 +70,8 @@ Check and update at every release. Before any change that adds cost (new service
 
 - Agree a monthly budget with the person for running and AI costs, including your own build usage. Give a one-line build-usage estimate (labelled estimate) only when the user asks or a budget tripwire fires, as sessions × tokens per session, with subscription and pay-per-use split, any assumed price marked "assumed", a range and "may be off by 2x"; record an actual only if the user shares it (some tools show usage to the user, e.g. a cost command; you usually can't read it: ask them to share it, otherwise estimate).
 - Set spending limits/alerts in every provider that supports them (AI API, hosting, database), at e.g. 50%, 80% and 100% of budget. Ask permission before changing billing settings; the person sets payment details themselves.
-- In the product: hard caps on AI usage per user/day; alert the person if daily AI cost exceeds a threshold.
+- **Many providers only alert and never stop spending.** Prefer a hard cap or a prepaid balance with auto-reload off where the provider offers one. Mark each alert-only provider in the cost register (new column or note) and tell the person plainly: "yahan limit sirf khabar deti hai, kharcha rokti nahi". A card on file for a "free" tier can still be charged once limits pass; check the provider's rule.
+- In the product: hard caps on AI usage per user/day, enforced in code (`ai-agents.md` §2 covers max spend, steps and the kill switch); alert the person if daily AI cost exceeds a threshold.
 - Watch free-tier limits and warn before they're crossed.
 
 ## 5. Visibility — record-only vs managed
@@ -122,4 +123,4 @@ Only where the tool lets you choose the model or sub-agent.
 
 - Give each delegated sub-agent a short brief and a fresh context: most cost is re-reading the conversation.
 - A mid-tier job that fails twice reruns on the strongest tier; a cheap-tier job that meets something it can't read hands up one tier.
-- Which step of a delivery run uses which tier: `delivery-loop.md` §5.
+- Which step of a delivery run uses which tier: `delivery-loop.md` §5 is the source for per-step tiers; if the table above ever differs from it, §5 wins.

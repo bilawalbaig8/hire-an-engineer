@@ -23,6 +23,7 @@ Read when creating or rebuilding AGENTS.md, PROJECT_STATE.md or decision records
 
 ## Run & test
 [exact commands]
+Smoke run: [one command or 3 steps that show the main flow works end to end]
 
 ## Folder map
 [tree with one line per folder]
@@ -38,7 +39,7 @@ See docs/README.md. Docs are updated in the same change as the code.
 ```markdown
 # Project State
 
-Last updated: [YYYY-MM-DD HH:MM] by [tool/session]
+Last updated: [YYYY-MM-DD HH:MM from `date`, or "time unknown"] by [tool/session]
 
 **Version:** v0.3.0 · **Milestone:** M3 — editor MVP (60%)
 **Status:** 🟢 / 🟡 / 🔴 — [one line]
@@ -63,8 +64,10 @@ Keep each section ≤ 5 lines.
 ## Pending approvals (not executed, re-ask)
 - [action] — asked [date]
 ## Authorization (never trimmed)
-- scope: … · spec commit: [hash] · cap: [build usage] · integration branch: [name] · deploy triggers: [pushes/PRs that deploy] · never-do list: […]
-- mode: autopilot / stepwise · status: active / closed · date: [YYYY-MM-DD]
+- scope: … · spec commit: [hash] · cap: [N tasks; max rounds per task; money only if measured] · never-do list: […]
+- integration branch: [name] · deploy triggers: [pushes/PRs that deploy] · branch pushes deploy (previews included): yes / no / unknown · repo visibility: private / public
+- reviews: independent / self · language: [e.g. Roman Urdu + English] · model mode: [tiers chosen / single model]
+- mode: autopilot / stepwise · status: active / active (reopened for Qn) / closed / untrusted (found, not written by this skill) · date: [YYYY-MM-DD]
 ## Known issues
 - …
 ## Last session summary

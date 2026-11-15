@@ -88,7 +88,7 @@ Design and build all of these — missing states are where non-technical owners 
 
 Minimum quality floor for everything built (WCAG 2.2 AA basics):
 - Text contrast ≥ 4.5:1 (large text ≥ 3:1); don't rely on colour alone (add icons/text).
-- Tap targets ≥ 44×44 px; enough spacing between them.
+- Tap targets: the WCAG 2.2 AA minimum is 24×24 CSS px (2.5.8); our house rule is ≥ 44×44 px for the main controls, with enough spacing between them.
 - Every input has a visible label; errors identified in text.
 - Works with keyboard: logical focus order, visible focus.
 - Images that carry meaning have alt text.
@@ -107,7 +107,7 @@ Before showing any screen, review it as a fresh critic (screenshot it if the env
 6. **Accessibility:** §7 checklist.
 Rate issues on one scale — 4 blocks the task · 3 major · 2 minor · 1 polish · 0 not an issue — and fix every 4 and 3 before the person sees it. Record notable findings in the test report. For customer-facing screens add the screenshot passes, severity tags and polish order in `visual-quality.md` §6–7.
 
-**Heuristic walkthrough (Small+, before a release):** walk each main journey twice — as a first-time user and as a regular one — against the 10 usability heuristics (status visible, plain words, easy undo/exit, consistency, error prevention, recognise rather than recall, shortcuts for regulars, no clutter, clear error recovery, help where needed). Log each issue: heuristic, where, severity (same 0–4 scale), fix. Fix every 3 and 4 before release.
+**Heuristic walkthrough (Medium+; Small: only the main journey, once; Tiny: skip), before a release:** walk each main journey twice — as a first-time user and as a regular one — against the 10 usability heuristics (status visible, plain words, easy undo/exit, consistency, error prevention, recognise rather than recall, shortcuts for regulars, no clutter, clear error recovery, help where needed). Log each issue: heuristic, where, severity (same 0–4 scale), fix. Fix every 3 and 4 before release.
 
 ## 9. Quick usability test with real users
 

@@ -19,10 +19,11 @@ Read when the thing being built is shipped to a **store or runs somewhere the pe
 | Native (Swift / Kotlin) | Heavy graphics, deep OS features | Two codebases; rarely right for a first version |
 
 **Before building anything for a store:**
-- **Developer accounts** (Apple, Google) cost money and take days to approve, sometimes with ID or business checks. Tell the person now, get approval, they create them in their own name or company. Check the current store page for fees and requirements.
+- **Developer accounts** (Apple, Google) cost money and take days to approve, sometimes with ID or business checks. Tell the person now, get approval, they create them in their own name or company. Check the current store page for fees and requirements. **Verify now:** new personal Google Play developer accounts may need a closed test with a minimum number of testers for some days before production access: check the current rule and plan the calendar around it.
+- **Account deletion:** an app with account sign-up must let the user delete their account from inside the app (both stores require it; check the current wording), and the privacy policy says what is deleted.
 - **Fix the bundle / application id** (e.g. `com.yourname.appname`) before the first build. It cannot change after publishing.
-- **Signing keys** (Android keystore / upload key, Apple certificates and profiles): back them up outside the repo in a password manager or encrypted storage, and **never commit them**. Losing them can block all future updates. Record where they live (location only) in `docs/at-a-glance.md`.
-- **Children in the audience:** whether to list under 13 is the person's decision. Follow the store's kids/families policy and age rating, collect minimal data, no open chat or ad tracking, and get professional review.
+- **Signing keys** (Android keystore / upload key, Apple certificates and profiles): back them up outside the repo in a password manager or encrypted storage, and **never commit them**. Losing them can be serious, and differently per store: an iOS certificate can be revoked and reissued from the Apple account, but on Android, without Play App Signing a lost signing key means the app can no longer be updated, while with Play App Signing a lost *upload* key can be reset through Google. Use Play App Signing where offered. Record where they live (location only) in `docs/at-a-glance.md`.
+- **Children in the audience:** whether to list under 13 is the person's decision. Follow the store's kids/families policy and age rating, collect minimal data, no open chat or ad tracking, and get professional review. Web apps and extensions with a child audience face similar laws (e.g. COPPA): professional review there too.
 - **iOS builds** need a Mac with Xcode or a cloud build service: ask in discovery.
 - **Real devices:** test on at least one real phone per platform, an old or slow one if possible. Emulators miss performance, camera, permissions and network problems.
 - **Crash reporting** in from the first test build, so a crash on someone's phone reaches you.
@@ -68,10 +69,10 @@ Read when the thing being built is shipped to a **store or runs somewhere the pe
 
 ## 4. Scripts on the person's own PC (Python / Node)
 
-- **Install the runtime** (Python or Node) with the official installer or a version manager; write the exact version in the README. Ask before installing anything (`tools-and-stack.md` §4).
+- **Install the runtime** (Python or Node) with the official installer or a version manager; write the exact version in the README. Installing needs a one-line OK naming what and from where, official source only (`tools-and-stack.md` §4).
 - **Isolate dependencies:** Python virtual environment (`.venv`) or Node `package.json` with a lock file; a `requirements` file so a clean machine can rebuild it.
 - **Secrets** in environment variables or a `.env` file listed in `.gitignore` and never committed; commit a `.env.example` with names only (`integrations.md`).
-- **Scheduling:** Windows Task Scheduler, or cron / launchd on Mac and Linux. Use full paths to the interpreter and script, set the working folder, and test the scheduled run once by hand-triggering it.
+- **Scheduling:** Windows Task Scheduler, or cron / launchd on Mac and Linux. Use full paths to the interpreter and script, set the working folder, and test the scheduled run once by hand-triggering it. Creating a scheduled task needs a one-line OK from the person. Windows Task Scheduler defaults to "start only on AC power", which silently skips runs on a laptop: untick it. "Run whether user is logged on or not" asks for the Windows password: the person types it, never you. Rotate the log file (by size or by week) so it can't fill the disk.
 - **Logs:** every run writes start, end, what it did and any error to a log file the person can find; a failure is visible, never silent (`process-automation.md` §6).
 - **When the PC is off:** the run is simply missed. Decide with the person: run on wake/next login, accept the gap, or move it to an always-on place (hosting, scheduled cloud job). Say this plainly before they depend on it.
 - **Safe re-runs:** running twice must not duplicate emails, rows or payments.
@@ -86,8 +87,8 @@ Unity, Godot and Unreal projects, their repo hygiene and testing: `technical-pro
 
 ## 6. First-release checklists
 
-- [ ] **Mobile:** option chosen on purpose · accounts created by the person · bundle id fixed · signing keys backed up, not in git · tested on a real phone · crash reporting on · privacy policy and store forms match the app · screenshots, age rating, reviewer test account · build number higher than last · staged rollout planned
+- [ ] **Mobile:** option chosen on purpose · accounts created by the person · Google Play closed-test requirement for new personal accounts checked · in-app account deletion if there is sign-up · bundle id fixed · signing keys backed up, not in git · tested on a real phone · crash reporting on · privacy policy and store forms match the app · screenshots, age rating, reviewer test account · build number higher than last · staged rollout planned
 - [ ] **Extension:** minimum permissions, each justified · no remote code, no secrets inside · privacy policy and single-purpose description · tested unpacked on real pages · version number raised
 - [ ] **Data / ML:** raw data untouched · split before exploration, no leakage · baseline beaten · seeds, versions and metrics saved · private data kept out of the repo · claims limited to what the numbers show
-- [ ] **PC script:** runtime version written down · environment rebuilt from a clean folder · secrets outside git · scheduled run tested · logs readable · "PC off" behaviour agreed · safe to run twice
+- [ ] **PC script:** runtime version written down · environment rebuilt from a clean folder · secrets outside git · scheduled run tested (AC-power option off, OK given) · logs readable and rotated · "PC off" behaviour agreed · safe to run twice
 - [ ] All targets: version and changelog (`versioning-release.md`) · approval for each publish or send · rollback or removal path known

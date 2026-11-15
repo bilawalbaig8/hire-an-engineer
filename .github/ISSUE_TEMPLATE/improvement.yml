@@ -3,6 +3,10 @@ description: Make an existing skill better.
 title: "[improve] "
 labels: ["type: improvement", "needs-triage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Issues are public. Please **don't include private code, keys, customer data or personal information**.
   - type: dropdown
     id: skill
     attributes:
