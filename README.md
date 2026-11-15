@@ -234,6 +234,37 @@ flowchart TD
 | Platforms | Mobile store releases, browser extensions, data/ML projects, scheduled scripts on a PC |
 | Complex products | Game engines, editors, SDKs, multi-tenant real-time platforms, playable-ad export |
 
+**What's in this repository**
+
+```text
+hire-an-engineer/
+├── skills/hire-an-engineer/      ← the skill (this folder is what you install)
+│   ├── SKILL.md                  ← always loaded: entry table, rules, router
+│   ├── LICENSE.txt
+│   └── references/               ← 29 guides, read only when the router says so
+│       ├── delivery-loop.md  task-loop.md  roles.md          (how work flows)
+│       ├── project-memory.md  templates.md  handoff.md       (memory between chats)
+│       ├── engineering-*.md  database.md  integrations.md …  (how to build safely)
+│       └── plain-language.md  documents.md  ui-ux.md …       (talking and showing)
+├── plugins/hire-an-engineer-board/  ← optional live board for Claude Code
+├── .claude-plugin/               ← marketplace for /plugin install
+├── docs/                         ← INSTALL.md and README graphics
+├── scripts/                      ← validate and package the skill
+└── .github/                      ← checks, releases, issue forms
+```
+
+What the skill creates inside **your** project (sized to the job — a tiny job gets only the first three):
+
+```text
+your-project/
+├── AGENTS.md          ← rules any AI tool follows
+├── PROJECT_STATE.md   ← where things stand; read first, updated after every task
+├── README.md
+├── TASKS.md           ← the task board (Small and up)
+├── REPORT.md          ← what was done and how to check it (after an autopilot run)
+└── docs/              ← plan, design, decisions, guides (grows with the project)
+```
+
 Tested by the author on simulated projects (a salon booking platform, a Unity card game, a browser extension, a coupons feature); the test files are not public. It has not yet been proven on many real projects — please report gaps.
 
 </details>

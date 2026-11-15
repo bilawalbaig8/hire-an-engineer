@@ -83,7 +83,7 @@ project/
 ├── PROJECT_STATE.md     ← where we are now; read first, update last
 ├── TASKS.md             ← the board, if Markdown (`project-management.md` §2)
 ├── README.md  CHANGELOG.md  .gitignore  .env.example
-│   (QUESTIONS.md, REPORT.md, .slots/ only during a run: `project-memory.md` §1)
+│   (QUESTIONS.md and .slots/ during an autopilot run; REPORT.md from its delivery: `project-memory.md` §1)
 ├── docs/
 │   ├── README.md        ← index of all docs
 │   ├── at-a-glance.md  brief.md  history.md
