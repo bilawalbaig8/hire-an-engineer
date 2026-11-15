@@ -1,157 +1,234 @@
-<div align="center">
+<p align="center">
+  <img src="docs/assets/hero.svg" width="100%" alt="Hire an Engineer: your AI tool becomes the senior engineer you never had to hire. No coding needed, plain words in any language, and it asks before anything risky.">
+</p>
 
-# Hire an Engineer
+<p align="center">
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/releases/latest"><b>⬇️ Download</b></a>
+  &nbsp;·&nbsp;
+  <a href="#-start-in-2-minutes"><b>🚀 Start in 2 minutes</b></a>
+  &nbsp;·&nbsp;
+  <a href="#-roman-urdu-mein"><b>🇵🇰 Roman Urdu</b></a>
+  &nbsp;·&nbsp;
+  <a href="#-questions"><b>❓ Questions</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/issues/new/choose"><b>🐞 Report a problem</b></a>
+</p>
 
-**An AI senior software engineer for non-technical builders and vibe coders.**
-Turn your AI coding tool into the engineer you would otherwise have to hire — it plans, structures, designs, builds, tests, ships and documents your software while you focus on the idea.
+<p align="center">
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/bilawalbaig8/hire-an-engineer?style=social"></a>
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/fork"><img alt="GitHub forks" src="https://img.shields.io/github/forks/bilawalbaig8/hire-an-engineer?style=social"></a>
+  <a href="https://github.com/bilawalbaig8"><img alt="Follow @bilawalbaig8" src="https://img.shields.io/github/followers/bilawalbaig8?label=Follow%20%40bilawalbaig8&style=social"></a>
+  <br>
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/bilawalbaig8/hire-an-engineer?display_name=tag&cacheSeconds=3600&color=4338ca"></a>
+  <a href="LICENSE"><img alt="Free, MIT license" src="https://img.shields.io/badge/free-MIT%20license-10b981"></a>
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/issues"><img alt="Open issues" src="https://img.shields.io/github/issues/bilawalbaig8/hire-an-engineer?color=f59e0b"></a>
+  <a href="https://github.com/bilawalbaig8/hire-an-engineer/actions/workflows/validate.yml"><img alt="Checks" src="https://github.com/bilawalbaig8/hire-an-engineer/actions/workflows/validate.yml/badge.svg"></a>
+</p>
 
-Works with **Claude Code · claude.ai · Cursor · Codex · Antigravity** and any agent that supports Agent Skills or `AGENTS.md`. Tested by the author on Claude Code and claude.ai; the others are best effort.
+<p align="center">
+  Made by <a href="https://github.com/bilawalbaig8"><b>Bilawal (@bilawalbaig8)</b></a> · If it helps you, please <a href="https://github.com/bilawalbaig8/hire-an-engineer"><b>⭐ star the repo</b></a> — it helps other non-coders find it.
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/bilawalbaig8/hire-an-engineer?display_name=tag&cacheSeconds=3600)](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest)
-[![Validate skills](https://github.com/bilawalbaig8/hire-an-engineer/actions/workflows/validate.yml/badge.svg)](https://github.com/bilawalbaig8/hire-an-engineer/actions/workflows/validate.yml)
+## 👋 What is this?
 
-</div>
+You have an idea. You ask an AI to build it. It works for a while — then it breaks, the files turn into a mess, and the next chat has forgotten everything.
 
----
+**Hire an Engineer fixes that.** It is a free add-on (called a *skill*) for your AI tool. Once it is installed, your AI stops acting like a chatbot and starts acting like a **senior engineer you hired**: it asks the right questions, makes a plan with you, builds and tests the work, and keeps notes so nothing is ever lost.
 
-## Start in 2 minutes
+You don't need to learn to code. You just say what you want.
 
-**What it is:** a free add-on (called a *skill*) for your AI tool. Once it is installed, the AI works like a senior software engineer you hired: it asks a few plain questions, makes a plan, builds your software, tests it, and keeps notes so the next chat remembers everything.
+## 😩 Sound familiar?
 
-**Who it's for:** people who use AI tools to build things but have no software background: founders, shop owners, designers, marketers, students. You do not need a terminal or any coding knowledge.
-
-**3 steps**
-1. **Download** `hire-an-engineer.zip` from the [latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) (look under **Assets**). Do **not** use "Source code (zip)" or the green **Code → Download ZIP** button; they have the wrong layout.
-2. **Install** it:
-   - **claude.ai:** upload the zip **as it is, do not unzip it**, in Settings → Capabilities (or Skills). Menu names can change. Code execution must be turned on.
-   - **Claude Code:** unzip it and put the `hire-an-engineer` folder inside your `.claude/skills` folder. No terminal needed; click-by-click steps for Windows and Mac are in [docs/INSTALL.md](docs/INSTALL.md).
-   - **Cursor, Codex, Antigravity, others:** see [docs/INSTALL.md](docs/INSTALL.md).
-3. **Say what you want.** Your first message can be as simple as:
-   - English: *"I want to build a booking app for my salon."*
-   - Roman Urdu: *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
-
-**Check it worked:** ask *"what skills do you have?"* and look for `hire-an-engineer`.
-
-**Roman Urdu mein khulasa:** Hire an Engineer ek free skill hai jo aapke AI tool ko senior software engineer bana deti hai. Aap apna idea aasan zabaan mein batayein; planning, building, testing aur documents woh sambhalti hai. Install karne ke liye Releases se `hire-an-engineer.zip` download karein: claude.ai mein zip ko unzip kiye baghair upload karein, Claude Code mein unzip karke folder `.claude/skills` mein rakhein (poori tarkeeb [docs/INSTALL.md](docs/INSTALL.md) mein hai). Pehla message likhein, jaise: *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
-
-**Remove it later:** delete the `hire-an-engineer` folder (or switch it off in claude.ai's Skills settings). Files it made in your projects, such as `PROJECT_STATE.md`, stay until you delete them. Details in [docs/INSTALL.md](docs/INSTALL.md#uninstall-or-turn-it-off).
-
----
-
-## What is Hire an Engineer?
-
-**Hire an Engineer** is an open-source **agent skill** that makes your AI assistant behave like a **senior software engineer you hired** — one who can also act as your whole software team: product manager, UI/UX designer, architect, project manager, developer, database admin, QA tester, DevOps and technical writer.
-
-It's built for people who **can use AI coding tools but don't have a software engineering background**: founders, creators, designers, marketers, students and domain experts who have an idea, start **vibe coding** (building by chatting with an AI), and then hit the same walls:
-
-| Without an engineer | With Hire an Engineer |
+| When you build alone with AI | With Hire an Engineer |
 |---|---|
-| You get **stuck** in error loops and don't know what to try next | An **unstuck protocol**: stop guessing, find the root cause, roll back safely, take one small step |
-| The project becomes a **mess** — giant files, duplicate code, random folders | A **standard project structure** and a structure guard from day one |
-| Every new chat or tool **forgets everything** | **Persistent project memory** in your repo (`AGENTS.md`, `PROJECT_STATE.md`), saved at every finished task (about every 20 minutes) |
-| **No documentation**, no plan, no idea what's done | **Docs-as-code**: brief, design, diagrams, plan, test reports, user guide — always current |
-| You don't know which **APIs, tools or databases** you need | It finds them, compares options, sets them up safely, and keeps your keys out of chat |
-| "It works on my machine" → broken launches | **Test-first build**, verified releases with version numbers, backups and rollback (going back to the last working version) |
-| Surprise **AI and hosting bills** | It **tracks the running and AI costs of your product** and sets budget alerts with your approval (its own build usage is shown as estimates) |
+| 🔁 The same error, again and again | 🧭 It stops guessing, finds the real cause and fixes it step by step |
+| 🍝 Files everywhere, nobody knows what does what | 🗂️ A clean, simple structure from day one |
+| 🧠 Every new chat forgets your project | 📒 Notes are saved inside your project, so any chat or tool carries on where you stopped |
+| 💥 "It worked yesterday" — broken launches | ✅ Tested before it says "done", with backups and an easy way back |
+| 🤷 You don't know which tools or services you need | 🧰 It picks them, explains them simply and keeps your keys and passwords out of the chat |
+| 💸 Surprise bills | 📉 It keeps costs visible and asks before anything that costs money |
 
-You don't need to learn engineering. You talk in plain language (English, Urdu, Roman Urdu or any language you use); it does the engineering.
+## 🛠️ How it works
 
-## Who is it for?
+<p align="center">
+  <img src="docs/assets/how-it-works.svg" width="100%" alt="Four steps: 1. Tell it your idea in your own words. 2. Answer a few questions; it shows a plan and a preview before building. 3. Say yes once; then it works on its own and keeps you posted. 4. It builds and delivers: tested, live, with a guide and saved notes. It always stops and asks before anything that costs money, publishes, goes live or deletes.">
+</p>
 
-- **Non-technical founders** building a first working version (an *MVP*) with AI
-- **Vibe coders** using Claude Code, Cursor, Codex or Antigravity who keep getting stuck
-- **No-code / low-code users** ready to go beyond templates (it will point you to an existing or no-code tool when that is enough)
-- **Small business owners** who want an internal tool, dashboard or **process automation**
-- **Designers, marketers, creators and students** turning ideas into working apps
-- **Anyone rescuing a messy AI-generated project**
+A tiny job gets a quick, tested result. A big project gets a proper plan, a task board, releases and backups. And if a ready-made tool already does what you need, it will tell you instead of building something new.
 
-Engineers can use it too: it takes over any request to build, change, fix, automate, design or ship, whether or not you are an engineer. Plain questions and one-line fixes stay light, with no process.
+## 🚀 Start in 2 minutes
 
-## What it can build
+**1. Download** — open the [latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) and, under **Assets**, download **`hire-an-engineer.zip`**.
 
-Scripts and automations · spreadsheet systems · websites and landing pages · internal team tools · web and mobile apps · dashboards and reports · chatbots and AI tools · integrations and bots · game prototypes, **three.js game engines** and editors · mobile apps and browser extensions · data and ML projects · scripts scheduled on your own PC · developer tools and SDKs · **real-time platforms** · fixing and finishing existing projects.
+> [!WARNING]
+> Don't use **"Source code (zip)"** or the green **Code → Download ZIP** button. Those are the wrong files.
 
-It sizes the process to the job: a tiny script gets a quick, tested result; a large platform gets a roadmap, task board, a safe test copy of the product (*staging*), releases and monitoring set-up (checks run when you open a session, or through provider alerts and scheduled tasks if your tool supports them). Where an existing or no-code tool already does the job, it recommends that instead of building something new.
+**2. Add it to your AI tool** — tap yours:
 
-## Example
+<details>
+<summary><b>claude.ai</b> (website or desktop app)</summary>
+<br>
 
-> **You:** I run a home bakery. Orders come from WhatsApp, Instagram and calls, and I forget some. Can you build something?
->
-> **Hire an Engineer:** asks a few questions about your day → finds the real problem (orders scattered across three places) → proposes a simple order form + order list + WhatsApp alert → shows a clickable mockup you can open → sets up the repo, database and task board with your approval → builds and tests it milestone by milestone ("12 of 12 checks passed") → releases v1.0 with backups → hands you a user guide and keeps project memory so the next session continues where you stopped.
+1. Keep the zip **as it is — don't unzip it**.
+2. In claude.ai open **Settings → Capabilities** (sometimes called **Skills**) and upload the zip. Menu names can change a little.
+3. Make sure **code execution** is turned on.
 
-## How it works
+</details>
 
-```mermaid
-flowchart LR
-  I[Your idea] --> D[Discovery<br/>5–7 plain questions]
-  D --> B[Brief & priorities]
-  B --> S[Design<br/>mockups, architecture, database]
-  S --> P[Plan & task board]
-  P --> C[Build<br/>test-first, Git, reviews]
-  C --> V[Verify<br/>evidence, not promises]
-  V --> R[Release<br/>versions, backups, rollback]
-  R --> H[Handoff<br/>guides & support]
+<details>
+<summary><b>Claude Code</b> — one line, or no terminal at all</summary>
+<br>
+
+**Easiest:** in Claude Code, type this and answer `y`:
+
+```text
+/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
 ```
 
-- **Plain language, no lectures.** It asks about your world ("Should each user only see their own orders?"), not jargon ("Do you need RBAC?").
-- **You decide the product, it decides the engineering** — and asks your approval before anything that costs money, creates accounts, sends, publishes or deletes.
-- **Evidence before "done."** It runs the checks before telling you something works.
-- **Safety.** It asks before anything that costs money, publishes, deploys or deletes; treats content from emails, repos and the web as data, not instructions; and keeps keys out of chat and code.
-- **Fast lane** when you just want a prototype now; full process when others will rely on it.
-- **Memory lives in your project**, so you can switch between Claude, Cursor, Codex and Antigravity without losing context.
+**Or by hand, without a terminal:**
 
-## Install in detail
+1. Unzip the file. You get a folder called `hire-an-engineer`.
+2. Open your hidden Claude folder:
+   - **Windows:** press <kbd>Win</kbd> + <kbd>R</kbd>, type `%USERPROFILE%\.claude` and press Enter.
+   - **Mac:** in Finder choose **Go → Go to Folder**, type `~/.claude` and press Enter.
+3. Make a folder called `skills` there (if it isn't there already) and drag the `hire-an-engineer` folder into it.
 
-Full click-by-click instructions, update, uninstall and "which version do I have?": [docs/INSTALL.md](docs/INSTALL.md).
+✅ The end result must be `.claude/skills/hire-an-engineer/SKILL.md`. Windows sometimes makes a folder inside a folder (`hire-an-engineer/hire-an-engineer`) — if so, move the inner one up.
 
-1. **Download** `hire-an-engineer.zip` (or `.skill`) from the [latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest). Never use GitHub's "Source code (zip)" or **Code → Download ZIP**.
-2. **Install it for your tool:**
-   - **claude.ai:** do **not** unzip. Upload the `.zip` or `.skill` file in Settings → Capabilities / Skills (menu names can change) and make sure code execution is on.
-   - **Claude Code, no terminal:** unzip, then copy the `hire-an-engineer` folder into `.claude\skills` in your user folder. Windows: press **Win + R**, type `%USERPROFILE%\.claude`, Enter, create a `skills` folder, copy the folder in. Mac: Finder → **Go → Go to Folder** → `~/.claude` (**Cmd + Shift + .** shows hidden folders). Windows "Extract All" can create `hire-an-engineer\hire-an-engineer\`; the result must be `.claude\skills\hire-an-engineer\SKILL.md`.
-   - **Claude Code, terminal:** commands (with the `cd` to your Downloads folder) are in [docs/INSTALL.md](docs/INSTALL.md#claude-code-with-a-terminal).
-   - **Cursor / Codex / Antigravity / Gemini CLI / others:** unzip, put the `hire-an-engineer` folder inside your project (`<project>/hire-an-engineer/`), and add this line to the project's `AGENTS.md` (or your tool's rules file): `Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.` If your tool supports Agent Skills it may also have a skills folder; check its docs.
-   - **Other chat apps:** upload the files to a project if the app supports project files. Pasting 30+ files into one chat is not practical.
-3. **Check it worked:** start a new session and ask *"what skills do you have?"*, then say what you want: *"I want to build a booking app for my salon"* — or *"I'm stuck, my app broke after the last change."*
+Prefer the terminal? Commands are in [the install guide](docs/INSTALL.md#claude-code-with-a-terminal).
 
-Claude Code and claude.ai are the tools the author tests with. Other tools are best effort, because their skill and rules folders change often.
+</details>
 
-## FAQ
+<details>
+<summary><b>Cursor, Codex, Antigravity, Gemini CLI and others</b></summary>
+<br>
 
-**Is this a replacement for a human developer?**
-It covers what a senior engineer would do inside your AI tool. For payments at scale, health or children's data, legal compliance or security of large public systems, it will recommend a qualified human review.
+1. Unzip the file and put the `hire-an-engineer` folder inside your project.
+2. Add this one line to the project's `AGENTS.md` (or your tool's rules file):
 
-**Do I need to know how to code?**
-No. You need to be comfortable using an AI tool. It runs the engineering and explains things only in plain terms.
+   ```text
+   Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.
+   ```
 
-**Which AI tools does it work with?**
-Claude (claude.ai and Claude Code) are tested by the author. Cursor, Codex, Antigravity, Gemini CLI and other agents that support Agent Skills or read `AGENTS.md` are best effort. Chat-only tools handle planning, design, docs and prototypes; coding agents handle the full build.
+The author tests on Claude Code and claude.ai. Other tools are best effort, because their settings change often.
 
-**How do I remove it, or find out which version I have?**
-Delete the `hire-an-engineer` folder, or switch it off in claude.ai's Skills settings. The version is in the release name and on the last line of `SKILL.md`. See [docs/INSTALL.md](docs/INSTALL.md#uninstall-or-turn-it-off).
+</details>
 
-**How is it different from Superpowers?**
-[Superpowers](https://github.com/obra/superpowers) gives developers a disciplined workflow. Hire an Engineer adapts that discipline for people *without* an engineering background and adds the rest of the team: product, UI/UX, project management, databases, integrations, releases, documentation, memory and cost tracking for your product.
+**3. Say what you want** — in your own words. For example:
 
-**Do I have to approve every task?**
-No. You approve the plan and spec once. After that it works on its own and asks only for hard-to-undo things (money, accounts, deploys, secrets, deleting, scope changes). You get a report at the end.
+- *"I want to build a booking app for my salon."*
+- *"Mujhe apni bakery ke orders ke liye ek simple app chahiye."*
+- *"I'm stuck. My app broke after the last change."*
 
-**I'm an engineer. Is it still useful?**
-Yes. It takes any build, change, fix or ship request, skips the beginner wording and keeps the steps: understand first, test first, an independent review and a report. A plain question or a one-line fix is just answered.
+**✅ Did it work?** Start a new chat and ask *"what skills do you have?"* — you should see `hire-an-engineer`.
 
-**Is it free?**
-Yes — MIT licensed.
+Updating, removing it, or checking your version: see the [full install guide](docs/INSTALL.md).
 
-## The delivery loop and roles (new in 0.4.0)
+## 💬 What it feels like
 
-Any request goes through one loop. It **understands first**, you **approve once**, then specialised **roles work on their own** and you get a **report with a diagram**. You are not asked to review or approve every task.
+> 🧑 **You:** I run a home bakery. Orders come from WhatsApp, Instagram and phone calls, and I keep forgetting some. Can you build something?
+>
+> 🤖 **Your AI engineer:** Happy to. Three quick questions first, so I build the right thing:
+> 1. Roughly how many orders do you get in a day?
+> 2. Who else needs to see the orders — just you, or your staff too?
+> 3. Should customers order themselves, or do you type the orders in?
+>
+> Here's a quick picture of what I have in mind: one order form, one list of today's orders, and a WhatsApp message when a new one comes in. Want me to go ahead with this plan?
+
+Then it gets on with it: sets everything up (asking you before creating any account), builds it piece by piece, tests each piece, puts it live with backups, and gives you a short guide. Next week, any chat picks up exactly where you left off.
+
+## 🧩 What it can build
+
+| 📱 Web and phone apps | 🤖 Chatbots and AI tools | ⚙️ Automations and scripts |
+|:--|:--|:--|
+| 🌐 Websites and landing pages | 📊 Dashboards and reports | 🔌 Connecting the tools you already use |
+| 🧩 Browser extensions | 🎮 Game prototypes | 🛟 Rescuing a messy AI-built project |
+
+## 📋 See your project at a glance (Claude Code)
+
+Add the free **project board** and a panel opens beside the chat showing what waits for you, what is being built, and what is done — updated live while the AI works.
+
+```text
+/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer
+```
+
+Open it any time with `/board`. It only reads your project notes; it never changes anything. [More about the board](plugins/hire-an-engineer-board/README.md).
+
+## 🛡️ You stay in control
+
+- 🙋 **It asks you first** before anything that costs money, creates an account, sends messages, publishes, puts something live or deletes.
+- 🔐 **It never asks for your passwords or card details**, and keeps keys out of chats, code and documents.
+- 🧪 **It shows proof, not promises.** It runs the checks before saying "done" and tells you how to check it yourself.
+- 🧑‍⚖️ **It knows its limits.** For payments, health or children's data, or legal questions, it recommends a review by a qualified person.
+
+## 🇵🇰 Roman Urdu mein
+
+**Hire an Engineer** ek free skill hai jo aapke AI tool ko ek senior software engineer bana deti hai. Aap apna idea apni zabaan mein batayein — sawal, plan, building, testing aur documents sab woh sambhalti hai, aur har zaroori kaam se pehle aap se poochti hai.
+
+1. [Latest release](https://github.com/bilawalbaig8/hire-an-engineer/releases/latest) se **`hire-an-engineer.zip`** download karein ("Source code" wali zip nahi).
+2. Upar diye gaye tareeqe se apne AI tool mein add karein.
+3. Bas likhein: *"Mujhe apni dukaan ke liye ek app chahiye."*
+
+Paise, account, kuch live karna ya delete karna — in sab se pehle woh hamesha aap ki ijazat leti hai.
+
+## ❓ Questions
+
+<details>
+<summary><b>Do I need to know how to code?</b></summary>
+<br>
+No. If you can chat with an AI tool, you can use this. It explains things in plain words and only asks you what you can judge: what your users see, cost, time and privacy.
+</details>
+
+<details>
+<summary><b>Is it free?</b></summary>
+<br>
+Yes. It's open source under the MIT license. You still pay for your own AI tool and for any services your project uses — and it asks before adding any new cost.
+</details>
+
+<details>
+<summary><b>Will it ask me to approve every little thing?</b></summary>
+<br>
+No. You approve the plan once. After that it works on its own and only stops for things that are hard to undo: money, accounts, going live, deleting or changing what you asked for.
+</details>
+
+<details>
+<summary><b>Does it replace a human developer?</b></summary>
+<br>
+It does what a senior engineer would do inside your AI tool. For payments at scale, health or children's data, legal compliance or big public systems, it will recommend a qualified human review.
+</details>
+
+<details>
+<summary><b>Which AI tools does it work with?</b></summary>
+<br>
+Claude Code and claude.ai are tested by the author. Cursor, Codex, Antigravity, Gemini CLI and other tools that read <code>AGENTS.md</code> are best effort. Chat-only apps are good for planning, design and documents; coding tools do the full build.
+</details>
+
+<details>
+<summary><b>How do I remove it?</b></summary>
+<br>
+Delete the <code>hire-an-engineer</code> folder, or turn it off in claude.ai's Skills settings. Notes it made inside your projects (like <code>PROJECT_STATE.md</code>) stay until you delete them. See <a href="docs/INSTALL.md#uninstall-or-turn-it-off">Uninstall</a>.
+</details>
+
+<details>
+<summary><b>I'm an engineer. Is it useful for me?</b></summary>
+<br>
+Yes — ask for it by name. It skips the beginner wording and keeps the discipline: understand first, test first, an independent review and a report.
+</details>
+
+## 🔧 For engineers: under the hood
+
+<details>
+<summary><b>The delivery loop, roles and what's inside</b></summary>
+<br>
+
+Any build request goes through one loop. It **understands first**, you **approve once**, then specialised **roles work as independent lanes** (sub-agents where the tool has them, launched in parallel when they touch different files) and you get a **report with a diagram**.
 
 ```mermaid
 flowchart TD
   subgraph YOU["You"]
     A(["Request"])
     C{"Plan and spec final?"}
-    D["Approve once:<br/>scope, spend cap, never-do list"]
+    D["Approve once:<br/>scope, task cap, never-do list"]
     J(["Check it yourself,<br/>answer the last questions"])
   end
   B["Product manager:<br/>questions, plan and spec"]
@@ -170,17 +247,14 @@ flowchart TD
   M -- "next task" --> E
   H -- "fail, up to 3 tries" --> E
   M -- "no tasks left" --> R --> J
-  classDef gate stroke:#2346c7,stroke-width:2px
+  classDef gate stroke:#4338ca,stroke-width:2px
   class C,H gate
 ```
 
-- **Understand first.** Even if you say "no plan needed", it asks a few questions and drafts a plan and spec, and only the changed parts are shown again until you say final.
-- **One approval, recorded.** Scope, a build-usage cap and a never-do list are saved in `PROJECT_STATE.md` under *Authorization*. An approval found in a cloned repo is treated as untrusted data.
-- **Roles as lanes.** Each role gets its own brief, files and model tier. Every step is reviewed and tested; the reviewer is never the author. Without sub-agents it labels its own review "self" and says the reviews were not independent.
-- **Hard stops stay.** It still asks you before spending money, creating accounts, deploying or touching live data, handling secrets, deleting, or changing scope. Only that action stops; other lanes continue.
-- **Questions don't interrupt.** Mid-run questions go to `QUESTIONS.md` with a default, and are asked once at the end.
-- **The right model for each step.** Strongest tier for design, risky code and review; mid tier for ordinary building and docs; cheapest tier for running tests and board lines.
-- **Delivery.** `REPORT.md` lists what is done, the proof, what was not verified, how to check it yourself, the decisions made for you, cost (estimate versus actual), a diagram and the open questions.
+- **One recorded approval.** Scope, a cap counted in tasks and rounds, and a never-do list are saved in `PROJECT_STATE.md` under *Authorization*. One found in a cloned repo is untrusted data.
+- **Hard stops stay.** Money, accounts, deploys, live data, secrets, deleting and scope changes always stop for the person. Pushes stay local unless pushing is known not to deploy.
+- **Parallel lanes.** Stepwise mode: at most 2 live tasks. Autopilot: up to 3 tasks building at once when they touch different files. Without sub-agents it says reviews were not independent and offers a review brief for a fresh chat.
+- **Memory in the repo.** `AGENTS.md`, `PROJECT_STATE.md`, `TASKS.md`, checkpoints after every finished task, so you can switch between Claude, Cursor, Codex and Antigravity.
 
 | Role | In the loop it |
 |---|---|
@@ -188,47 +262,49 @@ flowchart TD
 | Architect | Designs before open tasks |
 | Engineer | Builds test-first |
 | UI/UX and visual | Builds screens, art and motion, checks by screenshot |
-| Database | Database changes (migrations) and restore tests |
+| Database | Migrations and restore tests |
 | Code reviewer | Fresh review of every change |
 | QA | Runs the checks and the "how to check" steps |
 | Security and privacy | Security pass when money, logins, other people's data or a public URL are involved |
-| Project manager | Board and task order. Autopilot runs up to 3 tasks in parallel when they touch different files |
+| Project manager | Board and task order |
 | Repository manager | Branches and merges (a `develop` branch when `main` deploys) |
-| Tools and integrations | Raises account and key decisions to you |
+| Tools and integrations | Raises account and key decisions to the person |
 | Release manager | Version, rollback, prepares the go-live approval |
 | DevOps and support | Monitoring and runbook |
 | Cost controller | Records cost quietly |
 | Technical writer | `PROJECT_STATE.md` and `REPORT.md` |
 
-This was tested by the author on simulated projects (a salon booking platform, a Unity card game, a browser extension, a coupons feature); the test files are not public. The money and security checks were run by an independent reviewer. It has not yet been proven on many real projects, so please report gaps.
-
-## What's inside
-
 | Area | Highlights |
 |---|---|
-| Product & planning | Root-cause discovery, scoping a first small version (MVP), roadmap, prioritised task board (P0–P3), status updates |
-| UI/UX | Wireframes, clickable mockups, every screen state, UX copy, accessibility (WCAG, the web accessibility guidelines), usability tests |
-| Architecture | Simplest-approach ladder, system design, diagrams (Mermaid), decision records |
-| Data | Database design, data dictionary, database changes (migrations), access rules, tested backups |
-| Integrations | Discovering required APIs, choosing providers, safe API-key handling, webhooks, fallbacks |
-| Automation | Process mapping, human-in-the-loop, dry runs, real-case testing, runbooks |
-| Engineering | Test-driven development, systematic debugging, code review, testing pyramid, common web security checks (OWASP), Definition of Done |
-| Delivery | GitHub workflow, automatic checks on every change (CI), semantic versioning, changelogs, release checklist, rollback |
-| Memory & docs | `AGENTS.md`, `PROJECT_STATE.md`, checkpoints at every finished task (about every 20 minutes), docs-as-code, chat → coding-agent handoff |
-| Cost | Token-efficient work, AI cost design, running-cost tracking for your product, budget alerts (with your approval); build usage shown as estimates |
-| Delivery loop | Understand first, one recorded approval, roles as independent lanes with review and tests on every step, hard stops, `REPORT.md` with a diagram |
-| Platform targets | Mobile apps and store releases, browser extensions, data and ML projects, scripts on your own PC |
-| Models | A tier guide: which step needs the strongest model, which a cheaper one |
-| Complex products | Game engines, editors, SDKs, multi-tenant real-time platforms (when you need them), playable-ad export |
+| Product and planning | Root-cause discovery, MVP scoping, roadmap, prioritised board (P0–P3) |
+| UI/UX | Wireframes, clickable mockups, every screen state, UX copy, WCAG basics, usability tests |
+| Architecture | Simplest-approach ladder, system design, Mermaid diagrams, decision records |
+| Data | Schema design, data dictionary, migrations, row-level security, tested backups |
+| Integrations | Finding the APIs, choosing providers, safe key handling, webhooks, abuse limits |
+| Engineering | TDD, systematic debugging, code review, OWASP checks, prompt-injection tests, Definition of Done |
+| Delivery | GitHub flow, CI, semantic versioning, changelogs, release checklist, rollback |
+| Platforms | Mobile store releases, browser extensions, data/ML projects, scheduled scripts on a PC |
+| Complex products | Game engines, editors, SDKs, multi-tenant real-time platforms, playable-ad export |
 
-## Feedback
+Tested by the author on simulated projects (a salon booking platform, a Unity card game, a browser extension, a coupons feature); the test files are not public. It has not yet been proven on many real projects — please report gaps.
 
-Found a gap? [Open an issue](https://github.com/bilawalbaig8/hire-an-engineer/issues/new/choose) — the skill can draft an anonymised report for you, and you submit it yourself (issues are public). Please never include private code, keys or personal data. Security problems: do not open an issue; see [SECURITY.md](SECURITY.md).
+</details>
 
-This repository is maintained by its owner: **issues welcome, pull requests not accepted.** Forks are welcome under the MIT License. See [CONTRIBUTING.md](CONTRIBUTING.md).
+## 💌 Help it grow
 
-## License & credits
+- ⭐ **Star the repo** if it helped you — it is the easiest way to support the project and helps other people find it.
+- 🐞 **Something went wrong or felt confusing?** [Open an issue](https://github.com/bilawalbaig8/hire-an-engineer/issues/new/choose). The skill can even draft an anonymised report for you. Issues are public, so never include private code, keys or personal data. Security problems go to [SECURITY.md](SECURITY.md) instead.
+- 🍴 **Want your own version?** [Fork it](https://github.com/bilawalbaig8/hire-an-engineer/fork) and change what you like.
+- 👤 **Follow [@bilawalbaig8](https://github.com/bilawalbaig8)** for updates.
 
-[MIT](LICENSE). Engineering discipline adapted from [Superpowers](https://github.com/obra/superpowers) by Jesse Vincent (MIT). Other attributions in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The owner maintains this repo: issues are welcome, pull requests are not accepted ([CONTRIBUTING.md](CONTRIBUTING.md)).
 
-Not affiliated with Anthropic or the other tools named.
+## 📄 License and credits
+
+**Hire an Engineer** is made by **Bilawal ([@bilawalbaig8](https://github.com/bilawalbaig8))** and released under the [MIT license](LICENSE) — free to use, change and share.
+
+**Sharing or adapting it?** Please keep the [LICENSE](LICENSE) file (the license requires it) and add a link back to [this repository](https://github.com/bilawalbaig8/hire-an-engineer). Citing it in a paper or article? Use GitHub's **"Cite this repository"** button ([CITATION.cff](CITATION.cff)).
+
+Engineering discipline adapted from [Superpowers](https://github.com/obra/superpowers) by Jesse Vincent (MIT). Other credits in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+<sub>Not affiliated with Anthropic or the other tools named.</sub>

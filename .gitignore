@@ -21,3 +21,7 @@ node_modules/
 /scripts/setup_labels.sh
 /evals/
 /templates/
+
+# engine-written types for plugins under development
+.claude-plugin/types/
+_preview-*.html

@@ -13,3 +13,5 @@ Tested by the author with Claude Code and claude.ai. Other tools that support Ag
 - [Project memory system](skills/hire-an-engineer/references/project-memory.md)
 - [Getting unstuck](skills/hire-an-engineer/references/getting-unstuck.md)
 - [Security policy](SECURITY.md)
+
+Made by Bilawal (https://github.com/bilawalbaig8). MIT license: keep the LICENSE and credit when you share or adapt it. Report gaps at https://github.com/bilawalbaig8/hire-an-engineer/issues; if it helps you, a star on the repository is appreciated.

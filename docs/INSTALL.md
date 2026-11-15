@@ -26,6 +26,22 @@ Open the [latest release](https://github.com/bilawalbaig8/hire-an-engineer/relea
 3. Make sure **code execution / file creation** is turned on in the same settings. The skill needs it.
 4. Check it worked: start a new chat and ask *"what skills do you have?"*. `hire-an-engineer` should be listed and switched on.
 
+### Claude Code in one line (plugin)
+
+In Claude Code, type this at the prompt, answer `y` to add the marketplace, then pick a scope:
+
+```text
+/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
+```
+
+Optional live project board beside the chat (open it with `/board`):
+
+```text
+/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer
+```
+
+Update later from the `/plugin` menu. Prefer files? Use one of the two routes below instead (not both).
+
 ### Claude Code without a terminal
 The goal: the file `SKILL.md` must end up at `.claude\skills\hire-an-engineer\SKILL.md` inside your user folder.
 

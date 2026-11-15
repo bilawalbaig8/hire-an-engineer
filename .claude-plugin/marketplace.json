@@ -1,0 +1,22 @@
+{
+  "name": "hire-an-engineer",
+  "owner": {
+    "name": "Bilawal (bilawalbaig8)",
+    "url": "https://github.com/bilawalbaig8"
+  },
+  "metadata": {
+    "description": "Hire an Engineer by Bilawal (github.com/bilawalbaig8): an AI senior software engineer for people who don't code, plus a live project board for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "hire-an-engineer",
+      "source": "./",
+      "description": "The Hire an Engineer skill: your AI tool plans, builds, tests, ships and documents your project in plain language, and asks before anything risky."
+    },
+    {
+      "name": "hire-an-engineer-board",
+      "source": "./plugins/hire-an-engineer-board",
+      "description": "A live board beside the chat for projects run by the skill: tasks by stage, what waits for you, parallel lanes and the approved cap."
+    }
+  ]
+}

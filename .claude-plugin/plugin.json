@@ -1,0 +1,13 @@
+{
+  "name": "hire-an-engineer",
+  "version": "0.5.1",
+  "description": "An AI senior software engineer for people who don't code: plans, builds, tests, ships and documents your project in plain language, and asks before anything risky.",
+  "author": {
+    "name": "Bilawal (bilawalbaig8)",
+    "url": "https://github.com/bilawalbaig8"
+  },
+  "homepage": "https://github.com/bilawalbaig8/hire-an-engineer",
+  "repository": "https://github.com/bilawalbaig8/hire-an-engineer",
+  "license": "MIT",
+  "keywords": ["non-technical", "vibe-coding", "software-engineer", "project-memory", "roman-urdu"]
+}

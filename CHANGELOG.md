@@ -4,6 +4,13 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.5.1] - 2026-11-15
+- Credit travels with the skill: `LICENSE.txt` ships inside the skill folder, the frontmatter names the license and author, and SKILL.md ends with a credit line. LICENSE links the author's GitHub profile; new `CITATION.cff` adds GitHub's "Cite this repository".
+- Once per project, at the first finished milestone or delivery, the skill mentions where to report problems and that a star helps. Never mid-work, never in the person's files, never repeated.
+- Claude Code plugin marketplace: `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` installs the skill in one line.
+- New optional **project board** for Claude Code (`plugins/hire-an-engineer-board`): a live panel beside the chat showing what waits for you, tasks by stage, lanes and the approved cap. Read-only. `/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer`.
+- README redesigned for non-coders: banner and "How it works" graphics, short friendly sections, per-tool install steps that fold open, Roman Urdu, FAQ, and the technical detail moved into a "For engineers" section. Star, fork, follow and report-a-problem links.
+
 ### [0.5.0] - 2026-11-15
 Fixes from a full audit of the skill and the repo.
 
