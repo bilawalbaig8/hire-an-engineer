@@ -46,6 +46,9 @@ export const baseName = (path: string): string => {
   return parts[parts.length - 1] ?? path
 }
 
+// A plugin's agent type is namespaced (hire-an-engineer:engineer): show the part after the last colon.
+export const shortName = (name: string): string => name.slice(name.lastIndexOf(':') + 1)
+
 export const clip = (text: string, max: number): string =>
   text.length > max ? `${text.slice(0, max - 1)}…` : text
 
@@ -141,7 +144,7 @@ const drawTag = (agent: CrewAgent, x: number, y: number, scale: number): string 
 const drawAgent = (agent: CrewAgent, spot: Spot, scale: number): string => {
   const isMain = agent.id === 'main'
   const name = isMain ? 'Claude' : clip(agent.label, 15)
-  const kind = isMain ? 'main agent' : clip(agent.kind, 18)
+  const kind = isMain ? 'main agent' : clip(shortName(agent.kind), 18)
   const style = agent.state === 'working' ? 'a' : 's'
   const x = spot.x
   const tag = agentTag(agent)
@@ -197,7 +200,7 @@ const drawBench = (items: BenchItem[], top: number, width: number): string => {
       const y = top + Math.floor(i / BENCH_COLS) * BENCH_ROW
       const tip = `<title>${esc(item.name)} (${esc(item.source)}): ${esc(item.hint)}</title>`
       const label = (css: string): string =>
-        `<text class="${css}" text-anchor="middle" x="${x}" y="${y + 41}">${esc(clip(item.name, 9))}</text>`
+        `<text class="${css}" text-anchor="middle" x="${x}" y="${y + 41}">${esc(clip(shortName(item.name), 9))}</text>`
 
       return item.isOnDuty
         ? `<g>${tip}<rect x="${num(x - 11)}" y="${y + 4}" width="22" height="26" rx="5" fill="none" stroke="${ORANGE}" stroke-opacity="0.7" stroke-dasharray="2 2"/>` +

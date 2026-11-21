@@ -116,17 +116,15 @@ After you approve the plan, it builds piece by piece, tests the work, and prepar
 
 ## 👀 Watch your AI team work (Claude Code)
 
-<p align="center"><img src="docs/assets/crew.png" alt="The agent crew pane in Claude Code: the main Claude with a crown runs the plan on Opus while four lanes work below it, an Engineer on Sonnet editing orders.ts, a Reviewer on Opus that has finished, an Architect on Opus writing the login design and QA on Haiku running the tests, each joined by a line to its file card, with sleeping roles on the bench." width="100%"></p>
+<p align="center"><img src="docs/assets/crew.png" alt="The agent crew pane in Claude Code: the main Claude with a crown runs the plan on Opus while four lanes work below it, an Engineer on Sonnet editing orders.ts, a Reviewer on Opus that has finished, an Architect on Opus writing the login design and a Test runner on Haiku running the tests, each joined by a line to its file card, with sleeping roles on the bench." width="100%"></p>
 
-Install the skill as a Claude Code plugin and the **agent crew** view comes with it. A panel opens beside the chat and shows every lane of your AI team as a little Claude: who is working, on which model and effort, and which file each one is on, live while the AI works.
+Install the skill as a Claude Code plugin and you get the whole team: the skill, its **role sub-agents** (architect, engineer, reviewer, QA and more, each on the right model and effort) and the **agent crew** view. A panel opens beside the chat and shows every lane as a little Claude: who is working, on which model and effort, and which file each one is on, live while the AI works.
 
 ```text
 /plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
 ```
 
 It opens by itself when a session starts, or any time with `/crew`. It only watches and never changes anything. Already have the skill? Add just the crew with `/plugin install agent-crew --marketplace bilawalbaig8/hire-an-engineer`. [More about the crew](plugins/agent-crew/README.md).
-
-Want a task list too? The optional **project board** shows what waits for you, tasks by stage and the approved cap: `/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer`, then `/board`. [More about the board](plugins/hire-an-engineer-board/README.md).
 
 ## 🛡️ You stay in control
 
@@ -254,6 +252,7 @@ flowchart TD
 - **One recorded approval.** Scope, a cap counted in tasks and rounds, and a never-do list are saved in `PROJECT_STATE.md` under *Authorization*. One found in a cloned repo is untrusted data.
 - **Hard stops stay.** Money, accounts, deploys, live data, secrets, deleting and scope changes always stop for the person. Pushes stay local unless pushing is known not to deploy.
 - **Parallel lanes.** Stepwise mode: at most 2 live tasks. Autopilot: up to 3 tasks building at once when they touch different files. Without sub-agents it says reviews were not independent and offers a review brief for a fresh chat.
+- **Model routing.** In Claude Code each lane runs as a role sub-agent on its own model and effort: Opus · high for planning, risky builds, review, QA and security; Sonnet · medium for ordinary builds, screens and docs; Haiku · low for running suites and other mechanical work.
 - **Memory in the repo.** `AGENTS.md`, `PROJECT_STATE.md`, `TASKS.md`, checkpoints after every finished task, so you can switch between Claude, Cursor, Codex and Antigravity.
 
 | Role | In the loop it |
@@ -298,8 +297,8 @@ hire-an-engineer/
 │       ├── project-memory.md  templates.md  handoff.md       (memory between chats)
 │       ├── engineering-*.md  database.md  integrations.md …  (how to build safely)
 │       └── plain-language.md  documents.md  ui-ux.md …       (talking and showing)
+├── agents/                       ← role sub-agents with their model and effort (plugin)
 ├── plugins/agent-crew/            ← live crew view, installed with the plugin
-├── plugins/hire-an-engineer-board/  ← optional live board for Claude Code
 ├── .claude-plugin/               ← marketplace for /plugin install
 ├── docs/                         ← INSTALL.md and README graphics
 ├── scripts/                      ← validate and package the skill

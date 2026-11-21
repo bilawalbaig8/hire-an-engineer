@@ -1,6 +1,6 @@
 {
   "name": "agent-crew",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A pane beside the chat that shows the session's agents as little Claude characters, each tagged with its model and effort, joined to the files they work on.",
   "author": {
     "name": "Bilawal (bilawalbaig8)",

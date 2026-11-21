@@ -1,7 +1,7 @@
 {
   "name": "hire-an-engineer",
-  "version": "0.5.3",
-  "description": "An AI senior software engineer for people who don't code: plans, builds, tests, ships and documents your project in plain language, and asks before anything risky.",
+  "version": "0.6.0",
+  "description": "An AI senior software engineer for people who don't code: plans, builds, tests, ships and documents your project in plain language, and asks before anything risky. Comes with its role sub-agents (each on its own model and effort) and the agent crew view.",
   "author": {
     "name": "Bilawal (bilawalbaig8)",
     "url": "https://github.com/bilawalbaig8"

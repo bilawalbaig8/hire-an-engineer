@@ -4,6 +4,12 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.6.0] - 2026-11-22
+- **Role sub-agents ship with the plugin** (`agents/`): architect, engineer, ui-ux-designer, code-reviewer, qa, security-reviewer, test-runner and technical-writer, each with its own model and effort (Opus · high for planning, review, QA and security; Sonnet · medium for building, screens and docs; Haiku · low for mechanical work).
+- `delivery-loop.md` §5 gains a **Claude Code routing** table: which sub-agent, model and effort runs each lane, `model` and `effort` set on every Agent call, a usage-limit step-down, and Fable only after the person's yes. Installs from files use `general-purpose` with the same settings.
+- One mod only: the project board plugin is removed; the agent crew view installs with the skill and shows every lane. Crew 0.1.1 shows plugin agent types without their prefix (`engineer`, not `hire-an-engineer:engineer`).
+- Install: in Claude Code the AI installs the plugin (`claude plugin install hire-an-engineer@hire-an-engineer`), so every install gets the skill, the sub-agents and the crew together.
+
 ### [0.5.3] - 2026-11-22
 - New **agent crew** view for Claude Code (`plugins/agent-crew`), now the view that installs with the skill: each lane appears as a little Claude beside the chat, tagged with its model and effort and joined to the file it works on, with the callable roles asleep on the bench. `/crew` opens it.
 - The project board stays available as an optional plugin (`/board`); it no longer installs automatically.

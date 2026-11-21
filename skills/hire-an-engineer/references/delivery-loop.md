@@ -45,6 +45,22 @@ Set the tier in each lane's brief when the lane starts (`cost-management.md` §6
 | Running suites and builds, filtering logs, board and changelog lines, renaming | Cheapest, effort low |
 | Report and diagram | Mid |
 
+**Claude Code routing.** Strongest = `opus`, Mid = `sonnet`, Cheapest = `haiku`. Launch each lane with the Agent tool as the plugin's role sub-agent and set `model` and `effort` on every call, so the lane runs on its tier whatever the main session uses:
+
+| Lane | Sub-agent | Model · effort |
+|---|---|---|
+| Spec, plan, architecture | `hire-an-engineer:architect` | opus · high |
+| Ordinary build | `hire-an-engineer:engineer` | sonnet · medium |
+| Risky build (money, login, data formats, anything hard to undo) | `hire-an-engineer:engineer` | opus · high |
+| Screens, art, motion | `hire-an-engineer:ui-ux-designer` | sonnet · medium |
+| Review (every task, and the final whole diff) | `hire-an-engineer:code-reviewer` | opus · high |
+| Verification, "how to check" steps | `hire-an-engineer:qa` | opus · high |
+| Security pass at tripwires | `hire-an-engineer:security-reviewer` | opus · high |
+| Running suites and builds, logs, renames, changelog lines | `hire-an-engineer:test-runner` | haiku · low |
+| Docs, report, diagrams | `hire-an-engineer:technical-writer` | sonnet · medium |
+
+Skill installed from files (no plugin sub-agents): use `general-purpose` with the same `model` and `effort`, and the role name in the description. Fable only after the person's yes, as a sub-agent; never switch the main session's model or effort yourself. Before ≥4 lanes or a long strongest-tier run, if the tool shows the usage limit near (above ~80%), move lanes down one tier and say so in one line.
+
 - A mid-tier lane that fails two rounds reruns on the strongest; a cheapest-tier lane that can't read something hands up one tier.
 - The main session coordinates only: short, no building. Don't switch the main session's model mid-run.
 - Cost is recorded quietly in the task rows (rounds used; money only where the tool shows it, labelled). No cost chatter, no stopping for cost except the cap in §3. Before starting a task or a round, count tasks started and the task's rounds against the cap; the next one would pass it → hard stop: ask before going on.

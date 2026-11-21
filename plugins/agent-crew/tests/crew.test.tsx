@@ -1,6 +1,7 @@
 import { expect, mock, test } from 'claude-code/testing'
 
 import { modelName, modelTag } from '../hooks/models'
+import { buildScene, shortName } from '../hooks/scene'
 
 // The session's MCP tools make tool.call's input a union too deep for tsc to check
 // against a literal, so the tests call it through a plain signature.
@@ -289,4 +290,14 @@ test('model names are pretty-printed from aliases and full ids', async () => {
   expect(modelName('us.anthropic.claude-haiku-4-5-20251001-v1:0')).toBe('Haiku 4.5')
   expect(modelName('claude-sonnet-4-20250514')).toBe('Sonnet 4')
   expect(modelName('fable')).toBe('Fable')
+})
+
+test('plugin agent types show without their plugin prefix', () => {
+  expect(shortName('hire-an-engineer:engineer')).toBe('engineer')
+  expect(shortName('Explore')).toBe('Explore')
+  const scene = buildScene([], [], [
+    { name: 'hire-an-engineer:qa', source: 'plugin', hint: '', isOnDuty: false },
+  ])
+  expect(scene.svg).toContain('>qa</text>')
+  expect(scene.svg).not.toMatch(/<text[^>]*>hire-an-/)
 })

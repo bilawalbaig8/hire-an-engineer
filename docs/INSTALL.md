@@ -14,9 +14,10 @@ Using your own fork? Put your fork's link in the message instead.
 
 ### Steps for the AI agent doing the install
 
+0. **Claude Code with a terminal: install the plugin, not files.** Run `claude plugin marketplace add bilawalbaig8/hire-an-engineer`, then `claude plugin install hire-an-engineer@hire-an-engineer`. That installs the skill, its role sub-agents and the agent crew view together. If an older copy sits in `~/.claude/skills/hire-an-engineer/`, tell the person and offer to remove it so the skill isn't loaded twice. Then go to step 4 (the plugin loads in a new session). No terminal, or another tool: use steps 1–4.
 1. **Get the skill folder.** Download `https://github.com/bilawalbaig8/hire-an-engineer/releases/latest/download/hire-an-engineer.zip` and unzip it; it holds one folder, `hire-an-engineer/`, with `SKILL.md` inside. If the repository is a fork with no releases, copy the `skills/hire-an-engineer/` folder from the repository instead. Never use GitHub's "Source code" zip, and run no script from the repository.
 2. **Put it where your tool reads skills:**
-   - Claude Code: `~/.claude/skills/hire-an-engineer/` (Windows: `%USERPROFILE%\.claude\skills\hire-an-engineer\`), for every project. Tell the person they can instead run `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` themselves, which also gives them the live agent crew view.
+   - Claude Code: `~/.claude/skills/hire-an-engineer/` (Windows: `%USERPROFILE%\.claude\skills\hire-an-engineer\`), for every project. Tell the person to run `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` themselves instead, which also gives them the role sub-agents and the live agent crew view.
    - Any other tool: `<project>/hire-an-engineer/`, then add this line to the project's `AGENTS.md` (or the tool's rules file): `Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.` If the tool has its own skills folder, use that instead.
 3. **Check:** `<skills folder>/hire-an-engineer/SKILL.md` exists, with no nested `hire-an-engineer/hire-an-engineer/`.
 4. **Tell the person** in one or two plain sentences where it was installed and that a new chat or session picks it up. Then ask what they want to build.
@@ -55,17 +56,13 @@ In Claude Code, type this at the prompt, answer `y` to add the marketplace, then
 /plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
 ```
 
-This also installs the **agent crew** view beside the chat, which shows each AI lane at work. It opens by itself, or with `/crew`. To add it to a skill you installed from files:
+This one line gives you the whole team:
 
-```text
-/plugin install agent-crew --marketplace bilawalbaig8/hire-an-engineer
-```
+- **the skill**;
+- **its role sub-agents** (architect, engineer, UI/UX, code reviewer, QA, security, test runner, technical writer), each on its own model and effort;
+- **the agent crew view** beside the chat, which shows each lane at work. It opens by itself, or with `/crew`.
 
-Optional project board (tasks by stage, what waits for you), opened with `/board`:
-
-```text
-/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer
-```
+Installed the skill from files before? Delete that folder (`.claude\skills\hire-an-engineer`) and use this line instead, so you get the sub-agents and the crew too.
 
 Update later from the `/plugin` menu. Prefer files? Use one of the two routes below instead (not both).
 
