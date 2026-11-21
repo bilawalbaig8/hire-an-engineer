@@ -53,18 +53,19 @@ function isNone(s: string): boolean {
 export function parseTasks(md: string): BoardTask[] {
   const lines = md.split(/\r?\n/)
   for (let i = 0; i < lines.length - 1; i++) {
-    if (!lines[i].trim().startsWith('|')) continue
-    const head = cells(lines[i]).map(h => clean(h).toLowerCase())
+    const line = lines[i] ?? ''
+    if (!line.trim().startsWith('|')) continue
+    const head = cells(line).map(h => clean(h).toLowerCase())
     const hasId = head.includes('#') || head.includes('id')
     const hasFlow = head.includes('stage') || head.includes('status')
     if (!hasId || !hasFlow) continue
-    if (!/^\s*\|?\s*:?-{2,}/.test(lines[i + 1])) continue
+    if (!/^\s*\|?\s*:?-{2,}/.test(lines[i + 1] ?? '')) continue
     const col = (name: string) => head.indexOf(name)
     const idCol = col('#') >= 0 ? col('#') : col('id')
     const titleCol = ['title', 'task', 'name', 'what'].map(col).find(c => c >= 0) ?? -1
     const tasks: BoardTask[] = []
-    for (let j = i + 2; j < lines.length && lines[j].trim().startsWith('|'); j++) {
-      const row = cells(lines[j])
+    for (let j = i + 2; j < lines.length && (lines[j] ?? '').trim().startsWith('|'); j++) {
+      const row = cells(lines[j] ?? '')
       const at = (c: number) => (c >= 0 ? clean(row[c]) : '')
       const id = at(idCol).replace(/^#/, '')
       if (!id) continue
@@ -91,11 +92,11 @@ export function parseAuth(md: string): Record<string, string> {
   const start = lines.findIndex(l => /^#{1,6}\s*authori[sz]ation/i.test(l.trim()))
   if (start < 0) return out
   for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i].trim()
+    const l = (lines[i] ?? '').trim()
     if (/^#{1,6}\s/.test(l)) break
     for (const part of l.replace(/^[-*]\s*/, '').split('·')) {
       const m = part.match(/^\s*([A-Za-z][\w -]{0,30}?)\s*:\s*(.+?)\s*$/)
-      if (m) out[m[1].toLowerCase()] = clean(m[2])
+      if (m && m[1] && m[2]) out[m[1].toLowerCase()] = clean(m[2])
     }
   }
   return out
@@ -104,11 +105,11 @@ export function parseAuth(md: string): Record<string, string> {
 export function parseFocus(md: string): string {
   const lines = md.split(/\r?\n/)
   const start = lines.findIndex(l =>
-    /^#{1,6}\s*(current|now|focus|next step|where we are)/i.test(l.trim()),
+    /^#{1,6}\s*(current|now|focus|in progress|next step|where we are)/i.test(l.trim()),
   )
   if (start < 0) return ''
   for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i].trim()
+    const l = (lines[i] ?? '').trim()
     if (/^#{1,6}\s/.test(l)) break
     const text = clean(l.replace(/^[-*]\s*/, ''))
     if (text) return text.length > 140 ? text.slice(0, 137) + '…' : text
@@ -121,7 +122,7 @@ function isDone(t: BoardTask): boolean {
 }
 
 function needsLabel(n: string): string {
-  const key = n.split(/[\s:(]/)[0]
+  const key = n.split(/[\s:(]/)[0] ?? ''
   return NEEDS_LABEL[key] ?? n
 }
 

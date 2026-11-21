@@ -116,13 +116,15 @@ After you approve the plan, it builds piece by piece, tests the work, and prepar
 
 ## 📋 See your project at a glance (Claude Code)
 
-Add the free **project board** and a panel opens beside the chat showing what waits for you, what is being built, and what is done — updated live while the AI works.
+<p align="center"><img src="docs/assets/board.png" alt="Claude Code with the project board open beside the chat: the AI engineer runs three lanes in parallel while the board shows the approval, one task waiting for the person to test, tasks by stage, what is in the loop and what is next." width="100%"></p>
+
+Install the skill as a Claude Code plugin and the **project board** comes with it. A panel opens beside the chat showing what waits for you, what is being built, and what is done, updated live while the AI works.
 
 ```text
-/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer
+/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
 ```
 
-Open it any time with `/board`. It only reads your project notes; it never changes anything. [More about the board](plugins/hire-an-engineer-board/README.md).
+It opens by itself in a project folder, or any time with `/board`. It only reads your project notes and never changes anything. Already have the skill? Add just the board with `/plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer`. [More about the board](plugins/hire-an-engineer-board/README.md).
 
 ## 🛡️ You stay in control
 

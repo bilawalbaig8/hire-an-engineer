@@ -4,6 +4,12 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.5.2] - 2026-11-22
+- The project board now installs with the skill: the `hire-an-engineer` plugin lists `hire-an-engineer-board` as a dependency, so `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` sets up both.
+- The board's "Now:" line reads the `## In progress` section of the skill's own `PROJECT_STATE.md` template. Board code type-checks cleanly (0.1.1).
+- SKILL.md: in Claude Code with the plugin, keep `TASKS.md` and the Authorization lines in the templated format the board reads, and mention `/board` once at the first plan.
+- README and the board's README show a screenshot of the board beside the chat; install steps updated.
+
 ### [0.5.1] - 2026-11-15
 - Credit travels with the skill: `LICENSE.txt` ships inside the skill folder, the frontmatter names the license and author, and SKILL.md ends with a credit line. LICENSE links the author's GitHub profile; new `CITATION.cff` adds GitHub's "Cite this repository".
 - Once per project, at the first finished milestone or delivery, the skill mentions where to report problems and that a star helps. Never mid-work, never in the person's files, never repeated.

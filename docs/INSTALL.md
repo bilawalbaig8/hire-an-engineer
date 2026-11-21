@@ -16,7 +16,7 @@ Using your own fork? Put your fork's link in the message instead.
 
 1. **Get the skill folder.** Download `https://github.com/bilawalbaig8/hire-an-engineer/releases/latest/download/hire-an-engineer.zip` and unzip it; it holds one folder, `hire-an-engineer/`, with `SKILL.md` inside. If the repository is a fork with no releases, copy the `skills/hire-an-engineer/` folder from the repository instead. Never use GitHub's "Source code" zip, and run no script from the repository.
 2. **Put it where your tool reads skills:**
-   - Claude Code: `~/.claude/skills/hire-an-engineer/` (Windows: `%USERPROFILE%\.claude\skills\hire-an-engineer\`), for every project. Tell the person they can instead run `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` themselves.
+   - Claude Code: `~/.claude/skills/hire-an-engineer/` (Windows: `%USERPROFILE%\.claude\skills\hire-an-engineer\`), for every project. Tell the person they can instead run `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` themselves, which also gives them the live project board.
    - Any other tool: `<project>/hire-an-engineer/`, then add this line to the project's `AGENTS.md` (or the tool's rules file): `Follow the skill at hire-an-engineer/SKILL.md and read its references when its router says so.` If the tool has its own skills folder, use that instead.
 3. **Check:** `<skills folder>/hire-an-engineer/SKILL.md` exists, with no nested `hire-an-engineer/hire-an-engineer/`.
 4. **Tell the person** in one or two plain sentences where it was installed and that a new chat or session picks it up. Then ask what they want to build.
@@ -55,7 +55,7 @@ In Claude Code, type this at the prompt, answer `y` to add the marketplace, then
 /plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
 ```
 
-Optional live project board beside the chat (open it with `/board`):
+This also installs the live project board beside the chat. It opens by itself in a project folder, or with `/board`. To add only the board to a skill you installed from files:
 
 ```text
 /plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer
