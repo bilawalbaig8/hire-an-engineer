@@ -4,6 +4,12 @@ All notable changes per skill. Versions follow semantic versioning; tags are `<s
 
 ## hire-an-engineer
 
+### [0.5.3] - 2026-11-22
+- New **agent crew** view for Claude Code (`plugins/agent-crew`), now the view that installs with the skill: each lane appears as a little Claude beside the chat, tagged with its model and effort and joined to the file it works on, with the callable roles asleep on the bench. `/crew` opens it.
+- The project board stays available as an optional plugin (`/board`); it no longer installs automatically.
+- SKILL.md: name each sub-agent by its role and set its tier's model and effort so the crew view shows them; mention `/crew` once at the first plan.
+- README, INSTALL and the plugin READMEs show the crew screenshot.
+
 ### [0.5.2] - 2026-11-22
 - The project board now installs with the skill: the `hire-an-engineer` plugin lists `hire-an-engineer-board` as a dependency, so `/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer` sets up both.
 - The board's "Now:" line reads the `## In progress` section of the skill's own `PROJECT_STATE.md` template. Board code type-checks cleanly (0.1.1).

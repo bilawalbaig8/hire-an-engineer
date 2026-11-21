@@ -9,17 +9,9 @@ A live board beside the chat in Claude Code for projects run by the [Hire an Eng
 
 It refreshes on its own every few seconds and right after the AI edits either file. It only reads; it never changes your files.
 
-![The project board beside the chat in Claude Code](../../docs/assets/board.png)
-
 ## Install
 
-The board installs by itself with the skill's plugin:
-
-```text
-/plugin install hire-an-engineer --marketplace bilawalbaig8/hire-an-engineer
-```
-
-If you installed the skill from files, add just the board:
+In Claude Code, type:
 
 ```text
 /plugin install hire-an-engineer-board --marketplace bilawalbaig8/hire-an-engineer

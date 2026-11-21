@@ -5,13 +5,18 @@
     "url": "https://github.com/bilawalbaig8"
   },
   "metadata": {
-    "description": "Hire an Engineer by Bilawal (github.com/bilawalbaig8): an AI senior software engineer for people who don't code, plus a live project board for Claude Code."
+    "description": "Hire an Engineer by Bilawal (github.com/bilawalbaig8): an AI senior software engineer for people who don't code, plus a live agent crew view and project board for Claude Code."
   },
   "plugins": [
     {
       "name": "hire-an-engineer",
       "source": "./",
-      "description": "The Hire an Engineer skill: your AI tool plans, builds, tests, ships and documents your project in plain language, and asks before anything risky. Installs the project board with it."
+      "description": "The Hire an Engineer skill: your AI tool plans, builds, tests, ships and documents your project in plain language, and asks before anything risky. Installs the agent crew view with it."
+    },
+    {
+      "name": "agent-crew",
+      "source": "./plugins/agent-crew",
+      "description": "A pane beside the chat that shows your AI engineering team at work: each agent as a little Claude with its model, effort and the file it is on."
     },
     {
       "name": "hire-an-engineer-board",
